@@ -6,6 +6,7 @@ import 'TextAndStyle.dart';
 import 'Button.dart';
 import 'ImageAndIcon.dart';
 import 'SwitchAndCheckbox.dart';
+import 'InputAndForm.dart';
 
 void main() {
   runApp(new MyApp());
@@ -109,6 +110,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     initialValue: 0,
                   );*/
                   return SwitchAndCheckBoxTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "输入框和表单",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return FormTestRoute();
                 }));
               },
             ),
