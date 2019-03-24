@@ -7,6 +7,21 @@ import 'Button.dart';
 import 'ImageAndIcon.dart';
 import 'SwitchAndCheckbox.dart';
 import 'InputAndForm.dart';
+import 'package:flutter_app/layoutwidgets/RowColumnTest.dart';
+import 'package:flutter_app/layoutwidgets/FlexTest.dart';
+import 'package:flutter_app/layoutwidgets/WrapFlow.dart';
+import 'package:flutter_app/layoutwidgets/StackPositionedTest.dart';
+import 'package:flutter_app/containerwidgets/PaddingTest.dart';
+import 'package:flutter_app/containerwidgets/TransformTest.dart';
+import 'package:flutter_app/containerwidgets/ScaffoldTabbarNavigation.dart';
+import 'package:flutter_app/scrollablewidgets/SingleChildScrollViewTest.dart';
+import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
+import 'package:flutter_app/scrollablewidgets/GridViewTest.dart';
+import 'package:flutter_app/scrollablewidgets/CustomScrollViewtestRoute.dart';
+import 'package:flutter_app/scrollablewidgets/ScrollControllerTest.dart';
+import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
+import 'package:flutter_app/funtionalwidgets/InheritedWidgets.dart';
+import 'package:flutter_app/funtionalwidgets/ThemeTestRoute.dart';
 
 void main() {
   runApp(new MyApp());
@@ -50,10 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: new ListView(
           children: <Widget>[
-            FlatButton(
+            RaisedButton(
               child: Text(
                 "文本字体样式",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -125,6 +139,231 @@ class _MyHomePageState extends State<MyHomePage> {
                     initialValue: 0,
                   );*/
                   return FormTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "线性布局Row、Column",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return RowColumnWidget();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "弹性布局Flex",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return FlexLayoutTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "流式布局",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return WrapFlowTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "层叠布局",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return StackPositionedRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Padding",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return PaddingTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Transform",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return TransformTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Scallold",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return ScaffoldRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "SingleChildScrollView",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return SingleChildScrollViewRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "ListView",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return ListViewRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "GridView",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return GridViewRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "CustomScrollView",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return CustomScrollViewRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "ScrollControllerRoute 滚动监听及控制",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return ScrollNotificationTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "WillPopScopeRoute",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return WillPopScopeRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "InheritedWidgetRoute",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return InheritedWidgetRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "ThemeTestRoute",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return ThemeTestRoute();
                 }));
               },
             ),

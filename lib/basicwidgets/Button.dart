@@ -33,10 +33,10 @@ class MyButtonWidget extends StatelessWidget {
             FlatButton(
               color: Colors.blue,
               highlightColor: Colors.blue[700],
-              colorBrightness: Brightness.dark,
               splashColor: Colors.grey,
               child: Text("Submit"),
-              shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
               onPressed: () => {},
             )
           ],
