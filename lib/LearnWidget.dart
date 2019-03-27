@@ -1,27 +1,35 @@
 import 'dart:core';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'TextAndStyle.dart';
-import 'Button.dart';
-import 'ImageAndIcon.dart';
-import 'SwitchAndCheckbox.dart';
-import 'InputAndForm.dart';
-import 'package:flutter_app/layoutwidgets/RowColumnTest.dart';
-import 'package:flutter_app/layoutwidgets/FlexTest.dart';
-import 'package:flutter_app/layoutwidgets/WrapFlow.dart';
-import 'package:flutter_app/layoutwidgets/StackPositionedTest.dart';
+import 'package:flutter_app/basicwidgets/Button.dart';
+import 'package:flutter_app/basicwidgets/ImageAndIcon.dart';
+import 'package:flutter_app/basicwidgets/InputAndForm.dart';
+import 'package:flutter_app/basicwidgets/SwitchAndCheckbox.dart';
+import 'package:flutter_app/basicwidgets/TextAndStyle.dart';
 import 'package:flutter_app/containerwidgets/PaddingTest.dart';
-import 'package:flutter_app/containerwidgets/TransformTest.dart';
 import 'package:flutter_app/containerwidgets/ScaffoldTabbarNavigation.dart';
-import 'package:flutter_app/scrollablewidgets/SingleChildScrollViewTest.dart';
-import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
-import 'package:flutter_app/scrollablewidgets/GridViewTest.dart';
-import 'package:flutter_app/scrollablewidgets/CustomScrollViewtestRoute.dart';
-import 'package:flutter_app/scrollablewidgets/ScrollControllerTest.dart';
-import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
+import 'package:flutter_app/containerwidgets/TransformTest.dart';
+import 'package:flutter_app/eventhandleandnotification/EventBus.dart';
+import 'package:flutter_app/eventhandleandnotification/GestureDetectorTestRoute.dart';
+import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
+import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dart';
 import 'package:flutter_app/funtionalwidgets/InheritedWidgets.dart';
 import 'package:flutter_app/funtionalwidgets/ThemeTestRoute.dart';
+import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
+import 'package:flutter_app/layoutwidgets/FlexTest.dart';
+import 'package:flutter_app/layoutwidgets/RowColumnTest.dart';
+import 'package:flutter_app/layoutwidgets/StackPositionedTest.dart';
+import 'package:flutter_app/layoutwidgets/WrapFlow.dart';
+import 'package:flutter_app/scrollablewidgets/CustomScrollViewtestRoute.dart';
+import 'package:flutter_app/scrollablewidgets/GridViewTest.dart';
+import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
+import 'package:flutter_app/scrollablewidgets/ScrollControllerTest.dart';
+import 'package:flutter_app/scrollablewidgets/SingleChildScrollViewTest.dart';
+import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
+import 'package:flutter_app/animations/FadeRouteTest.dart';
+import 'package:flutter_app/animations/HeroAnimationRoute.dart';
+import 'package:flutter_app/animations/StaggerDemo.dart';
 
 void main() {
   runApp(new MyApp());
@@ -58,6 +66,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    bus.on("login", (arg) {
+      print("Receive login event:" + arg);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -364,6 +381,98 @@ class _MyHomePageState extends State<MyHomePage> {
                     initialValue: 0,
                   );*/
                   return ThemeTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "PointerEventTestRoute",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  /* return new CounterWidget(
+                    initialValue: 0,
+                  );*/
+                  return PointerEventTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "手势识别GestureDetector",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context, new FadeRoute(builder: (context) {
+                  return GestureDetectorTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "使用EventBus发送事件",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                bus.emit("login", "Login event");
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "send notification",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    //自自定义页面切换动画效果
+                    PageRouteBuilder(
+                        transitionDuration: Duration(milliseconds: 500),
+                        pageBuilder: ((BuildContext context,
+                            Animation<double> animation,
+                            Animation<double> secondaryAnimation) {
+                          return new FadeTransition(
+                            opacity: animation,
+                            child: NotificationRoute(),
+                          );
+                        })));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "动画",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new CupertinoPageRoute(builder: (context) {
+                  return ScaleAnimationRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "共享元素动画",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new CupertinoPageRoute(builder: (context) {
+                  return HeroAnimationRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "交错动画",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new CupertinoPageRoute(builder: (context) {
+                  return StaggerDemo();
                 }));
               },
             ),
