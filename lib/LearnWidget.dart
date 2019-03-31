@@ -2,6 +2,10 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/animations/FadeRouteTest.dart';
+import 'package:flutter_app/animations/HeroAnimationRoute.dart';
+import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
+import 'package:flutter_app/animations/StaggerDemo.dart';
 import 'package:flutter_app/basicwidgets/Button.dart';
 import 'package:flutter_app/basicwidgets/ImageAndIcon.dart';
 import 'package:flutter_app/basicwidgets/InputAndForm.dart';
@@ -10,6 +14,10 @@ import 'package:flutter_app/basicwidgets/TextAndStyle.dart';
 import 'package:flutter_app/containerwidgets/PaddingTest.dart';
 import 'package:flutter_app/containerwidgets/ScaffoldTabbarNavigation.dart';
 import 'package:flutter_app/containerwidgets/TransformTest.dart';
+import 'package:flutter_app/customwidgets/CustomPaintRoute.dart';
+import 'package:flutter_app/customwidgets/GradientButton.dart';
+import 'package:flutter_app/customwidgets/GradientCircularProgressRoute.dart';
+import 'package:flutter_app/customwidgets/TurnBoxRoute.dart';
 import 'package:flutter_app/eventhandleandnotification/EventBus.dart';
 import 'package:flutter_app/eventhandleandnotification/GestureDetectorTestRoute.dart';
 import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
@@ -17,6 +25,7 @@ import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dar
 import 'package:flutter_app/funtionalwidgets/InheritedWidgets.dart';
 import 'package:flutter_app/funtionalwidgets/ThemeTestRoute.dart';
 import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
+import 'package:flutter_app/io_and_network/FileOperationRoute.dart';
 import 'package:flutter_app/layoutwidgets/FlexTest.dart';
 import 'package:flutter_app/layoutwidgets/RowColumnTest.dart';
 import 'package:flutter_app/layoutwidgets/StackPositionedTest.dart';
@@ -26,14 +35,8 @@ import 'package:flutter_app/scrollablewidgets/GridViewTest.dart';
 import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
 import 'package:flutter_app/scrollablewidgets/ScrollControllerTest.dart';
 import 'package:flutter_app/scrollablewidgets/SingleChildScrollViewTest.dart';
-import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
-import 'package:flutter_app/animations/FadeRouteTest.dart';
-import 'package:flutter_app/animations/HeroAnimationRoute.dart';
-import 'package:flutter_app/animations/StaggerDemo.dart';
-import 'package:flutter_app/customwidgets/GradientButton.dart';
-import 'package:flutter_app/customwidgets/TurnBoxRoute.dart';
-import 'package:flutter_app/customwidgets/CustomPaintRoute.dart';
-import 'package:flutter_app/customwidgets/GradientCircularProgressRoute.dart';
+import 'io_and_network/HttpTestRoute.dart';
+import 'io_and_network/WebSocketRoute.dart';
 
 void main() {
   runApp(new MyApp());
@@ -525,6 +528,42 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     new CupertinoPageRoute(builder: (context) {
                   return GradientCircularProgressRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "文件操作",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new CupertinoPageRoute(builder: (context) {
+                  return FileOperationRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "通过HttpClient发起HTTP请求",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new CupertinoPageRoute(builder: (context) {
+                  return HttpTestRoute();
+                }));
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "使用WebSockets",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new CupertinoPageRoute(builder: (context) {
+                  return WebSocketRoute();
                 }));
               },
             ),
