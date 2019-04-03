@@ -3,11 +3,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/package_manage.dart';
 
-//void main() => runApp(MyApp());
+import 'containerwidgets/ScaffoldTabbarNavigation.dart';
+import 'containerwidgets/TransformTest.dart';
+import 'enjoy/view/home_page.dart';
 
 /// 程序入口
-void main() {
-  runApp(MyApp());
+
+void main() => runApp(App());
+
+class App extends StatefulWidget {
+  @override
+  State createState() {
+    return _AppState();
+  }
+}
+
+class _AppState extends State<App> {
+  var _pageController;
+  int _tabIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: 0, keepPage: true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(), //让pageView不能滑动
+          children: <Widget>[HomePage(), ScaffoldRoute(), TransformTestRoute()],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _tabIndex,
+            type: BottomNavigationBarType.fixed,
+            fixedColor: Colors.deepPurpleAccent,
+            onTap: (index) => _tab(index),
+            items: [
+              BottomNavigationBarItem(
+                  title: Text('推荐'), icon: Icon(Icons.home)),
+              BottomNavigationBarItem(title: Text('项目'), icon: Icon(Icons.map)),
+              BottomNavigationBarItem(
+                  title: Text('公众号'), icon: Icon(Icons.contact_mail)),
+            ]),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  _tab(int index) {
+    setState(() {
+      _tabIndex = index;
+      _pageController.jumpToPage(index);
+    });
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -132,4 +189,3 @@ class NewRoute extends StatelessWidget {
     );
   }
 }
-
