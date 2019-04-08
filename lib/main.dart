@@ -1,11 +1,12 @@
 // This sample shows adding an action to an [AppBar] that opens a shopping cart.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/enjoy/view/wechat_article_page.dart';
 import 'package:flutter_app/package_manage.dart';
 
-import 'containerwidgets/ScaffoldTabbarNavigation.dart';
-import 'containerwidgets/TransformTest.dart';
 import 'enjoy/view/home_page.dart';
+import 'enjoy/view/project_practice_page.dart';
+import 'LearnWidget.dart';
 
 /// 程序入口
 
@@ -35,7 +36,12 @@ class _AppState extends State<App> {
         body: PageView(
           controller: _pageController,
           physics: NeverScrollableScrollPhysics(), //让pageView不能滑动
-          children: <Widget>[HomePage(), ScaffoldRoute(), TransformTestRoute()],
+          children: <Widget>[
+            MyHomePage(title: "你好"),
+            HomePage(),
+            ProjectPracticePage(),
+            WechatArticlePage()
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: _tabIndex,
@@ -43,6 +49,8 @@ class _AppState extends State<App> {
             fixedColor: Colors.deepPurpleAccent,
             onTap: (index) => _tab(index),
             items: [
+              BottomNavigationBarItem(
+                  title: Text('基础知识'), icon: Icon(Icons.shopping_basket)),
               BottomNavigationBarItem(
                   title: Text('推荐'), icon: Icon(Icons.home)),
               BottomNavigationBarItem(title: Text('项目'), icon: Icon(Icons.map)),
@@ -91,14 +99,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+/*class MyHomePage extends StatefulWidget {
   final String title;
 
   MyHomePage({Key key, this.title}) : super(key: key);
 
   @override
   _MyHomePageState createState() => new _MyHomePageState();
-}
+}*/
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;

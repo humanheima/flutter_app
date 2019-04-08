@@ -65,6 +65,7 @@ flutter:
   assets:
   - assets/
   - images/avatar.png
+  - images/image_default.png
 
   fonts:
   - family: myIcon

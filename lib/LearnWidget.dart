@@ -449,7 +449,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             RaisedButton(
               child: Text(
-                "动画",
+                "动画基本结构",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
               ),
               onPressed: () {

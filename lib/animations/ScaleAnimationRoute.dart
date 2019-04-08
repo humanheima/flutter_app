@@ -54,13 +54,14 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
             child: null,
           ),
           Container(
-            /*child: AnimatedImage(
-              animation: animation,
-            ),*/
-            child: GrowTransition(
-              child: Image.asset("images/avatar.png"),
+            alignment: Alignment.topLeft,
+            child: AnimatedImage(
               animation: animation,
             ),
+            /*child: GrowTransition(
+              child: Image.asset("images/avatar.png"),
+              animation: animation,
+            ),*/
           ),
           RaisedButton(
             child: Text(
@@ -90,7 +91,7 @@ class AnimatedImage extends AnimatedWidget {
 
   Widget build(BuildContext context) {
     final Animation<double> animation = listenable;
-    return new Center(
+    return new Container(
       child: Image.asset("images/avatar.png",
           width: animation.value, height: animation.value),
     );
@@ -110,7 +111,7 @@ class GrowTransition extends StatelessWidget {
           animation: animation,
           builder: (BuildContext context, Widget child) {
             return new Container(
-                alignment: Alignment.topCenter,
+                alignment: Alignment.topLeft,
                 height: animation.value,
                 width: animation.value,
                 child: child);
