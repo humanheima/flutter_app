@@ -81,7 +81,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
         color: Colors.white,
         child: Row(
           children: [
-            IconButton(icon: Icon(Icons.home)),
+            Center(child: IconButton(icon: Icon(Icons.home))),
             SizedBox(), //中间位置空出
             IconButton(icon: Icon(Icons.business)),
           ],

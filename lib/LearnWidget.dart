@@ -35,6 +35,10 @@ import 'package:flutter_app/scrollablewidgets/GridViewTest.dart';
 import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
 import 'package:flutter_app/scrollablewidgets/ScrollControllerTest.dart';
 import 'package:flutter_app/scrollablewidgets/SingleChildScrollViewTest.dart';
+import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
+import 'package:flutter_app/wanandroid_flutter/wanandroid_fluuter_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'io_and_network/HttpTestRoute.dart';
 import 'io_and_network/WebSocketRoute.dart';
 
@@ -93,6 +97,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(
               child: Text(
+                "simulate wanandroid_flutter",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                _toWanAndroid(context);
+              },
+            ),
+            RaisedButton(
+              child: Text(
                 "文本字体样式",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
               ),
@@ -112,13 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
               ),
               onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return new MyButtonWidget();
-                }));
+                return new MyButtonWidget();
               },
             ),
             RaisedButton(
@@ -573,6 +580,25 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     //return Echo(text: "hello world",);
+  }
+
+  void _toWanAndroid(BuildContext context) async {
+    bool dark = await getThemeStyle();
+    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      return new WanAndroidApp(dark);
+    }));
+  }
+
+  ///返回是否是主题还是
+  Future<bool> getThemeStyle() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    bool darkTheme = sp.getBool("darkTheme");
+    if (darkTheme == null) {
+      darkTheme = false;
+    }
+    GlobalConfig.dark = darkTheme;
+
+    return darkTheme;
   }
 }
 
