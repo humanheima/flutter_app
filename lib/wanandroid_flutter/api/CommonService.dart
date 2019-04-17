@@ -4,6 +4,8 @@ import 'package:flutter_app/wanandroid_flutter/model/ArticleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/BannerModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/SystemTreeModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/SystemTreeContentModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/WxArticleTitleModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/WxArticleContentModel.dart';
 import 'package:flutter_app/wanandroid_flutter/net/DioManager.dart';
 
 import 'Api.dart';
@@ -41,6 +43,26 @@ class CommonService {
             options: _getOptions())
         .then((response) {
       callback(SystemTreeContentModel(response.data));
+    });
+  }
+
+  ///获取公众号名称
+  void getWxList(Function callback) async {
+    DioManager.singleton
+        .getDio()
+        .get(Api.WX_LIST, options: _getOptions())
+        .then((response) {
+      callback(WxArticleTitleModel(response.data));
+    });
+  }
+
+  ///获取公众号文章
+  void getWxArticleList(Function callback, int _id, int _page) async {
+    DioManager.singleton
+        .getDio()
+        .get(Api.WX_ARTICLE_LIST + "$_id/$_page/json", options: _getOptions())
+        .then((response) {
+      callback(WxArticleContentModel(response.data));
     });
   }
 

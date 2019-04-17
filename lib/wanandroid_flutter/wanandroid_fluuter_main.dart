@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/common/application.dart';
 import 'package:flutter_app/wanandroid_flutter/event/theme_change_event.dart';
-import 'package:flutter_app/wanandroid_flutter/ui/DrawerWidgetUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/HomePageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/ProjectTreePageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SearchPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SystemTreeUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/WxArticlePageUI.dart';
-import 'package:flutter_app/wanandroid_flutter/widget/BottomNavigationBarDemo.dart';
-import 'package:flutter_app/mytest/TestIndexedStack.dart';
 
 ///
 /// Created by dumingwei on 2019/4/12.
@@ -75,6 +72,8 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   int _index = 0;
+
+  PageController _pageController;
   var _pageList;
   var _titleList = [
     "首页",
@@ -90,9 +89,8 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(initialPage: 0, keepPage: true);
     _pageList = [
-      HomePageUI(),
-      HomePageUI(),
       HomePageUI(),
       SystemTreeUI(),
       WxArticlePageUI(),
@@ -104,7 +102,34 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     print('index=$_index');
-    return WillPopScope(
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: _appBarWidget(context),
+        body: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          children: _pageList,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _index,
+            type: BottomNavigationBarType.fixed,
+            fixedColor: Colors.deepPurpleAccent,
+            onTap: (index) => _tab(index),
+            items: [
+              BottomNavigationBarItem(
+                  title: Text('首页'), icon: Icon(Icons.shopping_basket)),
+              BottomNavigationBarItem(
+                  title: Text('知识体系'), icon: Icon(Icons.home)),
+              BottomNavigationBarItem(
+                  title: Text('公众号'), icon: Icon(Icons.map)),
+              BottomNavigationBarItem(
+                  title: Text('导航'), icon: Icon(Icons.home)),
+              BottomNavigationBarItem(title: Text('项目'), icon: Icon(Icons.map)),
+            ]),
+      ),
+    );
+    /* return WillPopScope(
         child: DefaultTabController(
             length: 5,
             child: Scaffold(
@@ -129,7 +154,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                         title: Text('third'), icon: Icon(Icons.map))
                   ]),
             )),
-        onWillPop: _onWillPop);
+        onWillPop: _onWillPop);*/
   }
 
   @override
@@ -208,6 +233,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   _tab(int index) {
     setState(() {
       _index = index;
+      _pageController.jumpToPage(index);
     });
   }
 }

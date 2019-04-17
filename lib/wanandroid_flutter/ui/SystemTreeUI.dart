@@ -15,7 +15,8 @@ class SystemTreeUI extends StatefulWidget {
   }
 }
 
-class SystemTreeUIState extends State<SystemTreeUI> {
+class SystemTreeUIState extends State<SystemTreeUI>
+    with AutomaticKeepAliveClientMixin {
   List<SystemTreeData> _datas = List();
 
   @override
@@ -108,5 +109,10 @@ class SystemTreeUIState extends State<SystemTreeUI> {
       children: tiles,
     );
     return content;
+  }
+
+  @override
+  bool get wantKeepAlive {
+    return true;
   }
 }
