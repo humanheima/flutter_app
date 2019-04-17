@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
+import 'package:flutter_app/wanandroid_flutter/common/User.dart';
+import 'package:flutter_app/wanandroid_flutter/common/application.dart';
+import 'package:flutter_app/wanandroid_flutter/event/login_event.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 ///
 /// Created by dumingwei on 2019/4/13.
@@ -7,10 +12,191 @@ import 'package:flutter/material.dart';
 
 class DrawerWidgetUI extends StatefulWidget {
   @override
-  State createState() {}
+  State createState() => DrawerWidgetUIState();
 }
 
 class DrawerWidgetUIState extends State<DrawerWidgetUI> {
   @override
-  Widget build(BuildContext context) {}
+  void initState() {
+    super.initState();
+    Application.eventBus
+        .on<LoginEvent>()
+        .listen((LoginEvent onData) => this.changeUI());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: InkWell(
+              child: Text(
+                  User.singleton.userName != null
+                      ? User.singleton.userName
+                      : '未登录',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              onTap: () {
+                if (User.singleton.userName != null) {
+                  return null;
+                } else {
+                  onLoginClick();
+                }
+              },
+            ),
+            accountEmail: null,
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage('images/avatar.jpg'),
+            ),
+            decoration: BoxDecoration(
+                color: Colors.grey[800],
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                        Colors.grey[800].withOpacity(0.6), BlendMode.hardLight),
+                    image: AssetImage(GlobalConfig.dark
+                        ? 'images/bg_dark.png'
+                        : 'images/bg_light.jpg'))),
+          ),
+          ListTile(
+            title: Text(
+              '我的收藏',
+              textAlign: TextAlign.left,
+            ),
+            leading: Icon(
+              Icons.collections,
+              color: GlobalConfig.themeData.accentColor,
+              size: 22.0,
+            ),
+            onTap: () {
+              if (User.singleton.userName != null) {
+                onCollectionClick();
+              } else {
+                onLoginClick();
+              }
+            },
+          ),
+          ListTile(
+            title: Text(
+              '常用网站',
+              textAlign: TextAlign.left,
+            ),
+            leading: Icon(Icons.web,
+                color: GlobalConfig.themeData.accentColor, size: 22.0),
+            onTap: () {
+              if (User.singleton.userName != null) {
+                onWebsiteCollectionClick();
+              } else {
+                onLoginClick();
+              }
+            },
+          ),
+          ListTile(
+            title: Text(
+              'TODO',
+              textAlign: TextAlign.left,
+            ),
+            leading: Icon(Icons.today,
+                color: GlobalConfig.themeData.accentColor, size: 22.0),
+            onTap: () {
+              if (User.singleton.userName != null) {
+                onTodoClick();
+              } else {
+                onLoginClick();
+              }
+            },
+          ),
+          ListTile(
+            title: Text(
+              GlobalConfig.dark ? '日间模式' : '夜间模式',
+              textAlign: TextAlign.left,
+            ),
+            leading: Icon(Icons.wb_sunny,
+                color: GlobalConfig.themeData.accentColor, size: 22.0),
+            onTap: () {
+              setState(() {
+                if (GlobalConfig.dark == true) {
+                  GlobalConfig.dark = false;
+                } else {
+                  GlobalConfig.dark = true;
+                }
+
+                changeTheme();
+              });
+            },
+          ),
+          ListTile(
+            title: Text(
+              '设置',
+              textAlign: TextAlign.left,
+            ),
+            leading: Icon(Icons.settings_applications,
+                color: GlobalConfig.themeData.accentColor, size: 22.0),
+            onTap: () {
+//              Navigator.pop(context);
+              Fluttertoast.showToast(msg: "该功能暂未上线~");
+            },
+          ),
+          ListTile(
+            title: Text(
+              '关于App',
+              textAlign: TextAlign.left,
+            ),
+            leading: Icon(Icons.people,
+                color: GlobalConfig.themeData.accentColor, size: 22.0),
+            onTap: () {
+              onAboutClick();
+              Scaffold.of(context).openEndDrawer();
+            },
+          ),
+          const SizedBox(height: 24.0),
+          logoutWidget(),
+        ],
+      ),
+    );
+  }
+
+  changeUI() async {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void onLoginClick() {}
+
+  void onCollectionClick() {}
+
+  void onWebsiteCollectionClick() {}
+
+  void onTodoClick() {}
+
+  void changeTheme() {}
+
+  void onAboutClick() {}
+
+  Widget logoutWidget() {
+    if (User.singleton.userName != null) {
+      return Center(
+        child: FlatButton(
+            onPressed: () {
+              User.singleton.clearUserInfo();
+              setState(() {});
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            child: Text(
+              '退出登录',
+              style: TextStyle(color: Colors.red),
+            )),
+      );
+    } else {
+      return SizedBox(
+        height: 10,
+      );
+    }
+  }
 }

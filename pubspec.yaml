@@ -43,6 +43,7 @@ dependencies:
 
   shared_preferences: ^0.5.2
 
+  fluttertoast: ^3.0.3
 
 dev_dependencies:
 
@@ -69,6 +70,9 @@ flutter:
   assets:
   - assets/
   - images/avatar.png
+  - images/avatar.jpg
+  - images/bg_dark.png
+  - images/bg_light.jpg
   - images/image_default.png
 
   fonts:

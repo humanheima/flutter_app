@@ -64,7 +64,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
                   textScaleFactor: 5,
                 ));
           }).toList()),
-      /* bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
           BottomNavigationBarItem(
@@ -75,8 +75,8 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
         currentIndex: _selectedIndex,
         fixedColor: Colors.blue,
         onTap: _onItemTapped,
-      ),*/
-      bottomNavigationBar: BottomAppBar(
+      ),
+      /* bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         color: Colors.white,
         child: Row(
@@ -87,7 +87,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
           ],
           mainAxisAlignment: MainAxisAlignment.spaceAround, //均分底部导航栏横向空间
         ),
-      ),
+      ),*/
       floatingActionButton: FloatingActionButton(
         onPressed: _onAdd,
         child: Icon(Icons.add),

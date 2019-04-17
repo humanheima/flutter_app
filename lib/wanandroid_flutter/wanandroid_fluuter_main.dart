@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/common/application.dart';
 import 'package:flutter_app/wanandroid_flutter/event/theme_change_event.dart';
+import 'package:flutter_app/wanandroid_flutter/ui/DrawerWidgetUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/HomePageUI.dart';
-import 'package:flutter_app/wanandroid_flutter/ui/NaviPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/ProjectTreePageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SearchPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SystemTreeUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/WxArticlePageUI.dart';
-import 'package:flutter_app/wanandroid_flutter/ui/DrawerWidgetUI.dart';
 import 'package:flutter_app/wanandroid_flutter/widget/BottomNavigationBarDemo.dart';
+import 'package:flutter_app/mytest/TestIndexedStack.dart';
 
 ///
 /// Created by dumingwei on 2019/4/12.
@@ -92,6 +92,8 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     super.initState();
     _pageList = [
       HomePageUI(),
+      HomePageUI(),
+      HomePageUI(),
       SystemTreeUI(),
       WxArticlePageUI(),
       WxArticlePageUI(),
@@ -101,20 +103,31 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
+    print('index=$_index');
     return WillPopScope(
         child: DefaultTabController(
-            length: _titleList.length,
+            length: 5,
             child: Scaffold(
               appBar: _showAppbar ? _appBarWidget(context) : null,
-              drawer: _showDrawer ? DrawerWidgetUI() : null,
               body: IndexedStack(
                 index: _index,
                 children: _pageList,
               ),
-              bottomNavigationBar: BottomNavigationBarDemo(
-                index: _index,
-                onChanged: _handleTabChanged,
-              ),
+              //drawer: _showDrawer ? DrawerWidgetUI() : null,
+              bottomNavigationBar: BottomNavigationBar(
+                  currentIndex: _index,
+                  type: BottomNavigationBarType.fixed,
+                  fixedColor: Colors.deepPurpleAccent,
+                  onTap: (index) => _tab(index),
+                  items: [
+                    BottomNavigationBarItem(
+                        title: Text('first'),
+                        icon: Icon(Icons.shopping_basket)),
+                    BottomNavigationBarItem(
+                        title: Text('second'), icon: Icon(Icons.home)),
+                    BottomNavigationBarItem(
+                        title: Text('third'), icon: Icon(Icons.map))
+                  ]),
             )),
         onWillPop: _onWillPop);
   }
@@ -179,7 +192,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   void _handleTabChanged(int newValue) {
     setState(() {
       _index = newValue;
-      if (_index == 0 || _index == 1 || _index == 2) {
+      /* if (_index == 0 || _index == 1 || _index == 2) {
         _showAppbar = true;
       } else {
         _showAppbar = false;
@@ -188,7 +201,13 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
         _showDrawer = true;
       } else {
         _showDrawer = false;
-      }
+      }*/
+    });
+  }
+
+  _tab(int index) {
+    setState(() {
+      _index = index;
     });
   }
 }

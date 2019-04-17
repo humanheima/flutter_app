@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/wanandroid_flutter/model/ArticleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/api/CommonService.dart';
-import 'package:flutter_app/wanandroid_flutter/widget/BannerWidgetUI.dart';
+import 'package:flutter_app/wanandroid_flutter/model/ArticleModel.dart';
+import 'package:flutter_app/wanandroid_flutter/ui/DrawerWidgetUI.dart';
 import 'package:flutter_app/wanandroid_flutter/utils/timeline_util.dart';
+import 'package:flutter_app/wanandroid_flutter/widget/BannerWidgetUI.dart';
+import 'package:flutter_app/wanandroid_flutter/utils/RouteUtil.dart';
 
 ///
 /// Created by dumingwei on 2019/4/13.
@@ -51,6 +53,7 @@ class HomePageUIState extends State<HomePageUI>
               //多的两个item一个是顶部banner，一个是底部的loadmore
               itemCount: _datas.length + 2),
           onRefresh: getData),
+      //drawer: DrawerWidgetUI(),
     );
   }
 
@@ -91,7 +94,10 @@ class HomePageUIState extends State<HomePageUI>
     if (index - 1 < _datas.length) {
       return new InkWell(
         onTap: () {
-          //RouteUtil.toWebView(context, _datas[index-1].title, _datas[index-1].link);
+          print("title${_datas[index - 1].title}");
+          print("link${_datas[index - 1].link}");
+          RouteUtil.toWebView(
+              context, _datas[index - 1].title, _datas[index - 1].link);
         },
         child: Column(
           children: <Widget>[
