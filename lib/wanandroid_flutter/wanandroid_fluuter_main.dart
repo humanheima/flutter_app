@@ -7,6 +7,7 @@ import 'package:flutter_app/wanandroid_flutter/ui/HomePageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/ProjectTreePageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SearchPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SystemTreeUI.dart';
+import 'package:flutter_app/wanandroid_flutter/ui/NaviPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/WxArticlePageUI.dart';
 
 ///
@@ -94,7 +95,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
       HomePageUI(),
       SystemTreeUI(),
       WxArticlePageUI(),
-      WxArticlePageUI(),
+      NaviPageUI(),
       ProjectTreePageUI(),
     ];
   }

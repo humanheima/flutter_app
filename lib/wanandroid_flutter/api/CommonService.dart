@@ -6,6 +6,7 @@ import 'package:flutter_app/wanandroid_flutter/model/SystemTreeModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/SystemTreeContentModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleTitleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleContentModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/NaviModel.dart';
 import 'package:flutter_app/wanandroid_flutter/net/DioManager.dart';
 
 import 'Api.dart';
@@ -63,6 +64,17 @@ class CommonService {
         .get(Api.WX_ARTICLE_LIST + "$_id/$_page/json", options: _getOptions())
         .then((response) {
       callback(WxArticleContentModel(response.data));
+    });
+  }
+
+  ///获取导航列表数据
+  void getNaviList(Function callback) async {
+    DioManager.singleton
+        .getDio()
+        .get(Api.NAVI_LIST, options: _getOptions())
+        .then((response) {
+      print('getNaviList${response.data}');
+      callback(NaviModel(response.data));
     });
   }
 
