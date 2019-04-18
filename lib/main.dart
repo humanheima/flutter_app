@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/enjoy/view/wechat_article_page.dart';
 import 'package:flutter_app/package_manage.dart';
-import 'package:flutter_app/wanandroid_flutter/wanandroid_fluuter_main.dart';
+import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 
 import 'LearnWidget.dart';
 import 'enjoy/view/home_page.dart';

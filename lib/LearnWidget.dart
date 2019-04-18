@@ -36,7 +36,7 @@ import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
 import 'package:flutter_app/scrollablewidgets/ScrollControllerTest.dart';
 import 'package:flutter_app/scrollablewidgets/SingleChildScrollViewTest.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
-import 'package:flutter_app/wanandroid_flutter/wanandroid_fluuter_main.dart';
+import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'io_and_network/HttpTestRoute.dart';

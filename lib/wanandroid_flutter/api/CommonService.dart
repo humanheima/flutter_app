@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter_app/wanandroid_flutter/common/User.dart';
 import 'package:flutter_app/wanandroid_flutter/model/ArticleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/BannerModel.dart';
-import 'package:flutter_app/wanandroid_flutter/model/SystemTreeModel.dart';
-import 'package:flutter_app/wanandroid_flutter/model/SystemTreeContentModel.dart';
-import 'package:flutter_app/wanandroid_flutter/model/WxArticleTitleModel.dart';
-import 'package:flutter_app/wanandroid_flutter/model/WxArticleContentModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/NaviModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/ProjectTreeModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/ProjectListModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/SystemTreeContentModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/SystemTreeModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/WxArticleContentModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/WxArticleTitleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/net/DioManager.dart';
 
 import 'Api.dart';
@@ -75,6 +77,28 @@ class CommonService {
         .then((response) {
       print('getNaviList${response.data}');
       callback(NaviModel(response.data));
+    });
+  }
+
+  ///获取项目分类
+  void getProjectTree(Function callback) async {
+    DioManager.singleton
+        .getDio()
+        .get(Api.PROJECT_TREE, options: _getOptions())
+        .then((response) {
+      print('getProjectTree${response.data}');
+      callback(ProjectTreeModel(response.data));
+    });
+  }
+
+  ///获取项目列表
+  void getProjectList(Function callback, int _page, int _id) async {
+    DioManager.singleton
+        .getDio()
+        .get(Api.PROJECT_LIST + "$_page/json?cid=$_id", options: _getOptions())
+        .then((response) {
+      print('getProjectList${response.data}');
+      callback(ProjectTreeListModel(response.data));
     });
   }
 
