@@ -5,20 +5,20 @@ import 'package:flutter/material.dart';
 /// Desc:
 ///
 
-class BottomNavigationBarDemo extends StatefulWidget {
+class BottomNavigationBarWidget extends StatefulWidget {
   final int index;
   final ValueChanged<int> onChanged;
 
-  BottomNavigationBarDemo({Key key, this.index: 0, this.onChanged})
+  BottomNavigationBarWidget({Key key, this.index: 0, this.onChanged})
       : super(key: key);
 
   @override
   State createState() {
-    return BottomNavigationBarDemoState();
+    return BottomNavigationBarWidgetState();
   }
 }
 
-class BottomNavigationBarDemoState extends State<BottomNavigationBarDemo>
+class BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget>
     with AutomaticKeepAliveClientMixin {
   int _currentIndex = 0;
 
@@ -39,21 +39,11 @@ class BottomNavigationBarDemoState extends State<BottomNavigationBarDemo>
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
         BottomNavigationBarItem(
-          icon: Icon(Icons.streetview),
-          title: Text('体系'),
-        ),
+            icon: Icon(Icons.streetview), title: Text('体系')),
+        BottomNavigationBarItem(icon: Icon(Icons.book), title: Text('公众号')),
         BottomNavigationBarItem(
-          icon: Icon(Icons.book),
-          title: Text('公众号'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.navigation),
-          title: Text('导航'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.apps),
-          title: Text('项目'),
-        ),
+            icon: Icon(Icons.navigation), title: Text('导航')),
+        BottomNavigationBarItem(icon: Icon(Icons.apps), title: Text('项目')),
       ],
     );
   }

@@ -40,10 +40,11 @@ class Api {
       "http://www.wanandroid.com/article/query/";
 
   // 用户登录
-  static const String USER_LOGIN = "http://www.wanandroid.com/user/login";
+  static const String USER_LOGIN = "https://www.wanandroid.com/user/login";
 
   // 用户注册
-  static const String USER_REGISTER = "http://www.wanandroid.com/user/register";
+  static const String USER_REGISTER =
+      "https://www.wanandroid.com/user/register";
 
   // 收藏列表
   static const String COLLECTION_LIST =

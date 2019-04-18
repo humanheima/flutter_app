@@ -18,7 +18,7 @@ class WxArticlePageUI extends StatefulWidget {
 }
 
 class WxArticlePageUIState extends State<WxArticlePageUI>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   List<WxArticleTitleData> _datas = new List();
 
   TabController _tabController;
@@ -65,6 +65,11 @@ class WxArticlePageUIState extends State<WxArticlePageUI>
         _datas = response.data;
       });
     });
+  }
+
+  @override
+  bool get wantKeepAlive {
+    return true;
   }
 }
 

@@ -13,7 +13,8 @@ class NaviPageUI extends StatefulWidget {
   State createState() => NaviPageUIState();
 }
 
-class NaviPageUIState extends State<NaviPageUI> {
+class NaviPageUIState extends State<NaviPageUI>
+    with AutomaticKeepAliveClientMixin {
   List<NaviData> _naviTitles = List();
 
   @override
@@ -100,5 +101,10 @@ class NaviPageUIState extends State<NaviPageUI> {
         url: item.link,
       );
     }));
+  }
+
+  @override
+  bool get wantKeepAlive {
+    return true;
   }
 }

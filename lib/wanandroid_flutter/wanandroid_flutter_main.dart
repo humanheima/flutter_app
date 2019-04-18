@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/common/application.dart';
 import 'package:flutter_app/wanandroid_flutter/event/theme_change_event.dart';
+import 'package:flutter_app/wanandroid_flutter/ui/DrawerWidgetUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/HomePageUI.dart';
+import 'package:flutter_app/wanandroid_flutter/ui/NaviPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/ProjectTreePageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SearchPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/SystemTreeUI.dart';
-import 'package:flutter_app/wanandroid_flutter/ui/NaviPageUI.dart';
 import 'package:flutter_app/wanandroid_flutter/ui/WxArticlePageUI.dart';
+import 'package:flutter_app/wanandroid_flutter/widget/BottomNavigationBarWidget.dart';
 
 ///
 /// Created by dumingwei on 2019/4/12.
@@ -76,7 +78,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   PageController _pageController;
   var _pageList;
-  var _titleList = [
+  List<String> _titleList = [
     "首页",
     "知识体系",
     "公众号",
@@ -103,8 +105,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     print('index=$_index');
-
-    return MaterialApp(
+    /* return MaterialApp(
       home: Scaffold(
         appBar: _appBarWidget(context),
         body: PageView(
@@ -112,50 +113,30 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           physics: NeverScrollableScrollPhysics(),
           children: _pageList,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _index,
-            type: BottomNavigationBarType.fixed,
-            fixedColor: Colors.deepPurpleAccent,
-            onTap: (index) => _tab(index),
-            items: [
-              BottomNavigationBarItem(
-                  title: Text('首页'), icon: Icon(Icons.shopping_basket)),
-              BottomNavigationBarItem(
-                  title: Text('知识体系'), icon: Icon(Icons.home)),
-              BottomNavigationBarItem(
-                  title: Text('公众号'), icon: Icon(Icons.map)),
-              BottomNavigationBarItem(
-                  title: Text('导航'), icon: Icon(Icons.home)),
-              BottomNavigationBarItem(title: Text('项目'), icon: Icon(Icons.map)),
-            ]),
+        bottomNavigationBar: BottomNavigationBarWidget(
+          index: _index,
+          onChanged: _handleTabChanged,
+        ),
       ),
-    );
-    /* return WillPopScope(
+    );*/
+
+    return WillPopScope(
         child: DefaultTabController(
-            length: 5,
+            length: _titleList.length,
             child: Scaffold(
               appBar: _showAppbar ? _appBarWidget(context) : null,
-              body: IndexedStack(
-                index: _index,
+              body: PageView(
+                controller: _pageController,
+                physics: NeverScrollableScrollPhysics(),
                 children: _pageList,
               ),
-              //drawer: _showDrawer ? DrawerWidgetUI() : null,
-              bottomNavigationBar: BottomNavigationBar(
-                  currentIndex: _index,
-                  type: BottomNavigationBarType.fixed,
-                  fixedColor: Colors.deepPurpleAccent,
-                  onTap: (index) => _tab(index),
-                  items: [
-                    BottomNavigationBarItem(
-                        title: Text('first'),
-                        icon: Icon(Icons.shopping_basket)),
-                    BottomNavigationBarItem(
-                        title: Text('second'), icon: Icon(Icons.home)),
-                    BottomNavigationBarItem(
-                        title: Text('third'), icon: Icon(Icons.map))
-                  ]),
+              drawer: _showDrawer ? DrawerWidgetUI() : null,
+              bottomNavigationBar: BottomNavigationBarWidget(
+                index: _index,
+                onChanged: _handleTabChanged,
+              ),
             )),
-        onWillPop: _onWillPop);*/
+        onWillPop: _onWillPop);
   }
 
   @override
@@ -218,7 +199,8 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   void _handleTabChanged(int newValue) {
     setState(() {
       _index = newValue;
-      /* if (_index == 0 || _index == 1 || _index == 2) {
+      _pageController.jumpToPage(_index);
+      if (_index == 0 || _index == 1 || _index == 3) {
         _showAppbar = true;
       } else {
         _showAppbar = false;
@@ -227,14 +209,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
         _showDrawer = true;
       } else {
         _showDrawer = false;
-      }*/
-    });
-  }
-
-  _tab(int index) {
-    setState(() {
-      _index = index;
-      _pageController.jumpToPage(index);
+      }
     });
   }
 }

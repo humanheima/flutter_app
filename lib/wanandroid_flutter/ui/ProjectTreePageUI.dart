@@ -16,7 +16,7 @@ class ProjectTreePageUI extends StatefulWidget {
 }
 
 class ProjectTreePageUIState extends State<ProjectTreePageUI>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   List<ProjectTreeData> _datas = List();
 
   TabController _tabController;
@@ -64,6 +64,11 @@ class ProjectTreePageUIState extends State<ProjectTreePageUI>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive {
+    return true;
   }
 }
 

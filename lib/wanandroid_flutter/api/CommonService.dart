@@ -3,10 +3,11 @@ import 'package:flutter_app/wanandroid_flutter/common/User.dart';
 import 'package:flutter_app/wanandroid_flutter/model/ArticleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/BannerModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/NaviModel.dart';
-import 'package:flutter_app/wanandroid_flutter/model/ProjectTreeModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/ProjectListModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/ProjectTreeModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/SystemTreeContentModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/SystemTreeModel.dart';
+import 'package:flutter_app/wanandroid_flutter/model/UserModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleContentModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleTitleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/net/DioManager.dart';
@@ -99,6 +100,35 @@ class CommonService {
         .then((response) {
       print('getProjectList${response.data}');
       callback(ProjectTreeListModel(response.data));
+    });
+  }
+
+  ///注册
+  void register(Function callback, String _username, String _password) async {
+    FormData formData = FormData.from({
+      "username": _username,
+      "password": _password,
+      "repassword": _password
+    });
+    DioManager.singleton
+        .getDio()
+        .post(Api.USER_REGISTER, data: formData, options: null)
+        .then((response) {
+      print('register${response.data}');
+      callback(UserModel(response.data));
+    });
+  }
+
+  ///登录
+  void login(Function callback, String _username, String _password) async {
+    FormData formData =
+        FormData.from({"username": _username, "password": _password});
+    DioManager.singleton
+        .getDio()
+        .post(Api.USER_LOGIN, data: formData, options: null)
+        .then((response) {
+      print('register${response.data}');
+      callback(UserModel(response.data), response);
     });
   }
 

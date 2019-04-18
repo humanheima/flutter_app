@@ -4,6 +4,10 @@ import 'package:flutter_app/wanandroid_flutter/common/User.dart';
 import 'package:flutter_app/wanandroid_flutter/common/application.dart';
 import 'package:flutter_app/wanandroid_flutter/event/login_event.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/wanandroid_flutter/event/theme_change_event.dart';
+import 'package:flutter_app/wanandroid_flutter/ui/AboutAppPageUI.dart';
+import 'package:flutter_app/wanandroid_flutter/ui/account/LoginPageUI.dart';
 
 ///
 /// Created by dumingwei on 2019/4/13.
@@ -121,7 +125,6 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
                 } else {
                   GlobalConfig.dark = true;
                 }
-
                 changeTheme();
               });
             },
@@ -166,7 +169,11 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
     super.dispose();
   }
 
-  void onLoginClick() {}
+  void onLoginClick() async {
+    await Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+      return LoginPageUI();
+    }));
+  }
 
   void onCollectionClick() {}
 
@@ -174,9 +181,17 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
 
   void onTodoClick() {}
 
-  void changeTheme() {}
+  void changeTheme() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setBool("darkTheme", GlobalConfig.dark);
+    Application.eventBus.fire(new ThemeChangeEvent(GlobalConfig.dark));
+  }
 
-  void onAboutClick() {}
+  void onAboutClick() async {
+    await Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+      return AboutAppPageUI();
+    }));
+  }
 
   Widget logoutWidget() {
     if (User.singleton.userName != null) {
