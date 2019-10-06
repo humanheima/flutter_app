@@ -68,18 +68,29 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/
-  - images/avatar.png
-  - images/avatar.jpg
-  - images/bg_dark.png
-  - images/bg_light.jpg
-  - images/image_default.png
+    - assets/
+    - images/avatar.png
+    - images/avatar.jpg
+    - images/bg_dark.png
+    - images/bg_light.jpg
+    - images/image_default.png
 
   fonts:
-  - family: myIcon
-    fonts:
-    - asset: fonts/iconfont.ttf
+    - family: myIcon
+      fonts:
+        - asset: fonts/iconfont.ttf
 
+    - family: Big_Shoulders_Display
+      fonts:
+        - asset: assets/fonts/Big_Shoulders_Display/BigShouldersDisplay-Bold.ttf
+
+    - family: wechateIcon
+      fonts:
+        - asset: iconfont/iconfont.ttf
+
+    - family: bookIcon
+      fonts:
+        - asset: iconfont/iconfont_book.ttf
 
 
   # To add assets to your application, add an assets section, like this:

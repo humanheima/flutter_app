@@ -1,6 +1,10 @@
-/// 包管理
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+
+///
+/// Crete by dumingwei on 2019-09-12
+/// Desc: 包管理
+///
 
 class RandomWordsWidget extends StatelessWidget {
   @override
