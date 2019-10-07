@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 /// Crete by dumingwei on 2019/3/18
 /// Desc:线性布局 Row、Column
 ///
+/// 如果Row里面嵌套Row，或者Column里面再嵌套Column，那么只有对最外面的Row或Column会占用尽可能大的空间，
+/// 里面Row或Column所占用的空间为实际大小
 
 class RowColumnWidget extends StatelessWidget {
   @override
@@ -22,6 +24,43 @@ class RowColumnWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max, //有效，外层Column高度为整个屏幕
               children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(" hello world "),
+                    Text(" I am Jack "),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(" hello world "),
+                    Text(" I am Jack "),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  textDirection: TextDirection.rtl,
+                  children: <Widget>[
+                    Text(" hello world "),
+                    Text(" I am Jack "),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  ///由下向上排列
+                  verticalDirection: VerticalDirection.up,
+                  children: <Widget>[
+                    Text(
+                      " hello world ",
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                    Text(" I am Jack "),
+                  ],
+                ),
+                CenterColumnWidget(),
                 Expanded(
                   child: Container(
                     color: Colors.red,
@@ -100,6 +139,19 @@ class RowColumnWidget extends StatelessWidget {
             Text(" i am jack "),
           ],
         ),
+      ],
+    );
+  }
+}
+
+class CenterColumnWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Text("hi"),
+        Text("world"),
       ],
     );
   }

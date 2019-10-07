@@ -25,21 +25,21 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Chapter 3 Home Page'),
+      home: new Chapter3HomePage(title: 'Chapter 3 Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Chapter3HomePage extends StatefulWidget {
+  Chapter3HomePage({Key key, @required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _Chapter3HomePageState createState() => new _Chapter3HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _Chapter3HomePageState extends State<Chapter3HomePage> {
   int _count = 0;
 
   void _incrementCounter() {

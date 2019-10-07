@@ -17,15 +17,11 @@ import 'package:flutter_app/eventhandleandnotification/EventBus.dart';
 import 'package:flutter_app/eventhandleandnotification/GestureDetectorTestRoute.dart';
 import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
 import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dart';
-import 'package:flutter_app/flutter_in_action/chapter_3/Code3_7.dart';
+import 'package:flutter_app/flutter_in_action/main.dart';
 import 'package:flutter_app/funtionalwidgets/InheritedWidgets.dart';
 import 'package:flutter_app/funtionalwidgets/ThemeTestRoute.dart';
 import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
 import 'package:flutter_app/io_and_network/FileOperationRoute.dart';
-import 'package:flutter_app/layoutwidgets/FlexTest.dart';
-import 'package:flutter_app/layoutwidgets/RowColumnTest.dart';
-import 'package:flutter_app/layoutwidgets/StackPositionedTest.dart';
-import 'package:flutter_app/layoutwidgets/WrapFlow.dart';
 import 'package:flutter_app/scrollablewidgets/CustomScrollViewtestRoute.dart';
 import 'package:flutter_app/scrollablewidgets/GridViewTest.dart';
 import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
@@ -102,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             RaisedButton(
               child: Text(
-                "输入框和表单",
+                "《Flutter in action 》",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
               ),
               onPressed: () {
@@ -111,67 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   /* return new CounterWidget(
                     initialValue: 0,
                   );*/
-                  return FormTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "线性布局Row、Column",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return RowColumnWidget();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "弹性布局Flex",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return FlexLayoutTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "流式布局",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return WrapFlowTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "层叠布局",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return StackPositionedRoute();
+                  return FlutterInActionMain();
                 }));
               },
             ),

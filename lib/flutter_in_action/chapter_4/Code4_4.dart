@@ -11,14 +11,12 @@ class WrapFlowTestRoute extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
           title: new Text(
-        "布局类Widgets",
+        "4.4 流式布局",
       )),
       backgroundColor: Colors.white,
       body: Container(
         child: Column(
           children: <Widget>[
-            //Flex的两个子widget按1：2来占据水平空间
-
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0, // 纵轴（垂直）方向间距
