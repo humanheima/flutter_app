@@ -6,9 +6,6 @@ import 'package:flutter_app/animations/FadeRouteTest.dart';
 import 'package:flutter_app/animations/HeroAnimationRoute.dart';
 import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
 import 'package:flutter_app/animations/StaggerDemo.dart';
-import 'package:flutter_app/flutter_in_action/chapter_3/Code3_5.dart';
-import 'package:flutter_app/basicwidgets/InputAndForm.dart';
-import 'package:flutter_app/basicwidgets/SwitchAndCheckbox.dart';
 import 'package:flutter_app/containerwidgets/PaddingTest.dart';
 import 'package:flutter_app/containerwidgets/ScaffoldTabbarNavigation.dart';
 import 'package:flutter_app/containerwidgets/TransformTest.dart';
@@ -20,6 +17,7 @@ import 'package:flutter_app/eventhandleandnotification/EventBus.dart';
 import 'package:flutter_app/eventhandleandnotification/GestureDetectorTestRoute.dart';
 import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
 import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dart';
+import 'package:flutter_app/flutter_in_action/chapter_3/Code3_7.dart';
 import 'package:flutter_app/funtionalwidgets/InheritedWidgets.dart';
 import 'package:flutter_app/funtionalwidgets/ThemeTestRoute.dart';
 import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
@@ -100,21 +98,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onPressed: () {
                 _toWanAndroid(context);
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "单选框和复选框",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return SwitchAndCheckBoxTestRoute();
-                }));
               },
             ),
             RaisedButton(

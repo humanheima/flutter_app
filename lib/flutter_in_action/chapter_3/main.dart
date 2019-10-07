@@ -4,6 +4,9 @@ import 'Code3_2.dart';
 import 'Code3_3.dart';
 import 'Code3_4.dart';
 import 'Code3_5.dart';
+import 'Code3_6.dart';
+import 'Code3_7.dart';
+import 'Code3_8.dart';
 import 'Echo.dart';
 
 ///
@@ -97,6 +100,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
+            RaisedButton(
+              child: Text('3.6 单选开关和复选框'),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return SwitchAndCheckBox();
+                }));
+              },
+            ),
+            RaisedButton(
+                child: Text('3.7 输入框及表单'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    //return new InputRoute();
+                    return new FormTestRoute();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('3.8 进度指示器'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    //return new InputRoute();
+                    return new ProgressWidget();
+                  }));
+                }),
           ],
         ),
       ),
