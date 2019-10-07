@@ -6,9 +6,6 @@ import 'package:flutter_app/animations/FadeRouteTest.dart';
 import 'package:flutter_app/animations/HeroAnimationRoute.dart';
 import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
 import 'package:flutter_app/animations/StaggerDemo.dart';
-import 'package:flutter_app/containerwidgets/PaddingTest.dart';
-import 'package:flutter_app/containerwidgets/ScaffoldTabbarNavigation.dart';
-import 'package:flutter_app/containerwidgets/TransformTest.dart';
 import 'package:flutter_app/customwidgets/CustomPaintRoute.dart';
 import 'package:flutter_app/customwidgets/GradientButton.dart';
 import 'package:flutter_app/customwidgets/GradientCircularProgressRoute.dart';
@@ -104,55 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
                   return FlutterInActionMain();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "Padding",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return PaddingTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "Transform",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return TransformTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "Scallold",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return ScaffoldRoute();
                 }));
               },
             ),

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/19
-/// Desc: Padding ConstrainedBox和SizedBox,UnconstrainedBox，
-/// DecoratedBox DecoratedBox可以在其子widget绘制前(或后)绘制一个装饰Decoration（如背景、边框、渐变等）
-///
 
 class ScaffoldRoute extends StatefulWidget {
   @override
@@ -64,33 +61,41 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
                   textScaleFactor: 5,
                 ));
           }).toList()),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.business), title: Text('Businiss')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.school), title: Text('School')),
-        ],
-        currentIndex: _selectedIndex,
-        fixedColor: Colors.blue,
-        onTap: _onItemTapped,
-      ),
-      /* bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        color: Colors.white,
-        child: Row(
-          children: [
-            Center(child: IconButton(icon: Icon(Icons.home))),
-            SizedBox(), //中间位置空出
-            IconButton(icon: Icon(Icons.business)),
-          ],
-          mainAxisAlignment: MainAxisAlignment.spaceAround, //均分底部导航栏横向空间
-        ),
-      ),*/
+      //bottomNavigationBar: buildBottomNavigationBar(),
+      bottomNavigationBar: buildBottomAppBarStyle1(),
       floatingActionButton: FloatingActionButton(
         onPressed: _onAdd,
         child: Icon(Icons.add),
+      ),
+    );
+  }
+
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.business), title: Text('Businiss')),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.school), title: Text('School')),
+      ],
+      currentIndex: _selectedIndex,
+      fixedColor: Colors.blue,
+      onTap: _onItemTapped,
+    );
+  }
+
+  BottomAppBar buildBottomAppBarStyle1() {
+    return BottomAppBar(
+      shape: CircularNotchedRectangle(),
+      color: Colors.white,
+      child: Row(
+        children: [
+          IconButton(icon: Icon(Icons.home)),
+          SizedBox(), //中间位置空出
+          IconButton(icon: Icon(Icons.business)),
+        ],
+        mainAxisAlignment: MainAxisAlignment.spaceAround, //均分底部导航栏横向空间
       ),
     );
   }

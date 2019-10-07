@@ -37,21 +37,27 @@ class ProgressWidget extends StatelessWidget {
                 value: 0.5,
               ),
             ),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 50.0, maxWidth: 50.0),
-              child: CircularProgressIndicator(
-                strokeWidth: 4.0,
-                backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation(Colors.blue),
-              ),
+            Padding(padding: EdgeInsets.only(top: 10.0)),
+            UnconstrainedBox(
+              child: SizedBox(
+                  width: 50.0,
+                  height: 50.0,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 4.0,
+                    backgroundColor: Colors.grey[200],
+                    valueColor: AlwaysStoppedAnimation(Colors.blue),
+                  )),
             ),
-            SizedBox(
-              width: 100.0,
-              height: 100.0,
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation(Colors.blue),
-                value: 0.5,
+            Padding(padding: EdgeInsets.only(top: 10.0)),
+            UnconstrainedBox(
+              child: SizedBox(
+                width: 20.0,
+                height: 20.0,
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.grey[200],
+                  valueColor: AlwaysStoppedAnimation(Colors.blue),
+                  value: 0.5,
+                ),
               ),
             ),
             AnimateProgressWidget(),
