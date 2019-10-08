@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 ///
-/// Crete by dumingwei on 2019/3/24
-/// Desc: CustomScrollView
-/// Sliver有细片、小片之意，在Flutter中，Sliver通常指具有特定滚动效果的可滚动块。
+/// Created by dumingwei on 2019-10-08.
+/// Desc:
 ///
-
 class CustomScrollViewRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,9 +14,9 @@ class CustomScrollViewRoute extends StatelessWidget {
             pinned: true,
             expandedHeight: 250.0,
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text('Demo'),
+              title: const Text('6.5 CustomScrollView'),
               background: Image.asset(
-                "images/avatar.png",
+                "images/avatar.jpg",
                 fit: BoxFit.cover,
               ),
             ),
@@ -57,43 +55,6 @@ class CustomScrollViewRoute extends StatelessWidget {
               itemExtent: 50.0)
         ],
       ),
-    );
-  }
-
-  GridView buildGridView() {
-    return GridView(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 1.0,
-      ),
-      children: <Widget>[
-        Icon(Icons.ac_unit),
-        Icon(Icons.airport_shuttle),
-        Icon(Icons.all_inclusive),
-        Icon(Icons.beach_access),
-        Icon(Icons.cake),
-        Icon(Icons.free_breakfast)
-      ],
-    );
-  }
-
-  ///纵轴宽度固定
-  ///例如网格布局是竖直方向上的，宽度为500px，如果maxCrossAxisExtent指定为150.0,
-  ///那么SliverGridDelegateWithMaxCrossAxisExtent会创建4列，每一列宽125px。
-  GridView buildGridViewMaxExtent() {
-    return GridView(
-      padding: EdgeInsets.zero,
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 120.0, childAspectRatio: 2.0 //宽高比为2
-          ),
-      children: <Widget>[
-        Icon(Icons.ac_unit),
-        Icon(Icons.airport_shuttle),
-        Icon(Icons.all_inclusive),
-        Icon(Icons.beach_access),
-        Icon(Icons.cake),
-        Icon(Icons.free_breakfast),
-      ],
     );
   }
 }

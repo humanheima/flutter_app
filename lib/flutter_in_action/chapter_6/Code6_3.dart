@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/24
@@ -9,17 +9,17 @@ import 'package:english_words/english_words.dart';
 class ListViewRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget divier1 = Divider(color: Colors.blue);
+    Widget divier1 = Divider(color: Colors.red);
     Widget divier2 = Divider(color: Colors.green);
     return new Scaffold(
       appBar: new AppBar(
           title: new Text(
-        "布局类Widgets",
+        "6.3 ListView",
       )),
       backgroundColor: Colors.white,
       body: Container(
-
           //child: buildListView(divier1, divier2),
+          //child: separatedListView(divier1, divier2),
           child: Column(
         children: <Widget>[
           ListTile(title: Text("固定表头")),
@@ -32,6 +32,30 @@ class ListViewRoute extends StatelessWidget {
   }
 
   ListView buildListView(Widget divier1, Widget divier2) {
+    return ListView.builder(
+      itemCount: 100,
+      itemBuilder: (BuildContext context, int index) {
+        return Column(
+          children: <Widget>[
+            ListTile(
+              title: Text("$index"),
+            ),
+            getDivider(index, divier1, divier2),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget getDivider(int index, Widget divider1, Widget divider2) {
+    if (index % 2 == 0) {
+      return divider1;
+    } else {
+      return divider2;
+    }
+  }
+
+  ListView separatedListView(Widget divider1, Widget divider2) {
     return ListView.separated(
       itemCount: 100,
       itemBuilder: (BuildContext context, int index) {
@@ -40,7 +64,7 @@ class ListViewRoute extends StatelessWidget {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return index % 2 == 0 ? divier1 : divier2;
+        return index % 2 == 0 ? divider1 : divider2;
       },
     );
   }
@@ -62,28 +86,35 @@ class _InfiniteListViewState extends State<InfiniteListView> {
 
   @override
   void initState() {
+    super.initState();
     _retriveData();
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+        itemCount: _words.length,
         itemBuilder: (BuildContext context, int index) {
           if (_words[index] == loadingTag) {
             //不足一百条继续获取
             if (_words.length - 1 < 100) {
               _retriveData();
               return Container(
-                padding: const EdgeInsets.all(16.0),
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: 24.0,
-                  height: 24.0,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.0,
-                  ),
-                ),
-              );
+                  padding: const EdgeInsets.all(16.0),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(loadingTag),
+                      SizedBox(
+                        width: 24.0,
+                        height: 24.0,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.0,
+                        ),
+                      ),
+                    ],
+                  ));
             } else {
               //已经加载了100条数据，不再获取数据。
               return Container(
@@ -105,8 +136,7 @@ class _InfiniteListViewState extends State<InfiniteListView> {
           return Divider(
             height: 0.0,
           );
-        },
-        itemCount: _words.length);
+        });
   }
 
   void _retriveData() {

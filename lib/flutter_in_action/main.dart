@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'chapter_3/main.dart';
 import 'chapter_4/main.dart';
 import 'chapter_5/main.dart';
+import 'chapter_6/main.dart';
 
 ///
 /// Created by dumingwei on 2019-10-07.
@@ -41,6 +42,14 @@ class FlutterInActionMain extends StatelessWidget {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
                     return new Chapter5HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第6章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter6HomePage();
                   }));
                 }),
           ],

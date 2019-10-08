@@ -19,11 +19,6 @@ import 'package:flutter_app/funtionalwidgets/InheritedWidgets.dart';
 import 'package:flutter_app/funtionalwidgets/ThemeTestRoute.dart';
 import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
 import 'package:flutter_app/io_and_network/FileOperationRoute.dart';
-import 'package:flutter_app/scrollablewidgets/CustomScrollViewtestRoute.dart';
-import 'package:flutter_app/scrollablewidgets/GridViewTest.dart';
-import 'package:flutter_app/scrollablewidgets/ListViewTest.dart';
-import 'package:flutter_app/scrollablewidgets/ScrollControllerTest.dart';
-import 'package:flutter_app/scrollablewidgets/SingleChildScrollViewTest.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,81 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return FlutterInActionMain();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "SingleChildScrollView",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return SingleChildScrollViewRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "ListView",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return ListViewRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "GridView",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return GridViewRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "CustomScrollView",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return CustomScrollViewRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "ScrollControllerRoute 滚动监听及控制",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return ScrollNotificationTestRoute();
                 }));
               },
             ),

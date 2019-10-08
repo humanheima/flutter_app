@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
 ///
-/// Crete by dumingwei on 2019/3/24
-/// Desc: ScrollController
-/// 滚动监听及控制
+/// Created by dumingwei on 2019-10-08.
+/// Desc:
 ///
-
-class ScrollControllerRoute extends StatefulWidget {
+class ScrollControllerTestRoute extends StatefulWidget {
   @override
   State createState() {
     return new ScrollControllerTestRouteState();
   }
 }
 
-class ScrollControllerTestRouteState extends State<ScrollControllerRoute> {
+class ScrollControllerTestRouteState extends State<ScrollControllerTestRoute> {
   ScrollController _controller = new ScrollController();
 
   bool showToTopBtn = false; //是否显示“返回到顶部”按钮
@@ -40,7 +38,7 @@ class ScrollControllerTestRouteState extends State<ScrollControllerRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('滚动控制'),
+        title: Text('6.6 滚动监听及控制'),
       ),
       body: Scrollbar(
           child: ListView.builder(
@@ -98,6 +96,7 @@ class _ScrollNotificationTestRouteState
           });
           //是否滚到到了底部
           print("BottomEdge: ${notification.metrics.extentAfter == 0}");
+          return true;
         },
         child: Stack(
           alignment: Alignment.center,

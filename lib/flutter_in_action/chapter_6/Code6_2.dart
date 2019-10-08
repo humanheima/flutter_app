@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 ///
-/// Crete by dumingwei on 2019/3/24
-/// Desc: SingleChildScrollView类似于Android中的ScrollView，它只能接收一个子Widget。
+/// Created by dumingwei on 2019-10-08.
+/// Desc:
 ///
-
-class SingleChildScrollViewRoute extends StatelessWidget {
+class SingleChildScrollViewTestRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

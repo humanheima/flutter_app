@@ -1,29 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 ///
-/// Crete by dumingwei on 2019/3/24
-/// Desc: GridView
-/// Sliver有细片、小片之意，在Flutter中，Sliver通常指具有特定滚动效果的可滚动块。
+/// Created by dumingwei on 2019-10-08.
+/// Desc:
 ///
-
-class GridViewRoute extends StatelessWidget {
+class GridViewTestRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
           title: new Text(
-        "布局类Widgets",
+        "6.4 GridView",
       )),
       backgroundColor: Colors.white,
       body: Container(
           child: Column(
         children: <Widget>[
           Expanded(
-            //child: buildGridViewMaxExtent(),
-            child: InfiniteGridView(),
+            child: buildGridViewMaxExtent(),
+            //child: InfiniteGridView(),
+            //child: buildStaggeredGridView(),
           )
         ],
-      )),
+      )
+          //child: buildGridView(),
+          // child: countGridView(),
+          //child: buildGridViewMaxExtent(),
+          //child: extentGridView(),
+          ),
+    );
+  }
+
+  StaggeredGridView buildStaggeredGridView() {
+    return new StaggeredGridView.countBuilder(
+      crossAxisCount: 4,
+      itemCount: 8,
+      itemBuilder: (BuildContext context, int index) => new Container(
+          color: Colors.green,
+          child: new Center(
+            child: new CircleAvatar(
+              backgroundColor: Colors.white,
+              child: new Text('$index'),
+            ),
+          )),
+      staggeredTileBuilder: (int index) =>
+          new StaggeredTile.count(2, index.isEven ? 2 : 1),
+      mainAxisSpacing: 4.0,
+      crossAxisSpacing: 4.0,
     );
   }
 
@@ -44,10 +68,43 @@ class GridViewRoute extends StatelessWidget {
     );
   }
 
+  GridView countGridView() {
+    return GridView.count(
+      crossAxisCount: 3,
+      childAspectRatio: 1.0,
+      children: <Widget>[
+        Icon(Icons.ac_unit),
+        Icon(Icons.airport_shuttle),
+        Icon(Icons.all_inclusive),
+        Icon(Icons.beach_access),
+        Icon(Icons.cake),
+        Icon(Icons.free_breakfast)
+      ],
+    );
+  }
+
   ///纵轴宽度固定
+  ///maxCrossAxisExtent为子元素在横轴上的最大长度
   ///例如网格布局是竖直方向上的，宽度为500px，如果maxCrossAxisExtent指定为150.0,
   ///那么SliverGridDelegateWithMaxCrossAxisExtent会创建4列，每一列宽125px。
   GridView buildGridViewMaxExtent() {
+    return GridView(
+      padding: EdgeInsets.zero,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 120.0, childAspectRatio: 2.0 //宽高比为2
+          ),
+      children: <Widget>[
+        Icon(Icons.ac_unit),
+        Icon(Icons.airport_shuttle),
+        Icon(Icons.all_inclusive),
+        Icon(Icons.beach_access),
+        Icon(Icons.cake),
+        Icon(Icons.free_breakfast),
+      ],
+    );
+  }
+
+  GridView extentGridView() {
     return GridView(
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
