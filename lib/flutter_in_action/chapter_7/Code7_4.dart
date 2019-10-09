@@ -2,12 +2,40 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/24
-/// Desc: InheritedWidget
+/// Desc:
 ///
-/// InheritedWidget是Flutter中非常重要的一个功能型Widget，
-/// 它可以高效的将数据在Widget树中向下传递、共享，
-/// 这在一些需要在Widget树中共享数据的场景中非常方便，如Flutter中，
-/// 正是通过InheritedWidget来共享应用主题(Theme)和Locale(当前语言环境)信息的。
+///
+
+///一个背景颜色和Title可以自定义的导航栏，并且背景色为深色时我们应该让Title显示为浅色；背景色为浅色时，Title显示为深色。
+class NavBar extends StatelessWidget {
+  final String title;
+  final Color color;
+
+  NavBar({Key key, this.title, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints(minHeight: 52, minWidth: double.infinity),
+      decoration: BoxDecoration(color: color, boxShadow: [
+        //阴影
+        BoxShadow(
+          color: Colors.black26,
+          offset: Offset(0, 3),
+          blurRadius: 3,
+        )
+      ]),
+      child: Text(
+        title,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color:
+                color.computeLuminance() < 0.5 ? Colors.white : Colors.black),
+      ),
+      alignment: Alignment.center,
+    );
+  }
+}
 
 class ThemeTestRoute extends StatefulWidget {
   @override
@@ -28,11 +56,23 @@ class _ThemeTestRouteState extends State<ThemeTestRoute> {
           iconTheme: IconThemeData(color: _themeColor)),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("主题测试"),
+          title: Text("7.4 颜色和主题"),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Column(
+              children: <Widget>[
+                NavBar(
+                  color: Colors.blue,
+                  title: '标题',
+                ),
+                NavBar(
+                  color: Colors.white,
+                  title: '标题',
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -62,41 +102,5 @@ class _ThemeTestRouteState extends State<ThemeTestRoute> {
         ),
       ),
     );
-  }
-}
-
-class ShareDataWidget extends InheritedWidget {
-  int data; //需要在子树中共享的数据，保存点击次数
-
-  ShareDataWidget({@required this.data, Widget child}) : super(child: child);
-
-  static ShareDataWidget of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(ShareDataWidget);
-  }
-
-  //该回调决定当data发生变化时，是否通知子树中依赖data的Widget
-  @override
-  bool updateShouldNotify(ShareDataWidget oldWidget) {
-    return oldWidget.data != data;
-  }
-}
-
-class _TestWidget extends StatefulWidget {
-  @override
-  _TestWidgetState createState() => new _TestWidgetState();
-}
-
-class _TestWidgetState extends State<_TestWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Text(ShareDataWidget.of(context).data.toString());
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
-    //如果build中没有依赖InheritedWidget，则此回调不会被调用。
-    print('Dependencies change');
   }
 }

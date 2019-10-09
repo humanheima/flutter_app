@@ -15,9 +15,6 @@ import 'package:flutter_app/eventhandleandnotification/GestureDetectorTestRoute.
 import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
 import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dart';
 import 'package:flutter_app/flutter_in_action/main.dart';
-import 'package:flutter_app/funtionalwidgets/InheritedWidgets.dart';
-import 'package:flutter_app/funtionalwidgets/ThemeTestRoute.dart';
-import 'package:flutter_app/funtionalwidgets/WillPopScope.dart';
 import 'package:flutter_app/io_and_network/FileOperationRoute.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
@@ -97,51 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return FlutterInActionMain();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "WillPopScopeRoute",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return WillPopScopeRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "InheritedWidgetRoute",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return InheritedWidgetRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "ThemeTestRoute",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return ThemeTestRoute();
                 }));
               },
             ),

@@ -20,9 +20,17 @@ class _WillPopScopeRouteState extends State<WillPopScopeRoute> {
   Widget build(BuildContext context) {
     return Material(
       child: new WillPopScope(
-          child: Container(
-            alignment: Alignment.center,
-            child: Text('1秒内连续点击两次返回键退出'),
+          child: Column(
+            children: <Widget>[
+              AppBar(
+                title: Text('7.1 导航返回拦截（WillPopScope）'),
+              ),
+              Expanded(
+                  child: Container(
+                alignment: Alignment.center,
+                child: Text('1秒内连续点击两次返回键退出'),
+              ))
+            ],
           ),
           onWillPop: () async {
             if (_lastPressAt == null ||
