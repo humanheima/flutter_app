@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 ///
-/// Crete by dumingwei on 2019/3/25
-/// Desc: Pointer事件处理,这个没怎么看懂，以后再研究
+/// Created by dumingwei on 2019-10-09.
+/// Desc:
 ///
-
 class PointerEventTestRoute extends StatefulWidget {
   @override
   _PointerEventTestRoute createState() => _PointerEventTestRoute();
@@ -16,11 +15,36 @@ class _PointerEventTestRoute extends State<PointerEventTestRoute> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Container(
-        alignment: Alignment.center,
-        child: buildListenerTwo(),
-      ),
-    );
+        appBar: AppBar(
+          title: Text('8.1 原始指针事件处理'),
+        ),
+        body: Column(
+          children: <Widget>[
+            new Container(
+              margin: EdgeInsets.only(top: 20.0),
+              alignment: Alignment.center,
+              child: buildListener(),
+              //child: buildListenerTwo(),
+            ),
+            new Container(
+              alignment: Alignment.center,
+              child: buildListener1(),
+              //child: buildListenerTwo(),
+            ),
+            new Container(
+              margin: EdgeInsets.only(top: 20.0),
+              alignment: Alignment.center,
+              child: buildListenerTwo(),
+              //child: buildListenerTwo(),
+            ),
+            new Container(
+              margin: EdgeInsets.only(top: 20.0),
+              alignment: Alignment.center,
+              child: buildStack(),
+              //child: buildListenerTwo(),
+            ),
+          ],
+        ));
   }
 
   Listener buildListener() {
@@ -51,21 +75,30 @@ class _PointerEventTestRoute extends State<PointerEventTestRoute> {
 
   Listener buildListener1() {
     return Listener(
-        child: Listener(
-            child: ConstrainedBox(
-              constraints: BoxConstraints.tight(Size(300.0, 150.0)),
-              child: Center(child: Text("Box A")),
+        child: Container(
+          margin: EdgeInsets.only(top: 20.0),
+
+          ///不能添加背景
+          //color: Colors.green,
+          child: ConstrainedBox(
+            constraints: BoxConstraints.tight(Size(300.0, 100.0)),
+            child: Center(
+              child: Text(
+                "Box A",
+                style: TextStyle(backgroundColor: Colors.blue),
+              ),
             ),
-            //behavior: HitTestBehavior.opaque,
-            onPointerDown: (event) => print("down A")),
-        //behavior: HitTestBehavior.deferToChild,
+          ),
+        ),
         behavior: HitTestBehavior.opaque,
         onPointerDown: (event) => print("down A"));
+    //behavior: HitTestBehavior.deferToChild,
+    //behavior: HitTestBehavior.opaque,
   }
 
   Listener buildListenerTwo() {
     return Listener(
-      child: IgnorePointer(
+      child: AbsorbPointer(
         child: Listener(
           child: Container(
             color: Colors.red,

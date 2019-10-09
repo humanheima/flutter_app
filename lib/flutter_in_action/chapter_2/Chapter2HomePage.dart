@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'NewRoute.dart';
 import 'EchoRoute.dart';
-import 'RouterTestRoute.dart';
+import 'Code2_2.dart';
 import 'dart:developer';
 import 'package:flutter_app/package_manage.dart';
 
@@ -10,7 +10,7 @@ import 'package:flutter_app/package_manage.dart';
 /// Desc: 计数器应用示例
 ///
 
-void main() => runApp(new MyApp());
+//void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -25,26 +25,25 @@ class MyApp extends StatelessWidget {
       routes: {
         "new_page": (context) => NewRoute(),
         "echo_page": (context) => EchoRoute(),
-        '/': (context) => MyHomePage(
+        '/': (context) => Chapter2HomePage(
               title: 'Flutter Demo Home Page',
             )
       },
-      //home: new MyHomePage(title: 'Flutter Demo Home Page'),
-      //home: new RouterTestRoute(),
+      //home: new Chapter2HomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Chapter2HomePage extends StatefulWidget {
+  Chapter2HomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _Chapter2HomePageState createState() => new _Chapter2HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _Chapter2HomePageState extends State<Chapter2HomePage> {
   int _count = 0;
 
   void _incrementCounter() {
@@ -57,25 +56,23 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: new Text('第2章'),
       ),
       body: new Center(
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            RaisedButton(
+                child: Text('2.2:路由管理'),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return RouteManageTest();
+                  }));
+                }),
             new Text('You have pushed the button this many times:'),
             new Text(
               '$_count',
               style: Theme.of(context).textTheme.display1,
-            ),
-            new FlatButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return NewRoute();
-                }));
-              },
-              child: Text('Open new route'),
-              textColor: Colors.blue,
             ),
             new FlatButton(
               onPressed: () {

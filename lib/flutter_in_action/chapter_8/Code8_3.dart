@@ -6,6 +6,7 @@
 //定义一个top-level变量，页面引入该文件后可以直接使用bus
 var bus = new EventBus();
 
+//订阅者回调签名
 typedef void EventCallback(arg);
 
 class EventBus {
@@ -42,7 +43,7 @@ class EventBus {
     if (f == null) {
       _emap[eventName] = null;
     } else {
-      _emap.remove(eventName);
+      _emap.remove(f);
     }
   }
 

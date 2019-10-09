@@ -2,7 +2,6 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/animations/FadeRouteTest.dart';
 import 'package:flutter_app/animations/HeroAnimationRoute.dart';
 import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
 import 'package:flutter_app/animations/StaggerDemo.dart';
@@ -10,10 +9,6 @@ import 'package:flutter_app/customwidgets/CustomPaintRoute.dart';
 import 'package:flutter_app/customwidgets/GradientButton.dart';
 import 'package:flutter_app/customwidgets/GradientCircularProgressRoute.dart';
 import 'package:flutter_app/customwidgets/TurnBoxRoute.dart';
-import 'package:flutter_app/eventhandleandnotification/EventBus.dart';
-import 'package:flutter_app/eventhandleandnotification/GestureDetectorTestRoute.dart';
-import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
-import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dart';
 import 'package:flutter_app/flutter_in_action/main.dart';
 import 'package:flutter_app/io_and_network/FileOperationRoute.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
@@ -59,15 +54,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  void initState() {
-    super.initState();
-
-    bus.on("login", (arg) {
-      print("Receive login event:" + arg);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
@@ -95,62 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     new MaterialPageRoute(builder: (context) {
                   return FlutterInActionMain();
                 }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "PointerEventTestRoute",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  /* return new CounterWidget(
-                    initialValue: 0,
-                  );*/
-                  return PointerEventTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "手势识别GestureDetector",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context, new FadeRoute(builder: (context) {
-                  return GestureDetectorTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "使用EventBus发送事件",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                bus.emit("login", "Login event");
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "send notification",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    //自自定义页面切换动画效果
-                    PageRouteBuilder(
-                        transitionDuration: Duration(milliseconds: 500),
-                        pageBuilder: ((BuildContext context,
-                            Animation<double> animation,
-                            Animation<double> secondaryAnimation) {
-                          return new FadeTransition(
-                            opacity: animation,
-                            child: NotificationRoute(),
-                          );
-                        })));
               },
             ),
             RaisedButton(
