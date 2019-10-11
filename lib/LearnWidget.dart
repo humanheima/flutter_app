@@ -2,9 +2,6 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/animations/HeroAnimationRoute.dart';
-import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
-import 'package:flutter_app/animations/StaggerDemo.dart';
 import 'package:flutter_app/customwidgets/CustomPaintRoute.dart';
 import 'package:flutter_app/customwidgets/GradientButton.dart';
 import 'package:flutter_app/customwidgets/GradientCircularProgressRoute.dart';
@@ -72,50 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             RaisedButton(
-              child: Text(
-                "《Flutter in action 》",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
+              child: Text("《Flutter in action 》"),
               onPressed: () {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return FlutterInActionMain();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "动画基本结构",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return ScaleAnimationRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "共享元素动画",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return HeroAnimationRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "交错动画",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return StaggerDemo();
                 }));
               },
             ),

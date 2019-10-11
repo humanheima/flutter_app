@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'StaggerAnimationTest.dart';
+import 'package:flutter_app/flutter_in_action/chapter_9/StaggerAnimation.dart';
 
 class StaggerDemo extends StatefulWidget {
   @override
@@ -24,13 +24,16 @@ class _StaggerDemoState extends State<StaggerDemo>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 2000));
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 2000));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('9.5 交织动画'),
+      ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {

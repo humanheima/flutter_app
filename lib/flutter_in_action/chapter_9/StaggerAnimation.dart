@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/27
-/// Desc: 交错动画
+/// Desc: 交织动画
 /// 有一个柱状图，需要在高度增长的同时改变颜色，等到增长到最大高度后，我们需要在X轴上平移一段距离。
 ///
 class StaggerAnimation extends StatelessWidget {
