@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/customwidgets/TurnBoxRoute.dart';
+import 'package:flutter_app/flutter_in_action/chapter_10/Code10_3.dart';
 
 ///
 /// Created by dumingwei on 2019/3/31.
@@ -30,11 +30,11 @@ class GradientCircularProgressRouteState
         isForward = true;
       } else if (status == AnimationStatus.completed ||
           status == AnimationStatus.dismissed) {
-        if (isForward) {
+        /*if (isForward) {
           _animationController.reverse();
         } else {
           _animationController.forward();
-        }
+        }*/
       } else if (status == AnimationStatus.reverse) {
         isForward = false;
       }
@@ -51,6 +51,9 @@ class GradientCircularProgressRouteState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('10.5 自绘实例：圆形背景渐变进度条'),
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(

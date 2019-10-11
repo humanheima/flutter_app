@@ -2,10 +2,6 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/customwidgets/CustomPaintRoute.dart';
-import 'package:flutter_app/customwidgets/GradientButton.dart';
-import 'package:flutter_app/customwidgets/GradientCircularProgressRoute.dart';
-import 'package:flutter_app/customwidgets/TurnBoxRoute.dart';
 import 'package:flutter_app/flutter_in_action/main.dart';
 import 'package:flutter_app/io_and_network/FileOperationRoute.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
@@ -74,54 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return FlutterInActionMain();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "自定义组合控件",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return GradientButtonRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "自定义组合控件实例turnBox",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return TurnBoxRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "自定义画笔",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return CustomPaintRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "自定义圆形进度条",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return GradientCircularProgressRoute();
                 }));
               },
             ),

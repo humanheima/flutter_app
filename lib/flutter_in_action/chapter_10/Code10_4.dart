@@ -10,12 +10,15 @@ class CustomPaintRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text('10.4 自绘组件 （CustomPaint与Canvas）'),
+        ),
         body: Center(
-      child: CustomPaint(
-        size: Size(300, 300), //指定画布大小
-        painter: MyPainter(),
-      ),
-    ));
+          child: CustomPaint(
+            size: Size(300, 300), //指定画布大小
+            painter: MyPainter(),
+          ),
+        ));
   }
 }
 
