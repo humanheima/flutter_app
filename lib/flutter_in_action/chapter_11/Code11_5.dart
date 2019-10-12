@@ -16,10 +16,17 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
   String _text = "";
 
   @override
+  void initState() {
+    super.initState();
+    //创建websocket连接
+    channel = new IOWebSocketChannel.connect('ws://echo.websocket.org');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("WebSocket(内容回显)"),
+        title: new Text("11.5：使用WebSockets"),
       ),
       body: new Padding(
         padding: const EdgeInsets.all(20.0),
@@ -53,13 +60,6 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
         child: new Icon(Icons.send),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    //创建websocket连接
-    channel = new IOWebSocketChannel.connect('ws://echo.websocket.org');
   }
 
   void _sendMessage() {

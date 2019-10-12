@@ -3,13 +3,9 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/flutter_in_action/main.dart';
-import 'package:flutter_app/io_and_network/FileOperationRoute.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'io_and_network/HttpTestRoute.dart';
-import 'io_and_network/WebSocketRoute.dart';
 
 void main() {
   runApp(new MyApp());
@@ -56,15 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: new ListView(
           children: <Widget>[
             RaisedButton(
-              child: Text(
-                "simulate wanandroid_flutter",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                _toWanAndroid(context);
-              },
-            ),
-            RaisedButton(
               child: Text("《Flutter in action 》"),
               onPressed: () {
                 Navigator.push(context,
@@ -75,38 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             RaisedButton(
               child: Text(
-                "文件操作",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+                "simulate wanandroid_flutter",
               ),
               onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return FileOperationRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "通过HttpClient发起HTTP请求",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return HttpTestRoute();
-                }));
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "使用WebSockets",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new CupertinoPageRoute(builder: (context) {
-                  return WebSocketRoute();
-                }));
+                _toWanAndroid(context);
               },
             ),
           ],

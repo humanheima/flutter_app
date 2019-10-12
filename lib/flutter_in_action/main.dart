@@ -9,6 +9,7 @@ import 'chapter_7/main.dart';
 import 'chapter_8/Chapter8HomePage.dart';
 import 'chapter_9/Chapter9HomePage.dart';
 import 'chapter_10/Chapter10HomePage.dart';
+import 'chapter_11/Chapter11HomePage.dart';
 
 ///
 /// Created by dumingwei on 2019-10-07.
@@ -95,6 +96,14 @@ class FlutterInActionMain extends StatelessWidget {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
                     return new Chapter10HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第11章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter11HomePage();
                   }));
                 }),
           ],

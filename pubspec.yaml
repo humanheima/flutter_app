@@ -51,6 +51,7 @@ dependencies:
 
 dev_dependencies:
 
+  json_model: ^0.0.2
   build_runner: ^1.0.0
   json_serializable: ^2.0.0
 

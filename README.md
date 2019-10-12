@@ -58,3 +58,12 @@ class MyIcons {
 }
 ```
 获取这个整数，可以用浏览器打开font_wexin目录下的demo_index.xml中看到
+
+
+# Json
+
+运行如下命令，生成json字符串对应的实体类
+```
+flutter packages pub run json_model
+
+```

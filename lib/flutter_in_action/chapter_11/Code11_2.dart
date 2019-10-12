@@ -20,15 +20,14 @@ class _HttpTestRouteState extends State<HttpTestRoute> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(
+        title: Text('11.2 通过HttpClient发起HTTP请求'),
+      ),
       body: ConstrainedBox(
         constraints: BoxConstraints.expand(),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Padding(
-                child: null,
-                padding: EdgeInsets.only(top: 100.0),
-              ),
               RaisedButton(
                 child: Text('获取百度首页'),
                 onPressed: _loading
@@ -44,6 +43,8 @@ class _HttpTestRouteState extends State<HttpTestRoute> {
                           //打开Http连接
                           HttpClientRequest request = await httpClient
                               .getUrl(Uri.parse("https://www.baidu.com"));
+                          request.headers.add("user-agent",
+                              "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1");
                           //等待连接服务器（会将请求信息发送给服务器）
                           HttpClientResponse response = await request.close();
                           //读取响应内容

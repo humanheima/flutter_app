@@ -10,7 +10,9 @@ import 'package:path_provider/path_provider.dart';
 
 class FileOperationRoute extends StatefulWidget {
   @override
-  State createState() =>_FileOperationRouteState();
+  State createState() => _FileOperationRouteState();
+
+  FileOperationRoute({Key key}) : super(key: key);
 }
 
 class _FileOperationRouteState extends State<FileOperationRoute> {
@@ -31,13 +33,15 @@ class _FileOperationRouteState extends State<FileOperationRoute> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('文件操作'),
+        title: new Text('11.1 文件操作'),
       ),
       body: new Center(
         child: new Text('点击了 $_counter 次'),
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: () {_incrementCounter();},
+        onPressed: () {
+          _incrementCounter();
+        },
         tooltip: 'Increment',
         child: new Icon(Icons.add),
       ),
