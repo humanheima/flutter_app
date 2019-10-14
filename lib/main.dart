@@ -11,7 +11,7 @@ import 'enjoy/view/project_practice_page.dart';
 
 /// 程序入口
 
-void main() => runApp(WanAndroidApp(false));
+void main() => runApp(FlutterInActionApp());
 
 class App extends StatefulWidget {
   @override

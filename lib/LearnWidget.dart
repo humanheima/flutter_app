@@ -8,10 +8,10 @@ import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(new MyApp());
+  runApp(new FlutterInActionApp());
 }
 
-class MyApp extends StatelessWidget {
+class FlutterInActionApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
 
         ///应用首页路由
         home: new MyHomePage(
-          title: "learn widget",
+          title: "Flutter in action",
         ));
   }
 }
