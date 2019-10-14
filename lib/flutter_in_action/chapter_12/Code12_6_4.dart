@@ -17,13 +17,16 @@ class webview_flutter_plugin_demoState
     extends State<webview_flutter_plugin_demo> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WebviewScaffold(
+      url: "https://flutterchina.club",
+      //hidden: true,
+      initialChild: Container(
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
       appBar: AppBar(
         title: Text('使用flutter_webview_plugin中的WebView'),
-      ),
-      body: WebviewScaffold(
-        url: "https://flutterchina.club",
-        withJavascript: true,
       ),
     );
   }
