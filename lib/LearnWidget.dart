@@ -1,11 +1,14 @@
 import 'dart:core';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/flutter_in_action/main.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'flutter_in_action/chapter_13/Code13_2.dart';
+import 'i10n/localization_intl.dart';
 
 void main() {
   runApp(new FlutterInActionApp());
@@ -16,6 +19,17 @@ class FlutterInActionApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        localizationsDelegates: [
+          // 本地化的代理类
+          GlobalMaterialLocalizations.delegate,
+          //DemoLocalizationsDelegate(),
+          IntlDemoLocalizationsDelegate(),
+        ],
+        supportedLocales: [
+          const Locale('en', 'US'), // 美国英语
+          const Locale('zh', 'CN'), // 中文简体
+          //其它Locales
+        ],
 
         ///应用名称
         title: 'Flutter Code Sample for material.AppBar.actions',
@@ -46,7 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        //title: new Text(widget.title),
+        //title: Text(DemoLocalizations.of(context).title),
+        title: Text(IntlDemoLocalizations.of(context).title),
       ),
       body: new Center(
         child: new ListView(

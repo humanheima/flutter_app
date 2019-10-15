@@ -6,3 +6,9 @@
 
 SingleChildScrollView类似于Android中的ScrollView，它只能接收一个子组件。
 
+## 第14章
+
+BuildContext就是widget对应的Element。
+
+
+

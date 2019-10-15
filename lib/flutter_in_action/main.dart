@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'chapter_10/Chapter10HomePage.dart';
 import 'chapter_11/Chapter11HomePage.dart';
 import 'chapter_12/Chapter12HomePage.dart';
+import 'chapter_13/Chapter13HomePage.dart';
 import 'chapter_2/Chapter2HomePage.dart';
 import 'chapter_3/main.dart';
 import 'chapter_4/main.dart';
@@ -113,6 +114,14 @@ class FlutterInActionMain extends StatelessWidget {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
                     return new Chapter12HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第13章国际化'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter13HomePage();
                   }));
                 }),
           ],
