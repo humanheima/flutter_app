@@ -1,25 +1,25 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/enjoy/manager/api_manager.dart';
-import 'package:flutter_app/enjoy/model/wechat_count_bean.dart';
-import 'package:flutter_app/enjoy/widgets/async_snapshot_widget.dart';
-import 'package:flutter_app/enjoy/view/wechat_article_list_page.dart';
+import 'package:flutter_app/enjoy_android/manager/api_manager.dart';
+import 'package:flutter_app/enjoy_android/model/project_classify_bean.dart';
+import 'package:flutter_app/enjoy_android/widgets/async_snapshot_widget.dart';
+import 'package:flutter_app/enjoy_android/view/project_list_page.dart';
 
 ///
-/// Created by dumingwei on 2019/4/8.
-/// Desc: 微信公众号页面
+/// Created by dumingwei on 2019/4/4.
+/// Desc: 项目实践页
 ///
 
-class WechatArticlePage extends StatefulWidget {
+class ProjectPracticePage extends StatefulWidget {
   @override
-  State createState() {
-    return _WechatArticlePageState();
-  }
+  State createState() => _ProjectPracticePageState();
 }
 
-class _WechatArticlePageState extends State<WechatArticlePage>
+class _ProjectPracticePageState extends State<ProjectPracticePage>
     with SingleTickerProviderStateMixin {
-  TabController _tabControllerl;
+  TabController _tabController;
 
   var _tabsName = List<String>();
 
@@ -27,26 +27,26 @@ class _WechatArticlePageState extends State<WechatArticlePage>
   Widget build(BuildContext context) {
     return FutureBuilder(
       builder: _buildFuture,
-      future: getWechatCount(),
+      future: getProjectClassify(),
     );
   }
 
   Widget _buildFuture(
-      BuildContext context, AsyncSnapshot<List<WechatCount>> snapshot) {
+      BuildContext context, AsyncSnapshot<List<ProjectClassify>> snapshot) {
     return AsyncSnapshotWidget(
       snapshot: snapshot,
       successWidget: (snapshot) {
         if (snapshot.data != null) {
           _parseWeChatCounts(snapshot.data);
-          if (_tabControllerl == null) {
-            _tabControllerl = TabController(
+          if (_tabController == null) {
+            _tabController = TabController(
                 length: snapshot.data.length, vsync: this, initialIndex: 0);
           }
           return Scaffold(
             appBar: AppBar(
-              title: Text("公众号"),
+              title: Text('项目'),
               backgroundColor: Color.fromARGB(255, 119, 136, 213),
-              centerTitle: true, //设置标题是否局中
+              centerTitle: true,
             ),
             body: Column(
               children: <Widget>[
@@ -54,7 +54,7 @@ class _WechatArticlePageState extends State<WechatArticlePage>
                   indicatorColor: Colors.deepPurpleAccent,
                   labelColor: Colors.black87,
                   unselectedLabelColor: Colors.black45,
-                  controller: _tabControllerl,
+                  controller: _tabController,
                   isScrollable: true,
                   tabs: _createTabs(),
                 ),
@@ -62,7 +62,7 @@ class _WechatArticlePageState extends State<WechatArticlePage>
                   flex: 1,
                   child: TabBarView(
                     children: _createPages(snapshot.data),
-                    controller: _tabControllerl,
+                    controller: _tabController,
                   ),
                 )
               ],
@@ -73,19 +73,21 @@ class _WechatArticlePageState extends State<WechatArticlePage>
     );
   }
 
-  /// 网络请求 获取推荐微信公众号
-  Future<List<WechatCount>> getWechatCount() async {
-    Response response;
-    await ApiManager().getWechatCount().then((res) {
-      response = res;
-    });
-    return WechatCountBean.fromJson(response.data).data;
+  /// 网络请求，获取项目分类
+  Future<List<ProjectClassify>> getProjectClassify() async {
+    try {
+      Response response;
+      response = await ApiManager().getProjectClassify();
+      return ProjectClassifyBean.fromJson(response.data).data;
+    } catch (e) {
+      return null;
+    }
   }
 
-  /// 解析微信公众号列表
-  void _parseWeChatCounts(List<WechatCount> wxCounts) {
+  /// 解析项目列表
+  void _parseWeChatCounts(List<ProjectClassify> projectClassify) {
     _tabsName.clear();
-    for (var value in wxCounts) {
+    for (var value in projectClassify) {
       _tabsName.add(value.name);
     }
   }
@@ -102,11 +104,11 @@ class _WechatArticlePageState extends State<WechatArticlePage>
     return widgets;
   }
 
-  /// 创建微信文章列表页
-  _createPages(List<WechatCount> list) {
+  /// 创建项目列表页
+  List<Widget> _createPages(List<ProjectClassify> projectClassify) {
     List<Widget> widgets = List();
-    for (WechatCount count in list) {
-      var page = WechatArticleListPage(cid: count.id);
+    for (ProjectClassify project in projectClassify) {
+      var page = ProjectListPage(cid: project.id);
       widgets.add(page);
     }
     return widgets;

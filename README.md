@@ -1,10 +1,5 @@
 # flutter_app
 
-## 这个分支用来学习《Flutter实战》一书的例子
-A new Flutter application.
-
-
-
 ## Flutter简介
 
 ### 跨平台自绘引擎
@@ -81,3 +76,9 @@ arb文件生成dart代码的命令
 flutter pub run intl_translation:generate_from_arb --output-dir=lib/i10n --no-use-deferred-loading lib/i10n/localization_intl.dart i10n-arb/intl_*.arb
 
 ```
+
+
+# 项目
+1. [零Flutter基础，四天完成Flutter简版玩Android客户端开发攻略](https://www.jianshu.com/p/e8d49e7a0554)
+
+

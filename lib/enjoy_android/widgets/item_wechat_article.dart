@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/enjoy/model/wechat_article_bean.dart';
-import 'package:flutter_app/enjoy/view/webview_page.dart';
-import 'package:flutter_app/enjoy/constant/textsize_const.dart';
+import 'package:flutter_app/enjoy_android/model/wechat_article_bean.dart';
+import 'package:flutter_app/enjoy_android/view/webview_page.dart';
+import 'package:flutter_app/enjoy_android/constant/textsize_const.dart';
 
 ///
 /// Created by dumingwei on 2019/4/8.

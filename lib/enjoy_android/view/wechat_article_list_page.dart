@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/enjoy/model/wechat_article_bean.dart';
-import 'package:flutter_app/enjoy/manager/api_manager.dart';
-import 'package:flutter_app/enjoy/widgets/item_wechat_article.dart';
+import 'package:flutter_app/enjoy_android/model/wechat_article_bean.dart';
+import 'package:flutter_app/enjoy_android/manager/api_manager.dart';
+import 'package:flutter_app/enjoy_android/widgets/item_wechat_article.dart';
 
 ///
 /// Created by dumingwei on 2019/4/8.

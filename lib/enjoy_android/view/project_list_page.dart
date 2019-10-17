@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/enjoy/model/project_list_bean.dart';
-import 'package:flutter_app/enjoy/manager/api_manager.dart';
-import 'package:flutter_app/enjoy/widgets/item_project.dart';
+import 'package:flutter_app/enjoy_android/model/project_list_bean.dart';
+import 'package:flutter_app/enjoy_android/manager/api_manager.dart';
+import 'package:flutter_app/enjoy_android/widgets/item_project.dart';
 
 ///
 /// Created by dumingwei on 2019/4/4.

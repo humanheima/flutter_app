@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/enjoy/constant/textsize_const.dart';
-import 'package:flutter_app/enjoy/manager/api_manager.dart';
-import 'package:flutter_app/enjoy/model/home_article_bean.dart';
-import 'package:flutter_app/enjoy/model/home_banner_bean.dart';
-import 'package:flutter_app/enjoy/widgets/item_home_article.dart';
+import 'package:flutter_app/enjoy_android/constant/textsize_const.dart';
+import 'package:flutter_app/enjoy_android/manager/api_manager.dart';
+import 'package:flutter_app/enjoy_android/model/home_article_bean.dart';
+import 'package:flutter_app/enjoy_android/model/home_banner_bean.dart';
+import 'package:flutter_app/enjoy_android/widgets/item_home_article.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 ///
