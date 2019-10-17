@@ -54,7 +54,7 @@ class WanAndroidAppState extends State<WanAndroidApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "模仿玩安卓",
+      title: "仿玩安卓",
       theme: themeData,
       debugShowCheckedModeBanner: false,
       home: Home(),
