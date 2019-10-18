@@ -22,6 +22,8 @@ class DioTest extends StatefulWidget {
 class _DioTestState extends State<DioTest> {
   static Dio _dio = Dio();
 
+  String responseJson = "请求响应";
+
   @override
   void initState() {
     _dio.interceptors.add(LogInterceptor());
@@ -37,6 +39,10 @@ class _DioTestState extends State<DioTest> {
       ),
       body: ListView(
         children: <Widget>[
+          Container(
+            color: Colors.grey[400],
+            child: Text(responseJson),
+          ),
           RaisedButton(
             child: Text('发起一个 GET 请求'),
             onPressed: () {
@@ -61,6 +67,8 @@ class _DioTestState extends State<DioTest> {
     for (var public in publicList.data) {
       print(public.toJson());
     }
+    responseJson = publicList.data[0].toJson().toString();
+    setState(() {});
   }
 
   ///搜索关键字
@@ -77,5 +85,7 @@ class _DioTestState extends State<DioTest> {
     for (var bean in searchPage.datas) {
       print(bean.toJson());
     }
+    responseJson = searchPage.datas[0].toJson().toString();
+    setState(() {});
   }
 }

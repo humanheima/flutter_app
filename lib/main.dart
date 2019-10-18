@@ -1,13 +1,13 @@
-// This sample shows adding an action to an [AppBar] that opens a shopping cart.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'enjoy_android/enjoy_android_main.dart';
 import 'flutter_in_action/main.dart';
-import 'pubs/diotest/DioTest.dart';
+import 'i10n/localization_intl.dart';
+import 'pubs/dio_test/DioTest.dart';
 
 /// 程序入口
 
@@ -25,6 +25,17 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        IntlDemoLocalizationsDelegate(),
+      ],
+
+      supportedLocales: [
+        const Locale('en', 'US'), // 美国英语
+        const Locale('zh', 'CN'), // 中文简体
+        //其它Locales
+      ],
 
       ///应用首页路由
       home: AppHomePage(
@@ -48,7 +59,7 @@ class _AppHomePageState extends State<AppHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: new Text(IntlDemoLocalizations.of(context).title),
       ),
       body: new ListView(
         children: <Widget>[
