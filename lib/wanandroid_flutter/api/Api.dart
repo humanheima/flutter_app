@@ -88,4 +88,11 @@ class Api {
 
   // 仅更新todo完成状态
   static const String DONE_TODO = "http://www.wanandroid.com/lg/todo/done/";
+
+  ///微信公众号列表
+  static const String WEIXIN_PUBLIC_LIST =
+      "https://wanandroid.com/wxarticle/chapters/json";
+
+  static const String SEARCH_LIST =
+      "https://www.wanandroid.com/article/query/0/json";
 }

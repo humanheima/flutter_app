@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'enjoy_android/enjoy_android_main.dart';
 import 'flutter_in_action/main.dart';
+import 'pubs/diotest/DioTest.dart';
 
 /// 程序入口
 
@@ -51,6 +52,14 @@ class _AppHomePageState extends State<AppHomePage> {
       ),
       body: new ListView(
         children: <Widget>[
+          RaisedButton(
+            child: Text("dio"),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return DioTest();
+              }));
+            },
+          ),
           RaisedButton(
             child: Text("《Flutter实战》"),
             onPressed: () {
