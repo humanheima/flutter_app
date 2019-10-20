@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage>
     super.initState();
     getBanner();
     getList(false);
-    _bannerController.autoplay = false;
+    _bannerController.autoplay = true;
 
     ///处理加载更多的逻辑
     _scrollController.addListener(() {
