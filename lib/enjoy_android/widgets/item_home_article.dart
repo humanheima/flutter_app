@@ -9,7 +9,7 @@ import 'package:flutter_app/enjoy_android/view/webview_page.dart';
 ///
 
 class HomeArticleItem extends StatefulWidget {
-  Article article;
+  final Article article;
 
   HomeArticleItem(this.article);
 

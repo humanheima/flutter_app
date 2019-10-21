@@ -47,11 +47,18 @@ class _HomePageState extends State<HomePage>
 
   ListView _buildListView() {
     return ListView.builder(
-      itemCount: articles.length + 1,
+      ///长度加2，一个是顶部的banner，一个是底部的刷新的loading
+      itemCount: articles.length + 2,
       itemBuilder: (BuildContext context, int index) {
-        return index == 0
-            ? _createBannerItem()
-            : HomeArticleItem(articles[index - 1]);
+        if (index == 0) {
+          return _createBannerItem();
+        } else {
+          if (index - 1 < articles.length) {
+            return HomeArticleItem(articles[index - 1]);
+          } else {
+            return _getMoreWidget();
+          }
+        }
       },
       controller: _scrollController,
     );
@@ -70,6 +77,7 @@ class _HomePageState extends State<HomePage>
       var pixels = _scrollController.position.pixels;
       if (maxScroll == pixels) {
         curPage++;
+        print('HomePage load more data');
         getList(true);
       }
     });
@@ -172,5 +180,20 @@ class _HomePageState extends State<HomePage>
     curPage = 0;
     await getList(false);
     return null;
+  }
+
+  /// 加载更多时显示的组件,给用户提示
+  Widget _getMoreWidget() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      alignment: Alignment.center,
+      child: SizedBox(
+        width: 24,
+        height: 24,
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+        ),
+      ),
+    );
   }
 }
