@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'enjoy_android/enjoy_android_main.dart';
 import 'flutter_in_action/main.dart';
 import 'i10n/localization_intl.dart';
+import 'prcatice/InsuranceOrderDetailWidget.dart';
 import 'pubs/dio_test/DioTest.dart';
 
 /// 程序入口
@@ -63,6 +64,14 @@ class _AppHomePageState extends State<AppHomePage> {
       ),
       body: new ListView(
         children: <Widget>[
+          RaisedButton(
+            child: Text("练习"),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return InsuranceOrderDetailWidget();
+              }));
+            },
+          ),
           RaisedButton(
             child: Text("dio"),
             onPressed: () {
