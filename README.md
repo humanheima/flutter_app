@@ -78,7 +78,7 @@ flutter pub run intl_translation:generate_from_arb --output-dir=lib/i10n --no-us
 ```
 
 
-# 项目
+# 参考项目
 1. [零Flutter基础，四天完成Flutter简版玩Android客户端开发攻略](https://www.jianshu.com/p/e8d49e7a0554)
 
-
+2. [玩Android-Flutter客户端](https://github.com/shijiacheng/wanandroid_flutter)

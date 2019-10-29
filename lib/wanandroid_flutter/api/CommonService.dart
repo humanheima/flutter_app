@@ -11,6 +11,7 @@ import 'package:flutter_app/wanandroid_flutter/model/UserModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleContentModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleTitleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/net/DioManager.dart';
+import 'package:flutter_app/wanandroid_flutter/model/HotwordData.dart';
 
 import 'Api.dart';
 
@@ -100,6 +101,30 @@ class CommonService {
         .then((response) {
       print('getProjectList${response.data}');
       callback(ProjectTreeListModel(response.data));
+    });
+  }
+
+  ///获取热门搜索词
+  void getSearchHotWord(Function callback) async {
+    DioManager.singleton
+        .getDio()
+        .get(Api.SEARCH_HOT_WORD, options: _getOptions())
+        .then((response) {
+      callback(HotWordModel.fromJson(response.data));
+    });
+  }
+
+  /// 获取搜索结果
+  void getSearchResult(Function callback, int _page, String _id) async {
+    FormData formData = new FormData.fromMap({
+      "k": _id,
+    });
+    DioManager.singleton
+        .getDio()
+        .post(Api.SEARCH_RESULT + "$_page/json",
+            data: formData, options: _getOptions())
+        .then((response) {
+      callback(ArticleModel.fromJson(response.data));
     });
   }
 
