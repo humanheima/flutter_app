@@ -77,6 +77,9 @@ flutter pub run intl_translation:generate_from_arb --output-dir=lib/i10n --no-us
 
 ```
 
+# Android 构建发布
+[发布Android版APP](https://flutterchina.club/android-release/)
+
 
 # 参考项目
 1. [零Flutter基础，四天完成Flutter简版玩Android客户端开发攻略](https://www.jianshu.com/p/e8d49e7a0554)
