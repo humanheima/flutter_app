@@ -1,0 +1,10 @@
+{
+  "@import": "package:flutter_app/models/SearchBean.dart",
+  "curPage":1,
+  "datas": "$[]SearchBean",
+  "offset":0,
+  "over":false,
+  "pageCount":9,
+  "size":20,
+  "total":166
+}

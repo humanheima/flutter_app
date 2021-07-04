@@ -1,10 +1,5 @@
 # flutter_app
 
-## 这个分支用来学习《Flutter实战》一书的例子
-A new Flutter application.
-
-
-
 ## Flutter简介
 
 ### 跨平台自绘引擎
@@ -58,3 +53,35 @@ class MyIcons {
 }
 ```
 获取这个整数，可以用浏览器打开font_wexin目录下的demo_index.xml中看到
+
+
+# Json
+
+运行如下命令，生成json字符串对应的实体类
+```
+flutter packages pub run json_model
+
+```
+
+# 国际化
+
+生成arb文件的命令
+```
+flutter pub run intl_translation:extract_to_arb --output-dir=i10n-arb \lib/i10n/localization_intl.dart 
+
+```
+
+arb文件生成dart代码的命令
+```
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/i10n --no-use-deferred-loading lib/i10n/localization_intl.dart i10n-arb/intl_*.arb
+
+```
+
+# Android 构建发布
+[发布Android版APP](https://flutterchina.club/android-release/)
+
+
+# 参考项目
+1. [零Flutter基础，四天完成Flutter简版玩Android客户端开发攻略](https://www.jianshu.com/p/e8d49e7a0554)
+
+2. [玩Android-Flutter客户端](https://github.com/shijiacheng/wanandroid_flutter)

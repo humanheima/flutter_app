@@ -1,0 +1,6 @@
+{
+  "@import": "package:flutter_app/models/SearchPage.dart",
+  "data": "$SearchPage",
+  "errorCode": 0,
+  "errorMsg": ""
+}

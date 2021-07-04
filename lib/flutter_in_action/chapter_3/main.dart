@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'LifeCycleTest.dart';
 import 'Code3_2.dart';
 import 'Code3_3.dart';
 import 'Code3_4.dart';
@@ -57,6 +58,17 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
       body: new Center(
         child: ListView(
           children: <Widget>[
+            new RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return new LifeCycleTest(
+                    initValue: 10,
+                  );
+                }));
+              },
+              child: Text('3.1测试StatefulWidget的状态生命周期'),
+            ),
             new Echo(text: "hello world"),
             new RaisedButton(
               onPressed: () {

@@ -1,0 +1,21 @@
+# Flutter踩坑集锦
+```
+ServicesBinding.defaultBinaryMessenger was accessed before the binding was initialized.
+
+```
+原因
+
+升级Flutter时会引入此问题。 其背后的原因是您正在等待一些数据或在main（）中运行异步函数。
+
+
+解决方法 
+```
+void main() {
+      WidgetsFlutterBinding.ensureInitialized();
+      runApp(Delta(
+        model: ProductDataModel(),
+      ));
+}
+```
+参考链接：
+[stack overflow](https://stackoverflow.com/questions/57689492/flutter-unhandled-exception-servicesbinding-defaultbinarymessenger-was-accesse)

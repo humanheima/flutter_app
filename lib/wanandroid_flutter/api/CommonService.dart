@@ -11,6 +11,7 @@ import 'package:flutter_app/wanandroid_flutter/model/UserModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleContentModel.dart';
 import 'package:flutter_app/wanandroid_flutter/model/WxArticleTitleModel.dart';
 import 'package:flutter_app/wanandroid_flutter/net/DioManager.dart';
+import 'package:flutter_app/wanandroid_flutter/model/HotwordData.dart';
 
 import 'Api.dart';
 
@@ -103,9 +104,33 @@ class CommonService {
     });
   }
 
+  ///获取热门搜索词
+  void getSearchHotWord(Function callback) async {
+    DioManager.singleton
+        .getDio()
+        .get(Api.SEARCH_HOT_WORD, options: _getOptions())
+        .then((response) {
+      callback(HotWordModel.fromJson(response.data));
+    });
+  }
+
+  /// 获取搜索结果
+  void getSearchResult(Function callback, int _page, String _id) async {
+    FormData formData = new FormData.fromMap({
+      "k": _id,
+    });
+    DioManager.singleton
+        .getDio()
+        .post(Api.SEARCH_RESULT + "$_page/json",
+            data: formData, options: _getOptions())
+        .then((response) {
+      callback(ArticleModel.fromJson(response.data));
+    });
+  }
+
   ///注册
   void register(Function callback, String _username, String _password) async {
-    FormData formData = FormData.from({
+    FormData formData = FormData.fromMap({
       "username": _username,
       "password": _password,
       "repassword": _password
@@ -122,7 +147,7 @@ class CommonService {
   ///登录
   void login(Function callback, String _username, String _password) async {
     FormData formData =
-        FormData.from({"username": _username, "password": _password});
+        FormData.fromMap({"username": _username, "password": _password});
     DioManager.singleton
         .getDio()
         .post(Api.USER_LOGIN, data: formData, options: null)

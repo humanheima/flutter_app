@@ -54,7 +54,7 @@ class WanAndroidAppState extends State<WanAndroidApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "模仿玩安卓",
+      title: "仿玩安卓",
       theme: themeData,
       debugShowCheckedModeBanner: false,
       home: Home(),
@@ -102,49 +102,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     ];
   }
 
-  @override
-  Widget build(BuildContext context) {
-    print('index=$_index');
-    /* return MaterialApp(
-      home: Scaffold(
-        appBar: _appBarWidget(context),
-        body: PageView(
-          controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
-          children: _pageList,
-        ),
-        bottomNavigationBar: BottomNavigationBarWidget(
-          index: _index,
-          onChanged: _handleTabChanged,
-        ),
-      ),
-    );*/
-
-    return WillPopScope(
-        child: DefaultTabController(
-            length: _titleList.length,
-            child: Scaffold(
-              appBar: _showAppbar ? _appBarWidget(context) : null,
-              body: PageView(
-                controller: _pageController,
-                physics: NeverScrollableScrollPhysics(),
-                children: _pageList,
-              ),
-              drawer: _showDrawer ? DrawerWidgetUI() : null,
-              bottomNavigationBar: BottomNavigationBarWidget(
-                index: _index,
-                onChanged: _handleTabChanged,
-              ),
-            )),
-        onWillPop: _onWillPop);
-  }
-
-  @override
-  bool get wantKeepAlive {
-    return true;
-  }
-
-  _appBarWidget(BuildContext context) {
+  Widget _appBarWidget(BuildContext context) {
     return AppBar(
       title: Text(_titleList[_index]),
       elevation: 0.4,
@@ -152,7 +110,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  _actionsWidget() {
+  List<Widget> _actionsWidget() {
     if (_showDrawer) {
       return [
         new IconButton(
@@ -166,9 +124,37 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     }
   }
 
+  @override
+  Widget build(BuildContext context) {
+    print('index=$_index');
+    return WillPopScope(
+        child: DefaultTabController(
+            length: _titleList.length,
+            child: Scaffold(
+              appBar: _showAppbar ? _appBarWidget(context) : null,
+              drawer: _showDrawer ? DrawerWidgetUI() : null,
+              body: IndexedStack(
+                index: _index,
+                children: _pageList,
+              ),
+              bottomNavigationBar: BottomNavigationBarWidget(
+                index: _index,
+                onChanged: _handleTabChanged,
+              ),
+            )),
+        onWillPop: _onWillPop);
+  }
+
+  @override
+  bool get wantKeepAlive {
+    return true;
+  }
+
   void onSearchClick() async {
     await Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return new SearchPageUI();
+      return new SearchPageUI(
+        searchStr: null,
+      );
     }));
   }
 
@@ -199,7 +185,6 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   void _handleTabChanged(int newValue) {
     setState(() {
       _index = newValue;
-      _pageController.jumpToPage(_index);
       if (_index == 0 || _index == 1 || _index == 3) {
         _showAppbar = true;
       } else {

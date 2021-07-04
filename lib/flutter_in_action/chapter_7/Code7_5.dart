@@ -57,7 +57,9 @@ class Code7_5 extends StatelessWidget {
 }
 
 Future<String> mockNetworkData() async {
-  return Future.delayed(Duration(seconds: 2), () => '我是从互联网上获取的数据');
+  return Future.delayed(Duration(seconds: 2), () {
+    return '我是从互联网上获取的数据';
+  });
 }
 
 Stream<int> counter() {

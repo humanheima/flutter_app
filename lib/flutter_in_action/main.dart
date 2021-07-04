@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'chapter_10/Chapter10HomePage.dart';
+import 'chapter_11/Chapter11HomePage.dart';
+import 'chapter_12/Chapter12HomePage.dart';
+import 'chapter_13/Chapter13HomePage.dart';
+import 'chapter_2/Chapter2HomePage.dart';
 import 'chapter_3/main.dart';
 import 'chapter_4/main.dart';
 import 'chapter_5/main.dart';
 import 'chapter_6/main.dart';
 import 'chapter_7/main.dart';
+import 'chapter_8/Chapter8HomePage.dart';
+import 'chapter_9/Chapter9HomePage.dart';
 
 ///
 /// Created by dumingwei on 2019-10-07.
@@ -21,6 +28,14 @@ class FlutterInActionMain extends StatelessWidget {
       body: Container(
         child: ListView(
           children: <Widget>[
+            RaisedButton(
+                child: Text('第2章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter2HomePage();
+                  }));
+                }),
             RaisedButton(
                 child: Text('第3章'),
                 onPressed: () {
@@ -59,6 +74,54 @@ class FlutterInActionMain extends StatelessWidget {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
                     return new Chapter7HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第8章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter8HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第9章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter9HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第10章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter10HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第11章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter11HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第12章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter12HomePage();
+                  }));
+                }),
+            RaisedButton(
+                child: Text('第13章国际化'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter13HomePage();
                   }));
                 }),
           ],
