@@ -18,7 +18,7 @@ class Code7_6 extends StatelessWidget {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('对话框1'),
                 onPressed: () {
                   showDialog(
@@ -29,12 +29,12 @@ class Code7_6 extends StatelessWidget {
                           title: Text('提示'),
                           content: Text('您确定要删除当前文件吗?'),
                           actions: <Widget>[
-                            FlatButton(
+                            TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                                 child: Text('取消')),
-                            FlatButton(
+                            TextButton(
                               child: Text("删除"),
                               onPressed: () {
                                 // ... 执行删除操作
@@ -48,7 +48,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('对话框2'),
                 onPressed: () async {
                   bool delete = await showDeleteConfirmDialog1(context);
@@ -61,7 +61,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('SimpleDialog'),
                 onPressed: () {
                   changeLanguage(context);
@@ -69,7 +69,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('showListDialog'),
                 onPressed: () {
                   showListDialog(context);
@@ -77,7 +77,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('showCustomDialog'),
                 onPressed: () {
                   showCustomDialog(
@@ -87,11 +87,11 @@ class Code7_6 extends StatelessWidget {
                           title: Text("提示"),
                           content: Text("您确定要删除当前文件吗?"),
                           actions: <Widget>[
-                            FlatButton(
+                            TextButton(
                               child: Text("取消"),
                               onPressed: () => Navigator.of(context).pop(),
                             ),
-                            FlatButton(
+                            TextButton(
                               child: Text("删除"),
                               onPressed: () {
                                 // 执行删除操作
@@ -105,7 +105,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('testChangeDialogState'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -119,7 +119,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('testChangeDialogState1'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -133,7 +133,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('testChangeDialogState2'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -147,7 +147,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('显示底部弹出框'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -157,7 +157,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('显示底部弹出框1'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -166,7 +166,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('展示LoadingDialog'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -175,7 +175,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('展示LoadingDialog1,修改尺寸'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -184,7 +184,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('日历选择'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -193,7 +193,7 @@ class Code7_6 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
+            child: ElevatedButton(
                 child: Text('ios风格日历选择'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
@@ -297,11 +297,11 @@ class Code7_6 extends StatelessWidget {
           title: Text("提示"),
           content: Text("您确定要删除当前文件吗?"),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("取消"),
               onPressed: () => Navigator.of(context).pop(), // 关闭对话框
             ),
-            FlatButton(
+            TextButton(
               child: Text("删除"),
               onPressed: () {
                 //关闭对话框并返回true
@@ -444,11 +444,11 @@ class Code7_6 extends StatelessWidget {
             ],
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("取消"),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            FlatButton(
+            TextButton(
               child: Text("删除"),
               onPressed: () {
                 // 将选中状态返回
@@ -490,11 +490,11 @@ class Code7_6 extends StatelessWidget {
             ],
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("取消"),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            FlatButton(
+            TextButton(
               child: Text("删除"),
               onPressed: () {
                 // 将选中状态返回
@@ -537,11 +537,11 @@ class Code7_6 extends StatelessWidget {
             ],
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("取消"),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            FlatButton(
+            TextButton(
               child: Text("删除"),
               onPressed: () {
                 // 执行删除操作
@@ -653,11 +653,11 @@ Future<bool> showDeleteConfirmDialog3(BuildContext context) {
           ],
         ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text("取消"),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          FlatButton(
+          TextButton(
             child: Text("删除"),
             onPressed: () {
               // 将选中状态返回

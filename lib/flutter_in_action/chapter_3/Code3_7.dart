@@ -93,7 +93,7 @@ class _InputRouteState extends State<InputRoute> {
                           builder: (ctx) {
                             return Column(
                               children: <Widget>[
-                                RaisedButton(
+                                ElevatedButton(
                                   child: Text("移动焦点"),
                                   onPressed: () {
                                     //将焦点从第一个TextField移到第二个TextField
@@ -105,7 +105,7 @@ class _InputRouteState extends State<InputRoute> {
                                     focusScopeNode.requestFocus(focusNode2);
                                   },
                                 ),
-                                RaisedButton(
+                                ElevatedButton(
                                   child: Text("隐藏键盘"),
                                   onPressed: () {
                                     // 当所有编辑框都失去焦点时键盘就会收起
@@ -195,11 +195,8 @@ class _FormTestRouteState extends State<FormTestRoute> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      child: RaisedButton(
-                        padding: EdgeInsets.all(15.0),
+                      child: ElevatedButton(
                         child: Text("登录"),
-                        color: Theme.of(context).primaryColor,
-                        textColor: Colors.white,
                         onPressed: () {
                           //在这里不能通过此方式获取FormState，context不对
                           //print(Form.of(context));
@@ -215,7 +212,7 @@ class _FormTestRouteState extends State<FormTestRoute> {
                     ),
                     Container(
                       child: Builder(builder: (context) {
-                        return RaisedButton(
+                        return ElevatedButton(
                             child: Text('通过Form.of(context)获取FormState'),
                             onPressed: () {
                               if (Form.of(context).validate()) {

@@ -22,7 +22,7 @@ class TipRoute extends StatelessWidget {
           child: Column(
             children: <Widget>[
               new Text(text),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () => Navigator.pop(context, "我是返回值"),
                 child: Text('返回'),
               )

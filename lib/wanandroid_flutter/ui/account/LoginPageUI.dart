@@ -69,12 +69,8 @@ class LoginPageUIState extends State<LoginPageUI> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                        child: RaisedButton(
-                            padding: EdgeInsets.all(16),
-                            elevation: 0.5,
+                        child: ElevatedButton(
                             child: Text('登录'),
-                            color: Colors.blue,
-                            textColor: Colors.white,
                             onPressed: () {
                               _login();
                             }))
@@ -84,7 +80,7 @@ class LoginPageUIState extends State<LoginPageUI> {
               Container(
                 padding: EdgeInsets.only(top: 10),
                 alignment: Alignment.centerRight,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: () {
                       onRegisterClick();
                     },

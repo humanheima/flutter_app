@@ -23,7 +23,7 @@ class Chapter5HomePage extends StatelessWidget {
       body: Container(
         child: ListView(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "5.1 填充（Padding）",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -35,7 +35,7 @@ class Chapter5HomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('5.2 尺寸限制类容器'),
                 onPressed: () {
                   Navigator.push(context,
@@ -43,7 +43,7 @@ class Chapter5HomePage extends StatelessWidget {
                     return new ConstrainedWidgetTestRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('5.3 装饰容器DecoratedBox'),
                 onPressed: () {
                   Navigator.push(context,
@@ -51,7 +51,7 @@ class Chapter5HomePage extends StatelessWidget {
                     return new DecoratedWidgetRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('5.4 变换（Transform）'),
                 onPressed: () {
                   Navigator.push(context,
@@ -59,7 +59,7 @@ class Chapter5HomePage extends StatelessWidget {
                     return new TransformTestRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('5.5 Container'),
                 onPressed: () {
                   Navigator.push(context,
@@ -67,7 +67,7 @@ class Chapter5HomePage extends StatelessWidget {
                     return new ContainerTestRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('5.6 Scaffold、TabBar、底部导航'),
                 onPressed: () {
                   Navigator.push(context,
@@ -75,7 +75,7 @@ class Chapter5HomePage extends StatelessWidget {
                     return new ScaffoldRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('5.7 剪裁（Clip）'),
                 onPressed: () {
                   Navigator.push(context,

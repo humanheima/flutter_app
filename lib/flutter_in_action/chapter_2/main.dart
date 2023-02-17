@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_count',
               style: Theme.of(context).textTheme.headline1,
             ),
-            new FlatButton(
+            new TextButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return NewRoute();
@@ -77,21 +77,21 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('Open new route'),
               textColor: Colors.blue,
             ),
-            new FlatButton(
+            new TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, "new_page");
               },
               child: Text('使用命名路由打开新的路由界面'),
               textColor: Colors.blue,
             ),
-            new FlatButton(
+            new TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed("echo_page", arguments: "hi");
               },
               child: Text('使用命名路由打开新的路由界面,并传递参数'),
               textColor: Colors.blue,
             ),
-            new FlatButton(
+            new TextButton(
               onPressed: () {
                 //debugDumpApp();
                 debugger(message: "测试debug");

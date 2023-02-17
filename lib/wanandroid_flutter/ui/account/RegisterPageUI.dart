@@ -94,15 +94,11 @@ class RegisterPageUIState extends State<RegisterPageUI> {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                        child: RaisedButton(
+                        child: ElevatedButton(
                       onPressed: () {
                         _register();
                       },
-                      padding: EdgeInsets.all(16),
-                      elevation: 0.5,
                       child: Text('注册'),
-                      color: Colors.blue,
-                      textColor: Colors.white,
                     ))
                   ],
                 ),

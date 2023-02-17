@@ -42,7 +42,7 @@ class _TurnBoxRouteState extends State<TurnBoxRoute> {
                 size: 150.0,
               ),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("顺时针旋转1/5圈"),
               onPressed: () {
                 setState(() {
@@ -50,7 +50,7 @@ class _TurnBoxRouteState extends State<TurnBoxRoute> {
                 });
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("逆时针旋转1/5圈"),
               onPressed: () {
                 setState(() {

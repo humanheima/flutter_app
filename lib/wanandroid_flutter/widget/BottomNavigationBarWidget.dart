@@ -37,13 +37,11 @@ class BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget>
       type: BottomNavigationBarType.fixed,
       fixedColor: Colors.blue,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.streetview), title: Text('体系')),
-        BottomNavigationBarItem(icon: Icon(Icons.book), title: Text('公众号')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.navigation), title: Text('导航')),
-        BottomNavigationBarItem(icon: Icon(Icons.apps), title: Text('项目')),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
+        BottomNavigationBarItem(icon: Icon(Icons.streetview), label: '体系'),
+        BottomNavigationBarItem(icon: Icon(Icons.book), label: '公众号'),
+        BottomNavigationBarItem(icon: Icon(Icons.navigation), label: '导航'),
+        BottomNavigationBarItem(icon: Icon(Icons.apps), label: '项目'),
       ],
     );
   }

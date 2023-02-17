@@ -180,12 +180,12 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                 title: Text("提示"),
                 content: new Text("确定退出应用吗？"),
                 actions: <Widget>[
-                  FlatButton(
+                  TextButton(
                       onPressed: () {
                         Navigator.of(context).pop(false);
                       },
                       child: Text('再看一会')),
-                  FlatButton(
+                  TextButton(
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },

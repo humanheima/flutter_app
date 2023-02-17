@@ -31,7 +31,7 @@ class _CounterWidgetState extends State<CounterWidget> {
     return Center(
         child: new Container(
       color: Colors.white,
-      child: new FlatButton(
+      child: new TextButton(
           //调用setState方法，会导致框架重新调用build方法
           onPressed: () => setState(() => ++_counter),
           child: Text('$_counter')),

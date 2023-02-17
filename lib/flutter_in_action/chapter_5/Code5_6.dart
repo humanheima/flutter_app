@@ -73,11 +73,9 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.business), title: Text('Businiss')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.school), title: Text('School')),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Businiss'),
+        BottomNavigationBarItem(icon: Icon(Icons.school), label: 'School'),
       ],
       currentIndex: _selectedIndex,
       fixedColor: Colors.blue,

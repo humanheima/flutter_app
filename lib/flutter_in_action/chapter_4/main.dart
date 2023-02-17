@@ -21,7 +21,7 @@ class Chapter4HomePage extends StatelessWidget {
       body: Container(
         child: ListView(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: Text('4.2：线性布局（Row、Column）'),
                 onPressed: () {
                   Navigator.push(context,
@@ -29,7 +29,7 @@ class Chapter4HomePage extends StatelessWidget {
                     return new RowColumnWidget();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('4.3 弹性布局（Flex）'),
                 onPressed: () {
                   Navigator.push(context,
@@ -37,7 +37,7 @@ class Chapter4HomePage extends StatelessWidget {
                     return new FlexLayoutTestRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('4.4 流式布局'),
                 onPressed: () {
                   Navigator.push(context,
@@ -45,7 +45,7 @@ class Chapter4HomePage extends StatelessWidget {
                     return new WrapFlowTestRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('4.5 层叠布局 Stack、Positioned'),
                 onPressed: () {
                   Navigator.push(context,
@@ -53,7 +53,7 @@ class Chapter4HomePage extends StatelessWidget {
                     return new StackPositionedRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('4.6 对齐与相对定位（Align）'),
                 onPressed: () {
                   Navigator.push(context,

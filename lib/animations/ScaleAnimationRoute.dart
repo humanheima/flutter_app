@@ -63,7 +63,7 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
               animation: animation,
             ),*/
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text(
               "开启动画",
               style: new TextStyle(fontSize: 20, color: Colors.redAccent),

@@ -58,7 +58,7 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
         child: ListView(
           children: <Widget>[
             new Echo(text: "hello world"),
-            new RaisedButton(
+            new ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
@@ -67,7 +67,7 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
               },
               child: Text('3.2状态管理'),
             ),
-            new RaisedButton(
+            new ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
@@ -76,7 +76,7 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
               },
               child: Text('3.3文本、字体样式'),
             ),
-            new RaisedButton(
+            new ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
@@ -85,7 +85,7 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
               },
               child: Text('3.4按钮'),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "3.5：图片和Icon",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -100,7 +100,7 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('3.6 单选开关和复选框'),
               onPressed: () {
                 Navigator.push(context,
@@ -109,7 +109,7 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('3.7 输入框及表单'),
                 onPressed: () {
                   Navigator.push(context,
@@ -118,7 +118,7 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
                     return new FormTestRoute();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('3.8 进度指示器'),
                 onPressed: () {
                   Navigator.push(context,

@@ -16,45 +16,38 @@ class MyButtonWidget extends StatelessWidget {
         alignment: Alignment(0.0, 0.0),
         child: new Column(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: Text("normal"),
                 //onPressed: () => print("button was pressed")),
                 onPressed: () {
-                  print("RaisedButton was pressed");
+                  print("ElevatedButton was pressed");
                 }),
-            FlatButton(
-              child: Text("FlatButton"),
-              onPressed: () => debugPrint("FlatButton was pressed"),
+            TextButton(
+              child: Text("TextButton"),
+              onPressed: () => debugPrint("TextButton was pressed"),
             ),
-            OutlineButton(
-              child: Text("OutlineButton"),
-              onPressed: () => debugPrint("OutlineButton was pressed"),
+            OutlinedButton(
+              child: Text("OutlinedButton"),
+              onPressed: () => debugPrint("OutlinedButton was pressed"),
             ),
             IconButton(
               icon: Icon(Icons.thumb_up),
-              onPressed: () => debugPrint("OutlineButton was pressed"),
+              onPressed: () => debugPrint("OutlinedButton was pressed"),
             ),
-            RaisedButton.icon(
+            ElevatedButton.icon(
                 icon: Icon(Icons.send), label: Text('发送'), onPressed: () {}),
-            OutlineButton.icon(
+            OutlinedButton.icon(
               icon: Icon(Icons.add),
               label: Text("添加"),
               onPressed: _onPressed,
             ),
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(Icons.info),
               label: Text("详情"),
               onPressed: _onPressed,
             ),
-            RaisedButton(
-              color: Colors.blue,
-              //按下时候的颜色
-              colorBrightness: Brightness.dark,
-              highlightColor: Colors.blue[700],
-              splashColor: Colors.grey,
+            ElevatedButton(
               child: Text("Submit"),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)),
               onPressed: () => {},
             )
           ],

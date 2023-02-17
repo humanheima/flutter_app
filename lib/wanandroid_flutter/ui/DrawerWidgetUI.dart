@@ -196,13 +196,11 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
   Widget logoutWidget() {
     if (User.singleton.userName != null) {
       return Center(
-        child: FlatButton(
+        child: TextButton(
             onPressed: () {
               User.singleton.clearUserInfo();
               setState(() {});
             },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
             child: Text(
               '退出登录',
               style: TextStyle(color: Colors.red),

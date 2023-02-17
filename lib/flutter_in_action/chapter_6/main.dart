@@ -19,7 +19,7 @@ class Chapter6HomePage extends StatelessWidget {
         ),
         body: ListView(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "6.2 SingleChildScrollView",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -31,7 +31,7 @@ class Chapter6HomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "6.3 ListView",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -43,7 +43,7 @@ class Chapter6HomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "6.4 GridView",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -55,7 +55,7 @@ class Chapter6HomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "6.5 CustomScrollView",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -67,7 +67,7 @@ class Chapter6HomePage extends StatelessWidget {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "6.6 滚动监听及控制",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),

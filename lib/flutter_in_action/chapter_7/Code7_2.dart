@@ -31,7 +31,7 @@ class _InheritedWidgetRouteState extends State<InheritedWidgetRoute> {
               padding: const EdgeInsets.only(bottom: 20.0),
               child: TestWidget(),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Increment"),
               onPressed: () => setState(() => ++count),
             )

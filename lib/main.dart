@@ -51,12 +51,11 @@ class _AppState extends State<App> {
             onTap: (index) => _tab(index),
             items: [
               BottomNavigationBarItem(
-                  title: Text('基础知识'), icon: Icon(Icons.shopping_basket)),
+                  label: '基础知识', icon: Icon(Icons.shopping_basket)),
+              BottomNavigationBarItem(label: '推荐', icon: Icon(Icons.home)),
+              BottomNavigationBarItem(label: '项目', icon: Icon(Icons.map)),
               BottomNavigationBarItem(
-                  title: Text('推荐'), icon: Icon(Icons.home)),
-              BottomNavigationBarItem(title: Text('项目'), icon: Icon(Icons.map)),
-              BottomNavigationBarItem(
-                  title: Text('公众号'), icon: Icon(Icons.contact_mail)),
+                  label: '公众号', icon: Icon(Icons.contact_mail)),
             ]),
       ),
     );
@@ -135,9 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline1,
             ),
-            FlatButton(
+            TextButton(
               child: Text("open new route"),
-              textColor: Colors.blue,
               onPressed: () {
                 /* Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {

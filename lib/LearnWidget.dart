@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: new Center(
         child: new ListView(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "simulate wanandroid_flutter",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 _toWanAndroid(context);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "《Flutter in action 》",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "PointerEventTestRoute",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "手势识别GestureDetector",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "使用EventBus发送事件",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 bus.emit("login", "Login event");
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "send notification",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -153,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         })));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "动画基本结构",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "共享元素动画",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -177,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "交错动画",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -189,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "自定义组合控件",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -201,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "自定义组合控件实例turnBox",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -213,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "自定义画笔",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -225,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "自定义圆形进度条",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -237,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "文件操作",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -249,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "通过HttpClient发起HTTP请求",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -261,7 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text(
                 "使用WebSockets",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),

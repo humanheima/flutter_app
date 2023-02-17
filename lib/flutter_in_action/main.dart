@@ -21,7 +21,7 @@ class FlutterInActionMain extends StatelessWidget {
       body: Container(
         child: ListView(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: Text('第3章'),
                 onPressed: () {
                   Navigator.push(context,
@@ -29,7 +29,7 @@ class FlutterInActionMain extends StatelessWidget {
                     return new Chapter3HomePage(title: 'Chapter 3 Home Page');
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('第4章'),
                 onPressed: () {
                   Navigator.push(context,
@@ -37,7 +37,7 @@ class FlutterInActionMain extends StatelessWidget {
                     return new Chapter4HomePage();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('第5章'),
                 onPressed: () {
                   Navigator.push(context,
@@ -45,7 +45,7 @@ class FlutterInActionMain extends StatelessWidget {
                     return new Chapter5HomePage();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('第6章'),
                 onPressed: () {
                   Navigator.push(context,
@@ -53,7 +53,7 @@ class FlutterInActionMain extends StatelessWidget {
                     return new Chapter6HomePage();
                   }));
                 }),
-            RaisedButton(
+            ElevatedButton(
                 child: Text('第7章'),
                 onPressed: () {
                   Navigator.push(context,

@@ -20,7 +20,7 @@ class Chapter7HomePage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          RaisedButton(
+          ElevatedButton(
             child: Text("7.1 导航返回拦截（WillPopScope）"),
             onPressed: () {
               Navigator.push(context, new MaterialPageRoute(builder: (context) {
@@ -28,7 +28,7 @@ class Chapter7HomePage extends StatelessWidget {
               }));
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text(
               "7.2 数据共享（InheritedWidget）",
               style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -39,7 +39,7 @@ class Chapter7HomePage extends StatelessWidget {
               }));
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text(
               "7.3 跨组件状态共享（Provider）",
               style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -50,7 +50,7 @@ class Chapter7HomePage extends StatelessWidget {
               }));
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text(
               "7.4 颜色和主题",
               style: new TextStyle(fontSize: 20, color: Colors.redAccent),
@@ -61,7 +61,7 @@ class Chapter7HomePage extends StatelessWidget {
               }));
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text(
               "7.5 异步UI更新（FutureBuilder、StreamBuilder）",
             ),
@@ -71,7 +71,7 @@ class Chapter7HomePage extends StatelessWidget {
               }));
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text(
               "7.6 对话框详解",
             ),
