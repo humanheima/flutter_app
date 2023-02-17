@@ -12,9 +12,7 @@ class ApiManager {
 
   ApiManager._internal() {
     var options = BaseOptions(
-        baseUrl: "http://www.wanandroid.com/",
-        connectTimeout: 10000,
-        receiveTimeout: 3000);
+        baseUrl: "https://www.wanandroid.com/");
 
     _dio = Dio(options);
   }

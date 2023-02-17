@@ -382,7 +382,7 @@ class Code7_6 extends StatelessWidget {
       {@required BuildContext context,
       bool barrierDismissible = true,
       WidgetBuilder builder}) {
-    final ThemeData theme = Theme.of(context, shadowThemeOnly: true);
+    final ThemeData theme = Theme.of(context);
     return showGeneralDialog(
       context: context,
       pageBuilder: (BuildContext context, Animation<double> animation,

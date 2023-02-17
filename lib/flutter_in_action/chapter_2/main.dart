@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
             new Text('You have pushed the button this many times:'),
             new Text(
               '$_count',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline1,
             ),
             new FlatButton(
               onPressed: () {

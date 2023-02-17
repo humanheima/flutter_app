@@ -52,7 +52,7 @@ class ShareDataWidget extends InheritedWidget {
     /*return context.inheritFromWidgetOfExactType(ShareDataWidget)
         as ShareDataWidget;*/
     return context
-        .ancestorInheritedElementForWidgetOfExactType(ShareDataWidget)
+        .getElementForInheritedWidgetOfExactType<ShareDataWidget>()
         .widget;
   }
 
