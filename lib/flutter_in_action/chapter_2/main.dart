@@ -75,21 +75,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
               child: Text('Open new route'),
-              textColor: Colors.blue,
             ),
             new TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, "new_page");
               },
               child: Text('使用命名路由打开新的路由界面'),
-              textColor: Colors.blue,
             ),
             new TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed("echo_page", arguments: "hi");
               },
               child: Text('使用命名路由打开新的路由界面,并传递参数'),
-              textColor: Colors.blue,
             ),
             new TextButton(
               onPressed: () {
@@ -98,7 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 print("测试debug");
               },
               child: Text('debugDumpApp'),
-              textColor: Colors.blue,
             ),
             RandomWordsWidget(),
           ],
