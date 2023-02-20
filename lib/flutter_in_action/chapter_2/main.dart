@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/flutter_in_action/chapter_2/StateLifecycleTest.dart';
 import 'NewRoute.dart';
 import 'EchoRoute.dart';
 import 'RouterTestRoute.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "new_page": (context) => NewRoute(),
         "echo_page": (context) => EchoRoute(),
+        "test_state_lifecycle_page": (context) => StateLifecycleTest(),
         '/': (context) => MyHomePage(
               title: 'Flutter Demo Home Page',
             )
@@ -87,6 +89,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pushNamed("echo_page", arguments: "hi");
               },
               child: Text('使用命名路由打开新的路由界面,并传递参数'),
+            ),
+            new TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("test_state_lifecycle_page");
+              },
+              child: Text('测试State生命周期'),
             ),
             new TextButton(
               onPressed: () {

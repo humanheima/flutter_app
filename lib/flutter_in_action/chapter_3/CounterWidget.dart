@@ -16,18 +16,20 @@ class CounterWidget extends StatefulWidget {
 
 ///关于State的生命周期,计数器的功能
 class _CounterWidgetState extends State<CounterWidget> {
+  final String TAG = "_CounterWidgetState";
+
   int _counter;
 
   @override
   void initState() {
     super.initState();
     _counter = widget.initialValue;
-    print("initState value is$_counter");
+    print("$TAG initState value is$_counter");
   }
 
   @override
   Widget build(BuildContext context) {
-    print("build");
+    print("$TAG build");
     return Center(
         child: new Container(
       color: Colors.white,
@@ -41,30 +43,30 @@ class _CounterWidgetState extends State<CounterWidget> {
   @override
   void didUpdateWidget(CounterWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print("didUpdateWidget");
+    print("$TAG didUpdateWidget");
   }
 
   @override
   void deactivate() {
     super.deactivate();
-    print("deactivate");
+    print("$TAG deactivate");
   }
 
   @override
   void dispose() {
     super.dispose();
-    print("dispose");
+    print("$TAG dispose");
   }
 
   @override
   void reassemble() {
     super.reassemble();
-    print("reassemble");
+    print("$TAG reassemble");
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print("didChangeDependencies");
+    print("$TAG didChangeDependencies");
   }
 }
