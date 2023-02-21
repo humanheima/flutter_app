@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../chapter_3/CounterWidget.dart';
+import 'CounterWidget.dart';
 
 ///
 /// 测试State的生命周期

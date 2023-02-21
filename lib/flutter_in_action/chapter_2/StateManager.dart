@@ -62,6 +62,7 @@ class _TapboxAState extends State<TapboxA> {
           ),
           width: 200.0,
           height: 200.0,
+          // decoration 属性可以用来设置背景色
           decoration: new BoxDecoration(
             color: _active ? Colors.lightGreen[700] : Colors.grey[600],
           )),
@@ -102,10 +103,12 @@ class _ParentWidgetBState extends State<ParentWidgetB> {
 class TapboxB extends StatelessWidget {
   final bool active;
 
-  //父类传入的回调函数
+  ///父类传入的回调函数
   final ValueChanged<bool> onChanged;
 
-  TapboxB({Key key, this.active: false, @required this.onChanged})
+  ///不传active的话，指定默认active
+  ///@required 指定必须传递的参数
+  TapboxB({Key key, this.active = false, @required this.onChanged})
       : super(key: key);
 
   void _handleTap() {
@@ -144,7 +147,7 @@ class ParentWidgetC extends StatefulWidget {
 class _ParentWidgetCState extends State<ParentWidgetC> {
   bool _active = false;
 
-  void _handleTapboxChanged(bool newValue) {
+  void _handleTapBoxChanged(bool newValue) {
     setState(() {
       _active = newValue;
     });
@@ -153,27 +156,27 @@ class _ParentWidgetCState extends State<ParentWidgetC> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: new TapboxC(
+      child: new TapBoxC(
         active: _active,
-        onChanged: _handleTapboxChanged,
+        onChanged: _handleTapBoxChanged,
       ),
     );
   }
 }
 
-///----------------------------- TapboxC ------------------------------
+///----------------------------- TapBoxC ------------------------------
 
-class TapboxC extends StatefulWidget {
+class TapBoxC extends StatefulWidget {
   final bool active;
   final ValueChanged<bool> onChanged;
 
-  TapboxC({Key key, this.active: false, @required this.onChanged})
+  TapBoxC({Key key, this.active = false, @required this.onChanged})
       : super(key: key);
 
-  _TapboxCState createState() => new _TapboxCState();
+  _TapBoxCState createState() => new _TapBoxCState();
 }
 
-class _TapboxCState extends State<TapboxC> {
+class _TapBoxCState extends State<TapBoxC> {
   bool _highlight = false;
 
   void _handleTapDown(TapDownDetails details) {

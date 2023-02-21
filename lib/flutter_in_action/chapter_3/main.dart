@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Code3_2.dart';
+import '../chapter_2/StateManager.dart';
 import 'Code3_3.dart';
 import 'Code3_4.dart';
 import 'Code3_5.dart';

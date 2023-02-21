@@ -15,3 +15,13 @@
 * 例子在 lib/flutter_in_action/chapter_2/StateLifecycleTest.dart 文件中
 
 ![State生命周期](State生命周期.jpg)
+
+* [Dart相关代码模版](https://gist.github.com/buntagonalprism/499850a3723dbded9146270c63375088)
+
+2.2.7 在 widget 树中获取State对象
+
+1. 通过Context 获取
+2. 在 Flutter 开发中便有了一个默认的约定：如果 StatefulWidget 的状态是希望暴露出的，应当在 StatefulWidget 中提供一个of 静态方法来获取其 State 对象，开发者便可直接通过该方法来获取；如果 State不希望暴露，则不提供of方法。这个约定在 Flutter SDK 里随处可见。
+3. 通过GlobalKey。
+
+## 2.3 状态管理

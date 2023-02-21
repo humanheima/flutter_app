@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_app/flutter_in_action/chapter_2/StateLifecycleTest.dart';
-import 'NewRoute.dart';
-import 'EchoRoute.dart';
-import 'RouterTestRoute.dart';
 import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_app/flutter_in_action/chapter_2/GetStateObjectRoute.dart';
+import 'package:flutter_app/flutter_in_action/chapter_2/StateLifecycleTest.dart';
 import 'package:flutter_app/package_manage.dart';
+
+import 'EchoRoute.dart';
+import 'NewRoute.dart';
+import 'StateManager.dart';
 
 ///
 /// Created by dumingwei on 2019-09-12.
@@ -27,6 +30,7 @@ class MyApp extends StatelessWidget {
         "new_page": (context) => NewRoute(),
         "echo_page": (context) => EchoRoute(),
         "test_state_lifecycle_page": (context) => StateLifecycleTest(),
+        "test_get_state_object": (context) => GetStateObjectRoute(),
         '/': (context) => MyHomePage(
               title: 'Flutter Demo Home Page',
             )
@@ -68,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             new Text('You have pushed the button this many times:'),
             new Text(
               '$_count',
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             new TextButton(
               onPressed: () {
@@ -98,6 +102,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             new TextButton(
               onPressed: () {
+                Navigator.of(context).pushNamed("test_get_state_object");
+              },
+              child: Text('测试在 widget 树中获取State对象'),
+            ),
+            new TextButton(
+              onPressed: () {
                 //debugDumpApp();
                 debugger(message: "测试debug");
                 print("测试debug");
@@ -105,6 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('debugDumpApp'),
             ),
             RandomWordsWidget(),
+            new ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return new StateManage();
+                }));
+              },
+              child: Text('3.2状态管理'),
+            ),
           ],
         ),
       ),
