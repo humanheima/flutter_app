@@ -9,6 +9,16 @@ class EchoRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context).settings.arguments;
     print(args);
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('我是命名路由打开的界面，并传递给我参数'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text("参数是：$args")],
+        ),
+      ),
+    );
   }
 }

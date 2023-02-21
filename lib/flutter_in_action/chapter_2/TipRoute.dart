@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-09-12.
-/// Desc:
+/// Desc:接受传递的参数（一个提示文本参数），将传入它的文本显示在页面上。
+/// 添加一个“返回”按钮，点击后在返回上一个路由的同时会带上一个返回参数。
 ///
 
 class TipRoute extends StatelessWidget {
@@ -21,7 +22,7 @@ class TipRoute extends StatelessWidget {
         child: Center(
           child: Column(
             children: <Widget>[
-              new Text(text),
+              Text(text),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context, "我是返回值"),
                 child: Text('返回'),

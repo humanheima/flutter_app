@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/flutter_in_action/chapter_2/GetStateObjectRoute.dart';
 import 'package:flutter_app/flutter_in_action/chapter_2/StateLifecycleTest.dart';
+import 'package:flutter_app/flutter_in_action/chapter_2/TipRoute.dart';
 import 'package:flutter_app/package_manage.dart';
 
 import 'EchoRoute.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: '/',
+      initialRoute: '/', //名为"/"的路由作为应用的home(首页)
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
       routes: {
         "new_page": (context) => NewRoute(),
         "echo_page": (context) => EchoRoute(),
+        "tip_page": (context) {
+          return TipRoute(text: ModalRoute.of(context).settings.arguments);
+        },
         "test_state_lifecycle_page": (context) => StateLifecycleTest(),
         "test_get_state_object": (context) => GetStateObjectRoute(),
         '/': (context) => MyHomePage(
@@ -74,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_count',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            new TextButton(
+            new ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return NewRoute();
@@ -82,31 +86,49 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Open new route'),
             ),
-            new TextButton(
+            ElevatedButton(
+              onPressed: () async {
+                var result = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                  return TipRoute(text: "我是传递过来的参数");
+                }));
+                print("路由返回值：$result");
+              },
+              child: Text('打开新的路由界面,并传递参数并接收返回值'),
+            ),
+            new ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "tip_page",
+                    arguments: "我是命名路由打开的界面传递过来的参数");
+              },
+              child: Text('使用命名路由打开TipRouter'),
+            ),
+            new ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, "new_page");
               },
               child: Text('使用命名路由打开新的路由界面'),
             ),
-            new TextButton(
+            ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed("echo_page", arguments: "hi");
+                Navigator.of(context)
+                    .pushNamed("echo_page", arguments: "hi,你好");
               },
-              child: Text('使用命名路由打开新的路由界面,并传递参数'),
+              child: Text('命名路由传递参数'),
             ),
-            new TextButton(
+            new ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed("test_state_lifecycle_page");
               },
               child: Text('测试State生命周期'),
             ),
-            new TextButton(
+            new ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed("test_get_state_object");
               },
               child: Text('测试在 widget 树中获取State对象'),
             ),
-            new TextButton(
+            new ElevatedButton(
               onPressed: () {
                 //debugDumpApp();
                 debugger(message: "测试debug");
