@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -132,9 +133,9 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 //debugDumpApp();
                 debugger(message: "测试debug");
-                print("测试debug");
+                debugPrint("测试debug");
               },
-              child: Text('debugDumpApp'),
+              child: Text('测试debug'),
             ),
             RandomWordsWidget(),
             new ElevatedButton(
@@ -145,6 +146,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               },
               child: Text('3.2状态管理'),
+            ),
+            new ElevatedButton(
+              onPressed: () async {
+                var secret = "arglebargle"; // Or a random generated string.
+                var result = runZoned(
+                    () async {
+                      await Future.delayed(Duration(seconds: 5), () {
+                        print("${Zone.current[#_secret]} glop glyf");
+                      });
+                    },
+                    zoneValues: {#_secret: secret},
+                    zoneSpecification: ZoneSpecification(
+                        print: (Zone self, parent, zone, String value) {
+                      if (value.contains(Zone.current[#_secret] as String)) {
+                        value = "--censored--";
+                      }
+                      parent.print(zone, value);
+                    }));
+                secret = ""; // Erase the evidence.
+                await result; // Wait for asynchronous computation to complete.
+              },
+              child: Text('使用runZoned 捕获异步异常'),
             ),
           ],
         ),
