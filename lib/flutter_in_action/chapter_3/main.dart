@@ -110,11 +110,18 @@ class _Chapter3HomePageState extends State<Chapter3HomePage> {
               },
             ),
             ElevatedButton(
-                child: Text('3.7 输入框及表单'),
+                child: Text('3.7 输入框及表单，输入框部分'),
                 onPressed: () {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
-                    //return new InputRoute();
+                    return new InputRoute();
+                  }));
+                }),
+            ElevatedButton(
+                child: Text('3.7 输入框及表单，表单部分'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
                     return new FormTestRoute();
                   }));
                 }),

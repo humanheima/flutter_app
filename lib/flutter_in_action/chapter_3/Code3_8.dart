@@ -33,11 +33,11 @@ class ProgressWidget extends StatelessWidget {
               height: 3,
               child: LinearProgressIndicator(
                 backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation(Colors.blue),
-                value: 0.5,
+                valueColor: AlwaysStoppedAnimation(Colors.cyan),
+                value: 0.8,
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 10.0)),
+            Padding(padding: EdgeInsets.only(top: 50.0)),
             UnconstrainedBox(
               child: SizedBox(
                   width: 50.0,
@@ -45,15 +45,16 @@ class ProgressWidget extends StatelessWidget {
                   child: CircularProgressIndicator(
                     strokeWidth: 4.0,
                     backgroundColor: Colors.grey[200],
-                    valueColor: AlwaysStoppedAnimation(Colors.blue),
+                    valueColor: AlwaysStoppedAnimation(Colors.brown),
                   )),
             ),
-            Padding(padding: EdgeInsets.only(top: 10.0)),
+            Padding(padding: EdgeInsets.only(top: 50.0)),
             UnconstrainedBox(
               child: SizedBox(
-                width: 20.0,
-                height: 20.0,
+                width: 40.0,
+                height: 40.0,
                 child: CircularProgressIndicator(
+                  strokeWidth: 8.0,
                   backgroundColor: Colors.grey[200],
                   valueColor: AlwaysStoppedAnimation(Colors.blue),
                   value: 0.5,

@@ -72,7 +72,11 @@ class _InputRouteState extends State<InputRoute> {
                     decoration: InputDecoration(
                         labelText: "密码",
                         hintText: "您的登陆密码",
-                        prefixIcon: Icon(Icons.lock)),
+                        prefixIcon: Icon(Icons.lock),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.green)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.deepOrange))),
                     obscureText: true,
                   ),
                   Text("下面演示控制焦点"),
@@ -81,7 +85,7 @@ class _InputRouteState extends State<InputRoute> {
                     child: Column(
                       children: <Widget>[
                         TextField(
-                          autofocus: true,
+                          autofocus: false,
                           focusNode: focusNode1, //关联focusNode1
                           decoration: InputDecoration(labelText: "input1"),
                         ),
@@ -131,13 +135,12 @@ class _InputRouteState extends State<InputRoute> {
                           border: InputBorder.none),
                     ),
 
-                    ///去掉这个注释，可以实现一个下，宽度1像素的下划线
-                    /*decoration: BoxDecoration(
+                    ///去掉这个注释，可以实现一个高度为1像素的下划线
+                    decoration: BoxDecoration(
                         border: Border(
                             bottom: BorderSide(
-                                color: Colors.grey[200], width: 1.0))),*/
-                  ),
-                  Text("表单Form"),
+                                color: Colors.grey[200], width: 1.0))),
+                  )
                 ],
               ),
             )));
@@ -168,7 +171,7 @@ class _FormTestRouteState extends State<FormTestRoute> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                  autofocus: true,
+                  autofocus: false,
                   controller: _unameController,
                   decoration: InputDecoration(
                       labelText: "用户名",

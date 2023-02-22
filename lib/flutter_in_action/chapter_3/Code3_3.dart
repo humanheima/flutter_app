@@ -29,7 +29,7 @@ class TextWidget extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
             new Text(
-              "Hello world! I'm Jack. " * 4,
+              "Hello world! I'm Jack. " * 5,
               style: new TextStyle(color: Colors.green, fontSize: 20),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -58,8 +58,9 @@ class TextWidget extends StatelessWidget {
               children: [
                 TextSpan(text: "Home: "),
                 TextSpan(
+
                     text: "https://flutterchina.club",
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: Colors.blue,fontSize: 20),
                     recognizer: new TapGestureRecognizer())
               ],
             )),

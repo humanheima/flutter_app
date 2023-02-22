@@ -9,7 +9,7 @@ class MyImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: Text("按钮"),
+        title: Text("图片和icon"),
       ),
       body: new Container(
         child: new Column(
@@ -42,7 +42,7 @@ class MyImageWidget extends StatelessWidget {
                     "images/avatar.jpg",
                     width: 100.0,
                     height: 200.0,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Padding(
@@ -64,7 +64,7 @@ class MyImageWidget extends StatelessWidget {
                   child: Image(
                     //从网络加载图片
                     image: NetworkImage(
-                        "https://img-my.csdn.net/uploads/201407/26/1406383299_1976.jpg"),
+                        "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4"),
                     width: 100.0,
                     height: 100.0,
                   ),
@@ -72,7 +72,7 @@ class MyImageWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 0.0, 0.0),
                   child: Image.network(
-                    "https://img-my.csdn.net/uploads/201407/26/1406383291_6518.jpg",
+                    "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4",
                     width: 100.0,
                     height: 100.0,
                   ),
