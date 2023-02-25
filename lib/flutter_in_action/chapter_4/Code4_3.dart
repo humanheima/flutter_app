@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/18
-/// Desc:弹性布局 弹性布局允许子widget按照一定比例来分配父容器空间
+/// Desc:弹性布局 弹性布局允许子widget按照一定比例来分配父容器空间,类似Android 里的 LinearLayout的 weight吧。
 ///
 
 class FlexLayoutTestRoute extends StatelessWidget {
@@ -11,7 +11,7 @@ class FlexLayoutTestRoute extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
           title: new Text(
-        "布局类Widgets",
+        "弹性布局Flex",
       )),
       backgroundColor: Colors.white,
       body: Container(

@@ -13,7 +13,7 @@ class RowColumnWidget extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
           title: new Text(
-        "布局类Widgets",
+        "线性布局类Widgets",
       )),
       backgroundColor: Colors.white,
       body: Container(

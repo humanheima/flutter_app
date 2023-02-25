@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 ///
 /// Crete by dumingwei on 2019/3/18
 /// Desc:流式布局
+/// 我们把超出屏幕显示范围会自动折行的布局称为流式布局。Flutter中通过Wrap和Flow来支持流式布局
 ///
 
 class WrapFlowTestRoute extends StatelessWidget {
@@ -94,10 +95,11 @@ class WrapFlowTestRoute extends StatelessWidget {
   }
 }
 
+/// 类似于 Android 自定义View的时候， 在 onLayout 方法中摆放View
 class TestFlowDelegate extends FlowDelegate {
   EdgeInsets margin = EdgeInsets.zero;
 
-  TestFlowDelegate({this.margin});
+  TestFlowDelegate({@required this.margin});
 
   @override
   void paintChildren(FlowPaintingContext context) {

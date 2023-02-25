@@ -5,6 +5,7 @@ import 'Code4_3.dart';
 import 'Code4_4.dart';
 import 'Code4_5.dart';
 import 'Code4_6.dart';
+import 'Code4_8.dart';
 
 ///
 /// Created by dumingwei on 2019-10-07.
@@ -59,6 +60,14 @@ class Chapter4HomePage extends StatelessWidget {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
                     return new AlignTestRoute();
+                  }));
+                }),
+            ElevatedButton(
+                child: Text('4.8 LayoutBuilder、AfterLayout'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new ALayoutBuildAfterLayoutTestRoute();
                   }));
                 }),
           ],
