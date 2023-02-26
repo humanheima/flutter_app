@@ -7,6 +7,7 @@ import 'Code5_4.dart';
 import 'Code5_5.dart';
 import 'Code5_6.dart';
 import 'Code5_7.dart';
+import 'TestFittedBox.dart';
 
 ///
 /// Created by dumingwei on 2019-10-07.
@@ -60,7 +61,7 @@ class Chapter5HomePage extends StatelessWidget {
                   }));
                 }),
             ElevatedButton(
-                child: Text('5.5 Container'),
+                child: Text('5.5 容器组件 Container'),
                 onPressed: () {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
@@ -68,7 +69,7 @@ class Chapter5HomePage extends StatelessWidget {
                   }));
                 }),
             ElevatedButton(
-                child: Text('5.6 Scaffold、TabBar、底部导航'),
+                child: Text('5.6 页面骨架Scaffold、TabBar、底部导航'),
                 onPressed: () {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
@@ -81,6 +82,14 @@ class Chapter5HomePage extends StatelessWidget {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
                     return new ClipTestRoute();
+                  }));
+                }),
+            ElevatedButton(
+                child: Text('空间适配（FittedBox）'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new TestFittedBox();
                   }));
                 }),
           ],

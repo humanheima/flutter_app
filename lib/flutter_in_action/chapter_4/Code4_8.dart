@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../LayoutParamsLog.dart';
 ///
 /// Created by dumingwei on 2019-10-07.
 /// Desc:LayoutBuilder、AfterLayout
@@ -30,7 +30,7 @@ class LayoutBuilderRoute extends StatelessWidget {
         Padding(padding:EdgeInsets.all(16)),
         //显示两列
         ResponsiveColumn(children: _children),
-        LayoutLogPrint(tag: "LogTag", child: Text("xx")) // 下面介绍
+        LayoutParamsLog(tag: "LogTag", child: Text("xx")) // 下面介绍
       ],
     );
   }
@@ -70,27 +70,4 @@ class ResponsiveColumn extends StatelessWidget {
   }
 }
 
-
-class LayoutLogPrint<T> extends StatelessWidget {
-  const LayoutLogPrint({
-    Key key,
-    this.tag,
-    @required this.child,
-  }) : super(key: key);
-
-  final Widget child;
-  final T tag; //指定日志tag
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (_, constraints) {
-      // assert在编译release版本时会被去除
-      assert(() {
-        print('${tag ?? key ?? child}: $constraints');
-        return true;
-      }());
-      return child;
-    });
-  }
-}
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/19
+/// 页面骨架（Scaffold）
 
 class ScaffoldRoute extends StatefulWidget {
   @override

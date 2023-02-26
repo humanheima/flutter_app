@@ -58,3 +58,8 @@ class MyIcons {
 }
 ```
 获取这个整数，可以用浏览器打开font_wexin目录下的demo_index.xml中看到
+
+
+#知识点
+
+### Flutter的空特性 待研究

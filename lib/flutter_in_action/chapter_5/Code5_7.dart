@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-10-07.
-/// Desc:
+/// Desc:剪裁（Clip）
 ///
 class ClipTestRoute extends StatelessWidget {
   @override
@@ -28,6 +28,7 @@ class ClipTestRoute extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 10.0),
             ),
+            //剪裁为圆角矩形
             ClipRRect(
               borderRadius: BorderRadius.circular(5.0),
               child: avatar,

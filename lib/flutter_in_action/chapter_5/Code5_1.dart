@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/19
-/// Desc: Padding
+/// Desc: Padding 填充
 ///
 
 class PaddingTestRoute extends StatelessWidget {
@@ -36,7 +36,7 @@ class PaddingTestRoute extends StatelessWidget {
             ),
             Padding(
               // 分别指定四个方向的补白
-              padding: const EdgeInsets.fromLTRB(20.0, .0, 20.0, 20.0),
+              padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
               child: Text("Your friend"),
             ),
           ],

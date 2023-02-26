@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-10-07.
-/// Desc:
+/// Desc:容器组件（Container）
 ///
 class ContainerTestRoute extends StatelessWidget {
   @override
@@ -22,7 +22,7 @@ class ContainerTestRoute extends StatelessWidget {
                     //雷达渐变
                     colors: [Colors.red, Colors.orange],
                     center: Alignment.topLeft,
-                    radius: .98),
+                    radius: 0.98),
                 boxShadow: [
                   //卡片阴影
                   BoxShadow(

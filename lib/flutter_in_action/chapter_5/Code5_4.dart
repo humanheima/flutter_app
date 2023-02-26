@@ -20,6 +20,14 @@ class TransformTestRoute extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
+                color: Colors.black,
+                margin: EdgeInsets.only(top: 30.0),
+                child: new Container(
+                  padding: const EdgeInsets.all(8.0),
+                  color: Colors.deepOrange,
+                  child: const Text('Apartment'),
+                )),
+            Container(
               color: Colors.black,
               margin: EdgeInsets.only(top: 30.0),
               child: new Transform(
@@ -29,6 +37,16 @@ class TransformTestRoute extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   color: Colors.deepOrange,
                   child: const Text('Apartment'),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 20.0),
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.red),
+                child: Transform.translate(
+                  offset: Offset(0.0, 0.0),
+                  child: Text("Hello"),//用来做对比
                 ),
               ),
             ),
@@ -61,9 +79,9 @@ class TransformTestRoute extends StatelessWidget {
               ),
             ),
             Container(
-                margin: EdgeInsets.only(top: 40.0),
+                margin: EdgeInsets.only(top: 80.0),
                 child: DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.red),
+                  decoration: BoxDecoration(color: Colors.blueAccent),
                   child: Transform.rotate(
                     //旋转90度
                     angle: math.pi / 2,
@@ -73,7 +91,7 @@ class TransformTestRoute extends StatelessWidget {
 
             ///先旋转再平移
             Container(
-                margin: EdgeInsets.only(top: 40.0),
+                margin: EdgeInsets.only(top: 80.0),
                 child: DecoratedBox(
                   decoration: BoxDecoration(color: Colors.red),
                   child: Transform.rotate(
@@ -85,11 +103,13 @@ class TransformTestRoute extends StatelessWidget {
                     ),
                   ),
                 )),
+
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 0.0),
               child: DecoratedBox(
                   decoration: BoxDecoration(color: Colors.red),
-                  child: Transform.scale(scale: 2, child: Text("Hello world"))),
+                  //缩放，放大到1.5倍
+                  child: Transform.scale(scale: 1.5, child: Text("Hello world"))),
             ),
 
             ///Transform的变换是应用在绘制阶段，而并不是应用在布局(layout)阶段，所以无论对子widget应用何种变化，
