@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-10-08.
-/// Desc:
+/// Desc:滚动监听及控制
 ///
 class ScrollControllerTestRoute extends StatefulWidget {
   @override
@@ -21,15 +21,19 @@ class ScrollControllerTestRouteState extends State<ScrollControllerTestRoute> {
     super.initState();
     //监听滚动事件，打印滚动位置
     _controller.addListener(() {
-      print(_controller.offset);
-      if (_controller.offset < 1000 && showToTopBtn) {
-        setState(() {
-          showToTopBtn = false;
-        });
+      print("_controller.offset = ${_controller.offset}");
+      if (_controller.offset < 1000) {
+        if (showToTopBtn) {
+          setState(() {
+            showToTopBtn = false;
+          });
+        }
       } else {
-        setState(() {
-          showToTopBtn = true;
-        });
+        if (!showToTopBtn) {
+          setState(() {
+            showToTopBtn = true;
+          });
+        }
       }
     });
   }

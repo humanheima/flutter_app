@@ -84,11 +84,11 @@ class _InfiniteListViewState extends State<InfiniteListView> {
 
   var _words = <String>[loadingTag];
 
-  @override
-  void initState() {
-    super.initState();
-    _retriveData();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _getData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,7 @@ class _InfiniteListViewState extends State<InfiniteListView> {
           if (_words[index] == loadingTag) {
             //不足一百条继续获取
             if (_words.length - 1 < 100) {
-              _retriveData();
+              _getData();
               return Container(
                   padding: const EdgeInsets.all(16.0),
                   alignment: Alignment.center,
@@ -139,9 +139,11 @@ class _InfiniteListViewState extends State<InfiniteListView> {
         });
   }
 
-  void _retriveData() {
-    Future.delayed(Duration(seconds: 2)).then((e) {
-      _words.insertAll(_words.length - 1,
+  void _getData() {
+    Future.delayed(Duration(seconds: 2)).then((element) {
+      _words.insertAll(
+          _words.length - 1,
+          //每次生成20个单词
           generateWordPairs().take(20).map((e) => e.asPascalCase).toList());
 
       setState(() {

@@ -3,7 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 ///
 /// Created by dumingwei on 2019-10-08.
-/// Desc:
+/// Desc:GridView
 ///
 class GridViewTestRoute extends StatelessWidget {
   @override
@@ -18,14 +18,14 @@ class GridViewTestRoute extends StatelessWidget {
           child: Column(
         children: <Widget>[
           Expanded(
-            child: buildGridViewMaxExtent(),
-            //child: InfiniteGridView(),
+            //child: buildGridViewMaxExtent(),
+            child: InfiniteGridView(),
             //child: buildStaggeredGridView(),
           )
         ],
       )
           //child: buildGridView(),
-          // child: countGridView(),
+          //child: countGridView(),
           //child: buildGridViewMaxExtent(),
           //child: extentGridView(),
           ),
@@ -56,6 +56,7 @@ class GridViewTestRoute extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 1.0,
+        mainAxisSpacing: 16,
       ),
       children: <Widget>[
         Icon(Icons.ac_unit),

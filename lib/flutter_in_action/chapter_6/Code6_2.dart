@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-10-08.
-/// Desc:
+/// Desc:SingleChildScrollView类似于Android中的ScrollView，它只能接收一个子组件
 ///
 class SingleChildScrollViewTestRoute extends StatelessWidget {
   @override
@@ -12,7 +12,7 @@ class SingleChildScrollViewTestRoute extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
           title: new Text(
-        "布局类Widgets",
+        "SingleChildScrollView",
       )),
       backgroundColor: Colors.white,
       body: Container(
