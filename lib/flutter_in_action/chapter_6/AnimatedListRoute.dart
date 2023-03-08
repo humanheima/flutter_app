@@ -27,21 +27,26 @@ class _AnimatedListRouteState extends State<AnimatedListRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
-        children: [
-          AnimatedList(
-              initialItemCount: data.length,
-              key: globalKey,
-              itemBuilder: (BuildContext context, int index,
-                  Animation<double> animation) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: buildItem(context, index),
-                );
-              }),
-          buildAddButton(),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('AnimatedList'),
+      ),
+      body: Material(
+        child: Stack(
+          children: [
+            AnimatedList(
+                initialItemCount: data.length,
+                key: globalKey,
+                itemBuilder: (BuildContext context, int index,
+                    Animation<double> animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: buildItem(context, index),
+                  );
+                }),
+            buildAddButton(),
+          ],
+        ),
       ),
     );
   }

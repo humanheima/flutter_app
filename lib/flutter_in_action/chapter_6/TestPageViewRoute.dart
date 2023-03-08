@@ -1,8 +1,10 @@
+import 'package:flukit/flukit.dart';
 import 'package:flutter/material.dart';
 
 ///
 /// Created by 杜明伟 on 2023/2/27.
 ///PageView与页面缓存
+///测试使用 KeepAliveWrapper 缓存控件。
 
 class TestPageViewRoute extends StatelessWidget {
   TestPageViewRoute();
@@ -11,15 +13,26 @@ class TestPageViewRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     var children = <Widget>[];
     for (int i = 0; i < 6; i++) {
-      children.add(Page(
+      children.add(KeepAliveWrapper(
+          child: Page(
         text: '$i',
-      ));
+      )));
     }
-    return Material(
-      child: PageView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PageView与页面缓存'),
+      ),
+      body: PageView(
         children: children,
+        //左右各缓存一页
+        //allowImplicitScrolling: true,
       ),
     );
+    // return Material(
+    //   child: PageView(
+    //     children: children,
+    //   ),
+    // );
   }
 }
 

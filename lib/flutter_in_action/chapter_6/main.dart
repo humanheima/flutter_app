@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'Code6_2.dart';
-import 'Code6_3.dart';
+import 'Code6_3_ListViewTest.dart';
 import 'Code6_4.dart';
 import 'Code6_5.dart';
 import 'Code6_6.dart';
 import 'AnimatedListRoute.dart';
+import 'KeepAliveTest.dart';
+import 'TabViewRoute2.dart';
 import 'TestPageViewRoute.dart';
 import 'TestPageViewCacheRoute.dart';
 import 'TestTabViewRoute1.dart';
@@ -122,13 +124,26 @@ class Chapter6HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               child: Text(
+                "测试KeepLiveWrapper控件",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return KeepAliveTest();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
                 "测试TabBarView",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
               ),
               onPressed: () {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
-                  return TestTabViewRoute1();
+                  //return TestTabViewRoute1();
+                  return TabViewRoute2();
                 }));
               },
             ),
