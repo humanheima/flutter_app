@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/flutter_in_action/chapter_6/Code6_10.dart';
+import 'package:flutter_app/flutter_in_action/chapter_6/TestNestedScrollView.dart';
 
+import 'Code10_3.dart';
+import 'Code6_11_1.dart';
 import 'Code6_2.dart';
 import 'Code6_3_ListViewTest.dart';
 import 'Code6_4.dart';
-import 'Code6_5.dart';
+import 'Code6_10_2.dart';
 import 'Code6_6.dart';
 import 'AnimatedListRoute.dart';
 import 'KeepAliveTest.dart';
@@ -58,18 +62,6 @@ class Chapter6HomePage extends StatelessWidget {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return GridViewTestRoute();
-                }));
-              },
-            ),
-            ElevatedButton(
-              child: Text(
-                "6.5 CustomScrollView",
-                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) {
-                  return CustomScrollViewRoute();
                 }));
               },
             ),
@@ -144,6 +136,67 @@ class Chapter6HomePage extends StatelessWidget {
                     new MaterialPageRoute(builder: (context) {
                   //return TestTabViewRoute1();
                   return TabViewRoute2();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "测试 6.10 CustomScrollView 和 Slivers",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return Code610();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "6.10.2 Flutter 中常用的 Sliver",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return CustomScrollViewRoute();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "测试 SliverPersistentHeader",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return PersistentHeaderRoute();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "6.11.2 自定义 Sliver",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return SliverPersistentHeaderToBoxRoute();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "6.12 NestedScrollView",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  //return SnapAppBar();
+                  return NestedTabBarView1();
                 }));
               },
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-10-08.
-/// Desc:
+/// Desc:6.10.2 Flutter 中常用的 Sliver
 ///
 class CustomScrollViewRoute extends StatelessWidget {
   @override
@@ -18,6 +18,28 @@ class CustomScrollViewRoute extends StatelessWidget {
               background: Image.asset(
                 "images/avatar.jpg",
                 fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 300,
+              decoration: BoxDecoration(color: Colors.amber),
+              child: PageView(
+                children: [
+                  Text(
+                    '1',
+                    textScaleFactor: 5,
+                  ),
+                  Text(
+                    '2',
+                    textScaleFactor: 5,
+                  ),
+                  Text(
+                    '3',
+                    textScaleFactor: 5,
+                  )
+                ],
               ),
             ),
           ),
