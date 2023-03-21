@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/24
-/// Desc: WillPopScope 想要pop出来
+/// Desc: 导航返回拦截 WillPopScope 想要pop出来
 ///
 
 class WillPopScopeRoute extends StatefulWidget {

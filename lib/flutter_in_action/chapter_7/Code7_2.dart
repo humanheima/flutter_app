@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/24
-/// Desc: InheritedWidget
+/// Desc: InheritedWidget 数据共享
 ///
 /// InheritedWidget是Flutter中非常重要的一个功能型Widget，
 /// 它可以高效的将数据在Widget树中向下传递、共享，
@@ -51,9 +51,10 @@ class ShareDataWidget extends InheritedWidget {
   static ShareDataWidget of(BuildContext context) {
     /*return context.inheritFromWidgetOfExactType(ShareDataWidget)
         as ShareDataWidget;*/
-    return context
-        .getElementForInheritedWidgetOfExactType<ShareDataWidget>()
-        .widget;
+    return context.dependOnInheritedWidgetOfExactType<ShareDataWidget>();
+    // return context
+    //     .getElementForInheritedWidgetOfExactType<ShareDataWidget>()
+    //     .widget;
   }
 
   //该回调决定当data发生变化时，是否通知子树中依赖data的Widget
@@ -80,6 +81,6 @@ class _TestWidgetState extends State<TestWidget> {
     super.didChangeDependencies();
     //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
     //如果build中没有依赖InheritedWidget，则此回调不会被调用。
-    print('Dependencies change');
+    print('TestWidget didChangeDependencies');
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-10-09.
-/// Desc:
+/// Desc: 异步UI更新（FutureBuilder、StreamBuilder）
 ///
 class Code7_5 extends StatelessWidget {
   @override
@@ -32,6 +32,11 @@ class Code7_5 extends StatelessWidget {
                     return CircularProgressIndicator();
                   }
                 }),
+            Container(
+              height: 20,
+              width: 200,
+              decoration: BoxDecoration(color: Colors.greenAccent),
+            ),
             StreamBuilder<int>(
                 stream: counter(),
                 builder: (BuildContext context, AsyncSnapshot<int> snapshot) {

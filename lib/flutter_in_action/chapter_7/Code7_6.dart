@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 ///
 /// Created by dumingwei on 2019-10-09.
-/// Desc:
+/// Desc:对话框详解
 ///
 class Code7_6 extends StatelessWidget {
   bool withTree = false; // 复选框选中状态
@@ -23,7 +23,7 @@ class Code7_6 extends StatelessWidget {
                 onPressed: () {
                   showDialog(
                       context: context,
-                      barrierDismissible: false,
+                      barrierDismissible: false, //点击对话框barrier(遮罩)时是否关闭它
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('提示'),
@@ -226,6 +226,7 @@ class Code7_6 extends StatelessWidget {
         return SizedBox(
           height: 200,
           child: CupertinoDatePicker(
+            backgroundColor: Colors.white,
             mode: CupertinoDatePickerMode.dateAndTime,
             minimumDate: date,
             maximumDate: date.add(
@@ -378,9 +379,12 @@ class Code7_6 extends StatelessWidget {
     }
   }
 
+  ///
+  /// 自定义弹窗
+  ///
   Future<T> showCustomDialog<T>(
       {@required BuildContext context,
-      bool barrierDismissible = true,
+      bool barrierDismissible = true, //点击外面阴影的部分是否消失。
       WidgetBuilder builder}) {
     final ThemeData theme = Theme.of(context);
     return showGeneralDialog(
@@ -397,7 +401,7 @@ class Code7_6 extends StatelessWidget {
       barrierDismissible: barrierDismissible,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       barrierColor: Colors.black87,
-      transitionDuration: const Duration(milliseconds: 150),
+      transitionDuration: const Duration(milliseconds: 1000),
       transitionBuilder: _buildMaterialDialogTransitions,
     );
   }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 ///
 /// Crete by dumingwei on 2019/3/24
-/// Desc:
+/// Desc: 颜色和主题
+/// Link: https://book.flutterchina.club/chapter7/theme.html#_7-4-1-%E9%A2%9C%E8%89%B2
 ///
 ///
 
@@ -45,6 +46,9 @@ class ThemeTestRoute extends StatefulWidget {
 }
 
 class _ThemeTestRouteState extends State<ThemeTestRoute> {
+
+
+  ////当前路由主题色
   Color _themeColor = Colors.teal;
 
   @override
@@ -52,8 +56,8 @@ class _ThemeTestRouteState extends State<ThemeTestRoute> {
     ThemeData themeData = Theme.of(context);
     return Theme(
       data: ThemeData(
-          primarySwatch: _themeColor,
-          iconTheme: IconThemeData(color: _themeColor)),
+          primarySwatch: _themeColor,//用于导航栏、FloatingActionButton的背景色等
+          iconTheme: IconThemeData(color: _themeColor)),//用于Icon颜色
       child: Scaffold(
         appBar: AppBar(
           title: Text("7.4 颜色和主题"),

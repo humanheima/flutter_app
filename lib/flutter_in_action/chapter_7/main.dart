@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/flutter_in_action/chapter_7/ValueListenableRoute.dart';
 
 import 'Code7_1.dart';
 import 'Code7_2.dart';
@@ -58,6 +59,17 @@ class Chapter7HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, new MaterialPageRoute(builder: (context) {
                 return ThemeTestRoute();
+              }));
+            },
+          ),
+          ElevatedButton(
+            child: Text(
+              "7.5 按需rebuild（ValueListenableBuilder）",
+              style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+            ),
+            onPressed: () {
+              Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                return ValueListenableRoute();
               }));
             },
           ),
