@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/flutter_in_action/chapter11/main.dart';
+import 'package:flutter_app/flutter_in_action/chapter8/main.dart';
 
 import 'chapter_3/main.dart';
 import 'chapter_4/main.dart';
@@ -75,6 +77,22 @@ class MainPage extends StatelessWidget {
                   Navigator.push(context,
                       new MaterialPageRoute(builder: (context) {
                     return new Chapter7HomePage();
+                  }));
+                }),
+            ElevatedButton(
+                child: Text('第8章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter8HomePage();
+                  }));
+                }),
+            ElevatedButton(
+                child: Text('第11章'),
+                onPressed: () {
+                  Navigator.push(context,
+                      new MaterialPageRoute(builder: (context) {
+                    return new Chapter11HomePage();
                   }));
                 }),
           ],
