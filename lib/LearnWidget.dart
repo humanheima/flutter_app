@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/animations/FadeRouteTest.dart';
 import 'package:flutter_app/animations/HeroAnimationRoute.dart';
 import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
@@ -57,6 +58,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  // 创建一个 MethodChannel 实例
+  static const platform = const  MethodChannel('com.example/my_channel');
+
   @override
   void initState() {
     super.initState();
@@ -75,6 +80,15 @@ class _MyHomePageState extends State<MyHomePage> {
       body: new Center(
         child: new ListView(
           children: <Widget>[
+            ElevatedButton(
+              child: Text(
+                "打开原生界面",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                _openNativeScreen();
+              },
+            ),
             ElevatedButton(
               child: Text(
                 "simulate wanandroid_flutter",
@@ -286,4 +300,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return darkTheme;
   }
+
+  // 定义一个方法来调用原生代码
+  _openNativeScreen() async {
+    try {
+      final result = await platform.invokeMethod('openNativeScreen');
+      print(result);
+    } on PlatformException catch (e) {
+      print("Failed to open native screen: '${e.message}'.");
+    }
+  }
+
 }
