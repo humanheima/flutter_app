@@ -19,7 +19,6 @@ import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'flutter_in_action/chapter11/FileOperationRoute.dart';
 import 'flutter_in_action/chapter11/HttpTestRoute.dart';
 import 'flutter_in_action/chapter11/WebSocketRoute.dart';
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 ///
 /// Created by dumingwei on 2019/4/3.
@@ -23,13 +22,7 @@ class _WebViewPageState extends State<WebViewPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: WebviewScaffold(
-        url: widget.url,
-        withZoom: false,
-        withLocalStorage: true,
-        hidden: true,
-        withJavascript: true,
-      ),
+      body: Text(widget.url),
     );
   }
 }
