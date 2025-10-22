@@ -10,9 +10,9 @@ class StaggerDemo extends StatefulWidget {
 
 class _StaggerDemoState extends State<StaggerDemo>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
-  Future<Null> _playAnimation() async {
+  Future<void> _playAnimation() async {
     try {
       await _controller.forward().orCancel;
       //await _controller.reverse().orCancel;
@@ -26,6 +26,12 @@ class _StaggerDemoState extends State<StaggerDemo>
     super.initState();
     _controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 2000));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override

@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 /// Desc:
 ///
 
-typedef SuccessWidget = Widget Function(AsyncSnapshot snapshot);
+typedef SuccessWidget = Widget Function(AsyncSnapshot<dynamic> snapshot);
 
 class AsyncSnapshotWidget extends StatelessWidget {
-  AsyncSnapshot snapshot;
+  final AsyncSnapshot<dynamic> snapshot;
+  final SuccessWidget successWidget;
 
-  SuccessWidget successWidget;
-
-  AsyncSnapshotWidget({this.snapshot, this.successWidget});
+  const AsyncSnapshotWidget({Key? key, required this.snapshot, required this.successWidget}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class AsyncSnapshotWidget extends StatelessWidget {
         print('done');
         return successWidget(snapshot);
       default:
-        return null;
+        return SizedBox.shrink();
     }
   }
 }

@@ -4,18 +4,18 @@
 ///
 
 class HomeBannerBean {
-  List<HomeBanner> data;
+  List<HomeBanner>? data;
 
-  int errorCode;
-  String errorMsg;
+  int? errorCode;
+  String? errorMsg;
 
   HomeBannerBean({this.data, this.errorCode, this.errorMsg});
 
   HomeBannerBean.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<HomeBanner>();
+      data = <HomeBanner>[];
       json['data'].forEach((v) {
-        data.add(new HomeBanner.fromJson(v));
+        data!.add(HomeBanner.fromJson(v));
       });
     }
     errorCode = json['errorCode'];
@@ -24,14 +24,14 @@ class HomeBannerBean {
 }
 
 class HomeBanner {
-  String desc;
-  int id;
-  String imagePath;
-  int isVisible;
-  int order;
-  String title;
-  int type;
-  String url;
+  String? desc;
+  int? id;
+  String? imagePath;
+  int? isVisible;
+  int? order;
+  String? title;
+  int? type;
+  String? url;
 
   HomeBanner(this.desc, this.id, this.imagePath, this.isVisible, this.order,
       this.title, this.type, this.url);
@@ -48,7 +48,7 @@ class HomeBanner {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['desc'] = this.desc;
     data['id'] = this.id;
     data['imagePath'] = this.imagePath;

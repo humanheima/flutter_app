@@ -1,67 +1,73 @@
-import 'dart:convert' show json;
+import 'dart:convert';
 
 class BannerModel {
-  int errorCode;
-  String errorMsg;
-  List<BannerData> data;
+  int? errorCode;
+  String? errorMsg;
+  List<BannerData>? data;
 
-  BannerModel.fromParams({this.errorCode, this.errorMsg, this.data});
+  BannerModel({this.errorCode, this.errorMsg, this.data});
 
-  factory BannerModel(jsonStr) => jsonStr == null
-      ? null
-      : jsonStr is String
-          ? new BannerModel.fromJson(json.decode(jsonStr))
-          : new BannerModel.fromJson(jsonStr);
-
-  BannerModel.fromJson(jsonRes) {
-    errorCode = jsonRes['errorCode'];
-    errorMsg = jsonRes['errorMsg'];
-    data = jsonRes['data'] == null ? null : [];
-
-    for (var dataItem in data == null ? [] : jsonRes['data']) {
-      data.add(dataItem == null ? null : new BannerData.fromJson(dataItem));
-    }
+  factory BannerModel.fromJson(dynamic jsonRes) {
+    if (jsonRes == null) return BannerModel();
+    final Map<String, dynamic> map = jsonRes is String ? jsonDecode(jsonRes) : Map<String, dynamic>.from(jsonRes as Map);
+    return BannerModel(
+      errorCode: map['errorCode'] as int?,
+      errorMsg: map['errorMsg'] as String?,
+      data: (map['data'] as List?)
+          ?.where((e) => e != null)
+          .map((e) => BannerData.fromJson(e))
+          .toList(),
+    );
   }
 
   @override
   String toString() {
-    return '{"errorCode": $errorCode,"errorMsg": ${errorMsg != null ? '${json.encode(errorMsg)}' : 'null'},"data": $data}';
+    return jsonEncode({
+      'errorCode': errorCode,
+      'errorMsg': errorMsg,
+      'data': data,
+    });
   }
 }
 
 class BannerData {
-  int id;
-  int isVisible;
-  int order;
-  int type;
-  String desc;
-  String imagePath;
-  String title;
-  String url;
+  int? id;
+  int? isVisible;
+  int? order;
+  int? type;
+  String? desc;
+  String? imagePath;
+  String? title;
+  String? url;
 
-  BannerData.fromParams(
-      {this.id,
-      this.isVisible,
-      this.order,
-      this.type,
-      this.desc,
-      this.imagePath,
-      this.title,
-      this.url});
+  BannerData({this.id, this.isVisible, this.order, this.type, this.desc, this.imagePath, this.title, this.url});
 
-  BannerData.fromJson(jsonRes) {
-    id = jsonRes['id'];
-    isVisible = jsonRes['isVisible'];
-    order = jsonRes['order'];
-    type = jsonRes['type'];
-    desc = jsonRes['desc'];
-    imagePath = jsonRes['imagePath'];
-    title = jsonRes['title'];
-    url = jsonRes['url'];
+  factory BannerData.fromJson(dynamic jsonRes) {
+    if (jsonRes == null) return BannerData();
+    final Map<String, dynamic> map = jsonRes is String ? jsonDecode(jsonRes) : Map<String, dynamic>.from(jsonRes as Map);
+    return BannerData(
+      id: map['id'] as int?,
+      isVisible: map['isVisible'] as int?,
+      order: map['order'] as int?,
+      type: map['type'] as int?,
+      desc: map['desc'] as String?,
+      imagePath: map['imagePath'] as String?,
+      title: map['title'] as String?,
+      url: map['url'] as String?,
+    );
   }
 
   @override
   String toString() {
-    return '{"id": $id,"isVisible": $isVisible,"order": $order,"type": $type,"desc": ${desc != null ? '${json.encode(desc)}' : 'null'},"imagePath": ${imagePath != null ? '${json.encode(imagePath)}' : 'null'},"title": ${title != null ? '${json.encode(title)}' : 'null'},"url": ${url != null ? '${json.encode(url)}' : 'null'}}';
+    return jsonEncode({
+      'id': id,
+      'isVisible': isVisible,
+      'order': order,
+      'type': type,
+      'desc': desc,
+      'imagePath': imagePath,
+      'title': title,
+      'url': url,
+    });
   }
 }

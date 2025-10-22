@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 ///
 
 class GetStateObjectRoute extends StatefulWidget {
-  GetStateObjectRoute({Key key}) : super(key: key);
+  GetStateObjectRoute({Key? key}) : super(key: key);
 
   @override
-  _GetStateObjectRouteState createState() => new _GetStateObjectRouteState();
+  _GetStateObjectRouteState createState() => _GetStateObjectRouteState();
 }
 
 class _GetStateObjectRouteState extends State<GetStateObjectRoute> {

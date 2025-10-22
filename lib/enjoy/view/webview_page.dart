@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 ///
 
 class WebViewPage extends StatefulWidget {
-  String url = "";
-  String title = "";
+  final String url;
+  final String title;
 
-  WebViewPage({this.url, this.title});
+  WebViewPage({this.url = "", this.title = ""});
 
   @override
   State createState() => _WebViewPageState();

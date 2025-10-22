@@ -51,7 +51,7 @@ class TestNestedScrollView extends StatelessWidget {
 }
 
 class SnapAppBar extends StatelessWidget {
-  const SnapAppBar({Key key}) : super(key: key);
+  const SnapAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class SnapAppBar extends StatelessWidget {
 }
 
 class NestedTabBarView1 extends StatelessWidget {
-  const NestedTabBarView1({Key key}) : super(key: key);
+  const NestedTabBarView1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

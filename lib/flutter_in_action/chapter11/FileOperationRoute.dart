@@ -14,7 +14,7 @@ class FileOperationRoute extends StatefulWidget {
 }
 
 class _FileOperationRouteState extends State<FileOperationRoute> {
-  int _counter;
+  int _counter = 0;
 
   @override
   void initState() {
@@ -52,10 +52,12 @@ class _FileOperationRouteState extends State<FileOperationRoute> {
       return int.parse(contents);
     } on FileSystemException {
       return 0;
+    } catch (e) {
+      return 0;
     }
   }
 
-  Future<Null> _incrementCounter() async {
+  Future<void> _incrementCounter() async {
     setState(() {
       _counter++;
     });

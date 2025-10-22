@@ -18,13 +18,13 @@ class GradientButtonRoute extends StatelessWidget {
             ),
             GradientButton(
               height: 50.0,
-              colors: [Colors.lightGreen, Colors.green[700]],
+              colors: [Colors.lightGreen, Colors.green[700]!],
               child: Text("Submit"),
               onTap: onTap,
             ),
             GradientButton(
               height: 50.0,
-              colors: [Colors.lightBlue[300], Colors.blueAccent],
+              colors: [Colors.lightBlue[300]!, Colors.blueAccent],
               child: Text("Submit"),
               onTap: onTap,
             ),
@@ -40,24 +40,23 @@ class GradientButtonRoute extends StatelessWidget {
 }
 
 class GradientButton extends StatelessWidget {
-  final List<Color> colors;
+  final List<Color>? colors;
 
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   final Widget child;
 
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
 
   GradientButton(
-      {this.colors, this.width, this.height, @required this.child, this.onTap});
+      {this.colors, this.width, this.height, required this.child, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     //确保colors数组不空
-    List<Color> _colors = colors ??
-        [theme.primaryColor, theme.primaryColorDark ?? theme.primaryColor];
+    List<Color> _colors = colors ?? [theme.primaryColor, theme.primaryColorDark];
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: _colors),

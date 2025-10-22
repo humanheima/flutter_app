@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 /// Desc:对话框详解
 ///
 class Code7_6 extends StatelessWidget {
-  bool withTree = false; // 复选框选中状态
+  final bool withTree = false; // 复选框选中状态
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +51,9 @@ class Code7_6 extends StatelessWidget {
             child: ElevatedButton(
                 child: Text('对话框2'),
                 onPressed: () async {
-                  bool delete = await showDeleteConfirmDialog1(context);
-                  if (delete == null) {
-                    print("取消删除");
-                  } else {
-                    print("已确认删除");
-                  }
-                }),
+                  bool? delete = await showDeleteConfirmDialog1(context);
+                  print("已确认删除");
+                                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
@@ -109,13 +105,9 @@ class Code7_6 extends StatelessWidget {
                 child: Text('testChangeDialogState'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
-                  bool deleteTree = await showDeleteConfirmDialog3(context);
-                  if (deleteTree == null) {
-                    print("取消删除");
-                  } else {
-                    print("同时删除子目录: $deleteTree");
-                  }
-                }),
+                  bool? deleteTree = await showDeleteConfirmDialog3(context);
+                  print("同时删除子目录: $deleteTree");
+                                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
@@ -123,13 +115,9 @@ class Code7_6 extends StatelessWidget {
                 child: Text('testChangeDialogState1'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
-                  bool deleteTree = await showDeleteConfirmDialog4(context);
-                  if (deleteTree == null) {
-                    print("取消删除");
-                  } else {
-                    print("同时删除子目录: $deleteTree");
-                  }
-                }),
+                  bool? deleteTree = await showDeleteConfirmDialog4(context);
+                  print("同时删除子目录: $deleteTree");
+                                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
@@ -137,13 +125,9 @@ class Code7_6 extends StatelessWidget {
                 child: Text('testChangeDialogState2'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
-                  bool deleteTree = await showDeleteConfirmDialog5(context);
-                  if (deleteTree == null) {
-                    print("取消删除");
-                  } else {
-                    print("同时删除子目录: $deleteTree");
-                  }
-                }),
+                  bool? deleteTree = await showDeleteConfirmDialog5(context);
+                  print("同时删除子目录: $deleteTree");
+                                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
@@ -151,7 +135,7 @@ class Code7_6 extends StatelessWidget {
                 child: Text('显示底部弹出框'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
-                  int type = await _showModalBottomsheet(context);
+                  int? type = await _showModalBottomsheet(context);
                   print(type);
                 }),
           ),
@@ -205,7 +189,7 @@ class Code7_6 extends StatelessWidget {
     );
   }
 
-  Future<DateTime> _showDatePicker1(BuildContext context) {
+  Future<DateTime?> _showDatePicker1(BuildContext context) {
     var date = DateTime.now();
     return showDatePicker(
       context: context,
@@ -218,9 +202,9 @@ class Code7_6 extends StatelessWidget {
     );
   }
 
-  Future<DateTime> _showDatePicker2(BuildContext context) {
+  Future<void> _showDatePicker2(BuildContext context) async {
     var date = DateTime.now();
-    return showCupertinoModalPopup(
+    await showCupertinoModalPopup(
       context: context,
       builder: (ctx) {
         return SizedBox(
@@ -290,8 +274,8 @@ class Code7_6 extends StatelessWidget {
   }
 
   // 弹出对话框
-  Future<bool> showDeleteConfirmDialog1(BuildContext context) {
-    return showDialog<bool>(
+  Future<bool?> showDeleteConfirmDialog1(BuildContext context) {
+    return showDialog<bool?>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -316,7 +300,7 @@ class Code7_6 extends StatelessWidget {
   }
 
   Future<void> changeLanguage(BuildContext context) async {
-    int i = await showDialog<int>(
+    int? i = await showDialog<int?>(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
@@ -345,13 +329,11 @@ class Code7_6 extends StatelessWidget {
             ],
           );
         });
-    if (i != null) {
-      print("选择了：${i == 1 ? "中文简体" : "美国英语"}");
+    print("选择了：${i == 1 ? "中文简体" : "美国英语"}");
     }
-  }
 
   Future<void> showListDialog(BuildContext context) async {
-    int index = await showDialog(
+    int? index = await showDialog<int?>(
         context: context,
         builder: (BuildContext context) {
           var child = Column(
@@ -374,18 +356,16 @@ class Code7_6 extends StatelessWidget {
             child: child,
           );
         });
-    if (index != null) {
-      print("点击了：$index");
+    print("点击了：$index");
     }
-  }
 
   ///
   /// 自定义弹窗
   ///
-  Future<T> showCustomDialog<T>(
-      {@required BuildContext context,
+  Future<T?> showCustomDialog<T>(
+      {required BuildContext context,
       bool barrierDismissible = true, //点击外面阴影的部分是否消失。
-      WidgetBuilder builder}) {
+      required WidgetBuilder builder}) {
     final ThemeData theme = Theme.of(context);
     return showGeneralDialog(
       context: context,
@@ -393,10 +373,8 @@ class Code7_6 extends StatelessWidget {
           Animation<double> secondaryAnimation) {
         final Widget pageChild = Builder(builder: builder);
         return SafeArea(child: Builder(builder: (BuildContext context) {
-          return theme != null
-              ? Theme(data: theme, child: pageChild)
-              : pageChild;
-        }));
+          return Theme(data: theme, child: pageChild);
+         }));
       },
       barrierDismissible: barrierDismissible,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -421,9 +399,9 @@ class Code7_6 extends StatelessWidget {
     );
   }
 
-  Future<bool> showDeleteConfirmDialog3(BuildContext context) {
+  Future<bool?> showDeleteConfirmDialog3(BuildContext context) {
     bool _withTree = false; //记录复选框是否选中
-    return showDialog<bool>(
+    return showDialog<bool?>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -465,9 +443,9 @@ class Code7_6 extends StatelessWidget {
     );
   }
 
-  Future<bool> showDeleteConfirmDialog4(BuildContext context) {
+  Future<bool?> showDeleteConfirmDialog4(BuildContext context) {
     bool _withTree = false; //记录复选框是否选中
-    return showDialog<bool>(
+    return showDialog<bool?>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -483,9 +461,9 @@ class Code7_6 extends StatelessWidget {
                   StatefulBuilder(builder: (context, _setState) {
                     return Checkbox(
                         value: _withTree,
-                        onChanged: (bool value) {
+                        onChanged: (bool? value) {
                           _setState(() {
-                            _withTree = !_withTree;
+                            _withTree = value ?? !_withTree;
                           });
                         });
                   }),
@@ -511,9 +489,9 @@ class Code7_6 extends StatelessWidget {
     );
   }
 
-  Future<bool> showDeleteConfirmDialog5(BuildContext context) {
+  Future<bool?> showDeleteConfirmDialog5(BuildContext context) {
     bool _withTree = false;
-    return showDialog<bool>(
+    return showDialog<bool?>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -529,11 +507,11 @@ class Code7_6 extends StatelessWidget {
                   Checkbox(
                     // 依然使用Checkbox组件
                     value: _withTree,
-                    onChanged: (bool value) {
+                    onChanged: (bool? value) {
                       // 此时context为对话框UI的根Element，我们
                       // 直接将对话框UI对应的Element标记为dirty
                       (context as Element).markNeedsBuild();
-                      _withTree = !_withTree;
+                      _withTree = value ?? !_withTree;
                     },
                   ),
                 ],
@@ -558,8 +536,8 @@ class Code7_6 extends StatelessWidget {
     );
   }
 
-  Future<int> _showModalBottomsheet(BuildContext context) {
-    return showModalBottomSheet<int>(
+  Future<int?> _showModalBottomsheet(BuildContext context) {
+    return showModalBottomSheet<int?>(
         context: context,
         builder: (BuildContext context) {
           return ListView.builder(
@@ -573,27 +551,27 @@ class Code7_6 extends StatelessWidget {
         });
   }
 
-  // 返回的是一个controller,这个展示不出来
-  PersistentBottomSheetController<int> _showBottomSheet(BuildContext context) {
-    return showBottomSheet<int>(
-      context: context,
-      builder: (BuildContext context) {
-        return ListView.builder(
-          itemCount: 30,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text("$index"),
-              onTap: () {
-                // do something
-                print("$index");
-                Navigator.of(context).pop();
-              },
-            );
-          },
-        );
-      },
-    );
-  }
+   // 返回的是一个controller,这个展示不出来
+  PersistentBottomSheetController _showBottomSheet(BuildContext context) {
+    return showBottomSheet(
+       context: context,
+       builder: (BuildContext context) {
+         return ListView.builder(
+           itemCount: 30,
+           itemBuilder: (BuildContext context, int index) {
+             return ListTile(
+               title: Text("$index"),
+               onTap: () {
+                 // do something
+                 print("$index");
+                 Navigator.of(context).pop();
+               },
+             );
+           },
+         );
+       },
+     );
+   }
 }
 
 class DialogCheckbox extends StatefulWidget {
@@ -605,11 +583,11 @@ class DialogCheckbox extends StatefulWidget {
     return _DialogCheckboxState();
   }
 
-  DialogCheckbox({Key key, this.value, this.onChanged});
+  DialogCheckbox({Key? key, required this.value, required this.onChanged}) : super(key: key);
 }
 
 class _DialogCheckboxState extends State<DialogCheckbox> {
-  bool value;
+  late bool value;
 
   @override
   void initState() {
@@ -621,67 +599,21 @@ class _DialogCheckboxState extends State<DialogCheckbox> {
   Widget build(BuildContext context) {
     return Checkbox(
         value: value,
-        onChanged: (v) {
-          widget.onChanged(v);
+        onChanged: (bool? v) {
+          widget.onChanged(v ?? false);
           setState(() {
-            value = v;
+            value = v ?? false;
           });
         });
   }
 }
 
-Future<bool> showDeleteConfirmDialog3(BuildContext context) {
-  bool _withTree = false; //记录复选框是否选中
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("提示"),
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text("您确定要删除当前文件吗?"),
-            Row(
-              children: <Widget>[
-                Text("同时删除子目录？"),
-                DialogCheckbox(
-                  value: _withTree, //默认不选中
-                  onChanged: (bool value) {
-                    //更新选中状态
-                    _withTree = !_withTree;
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text("取消"),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          TextButton(
-            child: Text("删除"),
-            onPressed: () {
-              // 将选中状态返回
-              Navigator.of(context).pop(_withTree);
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
-
 /*
 class StatefulBuilder extends StatefulWidget {
   const StatefulBuilder({
-    Key key,
-    @required this.builder,
-  })
-      : assert(builder != null),
-        super(key: key);
+    Key? key,
+    required this.builder,
+  }) : super(key: key);
 
   final StatefulWidgetBuilder builder;
 

@@ -24,7 +24,7 @@ class TestPageViewCacheRoute extends StatelessWidget {
 }
 
 class Page2 extends StatefulWidget {
-  Page2({Key key, this.text});
+  Page2({Key? key, this.text});
 
   final String text;
 

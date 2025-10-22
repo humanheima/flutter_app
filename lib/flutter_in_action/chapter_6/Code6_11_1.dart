@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 /// 6.11.2 自定义 Sliver，这一节没看懂，后面慢慢消化
 
 class SliverPersistentHeaderToBoxRoute extends StatelessWidget {
-  const SliverPersistentHeaderToBoxRoute({Key key}) : super(key: key);
+  const SliverPersistentHeaderToBoxRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

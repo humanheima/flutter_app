@@ -97,9 +97,9 @@ class WrapFlowTestRoute extends StatelessWidget {
 
 /// 类似于 Android 自定义View的时候， 在 onLayout 方法中摆放View
 class TestFlowDelegate extends FlowDelegate {
-  EdgeInsets margin = EdgeInsets.zero;
+  final EdgeInsets margin;
 
-  TestFlowDelegate({@required this.margin});
+  TestFlowDelegate({required this.margin});
 
   @override
   void paintChildren(FlowPaintingContext context) {

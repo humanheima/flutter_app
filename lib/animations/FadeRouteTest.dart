@@ -9,13 +9,15 @@ class FadeRoute extends PageRoute {
   final WidgetBuilder builder;
 
   FadeRoute(
-      {@required this.builder,
+      {required this.builder,
       this.transitionDuration = const Duration(milliseconds: 300),
       this.opaque = true,
       this.barrierDismissible = false,
       this.barrierLabel,
       this.barrierColor,
-      this.maintainState = true});
+      this.maintainState = true,
+      RouteSettings? settings})
+      : super(settings: settings);
 
   @override
   final Duration transitionDuration;
@@ -26,10 +28,10 @@ class FadeRoute extends PageRoute {
   final bool barrierDismissible;
 
   @override
-  final Color barrierColor;
+  final Color? barrierColor;
 
   @override
-  final String barrierLabel;
+  final String? barrierLabel;
 
   @override
   final bool maintainState;

@@ -9,9 +9,9 @@ import 'package:flutter_app/enjoy/widgets/item_wechat_article.dart';
 ///
 
 class WechatArticleListPage extends StatefulWidget {
-  int cid = 0;
+  final int cid;
 
-  WechatArticleListPage({this.cid});
+  WechatArticleListPage({required this.cid});
 
   @override
   State createState() => WechatArticleListPageState();
@@ -20,7 +20,7 @@ class WechatArticleListPage extends StatefulWidget {
 class WechatArticleListPageState extends State<WechatArticleListPage>
     with SingleTickerProviderStateMixin {
   int index = 1;
-  List<Article> articles = List();
+  List<Article> articles = <Article>[];
 
   @override
   void initState() {
@@ -40,14 +40,19 @@ class WechatArticleListPageState extends State<WechatArticleListPage>
 
   /// 网络请求，获取微信文章列表
   void getList() async {
-    await ApiManager().getWechatArticle(widget.cid, index).then((response) {
-      if (response != null) {
-        var wechatArticleBean = WechatArticleBean.fromJson(response.data);
+    try {
+      final response = await ApiManager().getWechatArticle(widget.cid, index);
+      final wechatArticleBean = WechatArticleBean.fromJson(response.data);
+      // wechatArticleBean.data and data.datas can be null — provide empty list fallback
+      final List<Article> newArticles = wechatArticleBean.data?.datas ?? <Article>[];
 
+      if (newArticles.isNotEmpty) {
         setState(() {
-          articles.addAll(wechatArticleBean.data.datas);
+          articles.addAll(newArticles);
         });
       }
-    });
+    } catch (e) {
+      // optionally log or handle error
+    }
   }
 }

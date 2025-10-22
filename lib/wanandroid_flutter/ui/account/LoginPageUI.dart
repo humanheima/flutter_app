@@ -106,16 +106,14 @@ class LoginPageUIState extends State<LoginPageUI> {
     String username = _userNameController.text;
     String password = _psdController.text;
     CommonService().login((UserModel _userModel, Response response) {
-      if (_userModel != null) {
-        if (_userModel.errorCode == 0) {
-          User().saveUserInfo(_userModel, response);
-          Application.eventBus.fire(LoginEvent());
-          Fluttertoast.showToast(msg: "登录成功！");
-          Navigator.of(context).pop();
-        } else {
-          Fluttertoast.showToast(msg: _userModel.errorMsg);
-        }
+      if (_userModel.errorCode == 0) {
+        User().saveUserInfo(_userModel, response);
+        Application.eventBus.fire(LoginEvent());
+        Fluttertoast.showToast(msg: "登录成功！");
+        Navigator.of(context).pop();
+      } else {
+        Fluttertoast.showToast(msg: _userModel.errorMsg);
       }
-    }, username, password);
+        }, username, password);
   }
 }

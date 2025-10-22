@@ -98,7 +98,7 @@ class _DragTestState extends State<DragTest>
 }
 
 class ScaleTest extends StatefulWidget {
-  const ScaleTest({Key key}) : super(key: key);
+  const ScaleTest({Key? key}) : super(key: key);
 
   @override
   State createState() {
@@ -136,7 +136,7 @@ class _ScaleTestState extends State<ScaleTest> {
 
 /// 测试 GestureRecognizer
 class GestureRecognizer extends StatefulWidget {
-  const GestureRecognizer({Key key}) : super(key: key);
+  const GestureRecognizer({Key? key}) : super(key: key);
 
   @override
   _GestureRecognizerState createState() => _GestureRecognizerState();

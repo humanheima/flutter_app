@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
   final int index;
-  final ValueChanged<int> onChanged;
+  final ValueChanged<int>? onChanged;
 
-  BottomNavigationBarWidget({Key key, this.index: 0, this.onChanged})
+  BottomNavigationBarWidget({Key? key, this.index = 0, this.onChanged})
       : super(key: key);
 
   @override
@@ -22,11 +22,17 @@ class BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget>
     with AutomaticKeepAliveClientMixin {
   int _currentIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.index;
+  }
+
   void _onTapHandler(int index) {
     setState(() {
       _currentIndex = index;
     });
-    widget.onChanged(index);
+    widget.onChanged?.call(index);
   }
 
   @override

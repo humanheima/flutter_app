@@ -9,7 +9,7 @@ import 'package:flutter_app/enjoy/constant/textsize_const.dart';
 ///
 /// 首页文章列表条目
 class ProjectItem extends StatefulWidget {
-  Project project;
+  final Project project;
 
   ProjectItem(this.project);
 
@@ -24,11 +24,8 @@ class _ProjectItemState extends State<ProjectItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            new MaterialPageRoute(
-                builder: (ctx) => WebViewPage(
-                    title: widget.project.title, url: widget.project.link)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (ctx) => WebViewPage(title: widget.project.title ?? "", url: widget.project.link ?? "")));
       },
       child: Card(
         margin: EdgeInsets.fromLTRB(2, 5, 2, 0),
@@ -40,7 +37,7 @@ class _ProjectItemState extends State<ProjectItem> {
                   width: 120,
                   height: 240,
                   placeholder: "images/image_default.png",
-                  image: widget.project.envelopePic),
+                  image: widget.project.envelopePic ?? ""),
               Expanded(
                 flex: 1,
                 child: Container(
@@ -52,7 +49,7 @@ class _ProjectItemState extends State<ProjectItem> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          widget.project.title,
+                          widget.project.title ?? "",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -74,7 +71,7 @@ class _ProjectItemState extends State<ProjectItem> {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 5),
                                 child: Text(
-                                  widget.project.author,
+                                  widget.project.author ?? "",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(color: Colors.grey),
@@ -89,7 +86,7 @@ class _ProjectItemState extends State<ProjectItem> {
                         child: Padding(
                           padding: EdgeInsets.only(top: 5),
                           child: Text(
-                            widget.project.desc,
+                            widget.project.desc ?? "",
                             maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -114,7 +111,7 @@ class _ProjectItemState extends State<ProjectItem> {
                             Padding(
                               padding: EdgeInsets.only(left: 5),
                               child: Text(
-                                widget.project.niceDate,
+                                widget.project.niceDate ?? "",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(color: Colors.grey),

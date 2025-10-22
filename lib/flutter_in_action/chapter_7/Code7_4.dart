@@ -12,7 +12,7 @@ class NavBar extends StatelessWidget {
   final String title;
   final Color color;
 
-  NavBar({Key key, this.title, this.color});
+  NavBar({Key? key, this.title, this.color});
 
   @override
   Widget build(BuildContext context) {

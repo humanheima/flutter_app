@@ -37,7 +37,7 @@ class TapboxA extends StatefulWidget {
     return new _TapboxAState();
   }
 
-  TapboxA({Key key}) : super(key: key);
+  TapboxA({Key? key}) : super(key: key);
 }
 
 class _TapboxAState extends State<TapboxA> {
@@ -108,7 +108,7 @@ class TapboxB extends StatelessWidget {
 
   ///不传active的话，指定默认active
   ///@required 指定必须传递的参数
-  TapboxB({Key key, this.active = false, @required this.onChanged})
+  TapboxB({Key? key, this.active = false, required this.onChanged})
       : super(key: key);
 
   void _handleTap() {
@@ -170,7 +170,7 @@ class TapBoxC extends StatefulWidget {
   final bool active;
   final ValueChanged<bool> onChanged;
 
-  TapBoxC({Key key, this.active = false, @required this.onChanged})
+  TapBoxC({Key? key, this.active = false, required this.onChanged})
       : super(key: key);
 
   _TapBoxCState createState() => new _TapBoxCState();

@@ -13,14 +13,14 @@ class TestIndexedStack extends StatefulWidget {
 }
 
 class TestIndexedStackState extends State<TestIndexedStack> {
-  List<Widget> wigets;
+  List<Widget> wigets = [];
 
   int _index = 0;
 
   @override
   void initState() {
     super.initState();
-    wigets = new List();
+    wigets = [];
     wigets.add(Container(
       width: 300,
       height: 300,
@@ -55,10 +55,9 @@ class TestIndexedStackState extends State<TestIndexedStack> {
           onTap: (index) => _tab(index),
           items: [
             BottomNavigationBarItem(
-                title: Text('first'), icon: Icon(Icons.shopping_basket)),
-            BottomNavigationBarItem(
-                title: Text('second'), icon: Icon(Icons.home)),
-            BottomNavigationBarItem(title: Text('third'), icon: Icon(Icons.map))
+                label: 'first', icon: Icon(Icons.shopping_basket)),
+            BottomNavigationBarItem(label: 'second', icon: Icon(Icons.home)),
+            BottomNavigationBarItem(label: 'third', icon: Icon(Icons.map))
           ]),
     );
   }

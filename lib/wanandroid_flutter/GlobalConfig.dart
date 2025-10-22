@@ -21,7 +21,6 @@ class GlobalConfig {
   static ThemeData themeDataLight = new ThemeData(
     primarySwatch: Colors.blue,
     primaryColor: Colors.grey[100],
-    primaryColorBrightness: Brightness.light,
   );
 
   static ThemeData themeDataDark = new ThemeData.dark();

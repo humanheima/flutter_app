@@ -159,8 +159,6 @@ Map<String, TimelineInfo> _timelineInfoMap = {
 
 ///add custom configuration.
 void setLocaleInfo(String locale, TimelineInfo timelineInfo) {
-  assert(locale != null, '[locale] must not be null');
-  assert(timelineInfo != null, '[timelineInfo] must not be null');
   _timelineInfoMap[locale] = timelineInfo;
 }
 /**

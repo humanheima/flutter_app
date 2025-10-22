@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class LayoutParamsLog<T> extends StatelessWidget {
   const LayoutParamsLog({
-    Key key,
+    Key? key,
     this.tag,
-    @required this.child,
+    required this.child,
   }) : super(key: key);
 
   final Widget child;

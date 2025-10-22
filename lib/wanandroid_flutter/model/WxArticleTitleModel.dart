@@ -3,26 +3,28 @@ import 'dart:convert' show json;
 ///import 'dart:convert' show json;
 ///表示只引入json.dart
 class WxArticleTitleModel {
-  int errorCode;
-  String errorMsg;
-  List<WxArticleTitleData> data;
+  int? errorCode;
+  String? errorMsg;
+  List<WxArticleTitleData>? data;
 
   WxArticleTitleModel.fromParams({this.errorCode, this.errorMsg, this.data});
 
-  factory WxArticleTitleModel(jsonStr) => jsonStr == null
-      ? null
-      : jsonStr is String
-          ? new WxArticleTitleModel.fromJson(json.decode(jsonStr))
-          : new WxArticleTitleModel.fromJson(jsonStr);
+  static WxArticleTitleModel? parse(dynamic jsonStr) {
+    if (jsonStr == null) return null;
+    if (jsonStr is String) {
+      return WxArticleTitleModel.fromJson(json.decode(jsonStr));
+    }
+    return WxArticleTitleModel.fromJson(jsonStr);
+  }
 
-  WxArticleTitleModel.fromJson(jsonRes) {
+  WxArticleTitleModel.fromJson(dynamic jsonRes) {
     errorCode = jsonRes['errorCode'];
     errorMsg = jsonRes['errorMsg'];
-    data = jsonRes['data'] == null ? null : [];
-
-    for (var dataItem in data == null ? [] : jsonRes['data']) {
-      data.add(
-          dataItem == null ? null : new WxArticleTitleData.fromJson(dataItem));
+    if (jsonRes['data'] != null) {
+      data = <WxArticleTitleData>[];
+      for (var dataItem in jsonRes['data']) {
+        data!.add(dataItem == null ? WxArticleTitleData.fromParams() : WxArticleTitleData.fromJson(dataItem));
+      }
     }
   }
 
@@ -33,26 +35,18 @@ class WxArticleTitleModel {
 }
 
 class WxArticleTitleData {
-  int courseId;
-  int id;
-  int order;
-  int parentChapterId;
-  int visible;
-  bool userControlSetTop;
-  String name;
-  List<dynamic> children;
+  int? courseId;
+  int? id;
+  int? order;
+  int? parentChapterId;
+  int? visible;
+  bool? userControlSetTop;
+  String? name;
+  List<dynamic>? children;
 
-  WxArticleTitleData.fromParams(
-      {this.courseId,
-      this.id,
-      this.order,
-      this.parentChapterId,
-      this.visible,
-      this.userControlSetTop,
-      this.name,
-      this.children});
+  WxArticleTitleData.fromParams({this.courseId, this.id, this.order, this.parentChapterId, this.visible, this.userControlSetTop, this.name, this.children});
 
-  WxArticleTitleData.fromJson(jsonRes) {
+  WxArticleTitleData.fromJson(dynamic jsonRes) {
     courseId = jsonRes['courseId'];
     id = jsonRes['id'];
     order = jsonRes['order'];
@@ -60,10 +54,11 @@ class WxArticleTitleData {
     visible = jsonRes['visible'];
     userControlSetTop = jsonRes['userControlSetTop'];
     name = jsonRes['name'];
-    children = jsonRes['children'] == null ? null : [];
-
-    for (var childrenItem in children == null ? [] : jsonRes['children']) {
-      children.add(childrenItem);
+    if (jsonRes['children'] != null) {
+      children = <dynamic>[];
+      for (var childrenItem in jsonRes['children']) {
+        children!.add(childrenItem);
+      }
     }
   }
 

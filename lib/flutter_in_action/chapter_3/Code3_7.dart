@@ -103,9 +103,6 @@ class _InputRouteState extends State<InputRoute> {
                                     //将焦点从第一个TextField移到第二个TextField
                                     // 这是一种写法 FocusScope.of(context).requestFocus(focusNode2);
                                     // 这是第二种写法
-                                    if (null == focusScopeNode) {
-                                      focusScopeNode = FocusScope.of(context);
-                                    }
                                     focusScopeNode.requestFocus(focusNode2);
                                   },
                                 ),

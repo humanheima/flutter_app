@@ -17,7 +17,7 @@ class SystemTreeUI extends StatefulWidget {
 
 class SystemTreeUIState extends State<SystemTreeUI>
     with AutomaticKeepAliveClientMixin {
-  List<SystemTreeData> _datas = List();
+  List<SystemTreeData> _datas = <SystemTreeData>[];
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class SystemTreeUIState extends State<SystemTreeUI>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       body: RefreshIndicator(
           child: ListView.separated(
               itemBuilder: _renderRow,
@@ -86,21 +86,20 @@ class SystemTreeUIState extends State<SystemTreeUI>
         ),
       );
     }
-    return null;
+    return SizedBox.shrink();
   }
 
   void _onItemClick(SystemTreeData data) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      //return SystemTreeContentPageUI(new ValueKey(data));
-      return SystemTreeContentPageUI(new ValueKey(data));
+      return SystemTreeContentPageUI(ValueKey<SystemTreeData>(data));
     }));
   }
 
   buildChildren(List<SystemTreeChild> children) {
-    List<Widget> tiles = [];
+    List<Widget> tiles = <Widget>[];
     Widget content;
     for (var item in children) {
-      tiles.add(new Chip(label: new Text(item.name)));
+      tiles.add(Chip(label: Text(item.name)));
     }
     content = Wrap(
       spacing: 8.0,

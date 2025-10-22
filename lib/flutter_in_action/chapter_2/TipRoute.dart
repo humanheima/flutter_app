@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class TipRoute extends StatelessWidget {
   final String text;
 
-  TipRoute({Key key, @required this.text}) : super(key: key);
+  TipRoute({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

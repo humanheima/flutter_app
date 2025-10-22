@@ -11,7 +11,7 @@ class PointerEventTestRoute extends StatefulWidget {
 }
 
 class _PointerEventTestRoute extends State<PointerEventTestRoute> {
-  PointerEvent _event;
+  PointerEvent? _event;
 
   @override
   Widget build(BuildContext context) {

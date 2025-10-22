@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Chapter3HomePage extends StatefulWidget {
-  Chapter3HomePage({Key key, @required this.title}) : super(key: key);
+  Chapter3HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 

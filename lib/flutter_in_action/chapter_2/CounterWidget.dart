@@ -6,24 +6,24 @@ import 'package:flutter/material.dart';
 ///
 
 class CounterWidget extends StatefulWidget {
-  final initialValue;
+  final int? initialValue;
 
-  const CounterWidget({Key key, this.initialValue});
+  const CounterWidget({Key? key, this.initialValue}) : super(key: key);
 
   @override
-  State createState() => new _CounterWidgetState();
+  State createState() => _CounterWidgetState();
 }
 
 ///关于State的生命周期,计数器的功能
 class _CounterWidgetState extends State<CounterWidget> {
   final String TAG = "_CounterWidgetState";
 
-  int _counter;
+  late int _counter;
 
   @override
   void initState() {
     super.initState();
-    _counter = widget.initialValue;
+    _counter = widget.initialValue ?? 0;
     print("$TAG initState value is$_counter");
   }
 
@@ -31,9 +31,9 @@ class _CounterWidgetState extends State<CounterWidget> {
   Widget build(BuildContext context) {
     print("$TAG build");
     return Center(
-        child: new Container(
+        child: Container(
       color: Colors.white,
-      child: new TextButton(
+      child: TextButton(
           //调用setState方法，会导致框架重新调用build方法
           onPressed: () => setState(() => ++_counter),
           child: Text('$_counter')),

@@ -61,7 +61,7 @@ class InheritedProvider<T> extends InheritedWidget {
   //共享状态使用泛型
   final T data;
 
-  InheritedProvider({@required this.data, Widget child}) : super(child: child);
+  InheritedProvider({required this.data, required Widget child}) : super(child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
@@ -78,11 +78,7 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
   final Widget child;
   final T data;
 
-  ChangeNotifierProvider({
-    Key key,
-    this.data,
-    this.child,
-  });
+  ChangeNotifierProvider({Key? key, required this.data, required this.child}) : super(key: key);
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
   // static T of<T>(BuildContext context) {
@@ -170,13 +166,11 @@ class CartModel extends ChangeNotifier {
 
 /// 这是一个便捷类，会获得当前context和指定数据类型的Provider
 class Consume<T> extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
   final Widget Function(BuildContext contex, T value) builder;
 
-  Consume({Key key, @required this.builder, this.child})
-      : assert(builder != null),
-        super(key: key);
+  Consume({Key? key, required this.builder, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

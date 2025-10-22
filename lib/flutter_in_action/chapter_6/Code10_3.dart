@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main.dart';
 
 ///
 /// Created by 杜明伟 on 2023/3/8.
 /// 测试 SliverPersistentHeader
 
 class PersistentHeaderRoute extends StatelessWidget {
-  const PersistentHeaderRoute({Key key}) : super(key: key);
+  const PersistentHeaderRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,22 +59,21 @@ typedef SliverHeaderBuilder = Widget Function(
 class SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double maxHeight;
   final double minHeight;
-  SliverHeaderBuilder builder;
+  final SliverHeaderBuilder builder;
 
   SliverHeaderDelegate(
-      {@required this.maxHeight, this.minHeight = 0.0, @required Widget child})
+      {required this.maxHeight, this.minHeight = 0.0, required Widget child})
       : builder = ((a, b, c) => child),
         assert(minHeight <= maxHeight && minHeight >= 0);
 
   SliverHeaderDelegate.fixedHeight({
-    @required double height,
-    @required Widget child,
+    required double height,
+    required Widget child,
   })  : builder = ((a, b, c) => child),
         maxHeight = height,
         minHeight = height;
 
-  SliverHeaderDelegate.builder(
-      {@required this.maxHeight, this.minHeight, @required this.builder});
+  SliverHeaderDelegate.builder({required this.maxHeight, required this.minHeight, required this.builder});
 
   @override
   Widget build(

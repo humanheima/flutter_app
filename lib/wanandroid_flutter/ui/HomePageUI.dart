@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/wanandroid_flutter/api/CommonService.dart';
 import 'package:flutter_app/wanandroid_flutter/model/ArticleModel.dart';
-import 'package:flutter_app/wanandroid_flutter/ui/DrawerWidgetUI.dart';
 import 'package:flutter_app/wanandroid_flutter/utils/timeline_util.dart';
 import 'package:flutter_app/wanandroid_flutter/widget/BannerWidgetUI.dart';
 import 'package:flutter_app/wanandroid_flutter/utils/RouteUtil.dart';
@@ -20,7 +19,7 @@ class HomePageUI extends StatefulWidget {
 
 class HomePageUIState extends State<HomePageUI>
     with AutomaticKeepAliveClientMixin {
-  List<Article> _datas = new List();
+  List<Article> _datas = <Article>[];
   ScrollController _scrollController = ScrollController();
   int _page = 0; //加载页数
 
@@ -28,6 +27,10 @@ class HomePageUIState extends State<HomePageUI>
   void initState() {
     super.initState();
     getData();
+    _scroll_controller_add_listener();
+  }
+
+  void _scroll_controller_add_listener() {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
@@ -39,6 +42,7 @@ class HomePageUIState extends State<HomePageUI>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // for AutomaticKeepAliveClientMixin
     return Scaffold(
       body: RefreshIndicator(
           child: ListView.separated(
@@ -62,23 +66,23 @@ class HomePageUIState extends State<HomePageUI>
     return true;
   }
 
-  Future<Null> getData() async {
+  Future<void> getData() async {
     _page = 0;
     print('$_page');
     CommonService().getArticleList((ArticleModel _articleModel) {
       setState(() {
-        _datas = _articleModel.data.datas;
+        _datas = _articleModel.data?.datas ?? <Article>[];
       });
     }, _page);
   }
 
-  Future<Null> _getMore() async {
+  Future<void> _getMore() async {
     _page++;
     print("$_page");
 
     CommonService().getArticleList((ArticleModel _articleModel) {
       setState(() {
-        _datas.addAll(_articleModel.data.datas);
+        _datas.addAll(_articleModel.data?.datas ?? <Article>[]);
       });
     }, _page);
   }
@@ -92,12 +96,12 @@ class HomePageUIState extends State<HomePageUI>
       );
     }
     if (index - 1 < _datas.length) {
-      return new InkWell(
+      return InkWell(
         onTap: () {
-          print("title${_datas[index - 1].title}");
-          print("link${_datas[index - 1].link}");
+          print("title");
+          print("link");
           RouteUtil.toWebView(
-              context, _datas[index - 1].title, _datas[index - 1].link);
+              context, _datas[index - 1].title ?? '', _datas[index - 1].link ?? '');
         },
         child: Column(
           children: <Widget>[
@@ -106,13 +110,13 @@ class HomePageUIState extends State<HomePageUI>
                 child: Row(
                   children: <Widget>[
                     Text(
-                      _datas[index - 1].author,
+                      _datas[index - 1].author ?? '',
                       style: TextStyle(fontSize: 12),
                       textAlign: TextAlign.left,
                     ),
                     Expanded(
                         child: Text(
-                      TimelineUtil.format(_datas[index - 1].publishTime),
+                      TimelineUtil.format(_datas[index - 1].publishTime ?? 0),
                       textAlign: TextAlign.right,
                       style: TextStyle(fontSize: 12),
                     )),
@@ -124,7 +128,7 @@ class HomePageUIState extends State<HomePageUI>
                   children: <Widget>[
                     Expanded(
                         child: Text(
-                      _datas[index - 1].title,
+                      _datas[index - 1].title ?? '',
                       maxLines: 2,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -137,7 +141,7 @@ class HomePageUIState extends State<HomePageUI>
                 child: Row(
                   children: <Widget>[
                     Text(
-                      _datas[index - 1].superChapterName,
+                      _datas[index - 1].superChapterName ?? '',
                       style: TextStyle(fontSize: 12),
                       textAlign: TextAlign.left,
                     ),
@@ -168,7 +172,7 @@ class HomePageUIState extends State<HomePageUI>
 
   @override
   void dispose() {
-    super.dispose();
     _scrollController.dispose();
+    super.dispose();
   }
 }

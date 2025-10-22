@@ -37,7 +37,7 @@ class TestPageViewRoute extends StatelessWidget {
 }
 
 class Page extends StatefulWidget {
-  Page({Key key, this.text});
+  Page({Key? key, this.text});
 
   final String text;
 

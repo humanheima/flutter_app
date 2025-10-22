@@ -17,9 +17,9 @@ class ProjectTreePageUI extends StatefulWidget {
 
 class ProjectTreePageUIState extends State<ProjectTreePageUI>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  List<ProjectTreeData> _datas = List();
+  List<ProjectTreeData> _datas = <ProjectTreeData>[];
 
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {
@@ -29,24 +29,26 @@ class ProjectTreePageUIState extends State<ProjectTreePageUI>
 
   @override
   Widget build(BuildContext context) {
-    _tabController = new TabController(length: _datas.length, vsync: this);
+    super.build(context); // for AutomaticKeepAliveClientMixin
+    final tabs = _datas.isNotEmpty ? _datas : [ProjectTreeData.fromParams()];
+    _tabController = TabController(length: tabs.length, vsync: this);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.4,
         title: TabBar(
           controller: _tabController,
-          tabs: _datas.map((ProjectTreeData item) {
+          tabs: (tabs.map((ProjectTreeData item) {
             return Tab(
-              text: item.name,
+              text: item.name ?? '',
             );
-          }).toList(),
+          }).toList()),
           isScrollable: true,
         ),
       ),
       body: TabBarView(
-        children: _datas.map((item) {
-          return NewsList(id: item.id);
-        }).toList(),
+        children: (tabs.map((item) {
+          return NewsList(id: item.id ?? 0);
+        }).toList()),
         controller: _tabController,
       ),
     );
@@ -55,7 +57,7 @@ class ProjectTreePageUIState extends State<ProjectTreePageUI>
   Future<Null> _getData() async {
     CommonService().getProjectTree((ProjectTreeModel _projectTreeModel) {
       setState(() {
-        _datas = _projectTreeModel.data;
+        _datas = _projectTreeModel.data ?? <ProjectTreeData>[];
       });
     });
   }
@@ -67,15 +69,13 @@ class ProjectTreePageUIState extends State<ProjectTreePageUI>
   }
 
   @override
-  bool get wantKeepAlive {
-    return true;
-  }
+  bool get wantKeepAlive => true;
 }
 
 class NewsList extends StatefulWidget {
   final int id;
 
-  NewsList({Key key, this.id}) : super(key: key);
+  NewsList({Key? key, required this.id}) : super(key: key);
 
   @override
   State createState() {
@@ -84,17 +84,17 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
-  List<ProjectTreeListDatas> _datas = List();
-  ScrollController _scrollController = ScrollController();
+  List<ProjectTreeListDatas> _datas = <ProjectTreeListDatas>[];
+  ScrollController _scroll_controller = ScrollController();
   int _page = 1;
 
   @override
   void initState() {
     super.initState();
     _getData();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
+    _scroll_controller.addListener(() {
+      if (_scroll_controller.position.pixels ==
+          _scroll_controller.position.maxScrollExtent) {
         _getMore();
       }
     });
@@ -103,10 +103,9 @@ class _NewsListState extends State<NewsList> {
   Future<Null> _getData() async {
     _page = 1;
     int _id = widget.id;
-    CommonService().getProjectList(
-        (ProjectTreeListModel _projectTreeListModel) {
+    CommonService().getProjectList((ProjectTreeListModel _projectTreeListModel) {
       setState(() {
-        _datas = _projectTreeListModel.data.datas;
+        _datas = _projectTreeListModel.data?.datas ?? <ProjectTreeListDatas>[];
       });
     }, _page, _id);
   }
@@ -114,10 +113,9 @@ class _NewsListState extends State<NewsList> {
   Future<Null> _getMore() async {
     _page++;
     int _id = widget.id;
-    CommonService().getProjectList(
-        (ProjectTreeListModel _projectTreeListModel) {
+    CommonService().getProjectList((ProjectTreeListModel _projectTreeListModel) {
       setState(() {
-        _datas.addAll(_projectTreeListModel.data.datas);
+        _datas.addAll(_projectTreeListModel.data?.datas ?? <ProjectTreeListDatas>[]);
       });
     }, _page, _id);
   }
@@ -127,7 +125,7 @@ class _NewsListState extends State<NewsList> {
     return Scaffold(
       body: RefreshIndicator(
           child: ListView.separated(
-              controller: _scrollController,
+              controller: _scroll_controller,
               padding: const EdgeInsets.all(16.0),
               itemBuilder: _renderRow,
               separatorBuilder: _separatorView,
@@ -179,7 +177,7 @@ class _NewsListState extends State<NewsList> {
         Container(
           padding: EdgeInsets.fromLTRB(8, 16, 8, 8),
           child: Image.network(
-            data.envelopePic,
+            data.envelopePic ?? '',
             width: 80,
             height: 120,
             fit: BoxFit.fill,
@@ -193,7 +191,7 @@ class _NewsListState extends State<NewsList> {
               child: Row(children: <Widget>[
                 Expanded(
                     child: Text(
-                  data.title,
+                  data.title ?? '',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.left,
                 ))
@@ -205,7 +203,7 @@ class _NewsListState extends State<NewsList> {
                 children: <Widget>[
                   Expanded(
                       child: Text(
-                    data.desc,
+                    data.desc ?? '',
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                     textAlign: TextAlign.left,
                     maxLines: 3,
@@ -218,12 +216,12 @@ class _NewsListState extends State<NewsList> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    data.author,
+                    data.author ?? '',
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   Expanded(
                       child: Text(
-                    TimelineUtil.format(data.publishTime),
+                    TimelineUtil.format(data.publishTime ?? 0),
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                     textAlign: TextAlign.right,
                   ))
@@ -239,8 +237,8 @@ class _NewsListState extends State<NewsList> {
   void _onItemClick(ProjectTreeListDatas data) async {
     await Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return WebViewPageUI(
-        title: data.title,
-        url: data.link,
+        title: data.title ?? '',
+        url: data.link ?? '',
       );
     }));
   }

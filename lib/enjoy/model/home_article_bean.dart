@@ -4,23 +4,21 @@
 ///
 
 class HomeArticleBean {
-  HomeArticle data;
-  int errorCode;
-  String errorMsg;
+  HomeArticle? data;
+  int? errorCode;
+  String? errorMsg;
 
   HomeArticleBean({this.data, this.errorCode, this.errorMsg});
 
   HomeArticleBean.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new HomeArticle.fromJson(json['data']) : null;
+    data = json['data'] != null ? HomeArticle.fromJson(json['data']) : null;
     errorCode = json['errorCode'];
     errorMsg = json['errorMsg'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data.toJson();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['data'] = this.data?.toJson();
     data['errorCode'] = this.errorCode;
     data['errorMsg'] = this.errorMsg;
     return data;
@@ -28,13 +26,13 @@ class HomeArticleBean {
 }
 
 class HomeArticle {
-  int curPage;
-  List<Article> datas;
-  int offset;
-  bool over;
-  int pageCount;
-  int size;
-  int total;
+  int? curPage;
+  List<Article>? datas;
+  int? offset;
+  bool? over;
+  int? pageCount;
+  int? size;
+  int? total;
 
   HomeArticle(
       {this.curPage,
@@ -48,9 +46,9 @@ class HomeArticle {
   HomeArticle.fromJson(Map<String, dynamic> json) {
     curPage = json['curPage'];
     if (json['datas'] != null) {
-      datas = new List<Article>();
+      datas = <Article>[];
       json['datas'].forEach((v) {
-        datas.add(new Article.fromJson(v));
+        datas!.add(Article.fromJson(v));
       });
     }
     offset = json['offset'];
@@ -61,11 +59,9 @@ class HomeArticle {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['curPage'] = this.curPage;
-    if (this.datas != null) {
-      data['datas'] = this.datas.map((v) => v.toJson()).toList();
-    }
+    data['datas'] = this.datas?.map((v) => v.toJson()).toList();
     data['offset'] = this.offset;
     data['over'] = this.over;
     data['pageCount'] = this.pageCount;
@@ -76,28 +72,28 @@ class HomeArticle {
 }
 
 class Article {
-  String apkLink;
-  String author;
-  int chapterId;
-  String chapterName;
-  bool collect;
-  int courseId;
-  String desc;
-  String envelopePic;
-  bool fresh;
-  int id;
-  String link;
-  String niceDate;
-  String origin;
-  String projectLink;
-  int publishTime;
-  int superChapterId;
-  String superChapterName;
-  String title;
-  int type;
-  int userId;
-  int visible;
-  int zan;
+  String? apkLink;
+  String? author;
+  int? chapterId;
+  String? chapterName;
+  bool? collect;
+  int? courseId;
+  String? desc;
+  String? envelopePic;
+  bool? fresh;
+  int? id;
+  String? link;
+  String? niceDate;
+  String? origin;
+  String? projectLink;
+  int? publishTime;
+  int? superChapterId;
+  String? superChapterName;
+  String? title;
+  int? type;
+  int? userId;
+  int? visible;
+  int? zan;
 
   Article(
       {this.apkLink,
@@ -149,7 +145,7 @@ class Article {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['apkLink'] = this.apkLink;
     data['author'] = this.author;
     data['chapterId'] = this.chapterId;

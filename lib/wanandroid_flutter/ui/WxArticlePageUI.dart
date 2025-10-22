@@ -19,9 +19,9 @@ class WxArticlePageUI extends StatefulWidget {
 
 class WxArticlePageUIState extends State<WxArticlePageUI>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  List<WxArticleTitleData> _datas = new List();
+  List<WxArticleTitleData> _datas = [];
 
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -31,11 +31,11 @@ class WxArticlePageUIState extends State<WxArticlePageUI>
 
   @override
   Widget build(BuildContext context) {
-    _tabController = new TabController(length: _datas.length, vsync: this);
+    _tabController = TabController(length: _datas.length, vsync: this);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.4,
-        title: new TabBar(
+        title: TabBar(
           tabs: _datas.map((WxArticleTitleData item) {
             return Tab(
               text: item.name,
@@ -45,7 +45,7 @@ class WxArticlePageUIState extends State<WxArticlePageUI>
           controller: _tabController,
         ),
       ),
-      body: new TabBarView(
+      body: TabBarView(
           controller: _tabController,
           children: _datas.map((item) {
             return NewsList(id: item.id);
@@ -55,14 +55,14 @@ class WxArticlePageUIState extends State<WxArticlePageUI>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController?.dispose();
     super.dispose();
   }
 
   Future<Null> _getData() async {
     CommonService().getWxList((WxArticleTitleModel response) {
       setState(() {
-        _datas = response.data;
+        _datas = response.data ?? [];
       });
     });
   }
@@ -74,9 +74,9 @@ class WxArticlePageUIState extends State<WxArticlePageUI>
 }
 
 class NewsList extends StatefulWidget {
-  final int id;
+  final int? id;
 
-  NewsList({Key key, this.id}) : super(key: key);
+  NewsList({Key? key, this.id}) : super(key: key);
 
   @override
   State createState() {
@@ -85,7 +85,7 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
-  List<WxArticleContentDatas> _datas = new List();
+  List<WxArticleContentDatas> _datas = [];
 
   ScrollController _scrollController = ScrollController();
 
@@ -119,20 +119,20 @@ class _NewsListState extends State<NewsList> {
 
   Future<Null> _getData() async {
     _page = 1;
-    int _id = widget.id;
+    int _id = widget.id ?? 0;
     CommonService().getWxArticleList((WxArticleContentModel response) {
       setState(() {
-        _datas = response.data.datas;
+        _datas = response.data?.datas ?? [];
       });
     }, _id, _page);
   }
 
   Future<Null> _getMore() async {
     _page++;
-    int _id = widget.id;
+    int _id = widget.id ?? 0;
     CommonService().getWxArticleList((WxArticleContentModel response) {
       setState(() {
-        _datas.addAll(response.data.datas);
+        _datas.addAll(response.data?.datas ?? []);
       });
     }, _id, _page);
   }
@@ -161,7 +161,7 @@ class _NewsListState extends State<NewsList> {
   Widget _newsRow(WxArticleContentDatas item) {
     return InkWell(
       onTap: () {
-        RouteUtil.toWebView(context, item.title, item.link);
+        RouteUtil.toWebView(context, item.title ?? '', item.link ?? '');
       },
       child: Card(
         child: Column(
@@ -172,7 +172,7 @@ class _NewsListState extends State<NewsList> {
                 children: <Widget>[
                   Expanded(
                       child: Text(
-                    item.title,
+                    item.title ?? '',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.left,
                   ))
@@ -181,11 +181,11 @@ class _NewsListState extends State<NewsList> {
             ),
             Container(
               padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child: new Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  new Expanded(
-                      child: new Text(TimelineUtil.format(item.publishTime),
+                  Expanded(
+                      child: Text(TimelineUtil.format(item.publishTime),
                           style: TextStyle(fontSize: 12, color: Colors.grey)))
                 ],
               ),

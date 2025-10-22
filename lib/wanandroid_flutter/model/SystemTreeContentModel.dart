@@ -2,18 +2,22 @@ import 'dart:convert' show json;
 
 class SystemTreeContentModel {
 
-  int errorCode;
-  String errorMsg;
-  SystemTreeContentData data;
+  int? errorCode;
+  String? errorMsg;
+  SystemTreeContentData? data;
 
   SystemTreeContentModel.fromParams({this.errorCode, this.errorMsg, this.data});
 
-  factory SystemTreeContentModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new SystemTreeContentModel.fromJson(json.decode(jsonStr)) : new SystemTreeContentModel.fromJson(jsonStr);
+  static SystemTreeContentModel? parse(dynamic jsonStr) {
+    if (jsonStr == null) return null;
+    if (jsonStr is String) return SystemTreeContentModel.fromJson(json.decode(jsonStr));
+    return SystemTreeContentModel.fromJson(jsonStr);
+  }
 
-  SystemTreeContentModel.fromJson(jsonRes) {
+  SystemTreeContentModel.fromJson(dynamic jsonRes) {
     errorCode = jsonRes['errorCode'];
     errorMsg = jsonRes['errorMsg'];
-    data = jsonRes['data'] == null ? null : new SystemTreeContentData.fromJson(jsonRes['data']);
+    data = jsonRes['data'] != null ? SystemTreeContentData.fromJson(jsonRes['data']) : null;
   }
 
   @override
@@ -24,27 +28,28 @@ class SystemTreeContentModel {
 
 class SystemTreeContentData {
 
-  int curPage;
-  int offset;
-  int pageCount;
-  int size;
-  int total;
-  bool over;
-  List<SystemTreeContentChild> datas;
+  int? curPage;
+  int? offset;
+  int? pageCount;
+  int? size;
+  int? total;
+  bool? over;
+  List<SystemTreeContentChild>? datas;
 
   SystemTreeContentData.fromParams({this.curPage, this.offset, this.pageCount, this.size, this.total, this.over, this.datas});
 
-  SystemTreeContentData.fromJson(jsonRes) {
+  SystemTreeContentData.fromJson(dynamic jsonRes) {
     curPage = jsonRes['curPage'];
     offset = jsonRes['offset'];
     pageCount = jsonRes['pageCount'];
     size = jsonRes['size'];
     total = jsonRes['total'];
     over = jsonRes['over'];
-    datas = jsonRes['datas'] == null ? null : [];
-
-    for (var datasItem in datas == null ? [] : jsonRes['datas']){
-      datas.add(datasItem == null ? null : new SystemTreeContentChild.fromJson(datasItem));
+    if (jsonRes['datas'] != null) {
+      datas = <SystemTreeContentChild>[];
+      for (var datasItem in jsonRes['datas']) {
+        datas!.add(datasItem == null ? SystemTreeContentChild.fromParams() : SystemTreeContentChild.fromJson(datasItem));
+      }
     }
   }
 
@@ -56,33 +61,33 @@ class SystemTreeContentData {
 
 class SystemTreeContentChild {
 
-  int chapterId;
-  int courseId;
-  int id;
-  int publishTime;
-  int superChapterId;
-  int type;
-  int userId;
-  int visible;
-  int zan;
-  bool collect;
-  bool fresh;
-  String apkLink;
-  String author;
-  String chapterName;
-  String desc;
-  String envelopePic;
-  String link;
-  String niceDate;
-  String origin;
-  String projectLink;
-  String superChapterName;
-  String title;
-  List<dynamic> tags;
+  int? chapterId;
+  int? courseId;
+  int? id;
+  int? publishTime;
+  int? superChapterId;
+  int? type;
+  int? userId;
+  int? visible;
+  int? zan;
+  bool? collect;
+  bool? fresh;
+  String? apkLink;
+  String? author;
+  String? chapterName;
+  String? desc;
+  String? envelopePic;
+  String? link;
+  String? niceDate;
+  String? origin;
+  String? projectLink;
+  String? superChapterName;
+  String? title;
+  List<dynamic>? tags;
 
   SystemTreeContentChild.fromParams({this.chapterId, this.courseId, this.id, this.publishTime, this.superChapterId, this.type, this.userId, this.visible, this.zan, this.collect, this.fresh, this.apkLink, this.author, this.chapterName, this.desc, this.envelopePic, this.link, this.niceDate, this.origin, this.projectLink, this.superChapterName, this.title, this.tags});
 
-  SystemTreeContentChild.fromJson(jsonRes) {
+  SystemTreeContentChild.fromJson(dynamic jsonRes) {
     chapterId = jsonRes['chapterId'];
     courseId = jsonRes['courseId'];
     id = jsonRes['id'];
@@ -105,10 +110,11 @@ class SystemTreeContentChild {
     projectLink = jsonRes['projectLink'];
     superChapterName = jsonRes['superChapterName'];
     title = jsonRes['title'];
-    tags = jsonRes['tags'] == null ? null : [];
-
-    for (var tagsItem in tags == null ? [] : jsonRes['tags']){
-      tags.add(tagsItem);
+    if (jsonRes['tags'] != null) {
+      tags = <dynamic>[];
+      for (var tagsItem in jsonRes['tags']) {
+        tags!.add(tagsItem);
+      }
     }
   }
 
@@ -117,4 +123,3 @@ class SystemTreeContentChild {
     return '{"chapterId": $chapterId,"courseId": $courseId,"id": $id,"publishTime": $publishTime,"superChapterId": $superChapterId,"type": $type,"userId": $userId,"visible": $visible,"zan": $zan,"collect": $collect,"fresh": $fresh,"apkLink": ${apkLink != null?'${json.encode(apkLink)}':'null'},"author": ${author != null?'${json.encode(author)}':'null'},"chapterName": ${chapterName != null?'${json.encode(chapterName)}':'null'},"desc": ${desc != null?'${json.encode(desc)}':'null'},"envelopePic": ${envelopePic != null?'${json.encode(envelopePic)}':'null'},"link": ${link != null?'${json.encode(link)}':'null'},"niceDate": ${niceDate != null?'${json.encode(niceDate)}':'null'},"origin": ${origin != null?'${json.encode(origin)}':'null'},"projectLink": ${projectLink != null?'${json.encode(projectLink)}':'null'},"superChapterName": ${superChapterName != null?'${json.encode(superChapterName)}':'null'},"title": ${title != null?'${json.encode(title)}':'null'},"tags": $tags}';
   }
 }
-

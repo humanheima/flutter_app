@@ -14,7 +14,7 @@ class WillPopScopeRoute extends StatefulWidget {
 
 class _WillPopScopeRouteState extends State<WillPopScopeRoute> {
   List<IconData> _icons = [];
-  DateTime _lastPressAt; //上次点击时间
+  DateTime? _lastPressAt; //上次点击时间 (nullable to avoid late initialization runtime error)
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _WillPopScopeRouteState extends State<WillPopScopeRoute> {
           ),
           onWillPop: () async {
             if (_lastPressAt == null ||
-                DateTime.now().difference(_lastPressAt) >
+                DateTime.now().difference(_lastPressAt!) >
                     Duration(seconds: 1)) {
               _lastPressAt = DateTime.now();
               return false;

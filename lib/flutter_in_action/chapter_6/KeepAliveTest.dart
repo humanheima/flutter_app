@@ -1,13 +1,12 @@
 import 'package:flukit/flukit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main.dart';
 
 /**
  * Created by p_dmweidu on 2023/3/8
  * Desc: 测试 KeepAliveWrapper 控件。
  */
 class KeepAliveTest extends StatelessWidget {
-  const KeepAliveTest({Key key}) : super(key: key);
+  const KeepAliveTest({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class KeepAliveTest extends StatelessWidget {
 }
 
 class ListItem extends StatefulWidget {
-  const ListItem({Key key, @required this.index}) : super(key: key);
+  const ListItem({Key? key, required this.index}) : super(key: key);
   final int index;
 
   @override

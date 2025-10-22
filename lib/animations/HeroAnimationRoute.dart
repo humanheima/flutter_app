@@ -29,14 +29,14 @@ class HeroAnimationRoute extends StatelessWidget {
               Navigator.push(context, PageRouteBuilder(pageBuilder:
                   ((BuildContext context, Animation<double> animation,
                       Animation<double> secondaryAnimation) {
-                return new FadeTransition(
+                return FadeTransition(
                   opacity: animation,
                   child: Scaffold(
                     body: HeroAnimationRouteB(),
                   ),
                 );
               })));
-            }),
+             }),
       ),
     );
   }

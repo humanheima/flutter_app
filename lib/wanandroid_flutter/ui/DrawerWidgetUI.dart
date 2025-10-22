@@ -42,12 +42,8 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
                       : '未登录',
                   style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
-                if (User.singleton.userName != null) {
-                  return null;
-                } else {
-                  onLoginClick();
-                }
-              },
+                return null;
+                            },
             ),
             accountEmail: null,
             currentAccountPicture: CircleAvatar(
@@ -70,16 +66,12 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
             ),
             leading: Icon(
               Icons.collections,
-              color: GlobalConfig.themeData.accentColor,
+              color: GlobalConfig.themeData.colorScheme.secondary,
               size: 22.0,
             ),
             onTap: () {
-              if (User.singleton.userName != null) {
-                onCollectionClick();
-              } else {
-                onLoginClick();
-              }
-            },
+              onCollectionClick();
+                        },
           ),
           ListTile(
             title: Text(
@@ -87,14 +79,10 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
               textAlign: TextAlign.left,
             ),
             leading: Icon(Icons.web,
-                color: GlobalConfig.themeData.accentColor, size: 22.0),
+                color: GlobalConfig.themeData.colorScheme.secondary, size: 22.0),
             onTap: () {
-              if (User.singleton.userName != null) {
-                onWebsiteCollectionClick();
-              } else {
-                onLoginClick();
-              }
-            },
+              onWebsiteCollectionClick();
+                        },
           ),
           ListTile(
             title: Text(
@@ -102,14 +90,10 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
               textAlign: TextAlign.left,
             ),
             leading: Icon(Icons.today,
-                color: GlobalConfig.themeData.accentColor, size: 22.0),
+                color: GlobalConfig.themeData.colorScheme.secondary, size: 22.0),
             onTap: () {
-              if (User.singleton.userName != null) {
-                onTodoClick();
-              } else {
-                onLoginClick();
-              }
-            },
+              onTodoClick();
+                        },
           ),
           ListTile(
             title: Text(
@@ -117,7 +101,7 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
               textAlign: TextAlign.left,
             ),
             leading: Icon(Icons.wb_sunny,
-                color: GlobalConfig.themeData.accentColor, size: 22.0),
+                color: GlobalConfig.themeData.colorScheme.secondary, size: 22.0),
             onTap: () {
               setState(() {
                 if (GlobalConfig.dark == true) {
@@ -135,7 +119,7 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
               textAlign: TextAlign.left,
             ),
             leading: Icon(Icons.settings_applications,
-                color: GlobalConfig.themeData.accentColor, size: 22.0),
+                color: GlobalConfig.themeData.colorScheme.secondary, size: 22.0),
             onTap: () {
 //              Navigator.pop(context);
               Fluttertoast.showToast(msg: "该功能暂未上线~");
@@ -147,7 +131,7 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
               textAlign: TextAlign.left,
             ),
             leading: Icon(Icons.people,
-                color: GlobalConfig.themeData.accentColor, size: 22.0),
+                color: GlobalConfig.themeData.colorScheme.secondary, size: 22.0),
             onTap: () {
               onAboutClick();
               Scaffold.of(context).openEndDrawer();
@@ -194,22 +178,16 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
   }
 
   Widget logoutWidget() {
-    if (User.singleton.userName != null) {
-      return Center(
-        child: TextButton(
-            onPressed: () {
-              User.singleton.clearUserInfo();
-              setState(() {});
-            },
-            child: Text(
-              '退出登录',
-              style: TextStyle(color: Colors.red),
-            )),
-      );
-    } else {
-      return SizedBox(
-        height: 10,
-      );
+    return Center(
+      child: TextButton(
+          onPressed: () {
+            User.singleton.clearUserInfo();
+            setState(() {});
+          },
+          child: Text(
+            '退出登录',
+            style: TextStyle(color: Colors.red),
+          )),
+    );
     }
-  }
 }

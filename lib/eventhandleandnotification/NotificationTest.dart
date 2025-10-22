@@ -25,6 +25,7 @@ class NotificationRouteState extends State<NotificationRoute> {
           setState(() {
             msg += notification.msg + " ";
           });
+          return true;
         },
         child: Center(
           child: Column(

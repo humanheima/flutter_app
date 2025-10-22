@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -18,7 +17,7 @@ class _TurnBoxRouteState extends State<TurnBoxRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           children: <Widget>[
@@ -66,29 +65,29 @@ class _TurnBoxRouteState extends State<TurnBoxRoute> {
 }
 
 class TurnBox extends StatefulWidget {
-  final double turns;
-  final int speed;
-  final Widget child;
+  final double? turns;
+  final int? speed;
+  final Widget? child;
 
-  const TurnBox({Key key, this.turns, this.speed, this.child})
+  const TurnBox({Key? key, this.turns, this.speed, this.child})
       : super(key: key);
 
   @override
   State createState() {
-    return new _TurnBoxState();
+    return _TurnBoxState();
   }
 }
 
 class _TurnBoxState extends State<TurnBox> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = new AnimationController(
+    _controller = AnimationController(
         vsync: this, lowerBound: -double.infinity, upperBound: double.infinity);
 
-    _controller.value = widget.turns;
+    _controller.value = widget.turns ?? 0.0;
   }
 
   @override
@@ -104,7 +103,7 @@ class _TurnBoxState extends State<TurnBox> with SingleTickerProviderStateMixin {
     super.didUpdateWidget(oldWidget);
     //旋转角度发生变化时执行过渡动画
     if (oldWidget.turns != widget.turns) {
-      _controller.animateTo(widget.turns,
+      _controller.animateTo(widget.turns ?? 0.0,
           duration: Duration(milliseconds: widget.speed ?? 200),
           curve: Curves.easeOut);
     }

@@ -1,21 +1,19 @@
 class WechatArticleBean {
-  WechatArticle data;
-  int errorCode;
-  String errorMsg;
+  WechatArticle? data;
+  int? errorCode;
+  String? errorMsg;
 
   WechatArticleBean({this.data, this.errorCode, this.errorMsg});
 
   WechatArticleBean.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new WechatArticle.fromJson(json['data']) : null;
+    data = json['data'] != null ? WechatArticle.fromJson(json['data']) : null;
     errorCode = json['errorCode'];
     errorMsg = json['errorMsg'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data.toJson();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['data'] = this.data?.toJson();
     data['errorCode'] = this.errorCode;
     data['errorMsg'] = this.errorMsg;
     return data;
@@ -23,30 +21,20 @@ class WechatArticleBean {
 }
 
 class WechatArticle {
-  int curPage;
-  List<Article> datas;
-  int offset;
-  bool over;
-  int pageCount;
-  int size;
-  int total;
+  int? curPage;
+  List<Article>? datas;
+  int? offset;
+  bool? over;
+  int? pageCount;
+  int? size;
+  int? total;
 
-  WechatArticle(
-      {this.curPage,
-        this.datas,
-        this.offset,
-        this.over,
-        this.pageCount,
-        this.size,
-        this.total});
+  WechatArticle({this.curPage, this.datas, this.offset, this.over, this.pageCount, this.size, this.total});
 
   WechatArticle.fromJson(Map<String, dynamic> json) {
     curPage = json['curPage'];
     if (json['datas'] != null) {
-      datas = new List<Article>();
-      json['datas'].forEach((v) {
-        datas.add(new Article.fromJson(v));
-      });
+      datas = (json['datas'] as List).map((v) => Article.fromJson(v)).toList();
     }
     offset = json['offset'];
     over = json['over'];
@@ -56,11 +44,9 @@ class WechatArticle {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['curPage'] = this.curPage;
-    if (this.datas != null) {
-      data['datas'] = this.datas.map((v) => v.toJson()).toList();
-    }
+    data['datas'] = this.datas?.map((v) => v.toJson()).toList();
     data['offset'] = this.offset;
     data['over'] = this.over;
     data['pageCount'] = this.pageCount;
@@ -71,54 +57,31 @@ class WechatArticle {
 }
 
 class Article {
-  String apkLink;
-  String author;
-  int chapterId;
-  String chapterName;
-  bool collect;
-  int courseId;
-  String desc;
-  String envelopePic;
-  bool fresh;
-  int id;
-  String link;
-  String niceDate;
-  String origin;
-  String projectLink;
-  int publishTime;
-  int superChapterId;
-  String superChapterName;
-  List<Tags> tags;
-  String title;
-  int type;
-  int userId;
-  int visible;
-  int zan;
+  String? apkLink;
+  String? author;
+  int? chapterId;
+  String? chapterName;
+  bool? collect;
+  int? courseId;
+  String? desc;
+  String? envelopePic;
+  bool? fresh;
+  int? id;
+  String? link;
+  String? niceDate;
+  String? origin;
+  String? projectLink;
+  int? publishTime;
+  int? superChapterId;
+  String? superChapterName;
+  List<Tags>? tags;
+  String? title;
+  int? type;
+  int? userId;
+  int? visible;
+  int? zan;
 
-  Article(
-      {this.apkLink,
-        this.author,
-        this.chapterId,
-        this.chapterName,
-        this.collect,
-        this.courseId,
-        this.desc,
-        this.envelopePic,
-        this.fresh,
-        this.id,
-        this.link,
-        this.niceDate,
-        this.origin,
-        this.projectLink,
-        this.publishTime,
-        this.superChapterId,
-        this.superChapterName,
-        this.tags,
-        this.title,
-        this.type,
-        this.userId,
-        this.visible,
-        this.zan});
+  Article({this.apkLink, this.author, this.chapterId, this.chapterName, this.collect, this.courseId, this.desc, this.envelopePic, this.fresh, this.id, this.link, this.niceDate, this.origin, this.projectLink, this.publishTime, this.superChapterId, this.superChapterName, this.tags, this.title, this.type, this.userId, this.visible, this.zan});
 
   Article.fromJson(Map<String, dynamic> json) {
     apkLink = json['apkLink'];
@@ -139,10 +102,7 @@ class Article {
     superChapterId = json['superChapterId'];
     superChapterName = json['superChapterName'];
     if (json['tags'] != null) {
-      tags = new List<Tags>();
-      json['tags'].forEach((v) {
-        tags.add(new Tags.fromJson(v));
-      });
+      tags = (json['tags'] as List).map((v) => Tags.fromJson(v)).toList();
     }
     title = json['title'];
     type = json['type'];
@@ -152,7 +112,7 @@ class Article {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['apkLink'] = this.apkLink;
     data['author'] = this.author;
     data['chapterId'] = this.chapterId;
@@ -170,9 +130,7 @@ class Article {
     data['publishTime'] = this.publishTime;
     data['superChapterId'] = this.superChapterId;
     data['superChapterName'] = this.superChapterName;
-    if (this.tags != null) {
-      data['tags'] = this.tags.map((v) => v.toJson()).toList();
-    }
+    data['tags'] = this.tags?.map((v) => v.toJson()).toList();
     data['title'] = this.title;
     data['type'] = this.type;
     data['userId'] = this.userId;
@@ -183,8 +141,8 @@ class Article {
 }
 
 class Tags {
-  String name;
-  String url;
+  String? name;
+  String? url;
 
   Tags({this.name, this.url});
 
@@ -194,7 +152,7 @@ class Tags {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = this.name;
     data['url'] = this.url;
     return data;

@@ -9,9 +9,9 @@ import 'package:flutter_app/enjoy/constant/textsize_const.dart';
 ///
 
 class WechatArticleItem extends StatefulWidget {
-  Article article;
+  final Article article;
 
-  WechatArticleItem({this.article});
+  WechatArticleItem({required this.article});
 
   @override
   State createState() {
@@ -28,7 +28,7 @@ class WechatArticleItemState extends State<WechatArticleItem> {
             context,
             new MaterialPageRoute(
                 builder: (ctx) => WebViewPage(
-                    title: widget.article.title, url: widget.article.link)));
+                    title: widget.article.title ?? "", url: widget.article.link ?? "")));
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -39,7 +39,7 @@ class WechatArticleItemState extends State<WechatArticleItem> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Text(
-                  widget.article.title
+                  (widget.article.title ?? "")
                       .replaceAll("&rdquo;", "")
                       .replaceAll("&ldquo;", ""),
                   maxLines: 2,
@@ -67,7 +67,7 @@ class WechatArticleItemState extends State<WechatArticleItem> {
                       child: Padding(
                         padding: EdgeInsets.only(left: 8),
                         child: Text(
-                          widget.article.niceDate,
+                          widget.article.niceDate ?? "",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(color: Colors.grey),

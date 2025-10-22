@@ -15,23 +15,15 @@ class ScaleAnimationRoute extends StatefulWidget {
 ///需要继承TickerProvider，如果有多个AnimationController，则应该使用TickerProviderStateMixin。
 class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
+  late Animation<double> animation;
+  late AnimationController controller;
 
   @override
   void initState() {
     super.initState();
-    controller =
-        new AnimationController(vsync: this, duration: Duration(seconds: 3));
-    //图片宽高从0变到300
-    /*//使用弹性曲线
-    animation = new Tween(begin: 0.0, end: 500.0).animate(
-        new CurvedAnimation(parent: controller, curve: Curves.bounceIn))
-      ..addListener(() {
-        setState(() {});
-      });*/
+    controller = AnimationController(vsync: this, duration: Duration(seconds: 3));
 
-    animation = new Tween(begin: 0.0, end: 300.0).animate(controller)
+    animation = Tween<double>(begin: 0.0, end: 300.0).animate(controller)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           //动画执行结束时反向执行动画
@@ -45,7 +37,7 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       body: Column(
         children: <Widget>[
           Container(
@@ -66,7 +58,7 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
           ElevatedButton(
             child: Text(
               "开启动画",
-              style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              style: TextStyle(fontSize: 20, color: Colors.redAccent),
             ),
             onPressed: () {
               controller.forward();
@@ -86,12 +78,12 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
 
 ///使用AnimatedWidget
 class AnimatedImage extends AnimatedWidget {
-  AnimatedImage({Key key, Animation<double> animation})
+  AnimatedImage({Key? key, required Animation<double> animation})
       : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
-    return new Container(
+    final Animation<double> animation = listenable as Animation<double>;
+    return Container(
       child: Image.asset("images/avatar.png",
           width: animation.value, height: animation.value),
     );
@@ -100,17 +92,17 @@ class AnimatedImage extends AnimatedWidget {
 
 ///使用AnimatedBuilder来封装动画
 class GrowTransition extends StatelessWidget {
-  GrowTransition({this.child, this.animation});
+  const GrowTransition({Key? key, required this.child, required this.animation}) : super(key: key);
 
   final Widget child;
   final Animation<double> animation;
 
   Widget build(BuildContext context) {
-    return new Container(
-      child: new AnimatedBuilder(
+    return Container(
+      child: AnimatedBuilder(
           animation: animation,
-          builder: (BuildContext context, Widget child) {
-            return new Container(
+          builder: (BuildContext context, Widget? child) {
+            return Container(
                 alignment: Alignment.topLeft,
                 height: animation.value,
                 width: animation.value,

@@ -19,9 +19,11 @@ class WechatArticlePage extends StatefulWidget {
 
 class _WechatArticlePageState extends State<WechatArticlePage>
     with SingleTickerProviderStateMixin {
-  TabController _tabControllerl;
-
-  var _tabsName = List<String>();
+  // ...existing code...
+  //  TabController _tabControllerl;
+  //
+  //  var _tabsName = List<String>();
+  List<String> _tabsName = <String>[];
 
   @override
   Widget build(BuildContext context) {
@@ -36,63 +38,95 @@ class _WechatArticlePageState extends State<WechatArticlePage>
     return AsyncSnapshotWidget(
       snapshot: snapshot,
       successWidget: (snapshot) {
-        if (snapshot.data != null) {
+        //        if (snapshot.data != null) {
+        //          _parseWeChatCounts(snapshot.data);
+        //          return Scaffold(
+        //            appBar: AppBar(
+        //              title: Text("公众号"),
+        //              backgroundColor: Color.fromARGB(255, 119, 136, 213),
+        //              centerTitle: true, //设置标题是否局中
+        //            ),
+        //            body: Column(
+        //              children: <Widget>[
+        //                TabBar(
+        //                  indicatorColor: Colors.deepPurpleAccent,
+        //                  labelColor: Colors.black87,
+        //                  unselectedLabelColor: Colors.black45,
+        //                  controller: _tabControllerl,
+        //                  isScrollable: true,
+        //                  tabs: _createTabs(),
+        //                ),
+        //                Expanded(
+        //                  flex: 1,
+        //                  child: TabBarView(
+        //                    children: _createPages(snapshot.data),
+        //                    controller: _tabControllerl,
+        //                  ),
+        //                )
+        //              ],
+        //            ),
+        //          );
+        //        }
+        if (snapshot.data != null && snapshot.data.isNotEmpty) {
           _parseWeChatCounts(snapshot.data);
-          if (_tabControllerl == null) {
-            _tabControllerl = TabController(
-                length: snapshot.data.length, vsync: this, initialIndex: 0);
-          }
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("公众号"),
-              backgroundColor: Color.fromARGB(255, 119, 136, 213),
-              centerTitle: true, //设置标题是否局中
-            ),
-            body: Column(
-              children: <Widget>[
-                TabBar(
+          // Use DefaultTabController so we don't need to manage lifecycle manually
+          return DefaultTabController(
+            length: _tabsName.length,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text("公众号"),
+                backgroundColor: Color.fromARGB(255, 119, 136, 213),
+                centerTitle: true, //设置标题是否局中
+                bottom: TabBar(
                   indicatorColor: Colors.deepPurpleAccent,
                   labelColor: Colors.black87,
                   unselectedLabelColor: Colors.black45,
-                  controller: _tabControllerl,
                   isScrollable: true,
                   tabs: _createTabs(),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: TabBarView(
-                    children: _createPages(snapshot.data),
-                    controller: _tabControllerl,
-                  ),
-                )
-              ],
+              ),
+              body: TabBarView(
+                children: _createPages(snapshot.data),
+              ),
             ),
           );
         }
+        // fallback when there's no data
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("公众号"),
+            backgroundColor: Color.fromARGB(255, 119, 136, 213),
+            centerTitle: true,
+          ),
+          body: Center(child: Text('暂无数据')),
+        );
       },
     );
   }
 
   /// 网络请求 获取推荐微信公众号
   Future<List<WechatCount>> getWechatCount() async {
-    Response response;
-    await ApiManager().getWechatCount().then((res) {
-      response = res;
-    });
-    return WechatCountBean.fromJson(response.data).data;
+    try {
+      Response response = await ApiManager().getWechatCount();
+      if (response.data == null) return <WechatCount>[];
+      return WechatCountBean.fromJson(response.data).data ?? <WechatCount>[];
+    } catch (e) {
+      // swallow and return empty list — caller handles empty state
+      return <WechatCount>[];
+    }
   }
 
   /// 解析微信公众号列表
   void _parseWeChatCounts(List<WechatCount> wxCounts) {
     _tabsName.clear();
     for (var value in wxCounts) {
-      _tabsName.add(value.name);
+      _tabsName.add(value.name ?? '');
     }
   }
 
   /// 生成顶部tab
   List<Widget> _createTabs() {
-    List<Widget> widgets = List();
+    List<Widget> widgets = <Widget>[];
     for (var value in _tabsName) {
       var tab = Tab(
         text: value,
@@ -103,10 +137,12 @@ class _WechatArticlePageState extends State<WechatArticlePage>
   }
 
   /// 创建微信文章列表页
-  _createPages(List<WechatCount> list) {
-    List<Widget> widgets = List();
+  List<Widget> _createPages(List<WechatCount> list) {
+    List<Widget> widgets = <Widget>[];
     for (WechatCount count in list) {
-      var page = WechatArticleListPage(cid: count.id);
+      // count.id is int? in the model; WechatArticleListPage expects a non-null int.
+      // Provide a default of 0 when id is null.
+      var page = WechatArticleListPage(cid: count.id ?? 0);
       widgets.add(page);
     }
     return widgets;

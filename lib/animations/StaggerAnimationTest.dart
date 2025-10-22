@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 ///
 class StaggerAnimation extends StatelessWidget {
   final Animation<double> controller;
-  Animation<double> height;
-  Animation<EdgeInsets> padding;
-  Animation<Color> color;
+  late final Animation<double> height;
+  late final Animation<EdgeInsets> padding;
+  late final Animation<Color?> color;
 
-  StaggerAnimation({Key key, this.controller}) : super(key: key) {
+  StaggerAnimation({Key? key, required this.controller}) : super(key: key) {
     height = Tween<double>(
       begin: 0.0,
       end: 300.0,
@@ -38,7 +38,7 @@ class StaggerAnimation extends StatelessWidget {
     );
   }
 
-  Widget _buildAnimation(BuildContext context, Widget child) {
+  Widget _buildAnimation(BuildContext context, Widget? child) {
     return Container(
       alignment: Alignment.bottomCenter,
       padding: padding.value,

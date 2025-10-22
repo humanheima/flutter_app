@@ -9,9 +9,9 @@ import 'package:flutter_app/enjoy/widgets/item_project.dart';
 ///
 
 class ProjectListPage extends StatefulWidget {
-  int cid = 0;
+  final int cid;
 
-  ProjectListPage({this.cid});
+  ProjectListPage({this.cid = 0});
 
   @override
   State createState() {
@@ -23,7 +23,7 @@ class _ProjectListState extends State<ProjectListPage>
     with AutomaticKeepAliveClientMixin {
   int index = 1;
 
-  List<Project> projects = List();
+  List<Project> projects = <Project>[];
 
   @override
   void initState() {
@@ -33,6 +33,7 @@ class _ProjectListState extends State<ProjectListPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ListView.builder(
       itemBuilder: (BuildContext context, int position) {
         return ProjectItem(projects[position]);
@@ -44,12 +45,11 @@ class _ProjectListState extends State<ProjectListPage>
   /// 获取项目列表
   void getList() async {
     await ApiManager().getProjectList(widget.cid, index).then((response) {
-      if (response != null) {
-        var projectListBean = ProjectListBean.fromJson(response.data);
-        setState(() {
-          projects.addAll(projectListBean.data.datas);
-        });
-      }
+      var projectListBean = ProjectListBean.fromJson(response.data);
+      final datas = projectListBean.data?.datas ?? [];
+      setState(() {
+        projects.addAll(datas);
+      });
     });
   }
 

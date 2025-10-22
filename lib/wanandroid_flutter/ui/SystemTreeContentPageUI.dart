@@ -11,11 +11,11 @@ import 'package:flutter_app/wanandroid_flutter/utils/timeline_util.dart';
 ///
 
 class SystemTreeContentPageUI extends StatefulWidget {
-  SystemTreeData data;
+  final SystemTreeData data;
 
-  SystemTreeContentPageUI(ValueKey<SystemTreeData> key) : super(key: key) {
-    this.data = key.value;
-  }
+  SystemTreeContentPageUI(ValueKey<SystemTreeData> key)
+      : data = key.value,
+        super(key: key);
 
   @override
   State createState() {
@@ -25,9 +25,9 @@ class SystemTreeContentPageUI extends StatefulWidget {
 
 class SystemTreeContentPageUIState extends State<SystemTreeContentPageUI>
     with TickerProviderStateMixin {
-  SystemTreeData _data;
+  late SystemTreeData _data;
 
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {
@@ -43,36 +43,43 @@ class SystemTreeContentPageUIState extends State<SystemTreeContentPageUI>
 
   @override
   Widget build(BuildContext context) {
-    _tabController =
-        new TabController(length: _data.children.length, vsync: this);
+    final children = _data.children ?? [];
+    // Ensure TabController has at least 1 tab to avoid assertion; if no real children, show a single empty tab
+    _tabController = TabController(length: children.isNotEmpty ? children.length : 1, vsync: this);
     return Scaffold(
       appBar: AppBar(
-        title: Text(_data.name),
+        title: Text(_data.name ?? ''),
         elevation: 0.4,
         bottom: new TabBar(
-          tabs: _data.children.map((SystemTreeChild item) {
-            return Tab(
-              text: item.name,
-            );
-          }).toList(),
+          tabs: (children.isNotEmpty
+                  ? children.map((SystemTreeChild item) {
+                      return Tab(
+                        text: item.name ?? '',
+                      );
+                    }).toList()
+                  : [Tab(text: '')])
+              .toList(),
           isScrollable: true,
           controller: _tabController,
         ),
       ),
       body: new TabBarView(
           controller: _tabController,
-          children: _data.children.map((item) {
-            return NewsList(id: item.id);
-          }).toList()),
+          children: (children.isNotEmpty
+                  ? children.map((item) {
+                      return NewsList(id: item.id ?? 0);
+                    }).toList()
+                  : [Container()])
+              .toList()),
     );
   }
 }
 
 ///知识体系文章列表
 class NewsList extends StatefulWidget {
-  int id;
+  final int id;
 
-  NewsList({Key key, this.id}) : super(key: key);
+  NewsList({Key? key, required this.id}) : super(key: key);
 
   @override
   State createState() {
@@ -81,7 +88,7 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
-  List<SystemTreeContentChild> _datas = List();
+  List<SystemTreeContentChild> _datas = <SystemTreeContentChild>[];
   ScrollController _scrollController = ScrollController();
 
   int _page = 0;
@@ -113,20 +120,20 @@ class _NewsListState extends State<NewsList> {
 
   Future<Null> getData() async {
     _page = 0;
-    int _id = widget.id;
+    final int _id = widget.id;
     CommonService().getSystemTreeContent((SystemTreeContentModel model) {
       setState(() {
-        _datas = model.data.datas;
+        _datas = model.data?.datas ?? [];
       });
     }, _page, _id);
   }
 
   Future<Null> _getMore() async {
     _page++;
-    int _id = widget.id;
+    final int _id = widget.id;
     CommonService().getSystemTreeContent((SystemTreeContentModel model) {
       setState(() {
-        _datas.addAll(model.data.datas);
+        _datas.addAll(model.data?.datas ?? []);
       });
     }, _page, _id);
   }
@@ -143,12 +150,12 @@ class _NewsListState extends State<NewsList> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    item.author,
+                    item.author ?? '',
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   new Expanded(
                     child: new Text(
-                      TimelineUtil.format(item.publishTime),
+                      TimelineUtil.format(item.publishTime ?? 0),
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                       textAlign: TextAlign.right,
                     ),
@@ -162,7 +169,7 @@ class _NewsListState extends State<NewsList> {
                   children: <Widget>[
                     Expanded(
                         child: Text(
-                      item.title,
+                      item.title ?? '',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.left,
@@ -174,11 +181,11 @@ class _NewsListState extends State<NewsList> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      item.superChapterName,
+                      item.superChapterName ?? '',
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     new Text(
-                      "/" + item.chapterName,
+                      "/" + (item.chapterName ?? ''),
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                       textAlign: TextAlign.right,
                     ),
@@ -187,7 +194,7 @@ class _NewsListState extends State<NewsList> {
           ],
         ),
         onTap: () {
-          RouteUtil.toWebView(context, item.title, item.link);
+          RouteUtil.toWebView(context, item.title ?? '', item.link ?? '');
         },
       );
     }

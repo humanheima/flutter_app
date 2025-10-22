@@ -2,18 +2,22 @@ import 'dart:convert' show json;
 
 class ArticleModel {
 
-  int errorCode;
-  String errorMsg;
-  Data data;
+  int? errorCode;
+  String? errorMsg;
+  Data? data;
 
   ArticleModel.fromParams({this.errorCode, this.errorMsg, this.data});
 
-  factory ArticleModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new ArticleModel.fromJson(json.decode(jsonStr)) : new ArticleModel.fromJson(jsonStr);
+  static ArticleModel? parse(dynamic jsonStr) {
+    if (jsonStr == null) return null;
+    if (jsonStr is String) return ArticleModel.fromJson(json.decode(jsonStr));
+    return ArticleModel.fromJson(jsonStr);
+  }
 
-  ArticleModel.fromJson(jsonRes) {
+  ArticleModel.fromJson(dynamic jsonRes) {
     errorCode = jsonRes['errorCode'];
     errorMsg = jsonRes['errorMsg'];
-    data = jsonRes['data'] == null ? null : new Data.fromJson(jsonRes['data']);
+    data = jsonRes['data'] != null ? Data.fromJson(jsonRes['data']) : null;
   }
 
   @override
@@ -24,27 +28,28 @@ class ArticleModel {
 
 class Data {
 
-  int curPage;
-  int offset;
-  int pageCount;
-  int size;
-  int total;
-  bool over;
-  List<Article> datas;
+  int? curPage;
+  int? offset;
+  int? pageCount;
+  int? size;
+  int? total;
+  bool? over;
+  List<Article>? datas;
 
   Data.fromParams({this.curPage, this.offset, this.pageCount, this.size, this.total, this.over, this.datas});
 
-  Data.fromJson(jsonRes) {
+  Data.fromJson(dynamic jsonRes) {
     curPage = jsonRes['curPage'];
     offset = jsonRes['offset'];
     pageCount = jsonRes['pageCount'];
     size = jsonRes['size'];
     total = jsonRes['total'];
     over = jsonRes['over'];
-    datas = jsonRes['datas'] == null ? null : [];
-
-    for (var datasItem in datas == null ? [] : jsonRes['datas']){
-      datas.add(datasItem == null ? null : new Article.fromJson(datasItem));
+    if (jsonRes['datas'] != null) {
+      datas = <Article>[];
+      for (var datasItem in jsonRes['datas']) {
+        datas!.add(datasItem == null ? Article.fromParams() : Article.fromJson(datasItem));
+      }
     }
   }
 
@@ -56,33 +61,33 @@ class Data {
 
 class Article {
 
-  int chapterId;
-  int courseId;
-  int id;
-  int publishTime;
-  int superChapterId;
-  int type;
-  int userId;
-  int visible;
-  int zan;
-  bool collect;
-  bool fresh;
-  String apkLink;
-  String author;
-  String chapterName;
-  String desc;
-  String envelopePic;
-  String link;
-  String niceDate;
-  String origin;
-  String projectLink;
-  String superChapterName;
-  String title;
-  List<Tag> tags;
+  int? chapterId;
+  int? courseId;
+  int? id;
+  int? publishTime;
+  int? superChapterId;
+  int? type;
+  int? userId;
+  int? visible;
+  int? zan;
+  bool? collect;
+  bool? fresh;
+  String? apkLink;
+  String? author;
+  String? chapterName;
+  String? desc;
+  String? envelopePic;
+  String? link;
+  String? niceDate;
+  String? origin;
+  String? projectLink;
+  String? superChapterName;
+  String? title;
+  List<Tag>? tags;
 
   Article.fromParams({this.chapterId, this.courseId, this.id, this.publishTime, this.superChapterId, this.type, this.userId, this.visible, this.zan, this.collect, this.fresh, this.apkLink, this.author, this.chapterName, this.desc, this.envelopePic, this.link, this.niceDate, this.origin, this.projectLink, this.superChapterName, this.title, this.tags});
 
-  Article.fromJson(jsonRes) {
+  Article.fromJson(dynamic jsonRes) {
     chapterId = jsonRes['chapterId'];
     courseId = jsonRes['courseId'];
     id = jsonRes['id'];
@@ -105,10 +110,11 @@ class Article {
     projectLink = jsonRes['projectLink'];
     superChapterName = jsonRes['superChapterName'];
     title = jsonRes['title'];
-    tags = jsonRes['tags'] == null ? null : [];
-
-    for (var tagsItem in tags == null ? [] : jsonRes['tags']){
-      tags.add(tagsItem == null ? null : new Tag.fromJson(tagsItem));
+    if (jsonRes['tags'] != null) {
+      tags = <Tag>[];
+      for (var tagsItem in jsonRes['tags']) {
+        tags!.add(tagsItem == null ? Tag.fromParams() : Tag.fromJson(tagsItem));
+      }
     }
   }
 
@@ -120,19 +126,18 @@ class Article {
 
 class Tag {
 
-  String name;
-  String url;
+  String? name;
+  String? url;
 
   Tag.fromParams({this.name, this.url});
 
-  Tag.fromJson(jsonRes) {
+  Tag.fromJson(dynamic jsonRes) {
     name = jsonRes['name'];
     url = jsonRes['url'];
   }
 
   @override
   String toString() {
-    return '{"name": ${name != null?'${json.encode(name)}':'null'},"url": ${url != null?'${json.encode(url)}':'null'}}';
+    return '{"name": ${name != null ? '${json.encode(name)}' : 'null'},"url": ${url != null ? '${json.encode(url)}' : 'null'}}';
   }
 }
-

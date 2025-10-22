@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// 7.5 按需rebuild（ValueListenableBuilder）
 
 class ValueListenableRoute extends StatefulWidget {
-  const ValueListenableRoute({Key key}) : super(key: key);
+  const ValueListenableRoute({Key? key}) : super(key: key);
 
   @override
   _ValueListenableRouteState createState() => new _ValueListenableRouteState();

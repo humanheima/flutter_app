@@ -9,7 +9,7 @@ import 'package:flutter_app/enjoy/view/webview_page.dart';
 ///
 
 class HomeArticleItem extends StatefulWidget {
-  Article article;
+  final Article article;
 
   HomeArticleItem(this.article);
 
@@ -22,10 +22,8 @@ class _HomeArticleItemState extends State<HomeArticleItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            new MaterialPageRoute(builder: (BuildContext context) {
-          return WebViewPage(
-              url: widget.article.link, title: widget.article.title);
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+          return WebViewPage(url: widget.article.link ?? "", title: widget.article.title ?? "");
         }));
       },
       child: Card(
@@ -46,7 +44,7 @@ class _HomeArticleItemState extends State<HomeArticleItem> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
-                        widget.article.author,
+                        widget.article.author ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: Colors.blueAccent),
@@ -60,7 +58,7 @@ class _HomeArticleItemState extends State<HomeArticleItem> {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Text(
-                    widget.article.title
+                    (widget.article.title ?? "")
                         .replaceAll("&rdquo;", "")
                         .replaceAll("&ldquo;", ""),
                     maxLines: 2,
@@ -86,7 +84,7 @@ class _HomeArticleItemState extends State<HomeArticleItem> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8),
                       child: Text(
-                        widget.article.niceDate,
+                        widget.article.niceDate ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: Colors.grey),

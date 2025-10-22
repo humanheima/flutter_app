@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   final String title;
 
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   @override
   _MyHomePageState createState() => new _MyHomePageState();
@@ -292,10 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ///返回是否是主题还是
   Future<bool> getThemeStyle() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    bool darkTheme = sp.getBool("darkTheme");
-    if (darkTheme == null) {
-      darkTheme = false;
-    }
+    bool darkTheme = sp.getBool("darkTheme") ?? false;
     GlobalConfig.dark = darkTheme;
 
     return darkTheme;

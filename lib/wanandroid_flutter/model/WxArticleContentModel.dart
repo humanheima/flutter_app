@@ -1,24 +1,24 @@
 import 'dart:convert' show json;
 
 class WxArticleContentModel {
-  int errorCode;
-  String errorMsg;
-  WxArticleContentData data;
+  int? errorCode;
+  String? errorMsg;
+  WxArticleContentData? data;
 
   WxArticleContentModel.fromParams({this.errorCode, this.errorMsg, this.data});
 
-  factory WxArticleContentModel(jsonStr) => jsonStr == null
-      ? null
-      : jsonStr is String
-          ? new WxArticleContentModel.fromJson(json.decode(jsonStr))
-          : new WxArticleContentModel.fromJson(jsonStr);
+  static WxArticleContentModel? parse(dynamic jsonStr) {
+    if (jsonStr == null) return null;
+    if (jsonStr is String) {
+      return WxArticleContentModel.fromJson(json.decode(jsonStr));
+    }
+    return WxArticleContentModel.fromJson(jsonStr);
+  }
 
-  WxArticleContentModel.fromJson(jsonRes) {
+  WxArticleContentModel.fromJson(dynamic jsonRes) {
     errorCode = jsonRes['errorCode'];
     errorMsg = jsonRes['errorMsg'];
-    data = jsonRes['data'] == null
-        ? null
-        : new WxArticleContentData.fromJson(jsonRes['data']);
+    data = jsonRes['data'] != null ? WxArticleContentData.fromJson(jsonRes['data']) : null;
   }
 
   @override
@@ -28,36 +28,28 @@ class WxArticleContentModel {
 }
 
 class WxArticleContentData {
-  int curPage;
-  int offset;
-  int pageCount;
-  int size;
-  int total;
-  bool over;
-  List<WxArticleContentDatas> datas;
+  int? curPage;
+  int? offset;
+  int? pageCount;
+  int? size;
+  int? total;
+  bool? over;
+  List<WxArticleContentDatas>? datas;
 
-  WxArticleContentData.fromParams(
-      {this.curPage,
-      this.offset,
-      this.pageCount,
-      this.size,
-      this.total,
-      this.over,
-      this.datas});
+  WxArticleContentData.fromParams({this.curPage, this.offset, this.pageCount, this.size, this.total, this.over, this.datas});
 
-  WxArticleContentData.fromJson(jsonRes) {
+  WxArticleContentData.fromJson(dynamic jsonRes) {
     curPage = jsonRes['curPage'];
     offset = jsonRes['offset'];
     pageCount = jsonRes['pageCount'];
     size = jsonRes['size'];
     total = jsonRes['total'];
     over = jsonRes['over'];
-    datas = jsonRes['datas'] == null ? null : [];
-
-    for (var datasItem in datas == null ? [] : jsonRes['datas']) {
-      datas.add(datasItem == null
-          ? null
-          : new WxArticleContentDatas.fromJson(datasItem));
+    if (jsonRes['datas'] != null) {
+      datas = <WxArticleContentDatas>[];
+      for (var datasItem in jsonRes['datas']) {
+        datas!.add(datasItem == null ? WxArticleContentDatas.fromParams() : WxArticleContentDatas.fromJson(datasItem));
+      }
     }
   }
 
@@ -68,56 +60,33 @@ class WxArticleContentData {
 }
 
 class WxArticleContentDatas {
-  int chapterId;
-  int courseId;
-  int id;
-  int publishTime;
-  int superChapterId;
-  int type;
-  int userId;
-  int visible;
-  int zan;
-  bool collect;
-  bool fresh;
-  String apkLink;
-  String author;
-  String chapterName;
-  String desc;
-  String envelopePic;
-  String link;
-  String niceDate;
-  String origin;
-  String projectLink;
-  String superChapterName;
-  String title;
-  List<WxArticleContentTags> tags;
+  int? chapterId;
+  int? courseId;
+  int? id;
+  int? publishTime;
+  int? superChapterId;
+  int? type;
+  int? userId;
+  int? visible;
+  int? zan;
+  bool? collect;
+  bool? fresh;
+  String? apkLink;
+  String? author;
+  String? chapterName;
+  String? desc;
+  String? envelopePic;
+  String? link;
+  String? niceDate;
+  String? origin;
+  String? projectLink;
+  String? superChapterName;
+  String? title;
+  List<WxArticleContentTags>? tags;
 
-  WxArticleContentDatas.fromParams(
-      {this.chapterId,
-      this.courseId,
-      this.id,
-      this.publishTime,
-      this.superChapterId,
-      this.type,
-      this.userId,
-      this.visible,
-      this.zan,
-      this.collect,
-      this.fresh,
-      this.apkLink,
-      this.author,
-      this.chapterName,
-      this.desc,
-      this.envelopePic,
-      this.link,
-      this.niceDate,
-      this.origin,
-      this.projectLink,
-      this.superChapterName,
-      this.title,
-      this.tags});
+  WxArticleContentDatas.fromParams({this.chapterId, this.courseId, this.id, this.publishTime, this.superChapterId, this.type, this.userId, this.visible, this.zan, this.collect, this.fresh, this.apkLink, this.author, this.chapterName, this.desc, this.envelopePic, this.link, this.niceDate, this.origin, this.projectLink, this.superChapterName, this.title, this.tags});
 
-  WxArticleContentDatas.fromJson(jsonRes) {
+  WxArticleContentDatas.fromJson(dynamic jsonRes) {
     chapterId = jsonRes['chapterId'];
     courseId = jsonRes['courseId'];
     id = jsonRes['id'];
@@ -140,12 +109,11 @@ class WxArticleContentDatas {
     projectLink = jsonRes['projectLink'];
     superChapterName = jsonRes['superChapterName'];
     title = jsonRes['title'];
-    tags = jsonRes['tags'] == null ? null : [];
-
-    for (var tagsItem in tags == null ? [] : jsonRes['tags']) {
-      tags.add(tagsItem == null
-          ? null
-          : new WxArticleContentTags.fromJson(tagsItem));
+    if (jsonRes['tags'] != null) {
+      tags = <WxArticleContentTags>[];
+      for (var tagsItem in jsonRes['tags']) {
+        tags!.add(tagsItem == null ? WxArticleContentTags.fromParams() : WxArticleContentTags.fromJson(tagsItem));
+      }
     }
   }
 
@@ -156,12 +124,12 @@ class WxArticleContentDatas {
 }
 
 class WxArticleContentTags {
-  String name;
-  String url;
+  String? name;
+  String? url;
 
   WxArticleContentTags.fromParams({this.name, this.url});
 
-  WxArticleContentTags.fromJson(jsonRes) {
+  WxArticleContentTags.fromJson(dynamic jsonRes) {
     name = jsonRes['name'];
     url = jsonRes['url'];
   }

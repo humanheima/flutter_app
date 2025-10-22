@@ -28,15 +28,13 @@ class RegisterPageUIState extends State<RegisterPageUI> {
       Fluttertoast.showToast(msg: '两次输入密码不一致');
     } else {
       CommonService().register((UserModel _userModel) {
-        if (_userModel != null) {
-          if (_userModel.errorCode == 0) {
-            Fluttertoast.showToast(msg: "注册成功!");
-            Navigator.of(context).pop();
-          } else {
-            Fluttertoast.showToast(msg: _userModel.errorMsg);
-          }
+        if (_userModel.errorCode == 0) {
+          Fluttertoast.showToast(msg: "注册成功!");
+          Navigator.of(context).pop();
+        } else {
+          Fluttertoast.showToast(msg: _userModel.errorMsg);
         }
-      }, userName, password);
+            }, userName, password);
     }
   }
 

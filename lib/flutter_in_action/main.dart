@@ -28,7 +28,7 @@ class FlutterInActionMain extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-  MainPage({Key key}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

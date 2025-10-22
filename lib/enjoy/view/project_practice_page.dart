@@ -19,9 +19,8 @@ class ProjectPracticePage extends StatefulWidget {
 
 class _ProjectPracticePageState extends State<ProjectPracticePage>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
-
-  var _tabsName = List<String>();
+  // Use DefaultTabController instead of manual TabController
+  List<String> _tabsName = <String>[];
 
   @override
   Widget build(BuildContext context) {
@@ -36,39 +35,38 @@ class _ProjectPracticePageState extends State<ProjectPracticePage>
     return AsyncSnapshotWidget(
       snapshot: snapshot,
       successWidget: (snapshot) {
-        if (snapshot.data != null) {
+        if (snapshot.data != null && snapshot.data.isNotEmpty) {
           _parseWeChatCounts(snapshot.data);
-          if (_tabController == null) {
-            _tabController = TabController(
-                length: snapshot.data.length, vsync: this, initialIndex: 0);
-          }
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('项目'),
-              backgroundColor: Color.fromARGB(255, 119, 136, 213),
-              centerTitle: true,
-            ),
-            body: Column(
-              children: <Widget>[
-                TabBar(
+          return DefaultTabController(
+            length: _tabsName.length,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text('项目'),
+                backgroundColor: Color.fromARGB(255, 119, 136, 213),
+                centerTitle: true,
+                bottom: TabBar(
                   indicatorColor: Colors.deepPurpleAccent,
                   labelColor: Colors.black87,
                   unselectedLabelColor: Colors.black45,
-                  controller: _tabController,
                   isScrollable: true,
                   tabs: _createTabs(),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: TabBarView(
-                    children: _createPages(snapshot.data),
-                    controller: _tabController,
-                  ),
-                )
-              ],
+              ),
+              body: TabBarView(
+                children: _createPages(snapshot.data),
+              ),
             ),
           );
         }
+        // fallback when no data
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('项目'),
+            backgroundColor: Color.fromARGB(255, 119, 136, 213),
+            centerTitle: true,
+          ),
+          body: Center(child: Text('暂无数据')),
+        );
       },
     );
   }
@@ -76,11 +74,10 @@ class _ProjectPracticePageState extends State<ProjectPracticePage>
   /// 网络请求，获取项目分类
   Future<List<ProjectClassify>> getProjectClassify() async {
     try {
-      Response response;
-      response = await ApiManager().getProjectClassify();
-      return ProjectClassifyBean.fromJson(response.data).data;
+      Response response = await ApiManager().getProjectClassify();
+      return ProjectClassifyBean.fromJson(response.data).data ?? <ProjectClassify>[];
     } catch (e) {
-      return null;
+      return <ProjectClassify>[];
     }
   }
 
@@ -88,13 +85,13 @@ class _ProjectPracticePageState extends State<ProjectPracticePage>
   void _parseWeChatCounts(List<ProjectClassify> projectClassify) {
     _tabsName.clear();
     for (var value in projectClassify) {
-      _tabsName.add(value.name);
+      _tabsName.add(value.name ?? '');
     }
   }
 
   /// 生成顶部tab
   List<Widget> _createTabs() {
-    List<Widget> widgets = List();
+    List<Widget> widgets = <Widget>[];
     for (var value in _tabsName) {
       var tab = Tab(
         text: value,
@@ -106,9 +103,9 @@ class _ProjectPracticePageState extends State<ProjectPracticePage>
 
   /// 创建项目列表页
   List<Widget> _createPages(List<ProjectClassify> projectClassify) {
-    List<Widget> widgets = List();
+    List<Widget> widgets = <Widget>[];
     for (ProjectClassify project in projectClassify) {
-      var page = ProjectListPage(cid: project.id);
+      var page = ProjectListPage(cid: project.id ?? 0);
       widgets.add(page);
     }
     return widgets;

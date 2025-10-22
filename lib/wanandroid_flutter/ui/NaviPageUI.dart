@@ -14,8 +14,8 @@ class NaviPageUI extends StatefulWidget {
 }
 
 class NaviPageUIState extends State<NaviPageUI>
-    with AutomaticKeepAliveClientMixin {
-  List<NaviData> _naviTitles = List();
+    with AutomaticKeepAliveClientMixin<NaviPageUI> {
+  List<NaviData> _naviTitles = <NaviData>[];
 
   @override
   void initState() {
@@ -25,6 +25,7 @@ class NaviPageUIState extends State<NaviPageUI>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // required by AutomaticKeepAliveClientMixin
     return Scaffold(
       body: Container(
         child: _rightListView(context),
@@ -35,7 +36,7 @@ class NaviPageUIState extends State<NaviPageUI>
   Future<Null> _getData() async {
     CommonService().getNaviList((NaviModel _naviModel) {
       setState(() {
-        _naviTitles = _naviModel.data;
+        _naviTitles = _naviModel.data ?? [];
       });
     });
   }
@@ -48,6 +49,7 @@ class NaviPageUIState extends State<NaviPageUI>
   }
 
   Widget _renderContent(BuildContext context, int index) {
+    final navi = _naviTitles[index];
     return Container(
       child: Container(
         padding: EdgeInsets.all(16),
@@ -58,14 +60,14 @@ class NaviPageUIState extends State<NaviPageUI>
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(bottom: 8),
               child: Text(
-                _naviTitles[index].name,
+                navi.name ?? '',
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.left,
               ),
             ),
             Container(
               alignment: Alignment.centerLeft,
-              child: buildChildren(_naviTitles[index].articles),
+              child: buildChildren(navi.articles ?? []),
             )
           ],
         ),
@@ -78,7 +80,7 @@ class NaviPageUIState extends State<NaviPageUI>
     Widget content;
     for (NaviArticle item in articles) {
       tiles.add(InkWell(
-        child: Chip(label: Text(item.title)),
+        child: Chip(label: Text(item.title ?? '')),
         onTap: () {
           _onItemClick(item);
         },
@@ -97,14 +99,12 @@ class NaviPageUIState extends State<NaviPageUI>
   void _onItemClick(NaviArticle item) async {
     await Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return WebViewPageUI(
-        title: item.title,
-        url: item.link,
+        title: item.title ?? '',
+        url: item.link ?? '',
       );
     }));
   }
 
   @override
-  bool get wantKeepAlive {
-    return true;
-  }
+  bool get wantKeepAlive => true;
 }

@@ -17,7 +17,7 @@ class ALayoutBuildAfterLayoutTestRoute extends StatelessWidget {
 }
 
 class LayoutBuilderRoute extends StatelessWidget {
-  const LayoutBuilderRoute({Key key}) : super(key: key);
+  const LayoutBuilderRoute({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class LayoutBuilderRoute extends StatelessWidget {
 }
 
 class ResponsiveColumn extends StatelessWidget {
-  const ResponsiveColumn({Key key, @required this.children}) : super(key: key);
+  const ResponsiveColumn({Key? key, required this.children}) : super(key: key);
 
   final List<Widget> children;
 
@@ -69,5 +69,3 @@ class ResponsiveColumn extends StatelessWidget {
     );
   }
 }
-
-

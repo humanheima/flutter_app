@@ -4,9 +4,9 @@
 ///使用插件将 json 生成 dart文件。
 class Test {
   Test({
-    num code,
-    String msg,
-    Data data,
+    num? code,
+    String? msg,
+    Data? data,
   }) {
     _code = code;
     _msg = msg;
@@ -19,14 +19,14 @@ class Test {
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
-  num _code;
-  String _msg;
-  Data _data;
+  num? _code;
+  String? _msg;
+  Data? _data;
 
   Test copyWith({
-    num code,
-    String msg,
-    Data data,
+    num? code,
+    String? msg,
+    Data? data,
   }) =>
       Test(
         code: code ?? _code,
@@ -34,18 +34,18 @@ class Test {
         data: data ?? _data,
       );
 
-  num get code => _code;
+  num? get code => _code;
 
-  String get msg => _msg;
+  String? get msg => _msg;
 
-  Data get data => _data;
+  Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['code'] = _code;
     map['msg'] = _msg;
     if (_data != null) {
-      map['data'] = _data.toJson();
+      map['data'] = _data!.toJson();
     }
     return map;
   }
@@ -57,9 +57,9 @@ class Test {
 
 class Data {
   Data({
-    FileInfo fileInfo,
-    RoleAudio roleAudio,
-    RoleImg roleImg,
+    FileInfo? fileInfo,
+    RoleAudio? roleAudio,
+    RoleImg? roleImg,
   }) {
     _fileInfo = fileInfo;
     _roleAudio = roleAudio;
@@ -67,23 +67,19 @@ class Data {
   }
 
   Data.fromJson(dynamic json) {
-    _fileInfo =
-        json['fileInfo'] != null ? FileInfo.fromJson(json['fileInfo']) : null;
-    _roleAudio = json['roleAudio'] != null
-        ? RoleAudio.fromJson(json['roleAudio'])
-        : null;
-    _roleImg =
-        json['roleImg'] != null ? RoleImg.fromJson(json['roleImg']) : null;
+    _fileInfo = json['fileInfo'] != null ? FileInfo.fromJson(json['fileInfo']) : null;
+    _roleAudio = json['roleAudio'] != null ? RoleAudio.fromJson(json['roleAudio']) : null;
+    _roleImg = json['roleImg'] != null ? RoleImg.fromJson(json['roleImg']) : null;
   }
 
-  FileInfo _fileInfo;
-  RoleAudio _roleAudio;
-  RoleImg _roleImg;
+  FileInfo? _fileInfo;
+  RoleAudio? _roleAudio;
+  RoleImg? _roleImg;
 
   Data copyWith({
-    FileInfo fileInfo,
-    RoleAudio roleAudio,
-    RoleImg roleImg,
+    FileInfo? fileInfo,
+    RoleAudio? roleAudio,
+    RoleImg? roleImg,
   }) =>
       Data(
         fileInfo: fileInfo ?? _fileInfo,
@@ -91,22 +87,22 @@ class Data {
         roleImg: roleImg ?? _roleImg,
       );
 
-  FileInfo get fileInfo => _fileInfo;
+  FileInfo? get fileInfo => _fileInfo;
 
-  RoleAudio get roleAudio => _roleAudio;
+  RoleAudio? get roleAudio => _roleAudio;
 
-  RoleImg get roleImg => _roleImg;
+  RoleImg? get roleImg => _roleImg;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_fileInfo != null) {
-      map['fileInfo'] = _fileInfo.toJson();
+      map['fileInfo'] = _fileInfo!.toJson();
     }
     if (_roleAudio != null) {
-      map['roleAudio'] = _roleAudio.toJson();
+      map['roleAudio'] = _roleAudio!.toJson();
     }
     if (_roleImg != null) {
-      map['roleImg'] = _roleImg.toJson();
+      map['roleImg'] = _roleImg!.toJson();
     }
     return map;
   }
@@ -120,11 +116,11 @@ class Data {
 
 class RoleImg {
   RoleImg({
-    num unlockStatus,
-    num needPopularityValue,
-    String imgUrl,
-    num width,
-    num height,
+    num? unlockStatus,
+    num? needPopularityValue,
+    String? imgUrl,
+    num? width,
+    num? height,
   }) {
     _unlockStatus = unlockStatus;
     _needPopularityValue = needPopularityValue;
@@ -141,18 +137,18 @@ class RoleImg {
     _height = json['height'];
   }
 
-  num _unlockStatus;
-  num _needPopularityValue;
-  String _imgUrl;
-  num _width;
-  num _height;
+  num? _unlockStatus;
+  num? _needPopularityValue;
+  String? _imgUrl;
+  num? _width;
+  num? _height;
 
   RoleImg copyWith({
-    num unlockStatus,
-    num needPopularityValue,
-    String imgUrl,
-    num width,
-    num height,
+    num? unlockStatus,
+    num? needPopularityValue,
+    String? imgUrl,
+    num? width,
+    num? height,
   }) =>
       RoleImg(
         unlockStatus: unlockStatus ?? _unlockStatus,
@@ -162,15 +158,15 @@ class RoleImg {
         height: height ?? _height,
       );
 
-  num get unlockStatus => _unlockStatus;
+  num? get unlockStatus => _unlockStatus;
 
-  num get needPopularityValue => _needPopularityValue;
+  num? get needPopularityValue => _needPopularityValue;
 
-  String get imgUrl => _imgUrl;
+  String? get imgUrl => _imgUrl;
 
-  num get width => _width;
+  num? get width => _width;
 
-  num get height => _height;
+  num? get height => _height;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -189,9 +185,9 @@ class RoleImg {
 
 class RoleAudio {
   RoleAudio({
-    num unlockStatus,
-    num needPopularityValue,
-    List<AudioList> audioList,
+    num? unlockStatus,
+    num? needPopularityValue,
+    List<AudioList>? audioList,
   }) {
     _unlockStatus = unlockStatus;
     _needPopularityValue = needPopularityValue;
@@ -202,21 +198,21 @@ class RoleAudio {
     _unlockStatus = json['unlockStatus'];
     _needPopularityValue = json['needPopularityValue'];
     if (json['audioList'] != null) {
-      _audioList = [];
-      json['audioList'].forEach((v) {
-        _audioList.add(AudioList.fromJson(v));
+      _audioList = <AudioList>[];
+      (json['audioList'] as List).forEach((v) {
+        _audioList!.add(AudioList.fromJson(v));
       });
     }
   }
 
-  num _unlockStatus;
-  num _needPopularityValue;
-  List<AudioList> _audioList;
+  num? _unlockStatus;
+  num? _needPopularityValue;
+  List<AudioList>? _audioList;
 
   RoleAudio copyWith({
-    num unlockStatus,
-    num needPopularityValue,
-    List<AudioList> audioList,
+    num? unlockStatus,
+    num? needPopularityValue,
+    List<AudioList>? audioList,
   }) =>
       RoleAudio(
         unlockStatus: unlockStatus ?? _unlockStatus,
@@ -224,18 +220,18 @@ class RoleAudio {
         audioList: audioList ?? _audioList,
       );
 
-  num get unlockStatus => _unlockStatus;
+  num? get unlockStatus => _unlockStatus;
 
-  num get needPopularityValue => _needPopularityValue;
+  num? get needPopularityValue => _needPopularityValue;
 
-  List<AudioList> get audioList => _audioList;
+  List<AudioList>? get audioList => _audioList;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['unlockStatus'] = _unlockStatus;
     map['needPopularityValue'] = _needPopularityValue;
     if (_audioList != null) {
-      map['audioList'] = _audioList.map((v) => v.toJson()).toList();
+      map['audioList'] = _audioList!.map((v) => v.toJson()).toList();
     }
     return map;
   }
@@ -263,25 +259,25 @@ class RoleAudio {
 
 class AudioList {
   AudioList({
-    String text,
-    String audioUrl,
-    num unlockStatus,
-    num unlockTime,
-    num likeCount,
-    bool selfLike,
-    String ugcId,
-    num duration,
-    String cbid,
-    String qurl,
-    String unAudioMsg,
-    String ccid,
-    num paraIndex,
-    num replyCount,
-    String iconUrl,
-    String goldShareUrl,
-    String nickname,
-    String cv,
-    num id,
+    String? text,
+    String? audioUrl,
+    num? unlockStatus,
+    num? unlockTime,
+    num? likeCount,
+    bool? selfLike,
+    String? ugcId,
+    num? duration,
+    String? cbid,
+    String? qurl,
+    String? unAudioMsg,
+    String? ccid,
+    num? paraIndex,
+    num? replyCount,
+    String? iconUrl,
+    String? goldShareUrl,
+    String? nickname,
+    String? cv,
+    num? id,
   }) {
     _text = text;
     _audioUrl = audioUrl;
@@ -326,46 +322,46 @@ class AudioList {
     _id = json['id'];
   }
 
-  String _text;
-  String _audioUrl;
-  num _unlockStatus;
-  num _unlockTime;
-  num _likeCount;
-  bool _selfLike;
-  String _ugcId;
-  num _duration;
-  String _cbid;
-  String _qurl;
-  String _unAudioMsg;
-  String _ccid;
-  num _paraIndex;
-  num _replyCount;
-  String _iconUrl;
-  String _goldShareUrl;
-  String _nickname;
-  String _cv;
-  num _id;
+  String? _text;
+  String? _audioUrl;
+  num? _unlockStatus;
+  num? _unlockTime;
+  num? _likeCount;
+  bool? _selfLike;
+  String? _ugcId;
+  num? _duration;
+  String? _cbid;
+  String? _qurl;
+  String? _unAudioMsg;
+  String? _ccid;
+  num? _paraIndex;
+  num? _replyCount;
+  String? _iconUrl;
+  String? _goldShareUrl;
+  String? _nickname;
+  String? _cv;
+  num? _id;
 
   AudioList copyWith({
-    String text,
-    String audioUrl,
-    num unlockStatus,
-    num unlockTime,
-    num likeCount,
-    bool selfLike,
-    String ugcId,
-    num duration,
-    String cbid,
-    String qurl,
-    String unAudioMsg,
-    String ccid,
-    num paraIndex,
-    num replyCount,
-    String iconUrl,
-    String goldShareUrl,
-    String nickname,
-    String cv,
-    num id,
+    String? text,
+    String? audioUrl,
+    num? unlockStatus,
+    num? unlockTime,
+    num? likeCount,
+    bool? selfLike,
+    String? ugcId,
+    num? duration,
+    String? cbid,
+    String? qurl,
+    String? unAudioMsg,
+    String? ccid,
+    num? paraIndex,
+    num? replyCount,
+    String? iconUrl,
+    String? goldShareUrl,
+    String? nickname,
+    String? cv,
+    num? id,
   }) =>
       AudioList(
         text: text ?? _text,
@@ -389,43 +385,43 @@ class AudioList {
         id: id ?? _id,
       );
 
-  String get text => _text;
+  String? get text => _text;
 
-  String get audioUrl => _audioUrl;
+  String? get audioUrl => _audioUrl;
 
-  num get unlockStatus => _unlockStatus;
+  num? get unlockStatus => _unlockStatus;
 
-  num get unlockTime => _unlockTime;
+  num? get unlockTime => _unlockTime;
 
-  num get likeCount => _likeCount;
+  num? get likeCount => _likeCount;
 
-  bool get selfLike => _selfLike;
+  bool? get selfLike => _selfLike;
 
-  String get ugcId => _ugcId;
+  String? get ugcId => _ugcId;
 
-  num get duration => _duration;
+  num? get duration => _duration;
 
-  String get cbid => _cbid;
+  String? get cbid => _cbid;
 
-  String get qurl => _qurl;
+  String? get qurl => _qurl;
 
-  String get unAudioMsg => _unAudioMsg;
+  String? get unAudioMsg => _unAudioMsg;
 
-  String get ccid => _ccid;
+  String? get ccid => _ccid;
 
-  num get paraIndex => _paraIndex;
+  num? get paraIndex => _paraIndex;
 
-  num get replyCount => _replyCount;
+  num? get replyCount => _replyCount;
 
-  String get iconUrl => _iconUrl;
+  String? get iconUrl => _iconUrl;
 
-  String get goldShareUrl => _goldShareUrl;
+  String? get goldShareUrl => _goldShareUrl;
 
-  String get nickname => _nickname;
+  String? get nickname => _nickname;
 
-  String get cv => _cv;
+  String? get cv => _cv;
 
-  num get id => _id;
+  num? get id => _id;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -459,10 +455,10 @@ class AudioList {
 
 class FileInfo {
   FileInfo({
-    num unlockStatus,
-    num needPopularityValue,
-    List<InfoList> infoList,
-    List<ExtendInfoList> extendInfoList,
+    num? unlockStatus,
+    num? needPopularityValue,
+    List<InfoList>? infoList,
+    List<ExtendInfoList>? extendInfoList,
   }) {
     _unlockStatus = unlockStatus;
     _needPopularityValue = needPopularityValue;
@@ -474,29 +470,29 @@ class FileInfo {
     _unlockStatus = json['unlockStatus'];
     _needPopularityValue = json['needPopularityValue'];
     if (json['infoList'] != null) {
-      _infoList = [];
-      json['infoList'].forEach((v) {
-        _infoList.add(InfoList.fromJson(v));
+      _infoList = <InfoList>[];
+      (json['infoList'] as List).forEach((v) {
+        _infoList!.add(InfoList.fromJson(v));
       });
     }
     if (json['extendInfoList'] != null) {
-      _extendInfoList = [];
-      json['extendInfoList'].forEach((v) {
-        _extendInfoList.add(ExtendInfoList.fromJson(v));
+      _extendInfoList = <ExtendInfoList>[];
+      (json['extendInfoList'] as List).forEach((v) {
+        _extendInfoList!.add(ExtendInfoList.fromJson(v));
       });
     }
   }
 
-  num _unlockStatus;
-  num _needPopularityValue;
-  List<InfoList> _infoList;
-  List<ExtendInfoList> _extendInfoList;
+  num? _unlockStatus;
+  num? _needPopularityValue;
+  List<InfoList>? _infoList;
+  List<ExtendInfoList>? _extendInfoList;
 
   FileInfo copyWith({
-    num unlockStatus,
-    num needPopularityValue,
-    List<InfoList> infoList,
-    List<ExtendInfoList> extendInfoList,
+    num? unlockStatus,
+    num? needPopularityValue,
+    List<InfoList>? infoList,
+    List<ExtendInfoList>? extendInfoList,
   }) =>
       FileInfo(
         unlockStatus: unlockStatus ?? _unlockStatus,
@@ -505,35 +501,32 @@ class FileInfo {
         extendInfoList: extendInfoList ?? _extendInfoList,
       );
 
-  num get unlockStatus => _unlockStatus;
+  num? get unlockStatus => _unlockStatus;
 
-  num get needPopularityValue => _needPopularityValue;
+  num? get needPopularityValue => _needPopularityValue;
 
-  List<InfoList> get infoList => _infoList;
+  List<InfoList>? get infoList => _infoList;
 
-  List<ExtendInfoList> get extendInfoList => _extendInfoList;
+  List<ExtendInfoList>? get extendInfoList => _extendInfoList;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['unlockStatus'] = _unlockStatus;
     map['needPopularityValue'] = _needPopularityValue;
     if (_infoList != null) {
-      map['infoList'] = _infoList.map((v) => v.toJson()).toList();
+      map['infoList'] = _infoList!.map((v) => v.toJson()).toList();
     }
     if (_extendInfoList != null) {
-      map['extendInfoList'] = _extendInfoList.map((v) => v.toJson()).toList();
+      map['extendInfoList'] = _extendInfoList!.map((v) => v.toJson()).toList();
     }
     return map;
   }
 }
 
-/// desc : "身份"
-/// text : "二级男主"
-
 class ExtendInfoList {
   ExtendInfoList({
-    String desc,
-    String text,
+    String? desc,
+    String? text,
   }) {
     _desc = desc;
     _text = text;
@@ -544,21 +537,21 @@ class ExtendInfoList {
     _text = json['text'];
   }
 
-  String _desc;
-  String _text;
+  String? _desc;
+  String? _text;
 
   ExtendInfoList copyWith({
-    String desc,
-    String text,
+    String? desc,
+    String? text,
   }) =>
       ExtendInfoList(
         desc: desc ?? _desc,
         text: text ?? _text,
       );
 
-  String get desc => _desc;
+  String? get desc => _desc;
 
-  String get text => _text;
+  String? get text => _text;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -568,13 +561,10 @@ class ExtendInfoList {
   }
 }
 
-/// desc : "姓名"
-/// text : "已解锁未上线的"
-
 class InfoList {
   InfoList({
-    String desc,
-    String text,
+    String? desc,
+    String? text,
   }) {
     _desc = desc;
     _text = text;
@@ -585,21 +575,21 @@ class InfoList {
     _text = json['text'];
   }
 
-  String _desc;
-  String _text;
+  String? _desc;
+  String? _text;
 
   InfoList copyWith({
-    String desc,
-    String text,
+    String? desc,
+    String? text,
   }) =>
       InfoList(
         desc: desc ?? _desc,
         text: text ?? _text,
       );
 
-  String get desc => _desc;
+  String? get desc => _desc;
 
-  String get text => _text;
+  String? get text => _text;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

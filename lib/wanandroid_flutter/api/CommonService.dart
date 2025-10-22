@@ -142,7 +142,7 @@ class CommonService {
   }
 
   Options _getOptions() {
-    Map<String, String> map = new Map();
+    final Map<String, String> map = <String, String>{};
     List<String> cookies = User().cookie;
     map['Cookie'] = cookies.toString();
     return Options(headers: map);
