@@ -37,7 +37,7 @@ class _AppState extends State<App> {
           controller: _pageController,
           physics: NeverScrollableScrollPhysics(), //让pageView不能滑动
           children: <Widget>[
-            MyHomePage(title: "你好"),
+            //MyHomePage(title: "你好"),
             ProjectPracticePage2(),
             HomePage(),
             ProjectPracticePage(),

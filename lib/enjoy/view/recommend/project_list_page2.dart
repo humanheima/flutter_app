@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/enjoy/manager/api_manager.dart';
 import 'package:flutter_app/enjoy/view/recommend/rec_item_project.dart';
-import 'package:flutter_app/enjoy/widgets/item_project.dart';
 
 import '../../model/HomeResponse.dart';
 
 ///
-/// Created by dumingwei on 2019/4/4.
+/// Created by dumingwei on 2019/4/4. 不敢想象，这是6年前创建的文件了。Amazing！
 /// Desc: 项目列表页
 ///
 
@@ -36,38 +35,77 @@ class _ProjectListState extends State<ProjectListPage2>
 
   List<Character> projects = <Character>[];
 
+  ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
-    getList();
+    getList(loadMore: false);
+
+    ///处理加载更多的逻辑
+    _scrollController.addListener(() {
+      var maxScroll = _scrollController.position.maxScrollExtent;
+      var pixels = _scrollController.position.pixels;
+      if (maxScroll == pixels) {
+        getList(loadMore: true);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int position) {
-        return RecProjectItem(projects[position]);
-      },
-      itemCount: projects.length,
+    // 使用 RefreshIndicator 包裹 ListView，实现下拉刷新
+    return RefreshIndicator(
+      onRefresh: _handleRefresh,
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, int position) {
+          return RecProjectItem(projects[position]);
+        },
+        itemCount: projects.length,
+        controller: _scrollController,
+      ),
     );
   }
 
+  /// 下拉刷新回调
+  Future<void> _handleRefresh() async {
+    // 重置为第一页（page 从1开始），然后重新请求
+    setState(() {
+      pageNum = 0; // getList 会把非加载更多的情况视为第一页
+    });
+    await getList(loadMore: false);
+  }
+
   /// 获取项目列表
-  void getList() async {
+  Future<void> getList({bool loadMore = false}) async {
     // 使用新的 getCharacterDiscovery 接口，传入分页和筛选参数
     try {
+      // 当不是加载更多时，我们需要请求第1页；当加载更多时，pageNum+1
+      var currentPage = loadMore ? pageNum + 1 : 1;
+
+      print("currentPage = $currentPage loadMore=$loadMore");
+
       final response = await ApiManager().getCharacterDiscovery(
-          sort: sortType ?? '', tagName: tagName ?? '', recPageNum: pageNum);
+          sort: sortType ?? '',
+          tagName: tagName ?? '',
+          recPageNum: currentPage);
 
       var homeResponse = HomeResponse.fromJson(response.data);
 
       var projectListBean = homeResponse.data.character?.list ?? <Character>[];
 
       setState(() {
-        projects.addAll(projectListBean);
-        // 下一页
-        pageNum += 1;
+        pageNum = currentPage;
+        if (loadMore) {
+          // 加载更多时，页码已经在外部增加
+          projects.addAll(projectListBean);
+          // 下一页
+        } else {
+          // 非加载更多时，重置页码为1
+          projects.clear();
+          projects.addAll(projectListBean);
+        }
       });
     } catch (e) {
       // 可以在此处理错误或提示用户

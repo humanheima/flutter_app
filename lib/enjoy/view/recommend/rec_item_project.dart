@@ -41,6 +41,15 @@ class _RecProjectItemState extends State<RecProjectItem> {
                   width: 120,
                   height: 240,
                   placeholder: "images/image_default.png",
+                  imageErrorBuilder: (_, __, ___) {
+                    return Image.asset(
+                      "images/image_default.png",
+                      width: 120,
+                      height: 240,
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
+                  fit: BoxFit.fitWidth,
                   image: widget.project.avatar ?? ""),
               Expanded(
                 flex: 1,
