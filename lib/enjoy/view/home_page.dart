@@ -1,3 +1,4 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/enjoy/constant/textsize_const.dart';
@@ -5,7 +6,6 @@ import 'package:flutter_app/enjoy/manager/api_manager.dart';
 import 'package:flutter_app/enjoy/model/home_article_bean.dart';
 import 'package:flutter_app/enjoy/model/home_banner_bean.dart';
 import 'package:flutter_app/enjoy/widgets/item_home_article.dart';
-import 'package:card_swiper/card_swiper.dart';
 
 ///
 /// Created by dumingwei on 2019/4/2.
@@ -84,7 +84,9 @@ class _HomePageState extends State<HomePage>
   /// 获取首页banner数据
   void getBanner() async {
     Response response = await ApiManager().getHomeBanner();
+    Response response2 = await ApiManager().getRecCategoryList();
     print("response:${response.data}");
+    print("response2:${response2.data}");
     var homeBannerBean = HomeBannerBean.fromJson(response.data);
     setState(() {
       banners.clear();

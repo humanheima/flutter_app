@@ -28,7 +28,7 @@ class WanAndroidApp extends StatefulWidget {
 }
 
 class WanAndroidAppState extends State<WanAndroidApp> {
-  ThemeData themeData;
+  late ThemeData themeData;
 
   @override
   void initState() {
@@ -76,7 +76,7 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   int _index = 0;
 
-  PageController _pageController;
+  late PageController _pageController;
   var _pageList;
   List<String> _titleList = [
     "首页",
@@ -104,6 +104,8 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
+    // Required when using AutomaticKeepAliveClientMixin
+    super.build(context);
     print('index=$_index');
     /* return MaterialApp(
       home: Scaffold(
@@ -172,28 +174,32 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     }));
   }
 
-  Future<bool> _onWillPop() {
-    return showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return new AlertDialog(
-                title: Text("提示"),
-                content: new Text("确定退出应用吗？"),
-                actions: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      },
-                      child: Text('再看一会')),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      },
-                      child: Text('退出')),
-                ],
-              );
-            }) ??
-        false;
+  Future<bool> _onWillPop() async {
+    final bool? result = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("提示"),
+          content: Text("确定退出应用吗？"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text('再看一会'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text('退出'),
+            ),
+          ],
+        );
+      },
+    );
+
+    return result ?? false;
   }
 
   void _handleTabChanged(int newValue) {

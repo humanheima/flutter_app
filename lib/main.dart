@@ -6,6 +6,7 @@ import 'package:flutter_app/package_manage.dart';
 
 import 'enjoy/view/home_page.dart';
 import 'enjoy/view/project_practice_page.dart';
+import 'enjoy/view/recommend/project_practice_page2.dart';
 
 /// 程序入口
 
@@ -37,6 +38,7 @@ class _AppState extends State<App> {
           physics: NeverScrollableScrollPhysics(), //让pageView不能滑动
           children: <Widget>[
             MyHomePage(title: "你好"),
+            ProjectPracticePage2(),
             HomePage(),
             ProjectPracticePage(),
             WechatArticlePage()
@@ -99,6 +101,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   final String title;
+
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   @override
@@ -125,7 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('You have pushed the button this many times:'),
-            Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
+            Text('$_counter',
+                style: Theme.of(context).textTheme.headlineMedium),
             TextButton(
               child: Text("open new route"),
               onPressed: () {
@@ -229,7 +233,8 @@ class _BootstrapHomeState extends State<_BootstrapHome> {
               color: Theme.of(context).colorScheme.primary,
             ),
             const SizedBox(height: 16),
-            Text('占位页面（待迁移原有页面）', style: Theme.of(context).textTheme.titleMedium),
+            Text('占位页面（待迁移原有页面）',
+                style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
       ),
@@ -239,7 +244,8 @@ class _BootstrapHomeState extends State<_BootstrapHome> {
         selectedItemColor: Colors.deepPurpleAccent,
         onTap: (i) => setState(() => _index = i),
         items: const [
-          BottomNavigationBarItem(label: '基础知识', icon: Icon(Icons.shopping_basket)),
+          BottomNavigationBarItem(
+              label: '基础知识', icon: Icon(Icons.shopping_basket)),
           BottomNavigationBarItem(label: '推荐', icon: Icon(Icons.home)),
           BottomNavigationBarItem(label: '项目', icon: Icon(Icons.map)),
           BottomNavigationBarItem(label: '公众号', icon: Icon(Icons.contact_mail)),

@@ -8,15 +8,77 @@ import 'package:dio/dio.dart';
 class ApiManager {
   late final Dio _dio;
 
+  // Dio instance for the dream API which uses a different baseUrl
+  late final Dio _dreamDio;
+
+  // Configure the dream API base URL here (adjust to real endpoint)
+  static const String _dreamBaseUrl = "https://test-app.zhumengdao.com/";
+
   static final ApiManager _instance = ApiManager._internal();
 
   ApiManager._internal() {
     var options = BaseOptions(baseUrl: "https://www.wanandroid.com/");
 
     _dio = Dio(options);
+
+    // Initialize a separate Dio for the dream API so it can use a different baseUrl
+    var dreamOptions = BaseOptions(baseUrl: _dreamBaseUrl);
+    _dreamDio = Dio(dreamOptions);
   }
 
   factory ApiManager() => _instance;
+
+  /// 获取分类列表
+  /// https://test-app.zhumengdao.com/im/rec/square/recCategoryList
+  Future<Response<dynamic>> getRecCategoryList() async {
+    try {
+      // Use the dream-specific Dio instance so this request goes to a different baseUrl
+      final response = await _dreamDio.get("im/rec/square/recCategoryList");
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// 获取推荐人物发现页
+  ///
+  /// 参数说明：
+  /// - sort: 排序类型（字符串），默认空
+  /// - tagName: 筛选标签，默认空
+  /// - recPageNum: 推荐页码，默认 0
+  /// - pageSize: 每页大小，可选，默认 20
+  /// - extraQuery: 额外的 query 参数，会合并到请求中（优先级更高）
+  ///
+  /// /xxsy/im/characterDiscovery/square?sort=&tagName=&recPageNum=0
+  Future<Response<dynamic>> getCharacterDiscovery({
+    String sort = '',
+    String tagName = '',
+    int recPageNum = 0,
+    int pageSize = 20,
+    Map<String, dynamic>? extraQuery,
+  }) async {
+    try {
+      final query = <String, dynamic>{
+        'sort': sort,
+        'tagName': tagName,
+        'recPageNum': recPageNum,
+        'pageSize': pageSize,
+      };
+
+      if (extraQuery != null) {
+        query.addAll(extraQuery);
+      }
+
+      // Use the dream-specific Dio instance so this request goes to a different baseUrl
+      final response = await _dreamDio.get(
+        'xxsy/im/characterDiscovery/square',
+        queryParameters: query,
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   /// 获取首页Banner
   Future<Response<dynamic>> getHomeBanner() async {
