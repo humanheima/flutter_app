@@ -24,7 +24,7 @@ class TestPageViewCacheRoute extends StatelessWidget {
 }
 
 class Page2 extends StatefulWidget {
-  Page2({Key? key, this.text});
+  Page2({Key? key, required this.text});
 
   final String text;
 
@@ -35,7 +35,6 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> with AutomaticKeepAliveClientMixin {
-
   @override
   Widget build(BuildContext context) {
     super.build(context); // 必须调用
@@ -43,7 +42,7 @@ class _Page2State extends State<Page2> with AutomaticKeepAliveClientMixin {
     return Center(
       child: Text(
         '${widget.text}',
-        textScaleFactor: 5,
+        textScaler: const TextScaler.linear(5),
       ),
     );
   }

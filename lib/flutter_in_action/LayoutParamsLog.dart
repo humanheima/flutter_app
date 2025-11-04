@@ -12,7 +12,7 @@ class LayoutParamsLog<T> extends StatelessWidget {
   }) : super(key: key);
 
   final Widget child;
-  final T tag; //指定日志tag
+  final T? tag; //指定日志tag（可空）
 
   @override
   Widget build(BuildContext context) {

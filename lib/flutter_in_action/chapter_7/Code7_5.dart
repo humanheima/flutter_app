@@ -52,7 +52,7 @@ class Code7_5 extends StatelessWidget {
                     case ConnectionState.done:
                       return Text('Stream已关闭');
                   }
-                  return null;
+                  return Text('未知状态');
                 }),
           ],
         ),

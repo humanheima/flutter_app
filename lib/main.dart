@@ -188,7 +188,7 @@ class NewRoute extends StatelessWidget {
 
 // Entry point for the app. Use a minimal, self-contained app to ensure it runs.
 //void main() => runApp(const BootstrapApp());
-void main() => runApp(App());
+// void main() => runApp(App());
 
 /// A minimal bootstrap app to get the project running while legacy modules are migrated.
 class BootstrapApp extends StatelessWidget {

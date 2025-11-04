@@ -32,7 +32,9 @@ class MyApp extends StatelessWidget {
         "new_page": (context) => NewRoute(),
         "echo_page": (context) => EchoRoute(),
         "tip_page": (context) {
-          return TipRoute(text: ModalRoute.of(context).settings.arguments);
+          final args = ModalRoute.of(context)?.settings.arguments;
+          final text = args is String ? args : (args?.toString() ?? '');
+          return TipRoute(text: text);
         },
         "test_state_lifecycle_page": (context) => StateLifecycleTest(),
         "test_get_state_object": (context) => GetStateObjectRoute(),
@@ -47,7 +49,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 

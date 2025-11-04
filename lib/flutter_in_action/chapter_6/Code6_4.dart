@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 ///
 /// Created by dumingwei on 2019-10-08.
@@ -31,22 +32,27 @@ class GridViewTestRoute extends StatelessWidget {
     );
   }
 
-  StaggeredGridView buildStaggeredGridView() {
-    return new StaggeredGridView.countBuilder(
+  Widget buildStaggeredGridView() {
+    const itemCount = 8;
+    return StaggeredGrid.count(
       crossAxisCount: 4,
-      itemCount: 8,
-      itemBuilder: (BuildContext context, int index) => new Container(
-          color: Colors.green,
-          child: new Center(
-            child: new CircleAvatar(
-              backgroundColor: Colors.white,
-              child: new Text('$index'),
-            ),
-          )),
-      staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 2 : 1),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
+      children: List.generate(itemCount, (index) {
+        return StaggeredGridTile.count(
+          crossAxisCellCount: 2,
+          mainAxisCellCount: index.isEven ? 2 : 1,
+          child: Container(
+            color: Colors.green,
+            child: const Center(
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text(''),
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 

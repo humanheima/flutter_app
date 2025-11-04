@@ -71,7 +71,7 @@ class InheritedProvider<T> extends InheritedWidget {
 }
 
 // 该方法用于在Dart中获取模板类型
-Type _typeOf<T>() => T;
+// Type _typeOf<T>() => T;
 
 ///这是一个订阅者，当收到数据改变的通知的时候，重新构建InheritedProvider。
 class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
@@ -81,19 +81,15 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
   ChangeNotifierProvider({Key? key, required this.data, required this.child}) : super(key: key);
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
-  // static T of<T>(BuildContext context) {
-  //   final type = _typeOf<InheritedProvider<T>>();
-  //   final provider =  context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>();
-  //   return provider.data;
-  // }
-
-  //定义一个便捷方法，方便子树中的widget获取共享数据
   static T of<T>(BuildContext context, {bool listen = true}) {
     final provider = listen ? context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>()
         : context
             .getElementForInheritedWidgetOfExactType<InheritedProvider<T>>()
             ?.widget as InheritedProvider<T>;
 
+    if (provider == null) {
+      throw Exception("Couldn't find an InheritedProvider<$T> above the current context");
+    }
     return provider.data;
   }
 

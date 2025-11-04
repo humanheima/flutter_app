@@ -48,9 +48,9 @@ class _SwitchAndCheckBoxWidgetState extends State<SwitchAndCheckBoxWidget> {
           Checkbox(
             value: _checkboxSelected,
             activeColor: Colors.red, //选中时的颜色
-            onChanged: (value) {
+            onChanged: (bool? value) {
               setState(() {
-                _checkboxSelected = value;
+                _checkboxSelected = value ?? false;
               });
             },
           )

@@ -58,9 +58,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   // 创建一个 MethodChannel 实例
-  static const platform = const  MethodChannel('com.example/my_channel');
+  static const platform = const MethodChannel('com.example/my_channel');
 
   @override
   void initState() {
@@ -246,7 +245,10 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(context,
                     new CupertinoPageRoute(builder: (context) {
-                  return GradientCircularProgressRoute();
+                  return GradientCircularProgressRoute(
+                    radius: 10,
+                    colors: [Colors.redAccent, Colors.redAccent],
+                  );
                 }));
               },
             ),
@@ -307,5 +309,4 @@ class _MyHomePageState extends State<MyHomePage> {
       print("Failed to open native screen: '${e.message}'.");
     }
   }
-
 }

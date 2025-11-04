@@ -78,7 +78,7 @@ class AnimateProgressWidget extends StatefulWidget {
 
 class _AnimateProgressWidgetState extends State<AnimateProgressWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {

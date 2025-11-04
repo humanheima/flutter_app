@@ -15,9 +15,14 @@ class ContextRoute extends StatelessWidget {
       body: Container(
         child: Builder(builder: (context) {
           // 在Widget树中向上查找最近的父级`Scaffold` widget
-          Scaffold scaffold = context.findAncestorWidgetOfExactType<Scaffold>();
-          // 直接返回 AppBar的title， 此处实际上是Text("Context测试")
-          return (scaffold.appBar as AppBar).title;
+          final Scaffold? scaffold = context.findAncestorWidgetOfExactType<Scaffold>();
+          // 如果找到了 Scaffold，并且其 appBar 是 AppBar，则返回 title（Widget?），否则返回一个fallback
+          final preferred = scaffold?.appBar;
+          if (preferred is AppBar) {
+            return preferred.title ?? SizedBox.shrink();
+          }
+          // 找不到时显示一条友好的提示，而不是发生空引用异常
+          return Text('No AppBar title found');
         }),
       ),
     );

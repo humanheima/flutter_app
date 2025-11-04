@@ -13,7 +13,7 @@ class ScaffoldRoute extends StatefulWidget {
 
 class _ScaffoldRouteState extends State<ScaffoldRoute>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
   List<String> tabs = ["新闻", "history", "image"];
   int _selectedIndex = 1;
 
@@ -59,7 +59,8 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
                 alignment: Alignment.center,
                 child: Text(
                   e,
-                  textScaleFactor: 5,
+                  // `textScaleFactor` was deprecated; use explicit font size instead.
+                  style: TextStyle(fontSize: 40),
                 ));
           }).toList()),
       //bottomNavigationBar: buildBottomNavigationBar(),
@@ -90,9 +91,21 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
       color: Colors.white,
       child: Row(
         children: [
-          IconButton(icon: Icon(Icons.home)),
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              // 切换到第一个 tab
+              _onItemTapped(0);
+            },
+          ),
           SizedBox(), //中间位置空出
-          IconButton(icon: Icon(Icons.business)),
+          IconButton(
+            icon: Icon(Icons.business),
+            onPressed: () {
+              // 切换到第二个 tab
+              _onItemTapped(1);
+            },
+          ),
         ],
         mainAxisAlignment: MainAxisAlignment.spaceAround, //均分底部导航栏横向空间
       ),

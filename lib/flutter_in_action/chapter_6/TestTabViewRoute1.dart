@@ -11,7 +11,7 @@ class TestTabViewRoute1 extends StatefulWidget {
 
 class _TestTabViewRoute1State extends State<TestTabViewRoute1>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
   List tabs = ['新闻', '历史', '图片'];
 
   @override
@@ -41,7 +41,7 @@ class _TestTabViewRoute1State extends State<TestTabViewRoute1>
                 keepAlive: true,
                 child: Text(
                   e,
-                  textScaleFactor: 5,
+                  textScaler: const TextScaler.linear(5),
                 ));
           }).toList()),
     );

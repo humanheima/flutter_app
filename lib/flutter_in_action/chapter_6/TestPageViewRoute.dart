@@ -37,7 +37,7 @@ class TestPageViewRoute extends StatelessWidget {
 }
 
 class Page extends StatefulWidget {
-  Page({Key? key, this.text});
+  Page({Key? key, required this.text});
 
   final String text;
 
@@ -54,7 +54,7 @@ class _PageState extends State<Page> {
     return Center(
       child: Text(
         '${widget.text}',
-        textScaleFactor: 5,
+        textScaler: const TextScaler.linear(5),
       ),
     );
   }

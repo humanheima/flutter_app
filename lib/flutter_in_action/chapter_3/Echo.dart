@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class Echo extends StatelessWidget {
   final String text;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   const Echo({Key? key, required this.text, this.backgroundColor})
       : super(key: key);
@@ -16,11 +16,11 @@ class Echo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        color: backgroundColor,
-        padding: new EdgeInsets.symmetric(vertical: 20.0, horizontal: 0.0),
+        color: backgroundColor ?? Colors.transparent,
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 0.0),
         child: Text(
           text,
-          style: new TextStyle(color: Colors.blue, fontSize: 32),
+          style: const TextStyle(color: Colors.blue, fontSize: 32.0),
         ),
       ),
     );

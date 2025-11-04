@@ -9,16 +9,16 @@ import 'package:flutter/material.dart';
 
 ///一个背景颜色和Title可以自定义的导航栏，并且背景色为深色时我们应该让Title显示为浅色；背景色为浅色时，Title显示为深色。
 class NavBar extends StatelessWidget {
-  final String title;
-  final Color color;
+  final String? title;
+  final Color? color;
 
-  NavBar({Key? key, this.title, this.color});
+  const NavBar({Key? key, this.title, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(minHeight: 52, minWidth: double.infinity),
-      decoration: BoxDecoration(color: color, boxShadow: [
+      constraints: const BoxConstraints(minHeight: 52, minWidth: double.infinity),
+      decoration: BoxDecoration(color: color, boxShadow: const [
         //阴影
         BoxShadow(
           color: Colors.black26,
@@ -27,11 +27,12 @@ class NavBar extends StatelessWidget {
         )
       ]),
       child: Text(
-        title,
+        title ?? '',
         style: TextStyle(
             fontWeight: FontWeight.bold,
-            color:
-                color.computeLuminance() < 0.5 ? Colors.white : Colors.black),
+            color: (color?.computeLuminance() ?? 0) < 0.5
+                ? Colors.white
+                : Colors.black),
       ),
       alignment: Alignment.center,
     );
@@ -39,6 +40,8 @@ class NavBar extends StatelessWidget {
 }
 
 class ThemeTestRoute extends StatefulWidget {
+  const ThemeTestRoute({Key? key}) : super(key: key);
+
   @override
   State createState() {
     return _ThemeTestRouteState();
@@ -46,10 +49,8 @@ class ThemeTestRoute extends StatefulWidget {
 }
 
 class _ThemeTestRouteState extends State<ThemeTestRoute> {
-
-
   ////当前路由主题色
-  Color _themeColor = Colors.teal;
+  MaterialColor _themeColor = Colors.teal;
 
   @override
   Widget build(BuildContext context) {

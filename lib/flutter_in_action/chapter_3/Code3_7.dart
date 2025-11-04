@@ -16,7 +16,6 @@ class _InputRouteState extends State<InputRoute> {
   ///用来控制焦点
   FocusNode focusNode1 = new FocusNode();
   FocusNode focusNode2 = new FocusNode();
-  FocusScopeNode focusScopeNode;
 
   @override
   void initState() {
@@ -32,6 +31,15 @@ class _InputRouteState extends State<InputRoute> {
     focusNode1.addListener(() {
       print("focusNode1.hasFocus ? ${focusNode1.hasFocus}");
     });
+  }
+
+  @override
+  void dispose() {
+    _unameController.dispose();
+    _selectionController.dispose();
+    focusNode1.dispose();
+    focusNode2.dispose();
+    super.dispose();
   }
 
   @override
@@ -101,9 +109,8 @@ class _InputRouteState extends State<InputRoute> {
                                   child: Text("移动焦点"),
                                   onPressed: () {
                                     //将焦点从第一个TextField移到第二个TextField
-                                    // 这是一种写法 FocusScope.of(context).requestFocus(focusNode2);
-                                    // 这是第二种写法
-                                    focusScopeNode.requestFocus(focusNode2);
+                                    // 直接通过 Builder 的 ctx 获取 FocusScope
+                                    FocusScope.of(ctx).requestFocus(focusNode2);
                                   },
                                 ),
                                 ElevatedButton(
@@ -136,7 +143,7 @@ class _InputRouteState extends State<InputRoute> {
                     decoration: BoxDecoration(
                         border: Border(
                             bottom: BorderSide(
-                                color: Colors.grey[200], width: 1.0))),
+                                color: Colors.grey.shade200, width: 1.0))),
                   )
                 ],
               ),
@@ -152,7 +159,14 @@ class FormTestRoute extends StatefulWidget {
 class _FormTestRouteState extends State<FormTestRoute> {
   TextEditingController _unameController = new TextEditingController();
   TextEditingController _pwdController = new TextEditingController();
-  GlobalKey _formKey = new GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _unameController.dispose();
+    _pwdController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +190,7 @@ class _FormTestRouteState extends State<FormTestRoute> {
                       icon: Icon(Icons.person)),
                   // 校验用户名
                   validator: (v) {
-                    return v.trim().length > 0 ? null : "用户名不能为空";
+                    return (v != null && v.trim().length > 0) ? null : "用户名不能为空";
                   }),
               TextFormField(
                   controller: _pwdController,
@@ -187,7 +201,7 @@ class _FormTestRouteState extends State<FormTestRoute> {
                   obscureText: true,
                   //校验密码
                   validator: (v) {
-                    return v.trim().length > 5 ? null : "密码不能少于6位";
+                    return (v != null && v.trim().length > 5) ? null : "密码不能少于6位";
                   }),
               // 登录按钮
               Padding(

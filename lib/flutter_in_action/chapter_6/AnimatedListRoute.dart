@@ -67,28 +67,37 @@ class _AnimatedListRouteState extends State<AnimatedListRoute> {
   }
 
   void onDelete(BuildContext context, int index) {
-    // 待实现
+    // 使用 AnimatedList 自带的删除动画
+    final removed = data[index];
     setState(() {
-      globalKey.currentState.removeItem(index, (context, animation) {
-        //todo globalKey.currentState 没有 getItemAt(index) 这种方法吗？
-        Widget item = buildItem(context, index);
-        print('删除 ${data[index]}');
-        data.removeAt(index);
-        return FadeTransition(
-          opacity: CurvedAnimation(
-              parent: animation,
-              //让透明度变化的更快一些
-              curve: const Interval(0.5, 1.0)),
-          // 不断缩小列表项的高度
-          child: SizeTransition(
-            sizeFactor: animation,
-            axisAlignment: 0.0,
-            child: item,
-          ),
-        );
-      },
-          // 动画时间为 200 ms
-          duration: Duration(milliseconds: 200));
+      globalKey.currentState?.removeItem(
+        index,
+        (context, animation) {
+          // 使用被删除的数据构建固定的 Item，避免索引变化导致显示错误
+          final item = ListTile(
+            key: ValueKey(removed),
+            title: Text(removed),
+            trailing: const Icon(Icons.delete),
+          );
+          // 从数据源中移除
+          data.removeAt(index);
+          print('删除 $removed');
+          return FadeTransition(
+            opacity: CurvedAnimation(
+                parent: animation,
+                //让透明度变化的更快一些
+                curve: const Interval(0.5, 1.0)),
+            // 不断缩小列表项的高度
+            child: SizeTransition(
+              sizeFactor: animation,
+              axisAlignment: 0.0,
+              child: item,
+            ),
+          );
+        },
+        // 动画时间为 200 ms
+        duration: const Duration(milliseconds: 200),
+      );
     });
   }
 
@@ -98,7 +107,7 @@ class _AnimatedListRouteState extends State<AnimatedListRoute> {
         child: Icon(Icons.add),
         onPressed: () {
           data.add('${++count}');
-          globalKey.currentState.insertItem(data.length - 1);
+          globalKey.currentState?.insertItem(data.length - 1);
           print("添加 $count");
         },
       ),

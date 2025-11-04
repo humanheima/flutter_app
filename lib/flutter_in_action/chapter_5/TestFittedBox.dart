@@ -131,7 +131,7 @@ class TestFittedBox extends StatelessWidget {
 class SingleLineFittedBox extends StatelessWidget {
   final Widget child;
 
-  const SingleLineFittedBox({Key key, this.child}) : super(key: key);
+  const SingleLineFittedBox({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

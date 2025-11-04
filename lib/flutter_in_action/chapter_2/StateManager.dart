@@ -221,7 +221,7 @@ class _TapBoxCState extends State<TapBoxC> {
           color: widget.active ? Colors.lightGreen[700] : Colors.grey[600],
           border: _highlight
               ? new Border.all(
-                  color: Colors.teal[700],
+                  color: Colors.teal.shade700,
                   width: 10.0,
                 )
               : null,
