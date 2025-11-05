@@ -39,7 +39,7 @@ class MainPage extends StatelessWidget {
       body: Container(
         child: ListView(
           children: <Widget>[
-            ElevatedButton(
+            TextButton(
                 child: Text('第3章'),
                 onPressed: () {
                   Navigator.push(context,
@@ -55,14 +55,27 @@ class MainPage extends StatelessWidget {
                     return new Chapter4HomePage();
                   }));
                 }),
-            ElevatedButton(
-                child: Text('第5章'),
-                onPressed: () {
-                  Navigator.push(context,
-                      new MaterialPageRoute(builder: (context) {
-                    return new Chapter5HomePage();
-                  }));
-                }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                OutlinedButton(
+                    child: Text('第5章'),
+                    onPressed: () {
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (context) {
+                        return new Chapter5HomePage();
+                      }));
+                    }),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (context) {
+                        return new Chapter5HomePage();
+                      }));
+                    },
+                    icon: Icon(Icons.favorite))
+              ],
+            ),
             ElevatedButton(
                 child: Text('第6章'),
                 onPressed: () {

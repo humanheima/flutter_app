@@ -12,7 +12,8 @@ class ApiManager {
   late final Dio _dreamDio;
 
   // Configure the dream API base URL here (adjust to real endpoint)
-  static const String _dreamBaseUrl = "https://test-app.zhumengdao.com/";
+  //static const String _dreamBaseUrl = "https://test-app.zhumengdao.com/";
+  static const String _dreamBaseUrl = "https://pre-app.zhumengdao.com/";
 
   static final ApiManager _instance = ApiManager._internal();
 

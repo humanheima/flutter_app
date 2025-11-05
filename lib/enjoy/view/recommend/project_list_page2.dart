@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/enjoy/manager/api_manager.dart';
-import 'package:flutter_app/enjoy/view/recommend/rec_item_project.dart';
 
 import '../../model/HomeResponse.dart';
+import 'CharacterCard.dart';
 
 ///
 /// Created by dumingwei on 2019/4/4. 不敢想象，这是6年前创建的文件了。Amazing！
@@ -60,7 +60,8 @@ class _ProjectListState extends State<ProjectListPage2>
       onRefresh: _handleRefresh,
       child: ListView.builder(
         itemBuilder: (BuildContext context, int position) {
-          return RecProjectItem(projects[position]);
+          //return RecProjectItem(projects[position]);
+          return CharacterCard(character: projects[position]);
         },
         itemCount: projects.length,
         controller: _scrollController,

@@ -77,7 +77,8 @@ class HomeData {
           : null,
       chat: json['chat'],
       character: json['character'] != null
-          ? CharacterContainer.fromJson(json['character'] as Map<String, dynamic>)
+          ? CharacterContainer.fromJson(
+              json['character'] as Map<String, dynamic>)
           : null,
       recSet: json['recSet'] != null
           ? RecSet.fromJson(json['recSet'] as Map<String, dynamic>)
@@ -94,13 +95,16 @@ class HomeData {
           ? Ext.fromJson(json['ext'] as Map<String, dynamic>)
           : null,
       agreementDialog: json['agreementDialog'] != null
-          ? AgreementDialog.fromJson(json['agreementDialog'] as Map<String, dynamic>)
+          ? AgreementDialog.fromJson(
+              json['agreementDialog'] as Map<String, dynamic>)
           : null,
       categoryColumn: json['categoryColumn'] != null
-          ? CategoryColumn.fromJson(json['categoryColumn'] as Map<String, dynamic>)
+          ? CategoryColumn.fromJson(
+              json['categoryColumn'] as Map<String, dynamic>)
           : null,
       recommendStoryResponse: json['recommendStoryResponse'] != null
-          ? RecommendStoryResponse.fromJson(json['recommendStoryResponse'] as Map<String, dynamic>)
+          ? RecommendStoryResponse.fromJson(
+              json['recommendStoryResponse'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -141,8 +145,12 @@ class NoticeInfo {
   factory NoticeInfo.fromJson(Map<String, dynamic> json) {
     return NoticeInfo(
       banner: json['banner'],
-      ad1: json['ad1'] != null ? Ad.fromJson(json['ad1'] as Map<String, dynamic>) : null,
-      ad2: json['ad2'] != null ? Ad.fromJson(json['ad2'] as Map<String, dynamic>) : null,
+      ad1: json['ad1'] != null
+          ? Ad.fromJson(json['ad1'] as Map<String, dynamic>)
+          : null,
+      ad2: json['ad2'] != null
+          ? Ad.fromJson(json['ad2'] as Map<String, dynamic>)
+          : null,
       streamerAd: json['streamerAd'],
     );
   }
@@ -342,6 +350,11 @@ class Character {
       'recPageNum': recPageNum,
     };
   }
+
+  bool isMale() {
+    return gender == 1;
+  }
+
 }
 
 class TagInfo {
@@ -427,7 +440,10 @@ class CharacterSort {
   final String sortDesc;
   final int sortValue;
 
-  CharacterSort({required this.sortName, required this.sortDesc, required this.sortValue});
+  CharacterSort(
+      {required this.sortName,
+      required this.sortDesc,
+      required this.sortValue});
 
   factory CharacterSort.fromJson(Map<String, dynamic> json) {
     return CharacterSort(
@@ -454,7 +470,10 @@ class Ext {
 
   factory Ext.fromJson(Map<String, dynamic> json) {
     return Ext(
-      currentTagName: (json['currentTagName'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
+      currentTagName: (json['currentTagName'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
       currentSort: json['currentSort'] as int? ?? 0,
     );
   }
@@ -472,7 +491,8 @@ class AgreementDialog {
   final int lastVersion;
   final String content;
 
-  AgreementDialog({required this.show, required this.lastVersion, required this.content});
+  AgreementDialog(
+      {required this.show, required this.lastVersion, required this.content});
 
   factory AgreementDialog.fromJson(Map<String, dynamic> json) {
     return AgreementDialog(
@@ -492,7 +512,10 @@ class CategoryColumn {
   final String categoryQurl;
   final String title;
 
-  CategoryColumn({required this.columnList, required this.categoryQurl, required this.title});
+  CategoryColumn(
+      {required this.columnList,
+      required this.categoryQurl,
+      required this.title});
 
   factory CategoryColumn.fromJson(Map<String, dynamic> json) {
     return CategoryColumn(
@@ -503,7 +526,11 @@ class CategoryColumn {
   }
 
   Map<String, dynamic> toJson() {
-    return {'columnList': columnList, 'categoryQurl': categoryQurl, 'title': title};
+    return {
+      'columnList': columnList,
+      'categoryQurl': categoryQurl,
+      'title': title
+    };
   }
 }
 
@@ -513,7 +540,8 @@ class RecommendStoryResponse {
   final int? showPosition;
   final dynamic recStoryList;
 
-  RecommendStoryResponse({this.titleUrl, this.darkTitleUrl, this.showPosition, this.recStoryList});
+  RecommendStoryResponse(
+      {this.titleUrl, this.darkTitleUrl, this.showPosition, this.recStoryList});
 
   factory RecommendStoryResponse.fromJson(Map<String, dynamic> json) {
     return RecommendStoryResponse(
@@ -533,4 +561,3 @@ class RecommendStoryResponse {
     };
   }
 }
-
