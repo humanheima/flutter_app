@@ -26,9 +26,10 @@ class BannerWidgetUIState extends State<BannerWidgetUI> {
 
   Future<void> _getBanner() async {
     CommonService().getBanner((BannerModel _bean) {
-      if (_bean.data.length > 0) {
+      final list = _bean.data ?? <BannerData>[];
+      if (list.isNotEmpty) {
         setState(() {
-          _bannerList = _bean.data;
+          _bannerList = list;
         });
       }
     });
@@ -49,13 +50,17 @@ class BannerWidgetUIState extends State<BannerWidgetUI> {
   }
 
   Widget buildItemImageWidget(BuildContext context, int index) {
+    final String url = _bannerList[index].imagePath ?? '';
+    if (url.isEmpty) {
+      return Container(color: Colors.grey.shade200);
+    }
     return InkWell(
       onTap: () {
         //RouteUtil.toWebView(context, _bannerList[index].title, _bannerList[index].url);
       },
       child: Container(
         child: Image.network(
-          _bannerList[index].imagePath,
+          url,
           fit: BoxFit.fill,
         ),
       ),

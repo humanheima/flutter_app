@@ -175,9 +175,8 @@ class TimelineUtil {
   /// locDateTime: current time or schedule time.
   /// locale: output key.
   static String formatByDateTime(DateTime dateTime,
-      {DateTime locDateTime, String locale, DayFormat dayFormat}) {
-    int _locDateTime =
-        (locDateTime == null ? null : locDateTime.millisecondsSinceEpoch);
+      {DateTime? locDateTime, String? locale, DayFormat? dayFormat}) {
+    int? _locDateTime = locDateTime?.millisecondsSinceEpoch;
     return format(dateTime.millisecondsSinceEpoch,
         locTimeMillis: _locDateTime, locale: locale, dayFormat: dayFormat);
   }
@@ -187,7 +186,7 @@ class TimelineUtil {
   /// locDateTime: current time or schedule time. millis.
   /// locale: output key.
   static String format(int timeMillis,
-      {int locTimeMillis, String locale, DayFormat dayFormat}) {
+      {int? locTimeMillis, String? locale, DayFormat? dayFormat}) {
     int _locTimeMillis = locTimeMillis ?? DateTime.now().millisecondsSinceEpoch;
     String _locale = locale ?? 'zh';
     TimelineInfo _info = _timelineInfoMap[_locale] ?? ZhInfo();

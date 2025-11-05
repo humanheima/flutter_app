@@ -20,7 +20,7 @@ class RegisterPageUIState extends State<RegisterPageUI> {
   TextEditingController _pwdController = TextEditingController();
   TextEditingController _pwdAgainController = TextEditingController();
 
-  Future<Null> _register() async {
+  Future<void> _register() async {
     String userName = _userNameController.text;
     String password = _pwdController.text;
     String passwordAgain = _pwdAgainController.text;
@@ -32,10 +32,18 @@ class RegisterPageUIState extends State<RegisterPageUI> {
           Fluttertoast.showToast(msg: "注册成功!");
           Navigator.of(context).pop();
         } else {
-          Fluttertoast.showToast(msg: _userModel.errorMsg);
+          Fluttertoast.showToast(msg: _userModel.errorMsg ?? '注册失败');
         }
             }, userName, password);
     }
+  }
+
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    _pwdController.dispose();
+    _pwdAgainController.dispose();
+    super.dispose();
   }
 
   @override

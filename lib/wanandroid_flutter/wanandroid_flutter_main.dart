@@ -1,4 +1,3 @@
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/common/application.dart';
@@ -33,7 +32,7 @@ class WanAndroidAppState extends State<WanAndroidApp> {
   @override
   void initState() {
     super.initState();
-    Application.eventBus = new EventBus();
+    // Use the singleton event bus from Application
     themeData = GlobalConfig.geThemeData(widget.darkTheme);
     registerThemeEvent();
   }
@@ -63,8 +62,8 @@ class WanAndroidAppState extends State<WanAndroidApp> {
 
   @override
   void dispose() {
+    // No explicit destroy needed for EventBus
     super.dispose();
-    Application.eventBus.destroy();
   }
 }
 
@@ -107,22 +106,13 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     // Required when using AutomaticKeepAliveClientMixin
     super.build(context);
     print('index=$_index');
-    /* return MaterialApp(
-      home: Scaffold(
-        appBar: _appBarWidget(context),
-        body: PageView(
-          controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
-          children: _pageList,
-        ),
-        bottomNavigationBar: BottomNavigationBarWidget(
-          index: _index,
-          onChanged: _handleTabChanged,
-        ),
-      ),
-    );*/
 
-    return WillPopScope(
+    return PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          if (didPop) return;
+          await _confirmExit();
+        },
         child: DefaultTabController(
             length: _titleList.length,
             child: Scaffold(
@@ -137,8 +127,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                 index: _index,
                 onChanged: _handleTabChanged,
               ),
-            )),
-        onWillPop: _onWillPop);
+            )));
   }
 
   @override
@@ -146,7 +135,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     return true;
   }
 
-  _appBarWidget(BuildContext context) {
+  AppBar _appBarWidget(BuildContext context) {
     return AppBar(
       title: Text(_titleList[_index]),
       elevation: 0.4,
@@ -154,11 +143,11 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  _actionsWidget() {
+  List<Widget>? _actionsWidget() {
     if (_showDrawer) {
       return [
-        new IconButton(
-            icon: new Icon(Icons.search),
+        IconButton(
+            icon: Icon(Icons.search),
             onPressed: () {
               onSearchClick();
             })
@@ -169,12 +158,12 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   }
 
   void onSearchClick() async {
-    await Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return new SearchPageUI();
+    await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return SearchPageUI();
     }));
   }
 
-  Future<bool> _onWillPop() async {
+  Future<void> _confirmExit() async {
     final bool? result = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -199,7 +188,9 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
       },
     );
 
-    return result ?? false;
+    if (result == true) {
+      Navigator.of(context).maybePop();
+    }
   }
 
   void _handleTabChanged(int newValue) {

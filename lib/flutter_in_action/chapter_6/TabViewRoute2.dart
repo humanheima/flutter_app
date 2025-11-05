@@ -1,4 +1,4 @@
-import 'package:flukit/flukit.dart';
+import 'package:flukit_plus/flukit.dart';
 import 'package:flutter/material.dart';
 
 /**

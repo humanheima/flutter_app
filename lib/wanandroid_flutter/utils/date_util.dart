@@ -47,8 +47,8 @@ Map<int, int> MONTH_DAY = {
 class DateUtil {
   ///get DateTime By DateStr.
   static DateTime getDateTime(String dateStr) {
-    DateTime dateTime = DateTime.tryParse(dateStr);
-    return dateTime;
+    final DateTime? dateTime = DateTime.tryParse(dateStr);
+    return dateTime ?? DateTime.now();
   }
 
   ///get DateTime By Milliseconds.
@@ -61,8 +61,8 @@ class DateUtil {
 
   ///get DateMilliseconds By DateStr.
   static int getDateMsByTimeStr(String dateStr) {
-    DateTime dateTime = DateTime.tryParse(dateStr);
-    return dateTime == null ? null : dateTime.millisecondsSinceEpoch;
+    final DateTime? dateTime = DateTime.tryParse(dateStr);
+    return dateTime?.millisecondsSinceEpoch ?? 0;
   }
 
   ///get Now Date Milliseconds.
@@ -83,8 +83,8 @@ class DateUtil {
   static String getDateStrByTimeStr(
     String dateStr, {
     DateFormat format = DateFormat.NORMAL,
-    String dateSeparate,
-    String timeSeparate,
+    String dateSeparate = '-',
+    String timeSeparate = ':',
   }) {
     return getDateStrByDateTime(getDateTime(dateStr),
         format: format, dateSeparate: dateSeparate, timeSeparate: timeSeparate);
@@ -97,8 +97,8 @@ class DateUtil {
   ///timeSeparate    time separate.
   static String getDateStrByMs(int milliseconds,
       {DateFormat format = DateFormat.NORMAL,
-      String dateSeparate,
-      String timeSeparate,
+      String dateSeparate = '-',
+      String timeSeparate = ':',
       bool isUtc = false}) {
     DateTime dateTime = getDateTimeByMs(milliseconds, isUtc: isUtc);
     return getDateStrByDateTime(dateTime,
@@ -112,8 +112,8 @@ class DateUtil {
   ///timeSeparate    time separate.
   static String getDateStrByDateTime(DateTime dateTime,
       {DateFormat format = DateFormat.NORMAL,
-      String dateSeparate,
-      String timeSeparate}) {
+      String dateSeparate = '-',
+      String timeSeparate = ':'}) {
     String dateStr = dateTime.toString();
     if (isZHFormat(format)) {
       dateStr = formatZHDateTime(dateStr, format, timeSeparate);
@@ -249,8 +249,8 @@ class DateUtil {
   static String dateTimeSeparate(
       String time, String dateSeparate, String timeSeparate) {
     time = time.replaceAll("-", dateSeparate);
-      time = time.replaceAll(":", timeSeparate);
-      return time;
+    time = time.replaceAll(":", timeSeparate);
+    return time;
   }
 
   ///get WeekDay By Milliseconds.
@@ -269,7 +269,7 @@ class DateUtil {
 
   ///get WeekDay.
   static String getWeekDay(DateTime dateTime) {
-    String weekday;
+    String weekday = "";
     switch (dateTime.weekday) {
       case 1:
         weekday = "Monday";
@@ -300,7 +300,7 @@ class DateUtil {
 
   ///get ZH WeekDay.
   static String getZHWeekDay(DateTime dateTime) {
-    String weekday;
+    String weekday = "";
     switch (dateTime.weekday) {
       case 1:
         weekday = "星期一";
@@ -375,7 +375,7 @@ class DateUtil {
     int month = dateTime.month;
     int days = dateTime.day;
     for (int i = 1; i < month; i++) {
-      days = days + MONTH_DAY[i];
+      days = days + (MONTH_DAY[i] ?? 0);
     }
     if (isLeapYearByYear(year) && month > 2) {
       days = days + 1;

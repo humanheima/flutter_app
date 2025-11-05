@@ -112,8 +112,15 @@ class LoginPageUIState extends State<LoginPageUI> {
         Fluttertoast.showToast(msg: "登录成功！");
         Navigator.of(context).pop();
       } else {
-        Fluttertoast.showToast(msg: _userModel.errorMsg);
+        Fluttertoast.showToast(msg: _userModel.errorMsg ?? '登录失败');
       }
         }, username, password);
+  }
+
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    _psdController.dispose();
+    super.dispose();
   }
 }

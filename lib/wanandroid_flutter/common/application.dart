@@ -6,5 +6,6 @@ import 'package:event_bus/event_bus.dart';
 ///
 
 class Application {
-  static EventBus eventBus;
+  // Initialize EventBus to avoid null-safety errors
+  static final EventBus eventBus = EventBus();
 }

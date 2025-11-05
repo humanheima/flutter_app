@@ -27,6 +27,7 @@ class SystemTreeUIState extends State<SystemTreeUI>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // required by AutomaticKeepAliveClientMixin
     return Scaffold(
       body: RefreshIndicator(
           child: ListView.separated(
@@ -42,10 +43,10 @@ class SystemTreeUIState extends State<SystemTreeUI>
     );
   }
 
-  Future<Null> _getData() async {
+  Future<void> _getData() async {
     CommonService().getSystemTree((SystemTreeModel _systemTreeModel) {
       setState(() {
-        _datas = _systemTreeModel.data;
+        _datas = _systemTreeModel.data ?? <SystemTreeData>[];
       });
     });
   }
@@ -69,14 +70,14 @@ class SystemTreeUIState extends State<SystemTreeUI>
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(bottom: 8),
                     child: Text(
-                      _datas[index].name,
+                      _datas[index].name ?? '',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    child: buildChildren(_datas[index].children),
+                    child: buildChildren(_datas[index].children ?? const <SystemTreeChild>[]),
                   )
                 ],
               ),
@@ -95,11 +96,11 @@ class SystemTreeUIState extends State<SystemTreeUI>
     }));
   }
 
-  buildChildren(List<SystemTreeChild> children) {
+  Widget buildChildren(List<SystemTreeChild> children) {
     List<Widget> tiles = <Widget>[];
     Widget content;
     for (var item in children) {
-      tiles.add(Chip(label: Text(item.name)));
+      tiles.add(Chip(label: Text(item.name ?? '')));
     }
     content = Wrap(
       spacing: 8.0,

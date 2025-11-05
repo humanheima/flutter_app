@@ -14,5 +14,14 @@ class SearchPageUI extends StatefulWidget {
 
 class SearchPageUIState extends State<SearchPageUI> {
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('搜索'),
+      ),
+      body: Center(
+        child: Text('搜索功能待实现'),
+      ),
+    );
+  }
 }

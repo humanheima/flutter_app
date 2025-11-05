@@ -37,7 +37,7 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
           UserAccountsDrawerHeader(
             accountName: InkWell(
               child: Text(
-                  User.singleton.userName != null
+                  User.singleton.userName.isNotEmpty
                       ? User.singleton.userName
                       : '未登录',
                   style: TextStyle(fontWeight: FontWeight.bold)),
@@ -50,11 +50,11 @@ class DrawerWidgetUIState extends State<DrawerWidgetUI> {
               backgroundImage: AssetImage('images/avatar.jpg'),
             ),
             decoration: BoxDecoration(
-                color: Colors.grey[800],
+                color: Colors.grey.shade800,
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     colorFilter: ColorFilter.mode(
-                        Colors.grey[800].withOpacity(0.6), BlendMode.hardLight),
+                        Colors.grey.shade800.withValues(alpha: 0.6), BlendMode.hardLight),
                     image: AssetImage(GlobalConfig.dark
                         ? 'images/bg_dark.png'
                         : 'images/bg_light.jpg'))),

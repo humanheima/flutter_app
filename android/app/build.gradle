@@ -24,8 +24,8 @@ if (flutterVersionName == null) {
 
 
 android {
-    compileSdkVersion 34
-    ndkVersion "21.1.6352462"
+    compileSdkVersion 36
+    ndkVersion "26.1.10909125"
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).

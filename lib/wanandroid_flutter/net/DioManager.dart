@@ -6,11 +6,10 @@ import 'package:dio/dio.dart';
 ///
 
 class DioManager {
-  Dio _dio;
+  // Make non-nullable and initialize via initializer list
+  final Dio _dio;
 
-  DioManager._internal() {
-    _dio = new Dio();
-  }
+  DioManager._internal() : _dio = Dio();
 
   static DioManager singleton = DioManager._internal();
 

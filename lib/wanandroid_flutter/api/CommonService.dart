@@ -25,7 +25,8 @@ class CommonService {
         .getDio()
         .get(Api.HOME_ARTICLE_LIST + "$_page/json", options: _getOptions())
         .then((response) {
-      callback(ArticleModel(response.data));
+      // ArticleModel has fromJson / parse methods
+      callback(ArticleModel.fromJson(response.data));
     });
   }
 
@@ -35,7 +36,7 @@ class CommonService {
         .getDio()
         .get(Api.SYSTEM_TREE, options: _getOptions())
         .then((response) {
-      callback(SystemTreeModel(response.data));
+      callback(SystemTreeModel.fromJson(response.data));
     });
   }
 
@@ -46,7 +47,7 @@ class CommonService {
         .get(Api.SYSTEM_TREE_CONTENT + "$_page/json?cid=$_id",
             options: _getOptions())
         .then((response) {
-      callback(SystemTreeContentModel(response.data));
+      callback(SystemTreeContentModel.fromJson(response.data));
     });
   }
 
@@ -56,7 +57,7 @@ class CommonService {
         .getDio()
         .get(Api.WX_LIST, options: _getOptions())
         .then((response) {
-      callback(WxArticleTitleModel(response.data));
+      callback(WxArticleTitleModel.fromJson(response.data));
     });
   }
 
@@ -66,7 +67,7 @@ class CommonService {
         .getDio()
         .get(Api.WX_ARTICLE_LIST + "$_id/$_page/json", options: _getOptions())
         .then((response) {
-      callback(WxArticleContentModel(response.data));
+      callback(WxArticleContentModel.fromJson(response.data));
     });
   }
 
@@ -77,7 +78,7 @@ class CommonService {
         .get(Api.NAVI_LIST, options: _getOptions())
         .then((response) {
       print('getNaviList${response.data}');
-      callback(NaviModel(response.data));
+      callback(NaviModel.fromJson(response.data));
     });
   }
 
@@ -88,7 +89,7 @@ class CommonService {
         .get(Api.PROJECT_TREE, options: _getOptions())
         .then((response) {
       print('getProjectTree${response.data}');
-      callback(ProjectTreeModel(response.data));
+      callback(ProjectTreeModel.fromJson(response.data));
     });
   }
 
@@ -99,7 +100,7 @@ class CommonService {
         .get(Api.PROJECT_LIST + "$_page/json?cid=$_id", options: _getOptions())
         .then((response) {
       print('getProjectList${response.data}');
-      callback(ProjectTreeListModel(response.data));
+      callback(ProjectTreeListModel.fromJson(response.data));
     });
   }
 
@@ -115,7 +116,7 @@ class CommonService {
         .post(Api.USER_REGISTER, data: formData, options: null)
         .then((response) {
       print('register${response.data}');
-      callback(UserModel(response.data));
+      callback(UserModel.fromJson(response.data));
     });
   }
 
@@ -128,7 +129,7 @@ class CommonService {
         .post(Api.USER_LOGIN, data: formData, options: null)
         .then((response) {
       print('register${response.data}');
-      callback(UserModel(response.data), response);
+      callback(UserModel.fromJson(response.data), response);
     });
   }
 
@@ -137,12 +138,13 @@ class CommonService {
         .getDio()
         .get(Api.HOME_BANNER, options: _getOptions())
         .then((response) {
-      callback(BannerModel(response.data));
+      callback(BannerModel.fromJson(response.data));
     });
   }
 
   Options _getOptions() {
     final Map<String, String> map = <String, String>{};
+    // Use cookie from singleton User (cookie is non-nullable in User class)
     List<String> cookies = User().cookie;
     map['Cookie'] = cookies.toString();
     return Options(headers: map);

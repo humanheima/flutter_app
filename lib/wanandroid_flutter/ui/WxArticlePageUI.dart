@@ -29,9 +29,31 @@ class WxArticlePageUIState extends State<WxArticlePageUI>
     _getData();
   }
 
+  void _initOrUpdateTabController() {
+    // Dispose old controller and create a new one when data length changes and > 0
+    _tabController?.dispose();
+    if (_datas.isNotEmpty) {
+      _tabController = TabController(length: _datas.length, vsync: this);
+    } else {
+      _tabController = null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    _tabController = TabController(length: _datas.length, vsync: this);
+    super.build(context); // required for AutomaticKeepAliveClientMixin
+
+    // When data not loaded yet, show a loading scaffold
+    if (_datas.isEmpty || _tabController == null) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0.4,
+          title: const Text('公众号'),
+        ),
+        body: const Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.4,
@@ -59,10 +81,12 @@ class WxArticlePageUIState extends State<WxArticlePageUI>
     super.dispose();
   }
 
-  Future<Null> _getData() async {
+  Future<void> _getData() async {
     CommonService().getWxList((WxArticleTitleModel response) {
+      if (!mounted) return;
       setState(() {
         _datas = response.data ?? [];
+        _initOrUpdateTabController();
       });
     });
   }
@@ -87,7 +111,7 @@ class NewsList extends StatefulWidget {
 class _NewsListState extends State<NewsList> {
   List<WxArticleContentDatas> _datas = [];
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   int _page = 1;
 
@@ -104,6 +128,12 @@ class _NewsListState extends State<NewsList> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
@@ -117,20 +147,22 @@ class _NewsListState extends State<NewsList> {
     );
   }
 
-  Future<Null> _getData() async {
+  Future<void> _getData() async {
     _page = 1;
     int _id = widget.id ?? 0;
     CommonService().getWxArticleList((WxArticleContentModel response) {
+      if (!mounted) return;
       setState(() {
         _datas = response.data?.datas ?? [];
       });
     }, _id, _page);
   }
 
-  Future<Null> _getMore() async {
+  Future<void> _getMore() async {
     _page++;
     int _id = widget.id ?? 0;
     CommonService().getWxArticleList((WxArticleContentModel response) {
+      if (!mounted) return;
       setState(() {
         _datas.addAll(response.data?.datas ?? []);
       });
@@ -146,9 +178,9 @@ class _NewsListState extends State<NewsList> {
 
   Widget _getMoreWidget() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       alignment: Alignment.center,
-      child: SizedBox(
+      child: const SizedBox(
         width: 24,
         height: 24,
         child: CircularProgressIndicator(
@@ -167,26 +199,29 @@ class _NewsListState extends State<NewsList> {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Row(
                 children: <Widget>[
                   Expanded(
                       child: Text(
                     item.title ?? '',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.left,
                   ))
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Expanded(
-                      child: Text(TimelineUtil.format(item.publishTime),
-                          style: TextStyle(fontSize: 12, color: Colors.grey)))
+                      child: Text(
+                          item.publishTime != null
+                              ? TimelineUtil.format(item.publishTime!)
+                              : '',
+                          style: const TextStyle(fontSize: 12, color: Colors.grey)))
                 ],
               ),
             )

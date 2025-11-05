@@ -10,8 +10,9 @@ import 'package:dio/dio.dart';
 class User {
   static final User singleton = User._internal();
 
-  List<String> cookie;
-  String userName;
+  // Non-null with safe defaults for null-safety
+  List<String> cookie = <String>[];
+  String userName = '';
 
   User._internal();
 
@@ -19,28 +20,29 @@ class User {
     return singleton;
   }
 
-  void saveUserInfo(UserModel _userModel, Response response) {
-    List<String> cookies = response.headers["set-cookie"];
-    cookie = cookies;
-    userName = _userModel.data.username;
-    saveInfo();
+  void saveUserInfo(UserModel _userModel, Response response) async {
+    // Headers indexer returns List<String>?; default to empty list
+    final List<String>? cookies = response.headers['set-cookie'];
+    cookie = cookies ?? <String>[];
+    userName = _userModel.data?.username ?? '';
+    await saveInfo();
   }
 
-  void clearUserInfo() {
-    cookie = null;
-    userName = null;
-    clearInfo();
+  void clearUserInfo() async {
+    cookie = <String>[];
+    userName = '';
+    await clearInfo();
   }
 
-  clearInfo() async {
+  Future<void> clearInfo() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    sp.setStringList("cookies", null);
-    sp.setString("username", null);
+    await sp.remove('cookies');
+    await sp.remove('username');
   }
 
-  void saveInfo() async {
+  Future<void> saveInfo() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    sp.setStringList("cookies", cookie);
-    sp.setString("username", userName);
+    await sp.setStringList('cookies', cookie);
+    await sp.setString('username', userName);
   }
 }
