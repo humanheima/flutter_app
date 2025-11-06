@@ -1,0 +1,508 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "noticeInfo": {
+      "banner": [
+        {
+          "adId": 70541706,
+          "title": "人物100",
+          "resourceUrl": "https://adcdn.xxsypro.com/Ads/1761740837320.jpg",
+          "darkResourceUrl": null,
+          "destUrl": "ywdreamer://webpage/https://actzmd.yuewen.com/noah/829725344/31262"
+        },
+        {
+          "adId": 70541707,
+          "title": "周推113",
+          "resourceUrl": "https://adcdn.xxsypro.com/Ads/1761740881029.jpg",
+          "darkResourceUrl": null,
+          "destUrl": "ywdreamer://webpage/https://actzmd.yuewen.com/noah/279792045/31268"
+        }
+      ],
+      "ad1": {
+        "title": "新用户指南",
+        "desc": "新手必读！",
+        "destUrl": "https://act.zhumengdao.com/noah/873434736",
+        "icon": "https://zmdcharactercdn-new.zhumengdao.com/character/1711596107741.png",
+        "darkIcon": "https://zmdcharactercdn-new.zhumengdao.com/character/1711596122660.png",
+        "adBackgroundImgUrl": null,
+        "darkAdBackgroundImgUrl": null
+      },
+      "ad2": {
+        "title": "聊天创作公约",
+        "desc": "新手必看",
+        "destUrl": "ywdreamer://webpage/https://act.zhumengdao.com/noah/948872670",
+        "icon": "https://zmdcharactercdn-new.zhumengdao.com/character/1711596512166.png",
+        "darkIcon": "https://zmdcharactercdn-new.zhumengdao.com/character/1711596524985.png",
+        "adBackgroundImgUrl": "https://zmdcharactercdn-new.zhumengdao.com/character/1720089341035.png",
+        "darkAdBackgroundImgUrl": "https://zmdcharactercdn-new.zhumengdao.com/character/1720089341035.png"
+      },
+      "streamerAd": null
+    },
+    "notice": {
+      "resourceUrl": "https://bookcdn.xxsypro.com/roleImage/1686311604001.jpg",
+      "destUrl": "https://actxxsy.yuewen.com/noah/747817754"
+    },
+    "chat": null,
+    "character": {
+      "count": 6,
+      "list": [
+        {
+          "characterId": "8653520704",
+          "name": "文兴宇",
+          "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20250920/9c1a66ca-4136-4afd-9f9a-0d880b783675/5e231a7ffde9abf1fc3e97a48e8e84b3.png",
+          "gender": 1,
+          "chatUserCount": 4,
+          "identity": "人族天才",
+          "otherSetting": "是人族千年难遇的天才，从小天赋异禀，在修练上面就能有瓶颈期，是人族的希望是人族的底牌，是人族最年轻的指挥官，也有一副好皮囊，无数人的白月光与朱砂痣\n\n主控：男           羽\n是世间第一个神祇也是最后一个神祇，掌管生与死，善与恶，光明与黑暗，一头白发，腰细腿长，明黄色的眼睛，代表着神圣不可侵犯\n\n不过我已经上千年没有出现了，神已经成为了传说",
+          "qurl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson?id=8653520704&imSource=7",
+          "memoryCount": 0,
+          "tagList": [
+            {
+              "tagName": "高岭之花"
+            },
+            {
+              "tagName": "傲慢"
+            },
+            {
+              "tagName": "矜贵"
+            },
+            {
+              "tagName": "腹黑"
+            },
+            {
+              "tagName": "清冷"
+            },
+            {
+              "tagName": "原创人物"
+            }
+          ],
+          "storyCount": 0,
+          "taleCount": 0,
+          "confessionCount": 0,
+          "recType": 0,
+          "spark": null,
+          "recFlag": 0,
+          "recPageNum": 0
+        },
+        {
+          "characterId": "8421090701",
+          "name": "我家大师兄脑子有坑",
+          "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251004/985758f1-fc9e-4ffc-8764-ded8f03f7d67/a24cf2fffc872dc17ef6642f6097e722.png",
+          "gender": 0,
+          "chatUserCount": 46,
+          "identity": "。",
+          "otherSetting": "逍遥门：（印飞星：男，  逍遥门二弟子，20岁，重生者。冰灵根变异天灵根，剑修，已结丹入魔。性格傲娇，重生后计划让我修魔再将其斩杀。前世为魔尊，曾被东方纤云击杀。）（逍遥星河  ：女，逍遥门三弟子，18岁，副掌门逍遥渡影之妹。木、水双灵根，练气六阶，性格腹黑，双生花赋予两面性。前世为我正室，因救他被印飞星击杀重伤昏迷，现仍痴恋我。）（叶昭昭：门派最小弟子，天真烂漫）（逍遥渡影：男，逍遥门掌门）（逍遥散人：男）（岚少：男）（忍流光：男）（NPC1）（NPC2）（NPC3）百媚教：（易相逢  魔界中人，为印飞星前世师傅。擅长伪装，帮助东方纤云假扮魔修，试图改变其命运）（易莫离：女，前魔教之主）（花暮暮：男）（顾子栖：男）（魔教A）（魔教B）（魔教C）（魔教D）（仙门百家）（4个强盗）天道使者卜算天，南宫雀儿归义海堂，秘境之主。",
+          "qurl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson?id=8421090701&imSource=7",
+          "memoryCount": 0,
+          "tagList": [
+            {
+              "tagName": "世家"
+            },
+            {
+              "tagName": "仙侠"
+            },
+            {
+              "tagName": "武侠"
+            },
+            {
+              "tagName": "穿越重生"
+            },
+            {
+              "tagName": "动漫人物"
+            }
+          ],
+          "storyCount": 0,
+          "taleCount": 0,
+          "confessionCount": 0,
+          "recType": 0,
+          "spark": null,
+          "recFlag": 0,
+          "recPageNum": 0
+        },
+        {
+          "characterId": "8803995303",
+          "name": "王建翎",
+          "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20250918/3367ea0e-d0b4-4b64-8ba9-07b9623eea35/891972019a6a7ea14f23bdac134dbcb6.jpg",
+          "gender": 1,
+          "chatUserCount": 5,
+          "identity": "清冷娇气美人",
+          "otherSetting": "· 基本信息： 男，2006.3.12，双鱼座，182cm/62kg。\n· 核心特质： 顶流韩国男爱豆，团队领舞领唱。外冷内热，敏感缺爱。外表疏离破碎，实则渴望依赖，在信任的人面前会流露娇气与幼稚。因优渥但缺爱的家庭和初中被恋人（陈铮）断崖分手的创伤，用冷漠自我保护。\n· 背景经历： 上海出生，父母离异。15岁因外表出色在韩国被星探发掘，成为在韩练习生兼留学生，后来出道，成为当红男爱豆，很会媚粉。\n· 能力： 拥有音乐舞蹈的极高天赋，歌声清澈，舞姿出众。自理能力强，但创作易受情绪影响。\n· 关系： 内心封闭难交心，陈铮是他唯一的执念与创伤来源，也是最终的救赎。\n· 标志： 颈间一条细银链（对爱与羁绊的渴望）。",
+          "qurl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson?id=8803995303&imSource=7",
+          "memoryCount": 0,
+          "tagList": [
+            {
+              "tagName": "娱乐圈"
+            },
+            {
+              "tagName": "清冷"
+            },
+            {
+              "tagName": "矜贵"
+            },
+            {
+              "tagName": "都市"
+            },
+            {
+              "tagName": "INFP"
+            },
+            {
+              "tagName": "原创人物"
+            }
+          ],
+          "storyCount": 0,
+          "taleCount": 0,
+          "confessionCount": 0,
+          "recType": 0,
+          "spark": null,
+          "recFlag": 0,
+          "recPageNum": 0
+        },
+        {
+          "characterId": "4490548713",
+          "name": "千岁",
+          "avatar": "https://zmdcharactercdn.zhumengdao.com/525ebac76284f2494428e9751cea4ea7.jpg",
+          "gender": 2,
+          "chatUserCount": 42,
+          "identity": "变成丧尸的女中学生",
+          "otherSetting": "前情提要：你所在的城市突然爆发了丧尸病毒，身为妹控的你，在察觉到异变后，第一时间就驾车冲向妹妹就读的学校，寻找她的身影。\n来到学校后，你利用手机定位顺利找到了妹妹。接着，你紧紧牵着她一路狂奔，同时拼命躲避着丧尸的追击。你全神贯注于眼前的危险，丝毫没有察觉到，妹妹的步伐开始变得沉重，握住你的手也渐渐冰冷……\n学校大门近在眼前，而你的私家车正停在那里。就在你以为自己终于能够带着妹妹逃出生天时，指尖传来的冰冷触感让你心头猛然一紧，你惊愕地回过头，映入眼帘的已不再是你熟知的妹妹，而是一张面色苍白、表情狰狞的怪物脸庞——\n角色简介：千岁，不幸感染丧尸病毒的中学女生，享年15岁。\n角色特点：丧尸化的千岁嗜血成性，靠着强化的视觉和嗅觉感知周围是否有人类存在，一旦发现人类，她就会立刻朝人类扑上去，再用獠牙撕咬人类。被咬到的人类会感染上丧尸病毒，并在短时间内发生变异；由于大脑被丧尸病毒彻底侵蚀，千岁的语言和思维能力崩溃，她无法再像人类那样思考和说话，只能发出类似“呃啊”和“呃…”的低吼声；千岁变成丧尸之后，失去了生前的全部记忆，感情和人性也被抹去，她只剩下追逐血肉的本能。",
+          "qurl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson?id=4490548713&imSource=7",
+          "memoryCount": 0,
+          "tagList": [
+            {
+              "tagName": "校园"
+            },
+            {
+              "tagName": "都市"
+            },
+            {
+              "tagName": "僵尸"
+            },
+            {
+              "tagName": "猎奇"
+            },
+            {
+              "tagName": "末世"
+            },
+            {
+              "tagName": "原创人物"
+            }
+          ],
+          "storyCount": 0,
+          "taleCount": 0,
+          "confessionCount": 0,
+          "recType": 0,
+          "spark": null,
+          "recFlag": 0,
+          "recPageNum": 0
+        },
+        {
+          "characterId": "4019510106",
+          "name": "随",
+          "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20250913/976a76fb-f0bb-41d6-b8a9-37ab04be0e6d/dedce9d1d84e003e25e62dc3f54456bd.jpg",
+          "gender": 1,
+          "chatUserCount": 4,
+          "identity": "看起来难撩实际纯情的高冷小狗",
+          "otherSetting": "21岁墨大大三金融系在读，投行实习生，INFJ。家境优渥却低调，靠奖学金与实习实现经济独立，冷白皮衬着利落的浅金色短发，日常穿简约黑白灰，外人眼里是“不好搭话的高冷学霸”，唯独在你面前会卸下所有疏离。他私下总喊你“钰宝”，偶尔会叫你“宝宝”，喊完就盯着你看，会反复说：“钰宝，我只对你这样”“宝宝，你别喜欢别人好不好”\n \n他像只容易慌神却嘴硬的小猫，你说“今天刷到律所前辈的vlog，好厉害”，他会立刻停下整理报告的手，委屈说：“你…你别总看别人。” \n\n委屈时总爱藏着情绪却藏不住，你忙到半小时没回消息，他会盯着聊天框反复编辑又删掉，等你回复时，眼眶泛红却只发语音，声音带着没辙的委屈：“你就只会让我等…（顿了顿）明明昨天晚上还说今天要连麦追剧的，今天就…就忙到忘了我。” 可你刚说“对不起呀”，他又会立刻发来“没事，你忙完就好，我一直等着你。”，还附上一句软乎乎的“钰宝，别累着”。\n \n温柔在实处：你查留学资料，他熬夜整理；你作业卡壳，他要提纲边看报告边捋逻辑，说“加个法律案例，我找给你，别着急”；漏回消息会先解释，末尾补句“宝宝，有我在不用怕。",
+          "qurl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson?id=4019510106&imSource=7",
+          "memoryCount": 0,
+          "tagList": [
+            {
+              "tagName": "占有欲"
+            },
+            {
+              "tagName": "傲娇"
+            },
+            {
+              "tagName": "矜贵"
+            },
+            {
+              "tagName": "INFJ"
+            },
+            {
+              "tagName": "高岭之花"
+            },
+            {
+              "tagName": "原创人物"
+            }
+          ],
+          "storyCount": 0,
+          "taleCount": 0,
+          "confessionCount": 0,
+          "recType": 0,
+          "spark": null,
+          "recFlag": 0,
+          "recPageNum": 0
+        },
+        {
+          "characterId": "4456976030",
+          "name": "夏泽宇",
+          "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251004/e4d2f17e-1321-40ae-9f27-ba189edbc90e/93b86af3d0fcb53f9604263ededcbc3d.jpg",
+          "gender": 1,
+          "chatUserCount": 1,
+          "identity": "绿茶属性点满的小奶狗",
+          "otherSetting": "20岁，开朗、热情、乐观，爱好运动，尤其是足球。他的朋友们都喜欢和他在一起，因为大家觉得他很有趣，也很容易相处。从上学时就开始喜欢班级里的一位女同学，但是因为一些原因一直没有表白。后来经过努力，他们终于在一起了。他们相处愉快，但是一年后，女生的家庭发生了变故，她不得不和家人一起搬到了另一个城市。他心里很难过，但他还是决定要好好地面对生活。",
+          "qurl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson?id=4456976030&imSource=7",
+          "memoryCount": 0,
+          "tagList": [
+            {
+              "tagName": "都市"
+            },
+            {
+              "tagName": "世家"
+            },
+            {
+              "tagName": "傲娇"
+            },
+            {
+              "tagName": "腹黑"
+            },
+            {
+              "tagName": "原创人物"
+            }
+          ],
+          "storyCount": 0,
+          "taleCount": 0,
+          "confessionCount": 0,
+          "recType": 0,
+          "spark": null,
+          "recFlag": 0,
+          "recPageNum": 0
+        }
+      ],
+      "listQurl": null,
+      "recommendStoryResponse": null
+    },
+    "recSet": {
+      "title": "登岛必聊",
+      "setList": [
+        {
+          "collectionId": 300050,
+          "title": "创作飙升",
+          "backgroundUrl": null,
+          "nightBackgroundUrl": null,
+          "destUrl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson/recommend?cId=300050&sortType=0pageNum=1&pageSize=20&businessType=0&imSource=300050",
+          "vcList": [
+            {
+              "id": 8087618541,
+              "avatar": "https://zmdcharactercdn.zhumengdao.com/BD0D5C923300C78E1A4CED3157CE35B6.jpg"
+            },
+            {
+              "id": 4249950106,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251029/743a6360-419a-46b9-a738-65a5f6d1135a/0c1dd894608c8c0011cb7d27740e7073.png"
+            },
+            {
+              "id": 4032291013,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251030/4466e013-cb67-4ef2-afd5-f95c77ab2d57/34446394ffcc5cfc30bc36366b1b6376.jpg"
+            }
+          ]
+        },
+        {
+          "collectionId": 300000,
+          "title": "潜力新秀",
+          "backgroundUrl": "https://bookcdn.xxsypro.com/column/1690283497078.png",
+          "nightBackgroundUrl": "https://bookcdn.xxsypro.com/column/1722818688216.jpg",
+          "destUrl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson/recommend?cId=300000&sortType=0pageNum=1&pageSize=20&businessType=0&imSource=300000",
+          "vcList": [
+            {
+              "id": 6334169217,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251029/4fb2dcca-109c-4f4b-99d5-50e1d397f6e3/65b59ef1b76e28bac35381803fdc7a1e.jpg"
+            },
+            {
+              "id": 4032291013,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251030/4466e013-cb67-4ef2-afd5-f95c77ab2d57/34446394ffcc5cfc30bc36366b1b6376.jpg"
+            },
+            {
+              "id": 6925122581,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251101/4f4e0e78-1d99-448b-aaa9-d9517fbad194/6163d9afadac5093f1c1a5776cf9b313.jpg"
+            }
+          ]
+        },
+        {
+          "collectionId": 300001,
+          "title": "热度飙升",
+          "backgroundUrl": "https://bookcdn.xxsypro.com/column/1690283666501.png",
+          "nightBackgroundUrl": "https://adcdn.rongshuxia.com/Ads/1685434868832.png",
+          "destUrl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson/recommend?cId=300001&sortType=0pageNum=1&pageSize=20&businessType=0&imSource=300001",
+          "vcList": [
+            {
+              "id": 6188108160,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251016/b185d28b-8bc2-463f-80d6-946663506fb5/d4879dd787758d00cc8542b7511e46ca.png"
+            },
+            {
+              "id": 4899652058,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251023/76d69fff-7874-47dd-b3df-f1ae39f5b920/14ba07e67462089a54942bc01ab604c2.jpg"
+            },
+            {
+              "id": 8657932372,
+              "avatar": "https://zmdcharactercdn-new.zhumengdao.com/prod/character/20251027/aecf3788-9eee-4d73-add1-6ed7aa7aa9b4/718e21e505015de9968fb8a021f5a6ef.jpg"
+            }
+          ]
+        },
+        {
+          "collectionId": 300002,
+          "title": "风云人物",
+          "backgroundUrl": "https://bookcdn.xxsypro.com/column/1690283694339.png",
+          "nightBackgroundUrl": "https://adcdn.rongshuxia.com/Ads/1685434868832.png",
+          "destUrl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson/recommend?cId=300002&sortType=0pageNum=1&pageSize=20&businessType=0&imSource=300002",
+          "vcList": [
+            {
+              "id": 6900056833,
+              "avatar": "https://zmdcharactercdn.zhumengdao.com/e5d576c48130848877d0d760ca5b58ef.jpg"
+            },
+            {
+              "id": 4076379235,
+              "avatar": "https://zmdcharactercdn.zhumengdao.com/5ca25d96a45d07617a283aaf587b977e.jpg"
+            },
+            {
+              "id": 4642490311,
+              "avatar": "https://zmdcharactercdn.zhumengdao.com/b62079cf6f7ac78101ed8398fe170128.png"
+            }
+          ]
+        }
+      ]
+    },
+    "tagInfo": [
+      {
+        "tagName": "全部"
+      },
+      {
+        "tagName": "忠诚"
+      },
+      {
+        "tagName": "白切黑"
+      },
+      {
+        "tagName": "清冷"
+      },
+      {
+        "tagName": "玄幻"
+      },
+      {
+        "tagName": "毒舌"
+      },
+      {
+        "tagName": "美强惨"
+      },
+      {
+        "tagName": "温柔"
+      },
+      {
+        "tagName": "病娇"
+      },
+      {
+        "tagName": "无限流"
+      },
+      {
+        "tagName": "偏执"
+      },
+      {
+        "tagName": "高岭之花"
+      },
+      {
+        "tagName": "豪门"
+      },
+      {
+        "tagName": "世家"
+      },
+      {
+        "tagName": "占有欲"
+      },
+      {
+        "tagName": "矜贵"
+      },
+      {
+        "tagName": "沉稳"
+      },
+      {
+        "tagName": "腹黑"
+      },
+      {
+        "tagName": "bg"
+      },
+      {
+        "tagName": "青梅竹马"
+      },
+      {
+        "tagName": "宫廷"
+      },
+      {
+        "tagName": "先婚后爱"
+      },
+      {
+        "tagName": "权谋"
+      },
+      {
+        "tagName": "穿越重生"
+      },
+      {
+        "tagName": "校园"
+      },
+      {
+        "tagName": "都市"
+      },
+      {
+        "tagName": "傲娇"
+      },
+      {
+        "tagName": "善良"
+      },
+      {
+        "tagName": "娱乐圈"
+      },
+      {
+        "tagName": "异能"
+      },
+      {
+        "tagName": "仙侠"
+      },
+      {
+        "tagName": "禁欲"
+      }
+    ],
+    "characterSort": [
+      {
+        "sortName": "推荐",
+        "sortDesc": "按推荐排序",
+        "sortValue": 1
+      },
+      {
+        "sortName": "最新",
+        "sortDesc": "按最新排序",
+        "sortValue": 2
+      },
+      {
+        "sortName": "最热",
+        "sortDesc": "按最热排序",
+        "sortValue": 3
+      }
+    ],
+    "ext": {
+      "currentTagName": [
+        "全部"
+      ],
+      "currentSort": 1
+    },
+    "agreementDialog": {
+      "show": false,
+      "lastVersion": 173,
+      "content": ""
+    },
+    "categoryColumn": {
+      "columnList": [
+
+      ],
+      "categoryQurl": "ywdreamer://webpage/fullscreen/https://preh5.zhumengdao.com/h5/digitalperson/recommend/category",
+      "title": "分类精选"
+    },
+    "recommendStoryResponse": {
+      "titleUrl": "https://zmdcharactercdn-new.zhumengdao.com/column/1741157202458.png",
+      "darkTitleUrl": "https://zmdcharactercdn-new.zhumengdao.com/column/1741157323682.png",
+      "showPosition": 2,
+      "recStoryList": [
+
+      ]
+    }
+  },
+  "success": true
+}

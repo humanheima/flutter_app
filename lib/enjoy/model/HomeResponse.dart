@@ -135,16 +135,18 @@ class HomeData {
 }
 
 class NoticeInfo {
-  final dynamic banner;
+  final List<RecBanner> banner;
   final Ad? ad1;
   final Ad? ad2;
   final dynamic streamerAd;
 
-  NoticeInfo({this.banner, this.ad1, this.ad2, this.streamerAd});
+  NoticeInfo({required this.banner, this.ad1, this.ad2, this.streamerAd});
 
   factory NoticeInfo.fromJson(Map<String, dynamic> json) {
+    var bannerList = json['banner'] as List;
+    List<RecBanner> banners = bannerList.map((i) => RecBanner.fromJson(i)).toList();
     return NoticeInfo(
-      banner: json['banner'],
+      banner: banners,
       ad1: json['ad1'] != null
           ? Ad.fromJson(json['ad1'] as Map<String, dynamic>)
           : null,
@@ -225,6 +227,44 @@ class Notice {
   Map<String, dynamic> toJson() {
     return {
       'resourceUrl': resourceUrl,
+      'destUrl': destUrl,
+    };
+  }
+}
+
+class RecBanner {
+  final int adId;
+  final String title;
+  final String resourceUrl;
+  final String? darkResourceUrl; // 可为 null
+  final String destUrl;
+
+  RecBanner({
+    required this.adId,
+    required this.title,
+    required this.resourceUrl,
+    this.darkResourceUrl,
+    required this.destUrl,
+  });
+
+  // 从 JSON 映射构建对象
+  factory RecBanner.fromJson(Map<String, dynamic> json) {
+    return RecBanner(
+      adId: json['adId'] as int,
+      title: json['title'] as String,
+      resourceUrl: json['resourceUrl'] as String,
+      darkResourceUrl: json['darkResourceUrl'] as String?,
+      destUrl: json['destUrl'] as String,
+    );
+  }
+
+  // 转换为 JSON 映射
+  Map<String, dynamic> toJson() {
+    return {
+      'adId': adId,
+      'title': title,
+      'resourceUrl': resourceUrl,
+      'darkResourceUrl': darkResourceUrl,
       'destUrl': destUrl,
     };
   }
@@ -354,7 +394,6 @@ class Character {
   bool isMale() {
     return gender == 1;
   }
-
 }
 
 class TagInfo {

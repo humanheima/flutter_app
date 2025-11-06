@@ -46,7 +46,6 @@ class CharacterCard extends StatelessWidget {
                 colors: [
                   Color(0xFF4158D0),
                   Color(0xFFC850C0),
-                  Color(0xFFFFCC70),
                 ],
               ),
             ),
