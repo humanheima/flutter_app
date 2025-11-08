@@ -74,7 +74,14 @@ class _ProjectListState extends State<ProjectListPage2>
                   height: 124,
                   child: Padding(
                     padding: EdgeInsets.all(2),
-                    child: RecommendBanner(banners: _banners, height: 124),
+                    child: Row(
+                      children: [
+                        RecommendBanner(banners: _banners, height: 124),
+                        Text('推荐人物',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
                   )),
             ),
           ),

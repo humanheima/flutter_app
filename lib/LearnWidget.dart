@@ -61,6 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
   // 创建一个 MethodChannel 实例
   static const platform = const MethodChannel('com.example/my_channel');
 
+  // scale factor for the second native-button animation
+  double _nativeButtonScale = 1.0;
+
   @override
   void initState() {
     super.initState();
@@ -87,6 +90,35 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 _openNativeScreen();
               },
+            ),
+            // Replaced the empty second button with a scaled animation + MethodChannel call
+            Transform.scale(
+              scale: _nativeButtonScale,
+              child: ElevatedButton(
+                child: Text(
+                  "打开原生界面2",
+                  style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+                ),
+                onPressed: () async {
+                  // brief scale-up animation to give a 'zoom' effect
+                  setState(() {
+                    _nativeButtonScale = 1.1;
+                  });
+                  await Future.delayed(Duration(milliseconds: 120));
+                  if (!mounted) return;
+                  setState(() {
+                    _nativeButtonScale = 1.0;
+                  });
+
+                  // Call Android FlutterPlugin via MethodChannel to show a native dialog
+                  try {
+                    final result = await platform.invokeMethod('openNativeDialog');
+                    print(result);
+                  } on PlatformException catch (e) {
+                    print("Failed to open native dialog: '${e.message}'.");
+                  }
+                },
+              ),
             ),
             ElevatedButton(
               child: Text(

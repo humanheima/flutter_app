@@ -27,12 +27,24 @@ android {
     compileSdkVersion 36
     ndkVersion "26.1.10909125"
 
+    // Ensure Java compiler target is Java 17 to match Kotlin's jvmTarget
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Configure Kotlin jvm target inside android block (supported by kotlin-android plugin)
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.hm.flutterapp"
         namespace = "com.hm.flutterapp"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 31
+        // Google Play requires targetSdkVersion 33 or higher
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -52,4 +64,11 @@ flutter {
 }
 
 dependencies {
+}
+
+// Also ensure every Kotlin compile task uses the same jvmTarget (safe fallback)
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }

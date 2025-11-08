@@ -12,7 +12,7 @@ import 'enjoy/view/recommend/project_practice_page2.dart';
 
 /*void main() => runApp(WanAndroidApp(false));*/
 
-void main() => runApp(App());
+// void main() => runApp(App());
 
 class App extends StatefulWidget {
   @override
