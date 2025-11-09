@@ -64,6 +64,22 @@ class _InputRouteState extends State<InputRoute> {
                   TextField(
                     controller: _selectionController,
                   ),
+
+                  TextField(
+                    autofocus: false,
+                    controller: _unameController,
+                    decoration: InputDecoration(
+                      hintText: "请输入手机号",
+                      // 去掉所有边框
+                      border: InputBorder.none,
+                      // 可选：清除其他状态下的边框（确保无残留）
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                    ),
+                  ),
+
                   TextField(
                     autofocus: false,
                     controller: _unameController,

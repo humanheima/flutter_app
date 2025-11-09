@@ -19,6 +19,7 @@ import 'package:flutter_app/flutter_in_action/main.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/login_page.dart';
 
 import 'flutter_in_action/chapter11/HttpTestRoute.dart';
 import 'flutter_in_action/chapter11/WebSocketRoute.dart';
@@ -63,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // scale factor for the second native-button animation
   double _nativeButtonScale = 1.0;
+  String nativeButtonText = "打开原生界面2";
 
   @override
   void initState() {
@@ -96,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
               scale: _nativeButtonScale,
               child: ElevatedButton(
                 child: Text(
-                  "打开原生界面2",
+                  nativeButtonText,
                   style: new TextStyle(fontSize: 20, color: Colors.redAccent),
                 ),
                 onPressed: () async {
@@ -112,7 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   // Call Android FlutterPlugin via MethodChannel to show a native dialog
                   try {
-                    final result = await platform.invokeMethod('openNativeDialog');
+                    final result =
+                        await platform.invokeMethod('openNativeDialog');
+                    setState(() {
+                      nativeButtonText = "原生返回的 result: $result";
+                    });
                     print(result);
                   } on PlatformException catch (e) {
                     print("Failed to open native dialog: '${e.message}'.");
@@ -138,6 +144,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return FlutterInActionMain();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "Figma登录页面",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return LoginPage();
                 }));
               },
             ),
