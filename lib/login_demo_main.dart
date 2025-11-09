@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/login_page.dart';
+import 'package:flutter_app/profile_page.dart';
 
 void main() {
   runApp(LoginDemoApp());
@@ -64,6 +65,27 @@ class LoginDemoHome extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              },
+              child: Text(
+                '查看个人资料页面',
+                style: TextStyle(fontSize: 18),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF45B7D1),
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
             Container(
               padding: EdgeInsets.all(16),
               margin: EdgeInsets.symmetric(horizontal: 20),
@@ -86,6 +108,35 @@ class LoginDemoHome extends StatelessWidget {
                   _buildFeatureItem('✓ 登录按钮状态控制'),
                   _buildFeatureItem('✓ 协议条款复选框'),
                   _buildFeatureItem('✓ 完全还原Figma设计'),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Color(0xFF45B7D1).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Color(0xFF45B7D1), width: 1),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '个人资料页面特点：',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color(0xFF45B7D1)),
+                  ),
+                  SizedBox(height: 8),
+                  _buildFeatureItem('✓ 自定义设备状态栏（信号、WiFi、电池）'),
+                  _buildFeatureItem('✓ 用户头像和信息展示'),
+                  _buildFeatureItem('✓ 账户余额卡片'),
+                  _buildFeatureItem('✓ 创作者中心功能区'),
+                  _buildFeatureItem('✓ 浮动底部导航栏'),
+                  _buildFeatureItem('✓ 深色主题UI设计'),
                 ],
               ),
             ),

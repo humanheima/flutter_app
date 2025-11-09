@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 ///
 /// Created by dumingwei on 2019-10-09.
@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 ///
 class Code7_6 extends StatelessWidget {
   final bool withTree = false; // 复选框选中状态
+
+  PersistentBottomSheetController? _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class Code7_6 extends StatelessWidget {
                 onPressed: () async {
                   bool? delete = await showDeleteConfirmDialog1(context);
                   print("已确认删除");
-                                }),
+                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
@@ -107,7 +109,7 @@ class Code7_6 extends StatelessWidget {
                   //弹出删除确认对话框，等待用户确认
                   bool? deleteTree = await showDeleteConfirmDialog3(context);
                   print("同时删除子目录: $deleteTree");
-                                }),
+                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
@@ -117,7 +119,7 @@ class Code7_6 extends StatelessWidget {
                   //弹出删除确认对话框，等待用户确认
                   bool? deleteTree = await showDeleteConfirmDialog4(context);
                   print("同时删除子目录: $deleteTree");
-                                }),
+                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
@@ -127,27 +129,28 @@ class Code7_6 extends StatelessWidget {
                   //弹出删除确认对话框，等待用户确认
                   bool? deleteTree = await showDeleteConfirmDialog5(context);
                   print("同时删除子目录: $deleteTree");
-                                }),
+                }),
           ),
           Container(
             margin: EdgeInsets.only(top: 20.0),
             child: ElevatedButton(
-                child: Text('显示底部弹出框'),
+                child: Text('显示底部弹出框，showModalBottomSheet'),
                 onPressed: () async {
                   //弹出删除确认对话框，等待用户确认
-                  int? type = await _showModalBottomsheet(context);
+                  int? type = await _showModalBottomSheet(context);
                   print(type);
                 }),
           ),
           Container(
-            margin: EdgeInsets.only(top: 20.0),
-            child: ElevatedButton(
-                child: Text('显示底部弹出框1'),
-                onPressed: () async {
-                  //弹出删除确认对话框，等待用户确认
-                  _showBottomSheet(context);
-                }),
-          ),
+              margin: EdgeInsets.only(top: 20.0),
+              child: Builder(
+                  builder: (ctx) => ElevatedButton(
+                      child: Text('显示底部弹出框1，showBottomSheet'),
+                      onPressed: () {
+                        //弹出删除确认对话框，等待用户确认
+                        _controller = _showBottomSheet(ctx);
+                        //controller.close(); // 关闭底部栏
+                      }))),
           Container(
             margin: EdgeInsets.only(top: 20.0),
             child: ElevatedButton(
@@ -330,7 +333,7 @@ class Code7_6 extends StatelessWidget {
           );
         });
     print("选择了：${i == 1 ? "中文简体" : "美国英语"}");
-    }
+  }
 
   Future<void> showListDialog(BuildContext context) async {
     int? index = await showDialog<int?>(
@@ -357,7 +360,7 @@ class Code7_6 extends StatelessWidget {
           );
         });
     print("点击了：$index");
-    }
+  }
 
   ///
   /// 自定义弹窗
@@ -374,7 +377,7 @@ class Code7_6 extends StatelessWidget {
         final Widget pageChild = Builder(builder: builder);
         return SafeArea(child: Builder(builder: (BuildContext context) {
           return Theme(data: theme, child: pageChild);
-         }));
+        }));
       },
       barrierDismissible: barrierDismissible,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
@@ -536,7 +539,7 @@ class Code7_6 extends StatelessWidget {
     );
   }
 
-  Future<int?> _showModalBottomsheet(BuildContext context) {
+  Future<int?> _showModalBottomSheet(BuildContext context) {
     return showModalBottomSheet<int?>(
         context: context,
         builder: (BuildContext context) {
@@ -551,27 +554,26 @@ class Code7_6 extends StatelessWidget {
         });
   }
 
-   // 返回的是一个controller,这个展示不出来
   PersistentBottomSheetController _showBottomSheet(BuildContext context) {
     return showBottomSheet(
-       context: context,
-       builder: (BuildContext context) {
-         return ListView.builder(
-           itemCount: 30,
-           itemBuilder: (BuildContext context, int index) {
-             return ListTile(
-               title: Text("$index"),
-               onTap: () {
-                 // do something
-                 print("$index");
-                 Navigator.of(context).pop();
-               },
-             );
-           },
-         );
-       },
-     );
-   }
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: List.generate(10, (index) {
+                  return ListTile(
+                    title: Text('底部栏 $index'),
+                    onTap: () {
+                      //Navigator.of(context).pop();
+                      _controller?.close();
+                    },
+                  );
+                })));
+      },
+    );
+  }
 }
 
 class DialogCheckbox extends StatefulWidget {
@@ -583,7 +585,8 @@ class DialogCheckbox extends StatefulWidget {
     return _DialogCheckboxState();
   }
 
-  DialogCheckbox({Key? key, required this.value, required this.onChanged}) : super(key: key);
+  DialogCheckbox({Key? key, required this.value, required this.onChanged})
+      : super(key: key);
 }
 
 class _DialogCheckboxState extends State<DialogCheckbox> {
