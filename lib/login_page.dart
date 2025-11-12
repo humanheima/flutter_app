@@ -1,22 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+///
+/// Created by dumingwei on 2025/11/12
+/// Desc: 登录页面
+///
+///
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
   bool _isAgreed = false;
   bool _canGetCode = true;
   int _countdown = 60;
+  late AnimationController _shakeController;
+  late Animation<double> _shakeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    // 初始化晃动动画控制器
+    _shakeController = AnimationController(
+      duration: Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    // 定义晃动动画，从-10到10像素的左右移动
+    _shakeAnimation = Tween<double>(
+      begin: -10.0,
+      end: 10.0,
+    ).animate(CurvedAnimation(
+      parent: _shakeController,
+      curve: Curves.elasticIn,
+    ));
+  }
 
   @override
   void dispose() {
     _phoneController.dispose();
     _codeController.dispose();
+    _shakeController.dispose();
     super.dispose();
   }
 
@@ -62,9 +89,13 @@ class _LoginPageState extends State<LoginPage> {
 
   // 立即登录
   void _login() {
-    if (_phoneController.text.isNotEmpty &&
-        _codeController.text.isNotEmpty &&
-        _isAgreed) {
+    if (_phoneController.text.isNotEmpty && _codeController.text.isNotEmpty) {
+      if (!_isAgreed) {
+        // 如果没有勾选协议，触发晃动动画
+        _triggerShakeAnimation();
+        return;
+      }
+
       // 这里应该调用实际的登录API
       print('登录: 手机号=${_phoneController.text}, 验证码=${_codeController.text}');
 
@@ -78,11 +109,16 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // 触发晃动动画
+  void _triggerShakeAnimation() {
+    _shakeController.forward().then((_) {
+      _shakeController.reverse();
+    });
+  }
+
   // 检查登录按钮是否可用
   bool get _canLogin {
-    return _phoneController.text.isNotEmpty &&
-        _codeController.text.isNotEmpty &&
-        _isAgreed;
+    return _phoneController.text.isNotEmpty && _codeController.text.isNotEmpty;
   }
 
   @override
@@ -286,82 +322,91 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             // 底部协议条款
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 复选框
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isAgreed = !_isAgreed;
-                      });
-                    },
-                    child: Container(
-                      width: 14,
-                      height: 14,
-                      margin: EdgeInsets.only(top: 3),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Color(0xFF67656B),
-                          width: 1,
+            AnimatedBuilder(
+              animation: _shakeAnimation,
+              builder: (context, child) {
+                return Transform.translate(
+                  offset: Offset(_shakeAnimation.value, 0),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 复选框
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isAgreed = !_isAgreed;
+                            });
+                          },
+                          child: Container(
+                            width: 14,
+                            height: 14,
+                            margin: EdgeInsets.only(top: 3),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Color(0xFF67656B),
+                                width: 1,
+                              ),
+                              color: _isAgreed
+                                  ? Color(0xFF976FF5)
+                                  : Colors.transparent,
+                            ),
+                            child: _isAgreed
+                                ? Icon(
+                                    Icons.check,
+                                    size: 10,
+                                    color: Colors.white,
+                                  )
+                                : null,
+                          ),
                         ),
-                        color:
-                            _isAgreed ? Color(0xFF976FF5) : Colors.transparent,
-                      ),
-                      child: _isAgreed
-                          ? Icon(
-                              Icons.check,
-                              size: 10,
-                              color: Colors.white,
-                            )
-                          : null,
+
+                        SizedBox(width: 8),
+
+                        // 协议文本
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              style: TextStyle(
+                                color: Color(0xFF67656B),
+                                fontSize: 10,
+                                fontFamily: 'PingFang SC',
+                                height: 1.5,
+                              ),
+                              children: [
+                                TextSpan(text: '我已经阅读并同意 '),
+                                TextSpan(
+                                  text: 'XXXX协议',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                TextSpan(text: ' '),
+                                TextSpan(
+                                  text: 'XXXX协议',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                TextSpan(text: ' '),
+                                TextSpan(
+                                  text: 'XXXX协议',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                TextSpan(text: '，未注册手机号登录后将自动创建戏格账号'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-
-                  SizedBox(width: 8),
-
-                  // 协议文本
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Color(0xFF67656B),
-                          fontSize: 10,
-                          fontFamily: 'PingFang SC',
-                          height: 1.5,
-                        ),
-                        children: [
-                          TextSpan(text: '我已经阅读并同意 '),
-                          TextSpan(
-                            text: 'XXXX协议',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                          TextSpan(text: ' '),
-                          TextSpan(
-                            text: 'XXXX协议',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                          TextSpan(text: ' '),
-                          TextSpan(
-                            text: 'XXXX协议',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                          TextSpan(text: '，未注册手机号登录后将自动创建戏格账号'),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                );
+              },
             ),
           ],
         ),
