@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebView 调用 Flutter 调试工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background: #007AFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #0056CC;
+        }
+        
+        #log {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+        }
+        
+        #result {
+            background: #e7f3ff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            border: 1px solid #b3d9ff;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>� WebView → Flutter 调试工具</h1>
+        
+        <button onclick="testBasicCall()">测试基础调用（无返回值）</button>
+        <button onclick="testCallWithReturn()">测试带返回值调用</button>
+        <button onclick="testDeviceInfo()">测试获取设备信息</button>
+        <button onclick="checkCommunication()">检查通信方式</button>
+        <button onclick="clearLog()">清空日志</button>
+        
+        <div id="result">
+            等待测试结果...
+        </div>
+        
+        <div id="log">
+            <div>📱 调试日志:</div>
+        </div>
+    </div>
+
+    <script>
+        let logElement = document.getElementById('log');
+        let resultElement = document.getElementById('result');
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logDiv = document.createElement('div');
+            logDiv.textContent = `[${timestamp}] ${message}`;
+            logElement.appendChild(logDiv);
+            logElement.scrollTop = logElement.scrollHeight;
+            console.log(message);
+        }
+        
+        function showResult(result) {
+            resultElement.textContent = result;
+            log(`结果: ${result}`);
+        }
+        
+        function clearLog() {
+            logElement.innerHTML = '<div>📱 调试日志:</div>';
+            resultElement.textContent = '日志已清空';
+        }
+        
+        // 检查通信方式
+        function checkCommunication() {
+            log('=== 检查通信方式 ===');
+            log(`window.flutterMethodChannel 存在: ${typeof window.flutterMethodChannel !== 'undefined'}`);
+            log(`window.flutterMethodChannelWithReturn 存在: ${typeof window.flutterMethodChannelWithReturn !== 'undefined'}`);
+            log(`window.flutter_inappwebview 存在: ${typeof window.flutter_inappwebview !== 'undefined'}`);
+            
+            if (window.flutter_inappwebview) {
+                log(`flutter_inappwebview.callHandler 存在: ${typeof window.flutter_inappwebview.callHandler === 'function'}`);
+            }
+            
+            showResult('通信方式检查完成，查看日志');
+        }
+        
+        // 测试基础调用
+        function testBasicCall() {
+            log('测试基础调用（无返回值）');
+            
+            const message = {
+                method: 'showToast',
+                params: {
+                    message: '来自WebView的测试消息',
+                    duration: 2000
+                },
+                timestamp: Date.now()
+            };
+            
+            try {
+                if (window.flutterMethodChannel && window.flutterMethodChannel.postMessage) {
+                    window.flutterMethodChannel.postMessage(JSON.stringify(message));
+                    log('消息已通过JavaScriptChannel发送');
+                    showResult('基础调用测试完成');
+                } else {
+                    log('JavaScriptChannel不可用，使用自定义协议');
+                    window.location.href = `flutter://method?data=${encodeURIComponent(JSON.stringify(message))}`;
+                    showResult('通过自定义协议发送');
+                }
+            } catch (error) {
+                log(`发送失败: ${error.message}`);
+                showResult(`发送失败: ${error.message}`);
+            }
+        }
+        
+        // 测试带返回值调用 - 方案1: 直接使用JavaScriptChannel
+        function testCallWithReturn() {
+            log('测试带返回值调用 - JavaScriptChannel方案');
+            
+            const callbackId = 'callback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            
+            const message = {
+                method: 'getUserInfo',
+                params: {
+                    userId: 12345
+                },
+                callbackId: callbackId,
+                timestamp: Date.now()
+            };
+            
+            // 设置全局回调
+            window[callbackId] = function(result) {
+                clearTimeout(timeoutId);
+                delete window[callbackId];
+                log(`收到Flutter返回: ${JSON.stringify(result)}`);
+                showResult(`用户信息: ${JSON.stringify(result)}`);
+            };
+            
+            // 设置超时
+            const timeoutId = setTimeout(() => {
+                if (window[callbackId]) {
+                    delete window[callbackId];
+                    log('调用超时（15秒）');
+                    showResult('调用超时（15秒）');
+                }
+            }, 15000);
+            
+            try {
+                if (window.flutterMethodChannelWithReturn && window.flutterMethodChannelWithReturn.postMessage) {
+                    window.flutterMethodChannelWithReturn.postMessage(JSON.stringify(message));
+                    log(`消息已通过带返回值JavaScriptChannel发送，回调ID: ${callbackId}`);
+                } else {
+                    log('带返回值JavaScriptChannel不可用，使用自定义协议');
+                    window.location.href = `flutter://methodWithReturn?data=${encodeURIComponent(JSON.stringify(message))}`;
+                }
+            } catch (error) {
+                clearTimeout(timeoutId);
+                delete window[callbackId];
+                log(`发送失败: ${error.message}`);
+                showResult(`发送失败: ${error.message}`);
+            }
+        }
+        
+        // 测试获取设备信息
+        function testDeviceInfo() {
+            log('测试获取设备信息');
+            
+            const callbackId = 'callback_device_' + Date.now();
+            
+            const message = {
+                method: 'getDeviceInfo',
+                params: {},
+                callbackId: callbackId,
+                timestamp: Date.now()
+            };
+            
+            // 设置全局回调
+            window[callbackId] = function(result) {
+                clearTimeout(timeoutId);
+                delete window[callbackId];
+                log(`设备信息返回: ${JSON.stringify(result)}`);
+                showResult(`设备: ${result.platform} ${result.version}`);
+            };
+            
+            // 设置超时
+            const timeoutId = setTimeout(() => {
+                if (window[callbackId]) {
+                    delete window[callbackId];
+                    log('获取设备信息超时');
+                    showResult('获取设备信息超时');
+                }
+            }, 10000);
+            
+            try {
+                if (window.flutterMethodChannelWithReturn && window.flutterMethodChannelWithReturn.postMessage) {
+                    window.flutterMethodChannelWithReturn.postMessage(JSON.stringify(message));
+                    log(`设备信息请求已发送，回调ID: ${callbackId}`);
+                } else {
+                    log('使用自定义协议获取设备信息');
+                    window.location.href = `flutter://methodWithReturn?data=${encodeURIComponent(JSON.stringify(message))}`;
+                }
+            } catch (error) {
+                clearTimeout(timeoutId);
+                delete window[callbackId];
+                log(`请求设备信息失败: ${error.message}`);
+                showResult(`请求失败: ${error.message}`);
+            }
+        }
+        
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            log('调试页面已加载完成');
+            
+            // 延迟检查通信方式
+            setTimeout(() => {
+                checkCommunication();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

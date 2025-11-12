@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter 调用 WebView 演示</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        
+        .display-area {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            min-height: 80px;
+            word-wrap: break-word;
+        }
+        
+        .message-display {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .counter-display {
+            font-size: 48px;
+            text-align: center;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .data-display {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 5px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="status" id="status">
+        ✅ WebView已就绪
+    </div>
+    
+    <div class="container">
+        <h1>📱 Flutter → WebView 演示</h1>
+        
+        <div class="display-area">
+            <h3>📢 消息显示区域</h3>
+            <div id="messageArea">
+                <div class="message-display">
+                    等待Flutter发送消息...
+                </div>
+            </div>
+        </div>
+        
+        <div class="display-area">
+            <h3>🔢 计数器</h3>
+            <div class="counter-display" id="counterDisplay">0</div>
+        </div>
+        
+        <div class="display-area">
+            <h3>📊 数据显示</h3>
+            <div id="dataArea">
+                <div class="data-display">暂无数据</div>
+            </div>
+        </div>
+        
+        <div class="log" id="log">
+            <div><strong>📱 WebView日志:</strong></div>
+        </div>
+    </div>
+
+    <script>
+        let currentCounter = 0;
+        let logElement = document.getElementById('log');
+        
+        // 记录日志
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logDiv = document.createElement('div');
+            logDiv.innerHTML = `[${timestamp}] ${message}`;
+            logElement.appendChild(logDiv);
+            logElement.scrollTop = logElement.scrollHeight;
+            console.log(message);
+        }
+        
+        // 更新状态指示器
+        function updateStatus(message, isError = false) {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = message;
+            statusElement.style.background = isError ? 'rgba(244, 67, 54, 0.9)' : 'rgba(76, 175, 80, 0.9)';
+            
+            if (!isError) {
+                setTimeout(() => {
+                    statusElement.textContent = '✅ WebView已就绪';
+                    statusElement.style.background = 'rgba(76, 175, 80, 0.9)';
+                }, 2000);
+            }
+        }
+        
+        // Flutter调用的方法：显示消息
+        window.showMessage = function(message) {
+            log(`Flutter调用showMessage: ${message}`);
+            
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML = `
+                <div class="message-display">
+                    <strong>来自Flutter的消息：</strong><br>
+                    ${message}
+                </div>
+            `;
+            
+            updateStatus('📢 收到消息');
+            return { success: true, timestamp: new Date().toISOString() };
+        };
+        
+        // Flutter调用的方法：更新计数器
+        window.updateCounter = function(value) {
+            log(`Flutter调用updateCounter: ${value}`);
+            
+            currentCounter = value;
+            document.getElementById('counterDisplay').textContent = currentCounter;
+            
+            updateStatus('🔢 计数器已更新');
+            return { success: true, oldValue: currentCounter, newValue: value };
+        };
+        
+        // Flutter调用的方法：增加计数器
+        window.incrementCounter = function(step = 1) {
+            log(`Flutter调用incrementCounter: +${step}`);
+            
+            currentCounter += step;
+            document.getElementById('counterDisplay').textContent = currentCounter;
+            
+            updateStatus('➕ 计数器递增');
+            return { success: true, currentValue: currentCounter };
+        };
+        
+        // Flutter调用的方法：显示数据
+        window.showData = function(data) {
+            log(`Flutter调用showData: ${JSON.stringify(data)}`);
+            
+            const dataArea = document.getElementById('dataArea');
+            let dataHtml = '';
+            
+            if (typeof data === 'object' && data !== null) {
+                for (const [key, value] of Object.entries(data)) {
+                    dataHtml += `
+                        <div class="data-display">
+                            <strong>${key}:</strong> ${JSON.stringify(value)}
+                        </div>
+                    `;
+                }
+            } else {
+                dataHtml = `<div class="data-display">${JSON.stringify(data)}</div>`;
+            }
+            
+            dataArea.innerHTML = dataHtml;
+            updateStatus('📊 数据已更新');
+            return { success: true, dataType: typeof data };
+        };
+        
+        // Flutter调用的方法：清空所有内容
+        window.clearAll = function() {
+            log('Flutter调用clearAll');
+            
+            // 清空消息区域
+            document.getElementById('messageArea').innerHTML = `
+                <div class="message-display">已清空所有内容</div>
+            `;
+            
+            // 重置计数器
+            currentCounter = 0;
+            document.getElementById('counterDisplay').textContent = '0';
+            
+            // 清空数据区域
+            document.getElementById('dataArea').innerHTML = `
+                <div class="data-display">暂无数据</div>
+            `;
+            
+            updateStatus('🧹 内容已清空');
+            return { success: true, message: '所有内容已清空' };
+        };
+        
+        // Flutter调用的方法：改变主题颜色
+        window.changeTheme = function(colors) {
+            log(`Flutter调用changeTheme: ${JSON.stringify(colors)}`);
+            
+            if (colors && colors.primary && colors.secondary) {
+                document.body.style.background = `linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%)`;
+                updateStatus('🎨 主题已更改');
+                return { success: true, theme: colors };
+            } else {
+                updateStatus('❌ 主题参数无效', true);
+                return { success: false, error: '无效的颜色参数' };
+            }
+        };
+        
+        // Flutter调用的方法：显示通知样式的消息
+        window.showNotification = function(title, message, type = 'info') {
+            log(`Flutter调用showNotification: ${title} - ${message} (${type})`);
+            
+            // 移除已存在的通知
+            const existingNotification = document.getElementById('flutter-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // 创建通知
+            const notification = document.createElement('div');
+            notification.id = 'flutter-notification';
+            
+            const colors = {
+                info: 'linear-gradient(135deg, #2196F3, #1976D2)',
+                success: 'linear-gradient(135deg, #4CAF50, #388E3C)',
+                warning: 'linear-gradient(135deg, #FF9800, #F57C00)',
+                error: 'linear-gradient(135deg, #F44336, #D32F2F)'
+            };
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${colors[type] || colors.info};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                max-width: 300px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            `;
+            
+            notification.innerHTML = `
+                <div style="font-weight: bold; margin-bottom: 5px;">${title}</div>
+                <div style="font-size: 14px; opacity: 0.9;">${message}</div>
+            `;
+            
+            // 点击关闭
+            notification.onclick = function() {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            };
+            
+            // 添加到页面
+            document.body.appendChild(notification);
+            
+            // 5秒后自动消失
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+            
+            updateStatus(`📢 ${type.toUpperCase()} 通知`);
+            return { success: true, type: type };
+        };
+        
+        // Flutter调用的方法：获取WebView状态
+        window.getWebViewStatus = function() {
+            log('Flutter调用getWebViewStatus');
+            
+            const status = {
+                timestamp: new Date().toISOString(),
+                counter: currentCounter,
+                userAgent: navigator.userAgent,
+                url: window.location.href,
+                screenSize: {
+                    width: window.screen.width,
+                    height: window.screen.height
+                },
+                viewportSize: {
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                },
+                ready: true
+            };
+            
+            updateStatus('📊 状态已获取');
+            return status;
+        };
+        
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            log('WebView页面已加载完成，等待Flutter调用');
+            updateStatus('✅ 页面已就绪');
+        });
+        
+        // 监听页面可见性变化
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                log('页面进入后台');
+            } else {
+                log('页面回到前台');
+                updateStatus('✅ 页面已激活');
+            }
+        });
+    </script>
+</body>
+</html>
