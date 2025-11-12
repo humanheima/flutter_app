@@ -19,7 +19,7 @@ class SingleChildScrollViewTestRoute extends StatelessWidget {
         child: Scrollbar(
             child: SingleChildScrollView(
           padding: EdgeInsets.all(16.0),
-          child: Center(
+         // child: Center(
             child: Column(
               children: str
                   .split("")
@@ -31,7 +31,7 @@ class SingleChildScrollViewTestRoute extends StatelessWidget {
             ),
           ),
         )),
-      ),
+      //),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_app/animations/FadeRouteTest.dart';
 import 'package:flutter_app/animations/HeroAnimationRoute.dart';
 import 'package:flutter_app/animations/ScaleAnimationRoute.dart';
 import 'package:flutter_app/animations/StaggerDemo.dart';
+import 'package:flutter_app/animations/animation_main_page.dart';
 import 'package:flutter_app/customwidgets/CustomPaintRoute.dart';
 import 'package:flutter_app/customwidgets/GradientButton.dart';
 import 'package:flutter_app/customwidgets/GradientCircularProgressRoute.dart';
@@ -216,6 +217,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         })));
               },
             ),
+
+            ElevatedButton(
+              onPressed: () {
+                // 在需要的地方导航到动画主页
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AnimationMainPage()),
+                );
+              },
+              child: Text(
+                "动画演示入口",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+            ),
+
             ElevatedButton(
               child: Text(
                 "动画基本结构",
