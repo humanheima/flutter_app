@@ -71,13 +71,11 @@ class _WebViewDemoPageState extends State<WebViewDemoPage> {
     try {
       String htmlContent =
           await rootBundle.loadString('assets/html/webview_demo.html');
-      String jsContent =
-          await rootBundle.loadString('assets/html/webview_bridge.js');
 
-      // 将JS内容内联到HTML中
+      // 移除HTML中的JS引用，我们将通过runJavaScript直接注入
       htmlContent = htmlContent.replaceAll(
           '<script src="webview_bridge.js"></script>',
-          '<script>$jsContent</script>');
+          '<!-- JavaScript将通过Flutter直接注入 -->');
 
       await _controller.loadHtmlString(htmlContent, baseUrl: 'assets://');
       debugPrint('双向通信演示HTML加载成功');
@@ -91,26 +89,40 @@ class _WebViewDemoPageState extends State<WebViewDemoPage> {
 
   // 注入JavaScript代码
   Future<void> _injectJavaScript() async {
-    await _controller.runJavaScript('''
-      console.log('🔄 Flutter双向通信演示WebView已初始化完成');
-      
-      // 检查JavaScriptChannel可用性
-      if (typeof flutterMethodChannelWithReturn === 'undefined') {
-        console.log('⚠️ JavaScriptChannel未就绪，将在1秒后重试');
-        setTimeout(function() {
-          if (window.bridge) {
-            window.bridge.log('JavaScriptChannel重新检测: ' + (typeof flutterMethodChannelWithReturn !== 'undefined'));
-          }
-        }, 1000);
-      } else {
-        console.log('✅ JavaScriptChannel已就绪');
-      }
-      
-      if (window.bridge) {
-        window.bridge.log('🚀 Flutter双向通信桥接已就绪');
-        window.bridge.log('JavaScriptChannel状态检测完成');
-      }
-    ''');
+    try {
+      // 第一步：加载并注入JavaScript桥接文件
+      String jsContent =
+          await rootBundle.loadString('assets/html/webview_bridge.js');
+      await _controller.runJavaScript(jsContent);
+      debugPrint('✅ JavaScript桥接文件注入成功');
+
+      // 第二步：运行初始化代码
+      await _controller.runJavaScript('''
+        console.log('🔄 Flutter双向通信演示WebView已初始化完成');
+        
+        // 检查JavaScriptChannel可用性
+        if (typeof flutterMethodChannelWithReturn === 'undefined') {
+          console.log('⚠️ JavaScriptChannel未就绪，将在1秒后重试');
+          setTimeout(function() {
+            if (window.bridge) {
+              window.bridge.log('JavaScriptChannel重新检测: ' + (typeof flutterMethodChannelWithReturn !== 'undefined'));
+            }
+          }, 1000);
+        } else {
+          console.log('✅ JavaScriptChannel已就绪');
+        }
+        
+        if (window.bridge) {
+          window.bridge.log('🚀 Flutter双向通信桥接已就绪');
+          window.bridge.log('JavaScriptChannel状态检测完成');
+        }
+      ''');
+    } catch (e) {
+      debugPrint('❌ JavaScript注入失败: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('JavaScript注入失败: $e')),
+      );
+    }
   }
 
   // 处理自定义协议

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'webview_demo_page.dart';
 import 'webview_call_flutter_page.dart';
 import 'flutter_call_webview_page.dart';
+import 'webview_real_page_demo.dart';
 
 class WebDemoEntryPage extends StatelessWidget {
   const WebDemoEntryPage({Key? key}) : super(key: key);
@@ -201,6 +202,89 @@ class WebDemoEntryPage extends StatelessWidget {
                         label: const Text('进入综合演示'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple[600],
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            // 真实网页加载演示
+            Card(
+              elevation: 3,
+              color: Colors.orange[50],
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.public,
+                          size: 28,
+                          color: Colors.orange,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '🌐 真实网页加载演示',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.orange[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    const Text(
+                      '加载真实的网页，演示完整的浏览器功能：前进后退、进度条、错误处理、URL输入等',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.orange[100],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        'test-h5.rolepub.com/feeds/detail?id=42',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.orange[800],
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const WebViewRealPageDemo(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.launch, size: 18),
+                        label: const Text('进入网页演示'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange[600],
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 20,
