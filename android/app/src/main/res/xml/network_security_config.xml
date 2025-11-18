@@ -13,10 +13,10 @@
         </trust-anchors>
     </domain-config>
 
-    <!-- 生产环境使用系统证书验证 -->
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system"/>
-        </trust-anchors>
-    </base-config>
+<!--    &lt;!&ndash; 生产环境使用系统证书验证 &ndash;&gt;-->
+<!--    <base-config cleartextTrafficPermitted="true">-->
+<!--        <trust-anchors>-->
+<!--            <certificates src="system"/>-->
+<!--        </trust-anchors>-->
+<!--    </base-config>-->
 </network-security-config>

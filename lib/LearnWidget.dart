@@ -18,6 +18,9 @@ import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
 import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dart';
 import 'package:flutter_app/flutter_in_action/main.dart';
 import 'package:flutter_app/login_demo_main.dart';
+import 'package:flutter_app/proxy/dio_proxy_demo.dart';
+import 'package:flutter_app/proxy/proxy_demo_main.dart';
+import 'package:flutter_app/figma/my_works_page.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,6 +90,24 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               child: Text(
+                "测试代理功能",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                _startProxyDemo();
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "我的作品页面（Figma设计实现）",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                _openMyWorksPage();
+              },
+            ),
+            ElevatedButton(
+              child: Text(
                 "打开原生界面",
                 style: new TextStyle(fontSize: 20, color: Colors.redAccent),
               ),
@@ -94,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 _openNativeScreen();
               },
             ),
+
             ElevatedButton(
               child: Text(
                 "打开Figma演示页面入口",
@@ -365,6 +387,18 @@ class _MyHomePageState extends State<MyHomePage> {
     GlobalConfig.dark = darkTheme;
 
     return darkTheme;
+  }
+
+  _startProxyDemo() {
+    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      return new DioProxyDemo();
+    }));
+  }
+
+  _openMyWorksPage() {
+    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      return const MyWorksPage();
+    }));
   }
 
   // 定义一个方法来调用原生代码

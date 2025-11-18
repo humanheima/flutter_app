@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  网络安全配置文件
+  用于 Android 7.0+ 系统抓包时信任用户安装的证书
+  
+  使用方法：
+  1. 将此文件放在 android/app/src/main/res/xml/ 目录下
+  2. 在 AndroidManifest.xml 中引用：
+     <application
+         android:networkSecurityConfig="@xml/network_security_config"
+         ...>
+  
+  ⚠️ 注意：仅用于开发调试，生产环境应移除或使用更严格的配置
+-->
+<network-security-config>
+    <!-- 基础配置：允许明文流量和用户证书 -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- 信任系统预装的证书 -->
+            <certificates src="system" />
+            <!-- 信任用户安装的证书（用于抓包工具如 Charles、Fiddler） -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+    
+    <!-- 
+      可选：为特定域名配置
+      如果只想对特定域名启用抓包，可以使用 domain-config
+    -->
+    <!--
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.example.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+    -->
+</network-security-config>
