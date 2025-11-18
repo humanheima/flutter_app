@@ -16,13 +16,14 @@ import 'package:flutter_app/eventhandleandnotification/EventBus.dart';
 import 'package:flutter_app/eventhandleandnotification/GestureDetectorTestRoute.dart';
 import 'package:flutter_app/eventhandleandnotification/NotificationTest.dart';
 import 'package:flutter_app/eventhandleandnotification/PointerEventTestRoute.dart';
+import 'package:flutter_app/figma/my_works_page.dart';
+import 'package:flutter_app/staggered/staggered_index.dart';
 import 'package:flutter_app/flutter_in_action/main.dart';
 import 'package:flutter_app/login_demo_main.dart';
 import 'package:flutter_app/proxy/dio_proxy_demo.dart';
-import 'package:flutter_app/proxy/proxy_demo_main.dart';
-import 'package:flutter_app/figma/my_works_page.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'flutter_in_action/chapter11/HttpTestRoute.dart';
@@ -106,6 +107,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 _openMyWorksPage();
               },
             ),
+            ElevatedButton(
+              child: Text(
+                "Staggered demo 演示",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                _flutterStaggeredGridViewDemoPage();
+              },
+            ),
+
             ElevatedButton(
               child: Text(
                 "打开原生界面",
@@ -398,6 +409,12 @@ class _MyHomePageState extends State<MyHomePage> {
   _openMyWorksPage() {
     Navigator.push(context, new MaterialPageRoute(builder: (context) {
       return const MyWorksPage();
+    }));
+  }
+
+  _flutterStaggeredGridViewDemoPage() {
+    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      return const StaggeredDemosIndex();
     }));
   }
 

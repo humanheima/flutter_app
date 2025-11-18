@@ -4,20 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 /// 我的作品页面
-class MyWorksPage extends StatefulWidget {
-  const MyWorksPage({Key? key}) : super(key: key);
+class StaggeredGridViewDemoPage extends StatefulWidget {
+  const StaggeredGridViewDemoPage({Key? key}) : super(key: key);
 
   @override
-  State<MyWorksPage> createState() => _MyWorksPageState();
+  State<StaggeredGridViewDemoPage> createState() =>
+      _StaggeredGridViewDemoPageState();
 }
 
-class _MyWorksPageState extends State<MyWorksPage> {
+class _StaggeredGridViewDemoPageState extends State<StaggeredGridViewDemoPage> {
   final ScrollController _scrollController = ScrollController();
   final List<WorkItem> _works = [];
   bool _isLoading = false;
   bool _hasMoreData = true;
 
-  // 模拟数据源
+  // 模拟的作品数据
+  // 标题 mock，极短和极长混合
   final List<String> _mockTitles = [
     '罢工',
     '魔王',
@@ -33,8 +35,15 @@ class _MyWorksPageState extends State<MyWorksPage> {
     '都市修仙传说之少年逆袭成长史，热血与友情并存',
     '重生之商业大亨的崛起与跌宕起伏的创业人生',
     '魔法学院日常生活点滴，友情、爱情与魔法的交织',
+    '古风宫廷秘史：一个宫女的逆袭之路，权谋与情感的较量',
+    '末世求生指南：人类在废土中的生存法则与希望',
+    '机甲战士传奇：未来世界的少年驾驶员成长之路',
+    '仙侠恋爱物语：跨越种族的浪漫传奇',
+    '校花的贴身高手：普通学生意外获得超能力，守护校花的故事',
+    '孟婆今天也想罢工：仙侠地府，爱恨情仇，白无常办错了事情',
   ];
 
+  // 描述 mock，极短和极长混合
   final List<String> _mockDescriptions = [
     '一部作品。',
     '很短的描述。',
@@ -42,15 +51,38 @@ class _MyWorksPageState extends State<MyWorksPage> {
     '逆袭。',
     '创业人生。',
     '友情并存。',
+    '魔法交织。',
+    '权谋较量。',
+    '生存法则。',
+    '少年成长。',
+    '跨越种族。',
+    '守护校花。',
+    '仙侠地府。',
     '这是一个关于友情、成长、逆袭和梦想的故事，主角在经历了无数挫折后终于实现了自己的目标。',
     '在未来的世界里，少年驾驶着机甲与敌人战斗，经历了友情、背叛和成长，最终成为了传奇战士。',
+    '古风宫廷秘史，讲述一个宫女如何在权谋斗争中逆袭，最终获得自由与幸福。',
+    '末世来临，人类在废土中挣扎求生，主角带领团队寻找希望与新生。',
+    '魔法学院的日常生活充满欢声笑语，学生们在学习魔法的同时也收获了珍贵的友谊和爱情。',
+    '重生回到过去，利用前世记忆创建商业帝国，经历了无数风雨，最终成为商业巨头。',
+    '仙侠恋爱物语，跨越种族的浪漫传奇，主角与爱人共同面对各种挑战，最终走到一起。',
+    '普通学生意外获得超能力，守护校花的故事，充满了青春、热血和感动。',
+    '仙侠地府，爱恨情仇，试图搞潜规则的白无常办错了事情，主角如何化解危机？',
+    '现代都市中隐藏的修仙世界，一个少年的成长历程，既有热血也有温情。',
+    '穿越到异界成为魔王，却发现这个世界并不简单，主角如何在异界生存？',
   ];
 
+  // 模拟的封面图片URL（使用随机图片）
   final List<String> _mockImages = [
     'https://picsum.photos/300/400?random=1',
     'https://picsum.photos/300/450?random=2',
     'https://picsum.photos/300/380?random=3',
     'https://picsum.photos/300/420?random=4',
+    'https://picsum.photos/300/460?random=5',
+    'https://picsum.photos/300/390?random=6',
+    'https://picsum.photos/300/440?random=7',
+    'https://picsum.photos/300/410?random=8',
+    'https://picsum.photos/300/470?random=9',
+    'https://picsum.photos/300/400?random=10',
   ];
 
   @override
@@ -62,13 +94,12 @@ class _MyWorksPageState extends State<MyWorksPage> {
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
   }
 
+  // 监听滚动，实现加载更多
   void _onScroll() {
-    if (!_scrollController.hasClients) return;
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 200) {
       if (!_isLoading && _hasMoreData) {
@@ -77,58 +108,80 @@ class _MyWorksPageState extends State<MyWorksPage> {
     }
   }
 
+  // 加载初始数据
   Future<void> _loadInitialData() async {
     setState(() => _isLoading = true);
-    await Future.delayed(const Duration(milliseconds: 500));
-    final initial = _generateMockWorks(10);
+    await Future.delayed(const Duration(seconds: 1)); // 模拟网络延迟
+
+    final initialWorks = _generateMockWorks(10);
     setState(() {
-      _works.addAll(initial);
+      _works.addAll(initialWorks);
       _isLoading = false;
     });
   }
 
+  // 下拉刷新
   Future<void> _onRefresh() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    final fresh = _generateMockWorks(10);
+    await Future.delayed(const Duration(seconds: 1)); // 模拟网络延迟
+
+    final newWorks = _generateMockWorks(10);
     setState(() {
       _works.clear();
-      _works.addAll(fresh);
+      _works.addAll(newWorks);
       _hasMoreData = true;
     });
   }
 
+  // 加载更多数据
   Future<void> _loadMoreData() async {
     setState(() => _isLoading = true);
-    await Future.delayed(const Duration(seconds: 1));
-    final more = _generateMockWorks(6);
+    await Future.delayed(const Duration(seconds: 1)); // 模拟网络延迟
+
+    final moreWorks = _generateMockWorks(6);
     setState(() {
-      _works.addAll(more);
+      _works.addAll(moreWorks);
       _isLoading = false;
-      if (_works.length >= 50) _hasMoreData = false;
+      // 模拟到达数据末尾
+      if (_works.length >= 50) {
+        _hasMoreData = false;
+      }
     });
   }
 
+  // 生成模拟数据
   List<WorkItem> _generateMockWorks(int count) {
-    final rnd = Random();
-    return List.generate(count, (i) {
-      final title = rnd.nextBool()
-          ? _mockTitles[rnd.nextInt(_mockTitles.length)]
-          : (_mockTitles[0] +
-              ' ' +
-              _mockTitles[rnd.nextInt(_mockTitles.length)]);
-      final desc = rnd.nextBool()
-          ? _mockDescriptions[rnd.nextInt(_mockDescriptions.length)]
-          : (_mockDescriptions[0] +
-              ' ' +
-              _mockDescriptions[rnd.nextInt(_mockDescriptions.length)]);
+    final Random random = Random();
+    return List.generate(count, (index) {
+      // 随机决定标题和描述长度
+      String title;
+      String description;
+      if (random.nextBool()) {
+        // 极短标题
+        title = _mockTitles[random.nextInt(10)];
+      } else {
+        // 极长标题
+        title = _mockTitles[10 + random.nextInt(_mockTitles.length - 10)];
+      }
+      if (random.nextBool()) {
+        // 极短描述
+        description = _mockDescriptions[random.nextInt(12)];
+      } else {
+        // 极长描述
+        description = _mockDescriptions[
+            12 + random.nextInt(_mockDescriptions.length - 12)];
+      }
+      final imageIndex = random.nextInt(_mockImages.length);
+
       return WorkItem(
-        id: DateTime.now().millisecondsSinceEpoch.toString() + i.toString(),
+        id: DateTime.now().millisecondsSinceEpoch.toString() + index.toString(),
         title: title,
-        description: desc,
-        imageUrl: _mockImages[rnd.nextInt(_mockImages.length)],
-        status: rnd.nextBool() ? WorkStatus.published : WorkStatus.draft,
-        lastEditTime: DateTime.now().subtract(Duration(days: rnd.nextInt(30))),
-        imageHeight: 300 + rnd.nextInt(200).toDouble(),
+        description: description,
+        imageUrl: _mockImages[imageIndex],
+        status: random.nextBool() ? WorkStatus.published : WorkStatus.draft,
+        lastEditTime: DateTime.now().subtract(
+          Duration(days: random.nextInt(30), hours: random.nextInt(24)),
+        ),
+        imageHeight: 350 + random.nextInt(100).toDouble(), // 随机高度实现瀑布流效果
       );
     });
   }
@@ -147,6 +200,7 @@ class _MyWorksPageState extends State<MyWorksPage> {
     );
   }
 
+  // 构建AppBar
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
       backgroundColor: const Color(0xFF020203),
@@ -172,6 +226,7 @@ class _MyWorksPageState extends State<MyWorksPage> {
     );
   }
 
+  // 构建主体内容
   Widget _buildBody() {
     if (_works.isEmpty && _isLoading) {
       return const Center(
@@ -181,30 +236,28 @@ class _MyWorksPageState extends State<MyWorksPage> {
       );
     }
 
-    // 使用外层 ListView 控制滚动，内部 MasonryGridView shrinkWrap
-    return ListView(
-      controller: _scrollController,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      children: [
-        MasonryGridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 8,
-          itemCount: _works.length,
-          itemBuilder: (context, index) => _buildWorkCard(_works[index]),
-        ),
-        if (_hasMoreData)
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            alignment: Alignment.center,
-            child: _buildLoadMoreIndicator(),
-          ),
-      ],
+    // return QuiltedGridView();
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: AlignedGridView.count(
+        controller: _scrollController,
+        crossAxisCount: 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 8,
+        itemCount: _works.length + (_hasMoreData ? 1 : 0),
+        itemBuilder: (context, index) {
+          if (index >= _works.length) {
+            // 加载更多指示器
+            return _buildLoadMoreIndicator();
+          }
+          return _buildWorkCard(_works[index]);
+        },
+      ),
     );
   }
 
+  // 构建作品卡片
   Widget _buildWorkCard(WorkItem work) {
     return GestureDetector(
       onTap: () => _onWorkTap(work),
@@ -216,7 +269,9 @@ class _MyWorksPageState extends State<MyWorksPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 封面图片和状态标签
             _buildCoverWithStatus(work),
+            // 内容区域
             _buildContentArea(work),
           ],
         ),
@@ -224,6 +279,7 @@ class _MyWorksPageState extends State<MyWorksPage> {
     );
   }
 
+  // 构建封面图片和状态标签
   Widget _buildCoverWithStatus(WorkItem work) {
     return Container(
       margin: const EdgeInsets.all(6).copyWith(bottom: 0),
@@ -266,6 +322,7 @@ class _MyWorksPageState extends State<MyWorksPage> {
               ),
             ),
           ),
+          // 状态标签
           if (work.status != WorkStatus.none)
             Positioned(
               top: 10,
@@ -294,12 +351,14 @@ class _MyWorksPageState extends State<MyWorksPage> {
     );
   }
 
+  // 构建内容区域
   Widget _buildContentArea(WorkItem work) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // 标题
           Text(
             work.title,
             style: const TextStyle(
@@ -312,6 +371,7 @@ class _MyWorksPageState extends State<MyWorksPage> {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 6),
+          // 描述
           Text(
             work.description,
             style: const TextStyle(
@@ -325,6 +385,7 @@ class _MyWorksPageState extends State<MyWorksPage> {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 6),
+          // 编辑时间
           Text(
             _formatEditTime(work.lastEditTime),
             style: const TextStyle(
@@ -339,18 +400,25 @@ class _MyWorksPageState extends State<MyWorksPage> {
     );
   }
 
+  // 构建加载更多指示器
   Widget _buildLoadMoreIndicator() {
-    return Container(
-      height: 48,
-      alignment: Alignment.center,
-      child: _isLoading
-          ? const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF80de4f)),
-            )
-          : const SizedBox.shrink(),
-    );
+    return StaggeredGridTile.fit(
+        crossAxisCellCount: 2,
+        child: Container(
+          height: 80,
+          alignment: Alignment.center,
+          child: _isLoading
+              ? Center(
+                  child: const CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(Color(0xFF80de4f)),
+                  ),
+                )
+              : const SizedBox.shrink(),
+        ));
   }
 
+  // 格式化编辑时间
   String _formatEditTime(DateTime time) {
     final now = DateTime.now();
     final difference = now.difference(time);
@@ -366,6 +434,7 @@ class _MyWorksPageState extends State<MyWorksPage> {
     }
   }
 
+  // 处理卡片点击事件
   void _onWorkTap(WorkItem work) {
     showModalBottomSheet(
       context: context,
