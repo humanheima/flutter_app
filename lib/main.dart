@@ -1,5 +1,5 @@
-// Figma登录页面演示
+// 使用 LearnWidget 作为程序入口
 import 'package:flutter/material.dart';
-import 'login_demo_main.dart';
+import 'package:flutter_app/LearnWidget.dart';
 
-void main() => runApp(LoginDemoApp());
+void main() => runApp(MyApp());

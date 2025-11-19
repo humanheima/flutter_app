@@ -1,17 +1,17 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_proxy_native/flutter_proxy_native.dart';
 
 /// Dio 代理设置 Demo
 /// 演示如何获取 Android 系统代理并设置给 Dio 进行抓包
 class DioProxyDemo extends StatefulWidget {
-
   const DioProxyDemo({Key? key}) : super(key: key);
 
   @override
   State<DioProxyDemo> createState() => _DioProxyDemoState();
-  
 }
 
 class _DioProxyDemoState extends State<DioProxyDemo> {
@@ -31,6 +31,8 @@ class _DioProxyDemoState extends State<DioProxyDemo> {
     // 获取系统代理配置
     final proxyHost = Platform.environment['HTTP_PROXY'] ??
         Platform.environment['http_proxy'];
+
+    //var proxy = await FlutterProxyNative.getSystemProxy();
 
     if (proxyHost != null && proxyHost.isNotEmpty) {
       setState(() {

@@ -57,6 +57,8 @@ dependencies:
 
   flukit_plus: ^3.1.0
 
+  flutter_proxy_native: ^0.0.2
+
 
 dev_dependencies:
 
