@@ -27,16 +27,20 @@ class _DioProxyDemoState extends State<DioProxyDemo> {
   }
 
   /// 设置 Dio 代理
-  void _setupDioProxy() {
+  void _setupDioProxy() async {
     // 获取系统代理配置
     final proxyHost = Platform.environment['HTTP_PROXY'] ??
         Platform.environment['http_proxy'];
 
-    //var proxy = await FlutterProxyNative.getSystemProxy();
+    final _flutterProxyPlugin = FlutterProxyNative();
 
-    if (proxyHost != null && proxyHost.isNotEmpty) {
+    var proxy = await _flutterProxyPlugin.getSystemProxy() ?? '';
+
+    print("DioProxyDemo - 系统代理: $proxy");
+
+    if (proxy != null) {
       setState(() {
-        _proxyInfo = '系统代理: $proxyHost';
+        _proxyInfo = '系统代理: $proxy';
       });
 
       // 配置 Dio 使用代理
@@ -45,7 +49,7 @@ class _DioProxyDemoState extends State<DioProxyDemo> {
 
         // 设置代理
         client.findProxy = (uri) {
-          return 'PROXY $proxyHost';
+          return 'PROXY $proxy';
         };
 
         // 如果是 HTTPS 抓包工具（如 Charles、Fiddler），需要允许自签名证书
