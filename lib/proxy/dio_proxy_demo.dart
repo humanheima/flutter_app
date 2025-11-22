@@ -29,16 +29,15 @@ class _DioProxyDemoState extends State<DioProxyDemo> {
   /// 设置 Dio 代理
   void _setupDioProxy() async {
     // 获取系统代理配置
-    final proxyHost = Platform.environment['HTTP_PROXY'] ??
-        Platform.environment['http_proxy'];
 
     final _flutterProxyPlugin = FlutterProxyNative();
 
+    //没有代理，返回的是 null:null
     var proxy = await _flutterProxyPlugin.getSystemProxy() ?? '';
 
     print("DioProxyDemo - 系统代理: $proxy");
 
-    if (proxy != null) {
+    if (proxy != null && !proxy.contains("null")) {
       setState(() {
         _proxyInfo = '系统代理: $proxy';
       });

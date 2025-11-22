@@ -16,6 +16,31 @@ class ProgressWidget extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.all(16.0),
+              child: Container(
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  ),
+                  child: LinearProgressIndicator(
+                    value: 0.6,
+                    backgroundColor: Colors.cyan,
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    valueColor: AlwaysStoppedAnimation(Colors.red),
+                  )),
+            ),
+            UnconstrainedBox(
+              child: SizedBox(
+                  width: 100.0,
+                  height: 100.0,
+                  child: CircularProgressIndicator(
+                    value: 0.5,
+                    backgroundColor: Colors.cyan,
+                    valueColor: AlwaysStoppedAnimation(Colors.red),
+                  )),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
               child: LinearProgressIndicator(
                 backgroundColor: Colors.grey[200],
                 valueColor: AlwaysStoppedAnimation(Colors.blue),
