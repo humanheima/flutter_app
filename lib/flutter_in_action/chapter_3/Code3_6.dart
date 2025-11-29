@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'PureImageCheckbox.dart';
+
 ///
 /// Created by dumingwei on 2019-10-07.
 /// Desc:3.6 单选开关和复选框
@@ -53,7 +55,30 @@ class _SwitchAndCheckBoxWidgetState extends State<SwitchAndCheckBoxWidget> {
                 _checkboxSelected = value ?? false;
               });
             },
-          )
+          ),
+
+          // 示例 2：自定义图片大小+初始选中+禁用状态
+          PureImageCheckbox(
+            uncheckedImagePath: "images/unchecked2.png",
+            checkedImagePath: "images/checked2.png",
+            imageWidth: 32, // 图片宽度 32px
+            imageHeight: 32, // 图片高度 32px
+            initialChecked: true, // 初始选中
+            isDisabled: false, // 不禁用
+            onCheckedChanged: (isChecked) {
+              print("自定义大小复选框：$isChecked");
+            },
+          ),
+
+          const SizedBox(height: 20),
+
+          // 示例 3：禁用状态（图片置灰，不可点击）
+          PureImageCheckbox(
+            uncheckedImagePath: "images/unchecked.png",
+            checkedImagePath: "images/checked.png",
+            isDisabled: true, // 禁用
+          ),
+
         ],
       ),
     );

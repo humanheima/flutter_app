@@ -85,6 +85,7 @@ flutter:
   assets:
     - assets/
     - assets/html/
+    - images/
     - images/avatar.png
     - images/avatar.jpg
     - images/bg_dark.png

@@ -26,6 +26,7 @@ import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/return_value_demo.dart';
+import 'package:flutter_app/tabbar_demo.dart';
 
 import 'flutter_in_action/chapter11/HttpTestRoute.dart';
 import 'flutter_in_action/chapter11/WebSocketRoute.dart';
@@ -151,6 +152,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     new MaterialPageRoute(builder: (context) {
                   // 跳转到我们之前创建的 HomePage（不使用新的 MaterialApp）
                   return HomePage();
+                }));
+              },
+            ),
+
+            ElevatedButton(
+              child: Text(
+                "TabBar 使用示例",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return TabBarDemoHome();
                 }));
               },
             ),
