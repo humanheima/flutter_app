@@ -27,6 +27,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/return_value_demo.dart';
 import 'package:flutter_app/tabbar_demo.dart';
+import 'package:flutter_app/popup_menu_demo.dart';
 
 import 'flutter_in_action/chapter11/HttpTestRoute.dart';
 import 'flutter_in_action/chapter11/WebSocketRoute.dart';
@@ -165,6 +166,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return TabBarDemoHome();
+                }));
+              },
+            ),
+
+            ElevatedButton(
+              child: Text(
+                "PopupMenu 使用示例",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return PopupMenuDemoPage();
                 }));
               },
             ),
