@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'scrollable_tabbar_example.dart';
 import 'non_scrollable_tabbar_example.dart';
 import 'dialog_tabbar_example.dart';
+import 'dialog_tabbar_example2.dart' as example2;
 
 void main() => runApp(TabBarDemoApp());
 
@@ -54,6 +55,13 @@ class TabBarDemoHome extends StatelessWidget {
                 showTabBarDialog(context);
               },
               child: Text('例子3：弹窗中的 TabBar'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                example2.showTabBarDialog(context);
+              },
+              child: Text('例子4：自适应高度的弹窗 TabBar'),
             ),
           ],
         ),
