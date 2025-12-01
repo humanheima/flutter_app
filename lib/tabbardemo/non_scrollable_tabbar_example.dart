@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/tabbardemo/RoundedRectangleTabIndicator.dart';
 
 /// 例子2：不可滚动的 TabBar
 class NonScrollableTabBarExample extends StatefulWidget {
@@ -40,14 +41,31 @@ class _NonScrollableTabBarExampleState extends State<NonScrollableTabBarExample>
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 0),
           controller: _tabController,
           isScrollable: false, // 设置为不可滚动，Tab 会平均分布
-          labelColor: Colors.white,
-          unselectedLabelColor: Colors.white70,
-          indicatorColor: Colors.white,
-          indicatorWeight: 3,
+          labelColor: Colors.white, //选中颜色tab文字颜色，不是下划线颜色
+          unselectedLabelColor: Colors.white70, //未选中颜色tab文字颜色，不是下划线颜色
+          indicatorSize: TabBarIndicatorSize.label, // 指示器大小为标签的宽度
+          dividerColor: Colors.transparent, //去掉tabbar下边的线
+          indicator: const RoundedRectangleTabIndicator(
+            color: Colors.blue,
+            height: 4, // 高度
+            radius: 4, // 圆角半径（越大越圆，通常 4~8）
+            padding: EdgeInsets.symmetric(horizontal: 0), // 左右留白（可调）
+            //bottomMargin: 6, // 距离文字底部的间距（关键！）
+            bottomMargin: 2,
+          ),
+          //indicatorSize:TabBarIndicatorSize.tab ,//会占满整个tab的宽度，比如有4个tab，每个tab的宽度是屏幕宽度的1/4
+
+          //indicatorColor: Colors.white,
+          //indicatorWeight: 3,
           tabs: _tabs.map((TabItem item) {
-            return Tab(
-              icon: Icon(item.icon),
-              text: item.name,
+            //指定tab的高度
+            return Container(
+              //height: 48,  // 这里可以指定高度，来解决indicator位置不对的问题
+              //decoration: BoxDecoration(color: Colors.black),
+              child: Tab(
+                text: item.name,
+                icon: Icon(item.icon),
+              ),
             );
           }).toList(),
         ),
