@@ -23,6 +23,8 @@ import 'package:flutter_app/login_demo_main.dart';
 import 'package:flutter_app/proxy/dio_proxy_demo.dart';
 import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
+import 'package:flutter_app/widget/GrowingTextDemo.dart';
+import 'package:flutter_app/widget/AIChatDemo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/return_value_demo.dart';
@@ -130,6 +132,30 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
 
+            ElevatedButton(
+              child: Text(
+                "动画Text",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return GrowingTextDemo();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "AI聊天演示 🤖",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return AIChatDemo();
+                }));
+              },
+            ),
             ElevatedButton(
               child: Text(
                 "打开Figma演示页面入口",
