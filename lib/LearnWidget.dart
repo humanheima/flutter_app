@@ -25,6 +25,7 @@ import 'package:flutter_app/wanandroid_flutter/GlobalConfig.dart';
 import 'package:flutter_app/wanandroid_flutter/wanandroid_flutter_main.dart';
 import 'package:flutter_app/widget/GrowingTextDemo.dart';
 import 'package:flutter_app/widget/AIChatDemo.dart';
+import 'package:flutter_app/widget/FutureBuilderDemo.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/return_value_demo.dart';
@@ -153,6 +154,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     new MaterialPageRoute(builder: (context) {
                   return AIChatDemo();
+                }));
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                "FutureBuilder 示例",
+                style: new TextStyle(fontSize: 20, color: Colors.redAccent),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) {
+                  return FutureBuilderDemo();
                 }));
               },
             ),
