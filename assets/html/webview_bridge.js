@@ -230,11 +230,21 @@ class WebViewBridge {
 
 // 初始化桥接
 let bridge;
-document.addEventListener('DOMContentLoaded', () => {
-    bridge = new WebViewBridge();
-    window.bridge = bridge;
-    console.log('双向通信演示WebView已初始化');
-});
+function _initBridgeIfNeeded() {
+    if (!bridge) {
+        bridge = new WebViewBridge();
+        window.bridge = bridge;
+        console.log('双向通信演示WebView已初始化');
+    }
+}
+
+// 如果DOM还未就绪，则等待DOMContentLoaded事件，否则立即初始化桥接
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _initBridgeIfNeeded);
+} else {
+    // DOM 已就绪，立即初始化
+    _initBridgeIfNeeded();
+}
 
 // 页面加载完成后的全局函数
 window.addEventListener('load', () => {
